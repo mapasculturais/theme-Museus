@@ -29,12 +29,12 @@ class Theme extends BaseMinc\Theme {
             
                         
             'entities: Spaces of the agent'=> 'Museus do agente',
-            'entities: Space Description'=> 'Descrição da Museu',
-            'entities: My Spaces'=> 'Minhas Museus',
-            'entities: My spaces'=> 'Minhas museus',
+            'entities: Space Description'=> 'Descrição do Museu',
+            'entities: My Spaces'=> 'Meus Museus',
+            'entities: My spaces'=> 'Meus museus',
             
-            'entities: no registered spaces'=> 'nenhuma museu cadastrada',
-            'entities: no spaces'=> 'nenhuma museu',
+            'entities: no registered spaces'=> 'nenhum museu cadastrada',
+            'entities: no spaces'=> 'nenhum museu',
             
             'entities: Space' => 'Museu',
             'entities: Spaces' => 'Museus',
@@ -89,7 +89,7 @@ class Theme extends BaseMinc\Theme {
     }
 
     public function getMetadataPrefix() {
-        return 'bib_';
+        return 'mus_';
     }
 
     protected function _getAgentMetadata() {
