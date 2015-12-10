@@ -30,32 +30,6 @@
         <br>
         <strong>Horários de Funcionamento</strong>
 
-        <script>
-        $(function(){
-            // Fixes editable input size based on placeholder length
-            // Fixes padding right hardcoded on 24px, now 0;
-            $('.js-editable').on('shown', function(e, editable) {
-                var placeholder = editable.input.$input.attr('placeholder'),
-                    placeholderLength = placeholder && placeholder.length > 20 ? placeholder.length : 0,
-                    possibleSize = Math.max(editable.value.length + 5, placeholderLength);
-
-                if (possibleSize > 20) {
-                    editable.input.$input.attr('size', possibleSize);
-                    editable.input.$input.css('padding-right', 0);
-                }
-
-                if ($(this).hasClass('js-mask-time')) {
-                    //Mask
-                    var masks = ['00:00'];
-                    editable.input.$input.mask(masks[0], {onKeyPress:
-                       function(val, e, field, options) {
-                           field.mask(masks[0], options) ;
-                       }
-                    });
-                }
-            });
-        });
-        </script>
         <style>
             .bib-horario-dia {
                 width: 90px;
