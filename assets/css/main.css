@@ -567,7 +567,7 @@ h6 {
   background: #1dabc6; }
 
 #filter-spaces {
-  background: #889975; }
+  background: #ffa5a5; }
 
 #filter-projects {
   background: #cc0033; }
@@ -739,8 +739,8 @@ h6 {
   border-right-color: #1dabc6; }
 
 #space-list-header {
-  border-left-color: #889975;
-  border-right-color: #889975; }
+  border-left-color: #ffa5a5;
+  border-right-color: #ffa5a5; }
 
 #project-list-header {
   border-left-color: #cc0033;
@@ -816,7 +816,7 @@ h6 {
   color: #1dabc6; }
 
 .space .objeto:hover h1 a, .space .objeto-meta a {
-  color: #889975; }
+  color: #ffa5a5; }
 
 .project .objeto:hover h1 a, .project .objeto-meta a {
   color: #cc0033; }
@@ -1004,7 +1004,7 @@ article.agent .header-image {
   background-color: #1dabc6; }
 
 article.space .header-image {
-  background-color: #889975; }
+  background-color: #ffa5a5; }
 
 article.event .header-image {
   background-color: #b3b921; }
@@ -1050,7 +1050,7 @@ article.project .header-image, article.registration .header-image {
   .header-content .event-type {
     color: #b3b921; }
   .header-content .space-type {
-    color: #889975; }
+    color: #ffa5a5; }
   .header-content > h2 {
     margin-bottom: 0; }
   .header-content .event-subtitle, .header-content .entity-parent-title, .header-content .registration-title {
@@ -1340,15 +1340,15 @@ article.project .header-image, article.registration .header-image {
   border-right: 8px solid transparent; }
 
 #entities-menu-space.active, #entities-menu-space:hover {
-  border-top-color: #889975;
-  color: #889975; }
+  border-top-color: #ffa5a5;
+  color: #ffa5a5; }
   #entities-menu-space.active a, #entities-menu-space:hover a {
-    color: #889975; }
+    color: #ffa5a5; }
 #entities-menu-space.active:after {
   content: "";
   position: absolute;
   top: -8px;
-  border-bottom: 8px solid #889975;
+  border-bottom: 8px solid #ffa5a5;
   border-left: 8px solid transparent;
   border-right: 8px solid transparent; }
 
@@ -1595,7 +1595,7 @@ article.project .header-image, article.registration .header-image {
   background: #1dabc6; }
 
 #nav-spaces {
-  background: #889975; }
+  background: #ffa5a5; }
 
 #nav-projects {
   background: #cc0033; }
@@ -1821,7 +1821,7 @@ article.project .header-image, article.registration .header-image {
 
 #spaces-filter:hover,
 #spaces-filter:focus {
-  background-color: #889975; }
+  background-color: #ffa5a5; }
 
 #projects-filter:hover,
 #projects-filter:focus {
@@ -1838,9 +1838,9 @@ article.project .header-image, article.registration .header-image {
     border-bottom-color: #1dabc6; }
 
 #home-spaces {
-  background: #889975; }
+  background: #ffa5a5; }
   #home-spaces .abas li.active {
-    border-bottom-color: #889975; }
+    border-bottom-color: #ffa5a5; }
 
 #home-projects {
   background: #cc0033; }
@@ -2042,7 +2042,7 @@ body.editable #main-section {
   #mc-entity-layers .btn-map-space:before {
     content: ""; }
   #mc-entity-layers .btn-map-space.active, #mc-entity-layers .btn-map-space:hover {
-    background-color: #889975; }
+    background-color: #ffa5a5; }
 
 .panel-main-content {
   position: relative;
@@ -2391,11 +2391,11 @@ nav.sidebar-panel ul {
     color: #1dabc6; }
 
 .sidebar.space {
-  border-top-color: #889975; }
+  border-top-color: #ffa5a5; }
   .sidebar.space:before {
-    border-top-color: #889975 !important; }
+    border-top-color: #ffa5a5 !important; }
   .sidebar.space .widget-list-item > a {
-    color: #889975; }
+    color: #ffa5a5; }
 
 .sidebar.project, .sidebar.registration {
   border-top-color: #cc0033; }
@@ -3440,7 +3440,7 @@ h1 .icon {
   background-color: #1dabc6; }
 
 .tag-space {
-  background-color: #889975; }
+  background-color: #ffa5a5; }
 
 .tag-project {
   background-color: #cc0033; }
@@ -3609,7 +3609,7 @@ h1 .icon {
   text-align: center;
   line-height: 2rem;
   color: #eee;
-  background-color: #889975; }
+  background-color: #ffa5a5; }
 
 .venue-status-definition {
   margin-bottom: 0;
@@ -4774,5 +4774,8 @@ button.mfp-arrow-left {
 .ie .tag-selected:after {
   height: 0.5rem;
   margin-top: 0.5rem; }
+
+#nav-spaces, #home-spaces {
+  background: #889975; }
 
 /*# sourceMappingURL=main.css.map */
