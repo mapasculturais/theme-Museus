@@ -85,6 +85,7 @@ Descubra o Brasil por meio dos seus museus!<br>
 
         $app->hook('template(space.<<create|edit|single>>.tabs-content):end', function(){
             $this->part('tab-publico', ['entity' => $this->data->entity]);
+            $this->part('tab-mais', ['entity' => $this->data->entity]);
         });
 
         /*
@@ -200,6 +201,104 @@ Descubra o Brasil por meio dos seus museus!<br>
                     'v::date("H:i:s")'
                 ]
             ],
+            'servicos_instalacoes' => [
+                'label' => 'Instalações básicas e serviços oferecidos',
+                'multiselect',
+                'options' => [
+                    'Bebedouro',
+                    'Estacionamento',
+                    'Guarda-volumes',
+                    'Livraria',
+                    'Loja',
+                    'Restaurante e/ou Lanchonete',
+                    'Sanitário',
+                    'Teatro/Auditório'
+                ]
+            ],
+            'servicos_instalacoes_capacidadeAuditorio' => [
+                'label' => 'Capacidade do teatro/auditório (assentos)',
+                'type' => 'int',
+                'validations' => [
+                    'v::numeric()' => 'a capacidade do teatro/auditório deve ser um número inteiro'
+                ]
+            ],
+            'servicos_visitaGuiada' => [
+                'label' => 'O museu promove visitas guiadas?',
+                'type' => 'select',
+                'options' => [ 'sim', 'não']
+            ],
+            'servicos_atendimentoEstrangeiros' => [
+                'label' => 'Atendimento em outros idiomas',
+                'multiselect',
+                'options' => [
+                    'Sinalização visual',
+                    'Material de divulgação impresso',
+                    'Audioguia',
+                    'Guia, monitor e/ou mediador'
+                ]
+            ],
+            'acessibilidade_fisica' => [
+                'label' => 'O museu possui infraestrutura para atender visitantes que apresentam dificuldade de locomoção?',
+                'multiselect',
+                'options' => [
+                    'Bebedouro adaptado',
+                    'Cadeira de rodas para uso do visitante',
+                    'Circuito de visitação adaptado',
+                    'Corrimão nas escadas e rampas',
+                    'Elevador adaptado',
+                    'Rampa de acesso',
+                    'Sanitário adaptado',
+                    'Telefone público adaptado',
+                    'Vaga de estacionamento exclusiva para deficientes',
+                    'Vaga de estacionamento exclusiva para idosos'
+                ]
+            ],
+            'acessibilidade_visual' => [
+                'label' => 'O museu oferece instalações e serviços destinados às pessoas com deficiências auditivas e visuais?',
+                'multiselect',
+                'options' => [
+                    'Guia multimídia (com monitor)',
+                    'Maquetes táteis ou mapas em relevo',
+                    'Obras e reproduções táteis',
+                    'Tradutor de Linguagem Brasileira de Sinais (LIBRAS)',
+                    'Texto/Etiquetas em braile com informações sobre os objetos expostos',
+                    'Outros'
+                ]
+            ],
+            'arquivo_possui' => [
+                'label' => 'O museu possui arquivo histórico?',
+                'type' => 'select',
+                'options' => [ 'sim', 'não']
+            ],
+            'arquivo_acessoPublico' => [
+                'label' => 'O arquivo tem acesso ao público?',
+                'type' => 'select',
+                'options' => [ 'sim', 'não']
+            ],
+            'biblioteca_possui' => [
+                'label' => 'O Museu possui biblioteca?',
+                'type' => 'select',
+                'options' => [ 'sim', 'não']
+            ],
+            'biblioteca_acessoPublico' => [
+                'label' => 'A biblioteca tem acesso ao público?',
+                'type' => 'select',
+                'options' => [ 'sim', 'não']
+            ],
+            
+            //cnpj do baseminc
+            
+            'atividadePrincipal' => [
+                'label' => 'Em relação à sua atividade principal, indique a opção que melhor caracterize a instituição',
+                'type' => 'singleselect',
+                'options' => [
+                    'Arquivo',
+                    'Biblioteca',
+                    'Centro cultural',
+                    'Museu',
+                    'Galeria'
+                ]
+            ]
         ];
 
         /*
