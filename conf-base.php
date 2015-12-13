@@ -5,5 +5,5 @@ return [
     'app.enabled.events'   => false,
     'app.enabled.apps'     => false,
     
-    'snbp.agentId' => 1,
+    'museus.ownerAgentId' => 1,
 ];
