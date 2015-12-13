@@ -57,3 +57,12 @@
     right:0;
     z-index:10000;
 }
+
+#nav-developers {
+    background: $brand-developer;
+}
+
+#home-spaces .abas li.active {
+    border-bottom-color: $brand-primary;
+}
+
