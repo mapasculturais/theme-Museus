@@ -5,7 +5,7 @@ $em = $app->em;
 $conn = $em->getConnection();
 
 return [
-    'importa base de museus' => function() use ( $conn ) {
+    'importa base de museus' => function() use ( $app, $conn ) {
    /*    
     [0] => Número na Processada
     [1] => Nome do Museu
@@ -151,6 +151,7 @@ return [
                 continue;
             
             foreach($d as $i => $val){
+                $d[$i] = trim($val);
                 if(trim($val) == '-'){
                     $d[$i] = '';
                 }
@@ -167,30 +168,40 @@ return [
 
             switch ($d[2]) {
                 case 'Pública Municipal':
-                    $obj->esfera = 'Pública';
-                    $obj->esfera_tipo = 'Municipal';
+                    $obj->__metadata->esfera = 'Pública';
+                    $obj->__metadata->esfera_tipo = 'Municipal';
+                    $obj->type = 60;
                     break;
 
                 case 'Pública Estadual':
-                    $obj->esfera = 'Pública';
-                    $obj->esfera_tipo = 'Estadual';
+                    $obj->__metadata->esfera = 'Pública';
+                    $obj->__metadata->esfera_tipo = 'Estadual';
+                    $obj->type = 60;
                     break;
 
                 case 'Pública Federal':
-                    $obj->esfera = 'Pública';
-                    $obj->esfera_tipo = 'Federal';
+                    $obj->__metadata->esfera = 'Pública';
+                    $obj->__metadata->esfera_tipo = 'Federal';
+                    $obj->type = 60;
                     break;
 
                 case 'Privada':
-                    $obj->esfera = 'Privada';
+                    $obj->__metadata->esfera = 'Privada';
+                    $obj->type = 61;
                     break;
 
                 case 'Outra':
-                    $obj->esfera_tipo = 'Outra';
+                    $obj->__metadata->esfera_tipo = 'Outra';
+                    $obj->type = 61;
+                    break;
+                
+                default:
+                    $obj->type = 61;
                     break;
             }
 
-            /* @TODO: [0] => Número na Processada */
+            /* [0] => Número na Processada */
+            $obj->__metadata->mus_cod = $d[0];
 
             $obj->name = $d[1];
 
@@ -216,8 +227,11 @@ return [
             // (longitude,latitude)
             if($d[11] && $d[12]){
                 $obj->location = "({$d[11]},{$d[12]})";
+                $obj->_geo_location = "ST_GeographyFromText('POINT({$d[11]} {$d[12]})')";
+                
             } else {
                 $obj->location = "(0,0)";
+                $obj->_geo_location = "ST_GeographyFromText('POINT(0 0)')";
             }
 
             // endereco de correspondência
@@ -287,11 +301,17 @@ return [
               [43] => Domingo
              */
 
-            /* @TODO:
-              [44] => O ingresso ao Museu é cobrado?
-              [45] => Valor
-             */
-
+            // [44] => O ingresso ao Museu é cobrado?
+            if ($d[44] == 'S') {
+                $obj->__metadata->mus_ingresso_cobrado = 'sim';
+            } else if ($d[44] == 'N') {
+                $obj->__metadata->mus_ingresso_cobrado = 'não';
+            }
+            
+            
+            // [45] => Valor
+            $obj->__metadata->mus_ingresso_valor = '';
+            
             $instalacoes = [
                 46 => "Bebedouro",
                 47 => "Estacionamento",
@@ -466,34 +486,32 @@ return [
             }
 
             // [90] => 2.7 - Com relação ao acervo, indique a opção que melhor caracterize a instituição:
+//
+//            if (strlen($d[90]) > 3) {
+//                $obj->__metadata->mus_acervo_propriedade = $d[90];
+//            }
 
-            if (strlen($d[90]) > 3) {
-                $obj->__metadata->mus_acervo_propriedade = $d[90];
+            
+              switch ($d[90]) {
+                case 'Possui SOMENTE acervo próprio':
+                    $obj->__metadata->mus_acervo_propriedade = 'próprio';
+                    break;
+
+                case 'Possui acervo próprio e em comodato':
+                    $obj->__metadata->mus_acervo_propriedade = 'próprio;comodato/empréstimo';
+                    break;
+
+                case 'Acervo compartilhado entre órgãos/setores da mesma entidade mantenedora':
+                    $obj->__metadata->mus_acervo_propriedade = 'compartilhado';
+                    break;
+
+                case 'Possui SOMENTE acervo em comodato/empréstimo':
+                    $obj->__metadata->mus_acervo_propriedade = 'comodato/empréstimo';
+                    break;
+
+                case 'NÃO possui acervo':
+                    break;
             }
-
-            /* no caso de ser um multiselect: 
-              switch($d[90]){
-              case 'Possui SOMENTE acervo próprio':
-              $obj->__metadata->mus_acervo_propriedade = 'próprio';
-              break;
-
-              case 'Possui acervo próprio e em comodato':
-              $obj->__metadata->mus_acervo_propriedade = 'próprio;comodato/empréstimo';
-              break;
-
-              case 'Acervo compartilhado entre órgãos/setores da mesma entidade mantenedora':
-              $obj->__metadata->mus_acervo_propriedade = 'compartilhado';
-              break;
-
-              case 'Possui SOMENTE acervo em comodato/empréstimo':
-              $obj->__metadata->mus_acervo_propriedade = 'comodato/empréstimo';
-              break;
-
-              case 'NÃO possui acervo':
-              break;
-              }
-             * 
-              // */
 
             /* [91] => 2.7.1 -  O comodato/empréstimo está formalizado por meio de documento legal?
              * só tem os valores N/A e "erro no sistema" vou pular
@@ -652,6 +670,47 @@ return [
             $museus[] = $obj;
         }
         
+        
+        // importa pro banco de dados
+        foreach($museus as $i => $museu){
+            $id = $conn->fetchColumn("SELECT nextval('space_id_seq'::regclass)");
+
+            echo "$i - inserindo museu \"$museu->name\" com o id ($id)\n";
+
+            $museu->agent_id = $app->config['museus.ownerAgentId'];
+            $museu->name = $conn->quote($museu->name);
+
+            $conn->executeQuery("
+                INSERT INTO space (
+                     id, location,  _geo_location,  name,  status,  type,  agent_id
+                ) VALUES (
+                    $id, '$museu->location', $museu->_geo_location, $museu->name, 1, $museu->type, $museu->agent_id
+                )
+            ");
+
+
+            $museu->__metadata->num_sniic = "ES-$id";
+
+            foreach($museu->__metadata as $key => $val){
+                $conn->executeQuery("
+                    INSERT INTO space_meta (
+                        object_id, key, value
+                    ) VALUES (
+                        '$id', '$key', :val
+                    )", ['val' => $val]);
+            }
+            
+            foreach($museu->__links as $link){
+                $conn->executeQuery("
+                    INSERT INTO metalist (
+                        object_type, object_id, grp, title, value
+                    ) VALUES (
+                        'MapasCulturais\Entities\Space', '$id', 'links', :val, :val
+                    )", ['val' => $link]);
+            }
+            
+            
+        }
         
         die;
     }
