@@ -87,6 +87,10 @@ Descubra o Brasil por meio dos seus museus!<br>
             $this->part('tab-publico', ['entity' => $this->data->entity]);
             $this->part('tab-mais', ['entity' => $this->data->entity]);
         });
+        
+        $app->hook('template(space.edit.tab-about-service):begin', function(){
+            $this->part('about-servive-begin', ['entity' => $this->data->entity]);
+        });
 
         /*
         $app->hook('template(space.<<create|edit|single>>.acessibilidade):after', function(){
@@ -117,6 +121,21 @@ Descubra o Brasil por meio dos seus museus!<br>
 
     protected function _getSpaceMetadata() {
         return [
+            'verificado' => [
+                'label' => 'O Museu é verificado?',
+                'type' => 'boolean'
+            ],
+            
+            'status' => [
+                'label' => 'Status do Museu',
+                'type' => 'select',
+                'options' => [
+                    'aberto' => 'Aberto',
+                    'fechado' => 'Fechado',
+                    'implantacao' => 'Em implantação'
+                ]
+            ],
+            
             'horario_segunda_das' => [
                 'label' => 'Aberto nas segundas-feiras das (00:00)',
                 'validations' => [
@@ -298,7 +317,62 @@ Descubra o Brasil por meio dos seus museus!<br>
                     'Museu',
                     'Galeria'
                 ]
-            ]
+            ],
+            
+            
+            
+            // FALTA DEFINIR SE VAI PARA O CORE
+            'EnCorrespondencia_CEP' => [
+                'label' => 'CEP',
+            ],
+            'EnCorrespondencia_Nome_Logradouro' => [
+                'label' => 'Logradouro',
+            ],
+            'EnCorrespondencia_Num' => [
+                'label' => 'Número',
+            ],
+            'EnCorrespondencia_Complemento' => [
+                'label' => 'Complemento',
+            ],
+            'EnCorrespondencia_Bairro' => [
+                'label' => 'Bairro',
+            ],
+            'EnCorrespondencia_Municipio' => [
+                'label' => 'Município',
+            ],
+            'EnCorrespondencia_Estado' => [
+                'label' => 'Estado',
+                'type' => 'select',
+                'options' => array(
+                    'AC'=>'Acre',
+                    'AL'=>'Alagoas',
+                    'AP'=>'Amapá',
+                    'AM'=>'Amazonas',
+                    'BA'=>'Bahia',
+                    'CE'=>'Ceará',
+                    'DF'=>'Distrito Federal',
+                    'ES'=>'Espírito Santo',
+                    'GO'=>'Goiás',
+                    'MA'=>'Maranhão',
+                    'MT'=>'Mato Grosso',
+                    'MS'=>'Mato Grosso do Sul',
+                    'MG'=>'Minas Gerais',
+                    'PA'=>'Pará',
+                    'PB'=>'Paraíba',
+                    'PR'=>'Paraná',
+                    'PE'=>'Pernambuco',
+                    'PI'=>'Piauí',
+                    'RJ'=>'Rio de Janeiro',
+                    'RN'=>'Rio Grande do Norte',
+                    'RS'=>'Rio Grande do Sul',
+                    'RO'=>'Rondônia',
+                    'RR'=>'Roraima',
+                    'SC'=>'Santa Catarina',
+                    'SP'=>'São Paulo',
+                    'SE'=>'Sergipe',
+                    'TO'=>'Tocantins',
+                )
+            ],
         ];
 
         /*
