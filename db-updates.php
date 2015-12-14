@@ -218,7 +218,6 @@ return [
             $obj->__metadata->En_Estado = $d[10];
 
             if ($d[6]) {
-
                 $obj->__metadata->endereco = "{$d[4]} {$d[5]}, {$d[6]}, {$d[7]}, {$d[8]}, {$d[9]}, {$d[10]}";
             } else {
                 $obj->__metadata->endereco = "{$d[4]} {$d[5]}, {$d[7]}, {$d[8]}, {$d[9]}, {$d[10]}";
@@ -235,19 +234,31 @@ return [
             }
 
             // endereco de correspondência
-            $obj->__metadata->EnCorrespondencia_Nome_Logradouro = $d[13];
-            $obj->__metadata->EnCorrespondencia_Num = $d[14];
-            $obj->__metadata->EnCorrespondencia_Complemento = $d[15];
-            $obj->__metadata->EnCorrespondencia_CaixaPostal = $d[16];
-            $obj->__metadata->EnCorrespondencia_Bairro = $d[17];
-            $obj->__metadata->EnCorrespondencia_CEP = $d[18];
-            $obj->__metadata->EnCorrespondencia_Municipio = $d[19];
-            $obj->__metadata->EnCorrespondencia_Estado = $d[20];
-
-            if ($obj->__metadata->EnCorrespondencia_Nome_Logradouro == $obj->__metadata->En_Nome_Logradouro && $obj->__metadata->EnCorrespondencia_Num == $obj->__metadata->En_Num) {
-                $obj->__metadata->EnCorrespondencia_mesmo = 'sim';
+            $obj->__metadata->mus_EnCorrespondencia_Nome_Logradouro = $d[13];
+            $obj->__metadata->mus_EnCorrespondencia_Num = $d[14];
+            $obj->__metadata->mus_EnCorrespondencia_Complemento = $d[15];
+            $obj->__metadata->mus_EnCorrespondencia_CaixaPostal = $d[16];
+            $obj->__metadata->mus_EnCorrespondencia_Bairro = $d[17];
+            $obj->__metadata->mus_EnCorrespondencia_CEP = $d[18];
+            $obj->__metadata->mus_EnCorrespondencia_Municipio = $d[19];
+            $obj->__metadata->mus_EnCorrespondencia_Estado = $d[20];
+            
+            if ($d[15]) {
+                $obj->__metadata->mus_endereco_correspondencia = "{$d[13]} {$d[14]}, {$d[15]}, {$d[17]}, {$d[18]}, {$d[19]}, {$d[20]}";
             } else {
-                $obj->__metadata->EnCorrespondencia_mesmo = 'não';
+                $obj->__metadata->mus_endereco_correspondencia = "{$d[13]} {$d[14]}, {$d[17]}, {$d[18]}, {$d[19]}, {$d[20]}";
+            }
+            
+            if($d[16]){
+                $obj->__metadata->mus_endereco_correspondencia .= ' - Caixa Postal: ' . $d[16];
+            }
+            
+
+
+            if ($obj->__metadata->mus_EnCorrespondencia_Nome_Logradouro == $obj->__metadata->En_Nome_Logradouro && $obj->__metadata->mus_EnCorrespondencia_Num == $obj->__metadata->En_Num) {
+                $obj->__metadata->mus_EnCorrespondencia_mesmo = 'sim';
+            } else {
+                $obj->__metadata->mus_EnCorrespondencia_mesmo = 'não';
             }
 
             $obj->__metadata->telefonePublico = $d[21];
@@ -282,11 +293,11 @@ return [
             }
 
             if (strlen($d[34]) > 1) {
-                $obj->__metadata->mus_tematica = $d[34];
+                $obj->__metadata->mus_tipo_tematica = $d[34];
             }
 
             if (is_numeric($d[35])) {
-                $obj->__metadata->mus_anoDeAbertura = $d[35];
+                $obj->__metadata->mus_abertura_ano = $d[35];
             }
 
             $obj->__metadata->mus_status = $d[36];
@@ -310,7 +321,7 @@ return [
             
             
             // [45] => Valor
-            $obj->__metadata->mus_ingresso_valor = '';
+            $obj->__metadata->mus_ingresso_valor = $d[45];
             
             $instalacoes = [
                 46 => "Bebedouro",
@@ -452,20 +463,22 @@ return [
             }
 
             // [86] => 2.2.1 -  A instituição possui acervo:
+            
+            $obj->__metadata->mus_acervo_comercializacao = $d[86];
+            /* mudei de idéia
             switch ($d[86]) {
                 case "APENAS comercializável":
-                    $obj->__metadata->mus_acervo_possui = 'comercializável';
                     break;
 
                 case "APENAS Não comercializável":
-                    $obj->__metadata->mus_acervo_possui = 'não comercializável';
+                    $obj->__metadata->mus_acervo_comercializacao = 'não comercializável';
                     break;
 
                 case "Comercializável e não comercializável":
-                    $obj->__metadata->mus_acervo_possui = 'comercializável;não comercializável';
+                    $obj->__metadata->mus_acervo_comercializacao = 'comercializável;não comercializável';
                     break;
             }
-
+            */
             // [87] => 2.5 - O museu é de caráter comunitário?
             if ($d[87] == 'Sim') {
                 $obj->__metadata->mus_caraterComunitario = 'sim';
@@ -587,11 +600,9 @@ return [
                 $obj->__metadata->mus_tipo_unidadeConservacao_usoSustentavel = $d[106];
             }
             
-            
-            
             // [107] => 3.3 - O museu é aberto ao púbico em geral ou somente para públicos específicos?
-            if (strlen($d[108]) > 3) {
-                $obj->__metadata->mus_abertura_publico = $d[108];
+            if (strlen($d[107]) > 3) {
+                $obj->__metadata->mus_abertura_publico = $d[107];
             }
             
             if ($d[108] == 'Sim') {

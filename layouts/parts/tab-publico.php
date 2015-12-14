@@ -1,41 +1,23 @@
-<div id="tab-publico" class="aba-content">
+<div id="tab-publico" class="aba-content new-tab">
     <div class="servico">
-
-        <?php if($this->isEditable() || $entity->mus_faixaEtariaPredominantes): ?>
-        <p>
-            <span class="label">Faixa etária predominante dos usuários da biblioteca:</span>
-            <span class="js-editable" data-edit="mus_faixaEtariaPredominante" data-original-title="Faixa etária predominante" data-emptytext="Selecione">
-                <?php echo $entity->mus_faixaEtariaPredominante; ?>
-            </span>
-        </p>
+        <?php if($this->isEditable() || $entity->mus_ingresso_cobrado || $entity->mus_ingresso_valor): ?>
+        <h5 style="margin-top:0">Entrada</h5>
+        <?php endif; ?>
+        <?php if($this->isEditable() || $entity->mus_ingresso_cobrado): ?>
+            <p>
+                <span class="label">Entrada é cobrada:</span> 
+                <span class="js-editable" data-edit="mus_ingresso_cobrado" data-original-title="A entrada no museu é cobrada?" data-emptytext="Selecione"><?php echo $entity->mus_ingresso_cobrado; ?></span>
+            </p>
+        <?php endif; ?>
+            
+        <?php if($this->isEditable() || $entity->mus_ingresso_valor): ?>
+            <p>
+                <span class="label">Descrição do valor da entrada:</span> 
+                <span class="js-editable" data-edit="mus_ingresso_valor" data-original-title="Valor da entrada no museu" data-emptytext="Descreva"><?php echo $this->isEditable() ? $entity->mus_ingresso_valor : nl2br($entity->mus_ingresso_valor); ?></span>
+            </p>
         <?php endif; ?>
 
-        <?php if($this->isEditable() || $entity->mus_comunidades): ?>
-        <p>
-            <span class="label">A biblioteca trabalha com comunidades ou grupos específicos?</span> 
-            <editable-multiselect entity-property="mus_comunidades" empty-label="Selecione" allow-other="true" box-title="A biblioteca trabalha com comunidades ou grupos específicos?:"></editable-multiselect>
-        </p>
-        <?php endif; ?>
-
-        <?php if($this->isEditable() || $entity->mus_publico_frequenciaMedia): ?>
-        <p>
-            <span class="label">Freqüência média mensal dos usuários na biblioteca:</span>
-            <span class="js-editable" data-edit="mus_publico_frequenciaMedia" data-original-title="Freqüência média mensal dos usuários na biblioteca" data-emptytext="Selecione">
-                <?php echo $entity->mus_publico_frequenciaMedia; ?>
-            </span>
-        </p>
-        <?php endif; ?>
-
-
-        <br>
-        <strong>Horários de Funcionamento</strong>
-
-        <style>
-            .bib-horario-dia {
-                width: 90px;
-                display: inline-block;
-            }
-        </style>
+        <h5>Horários de Funcionamento</h5>
 
         <?php if($this->isEditable() || ($entity->mus_horario_segunda_das && $entity->mus_horario_segunda_ate)): ?>
         <p>

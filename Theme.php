@@ -78,6 +78,30 @@ Descubra o Brasil por meio dos seus museus!<br>
         });
 
         parent::_init();
+        
+        // BUSCA POR CÓDIGO DO MUSEU
+        // adiciona o join do metadado
+        $app->hook('repo(<<*>>).getIdsByKeywordDQL.join', function(&$joins, $keyword) {
+            $joins .= "
+                LEFT JOIN 
+                        e.__metadata mus_cod
+                WITH 
+                        mus_cod.key = 'mus_cod'";
+        });
+
+        // filtra pelo valor do keyword
+        $app->hook('repo(<<*>>).getIdsByKeywordDQL.where', function(&$where, $keyword) {
+            $where .= "OR lower(mus_cod.value) LIKE lower(:keyword)";
+        });
+        
+        
+        // modificações nos templates
+        $app->hook('template(space.<<*>>.num-sniic):before', function(){
+            $entity = $this->data->entity;
+            if($entity->mus_cod){
+                echo "<small><span class='label'>Código:</span> {$entity->mus_cod}</small>";
+            }
+        });
 
         $app->hook('template(space.<<create|edit|single>>.tabs):end', function(){
             $this->part('tabs-museu', ['entity' => $this->data->entity]);
@@ -88,8 +112,25 @@ Descubra o Brasil por meio dos seus museus!<br>
             $this->part('tab-mais', ['entity' => $this->data->entity]);
         });
         
-        $app->hook('template(space.edit.tab-about-service):begin', function(){
+        $app->hook('template(space.<<create|edit|single>>.tab-about-service):begin', function(){
             $this->part('about-servive-begin', ['entity' => $this->data->entity]);
+        });
+
+        $app->hook('template(space.<<create|edit|single>>.acessibilidade):after', function(){
+            $entity = $this->data->entity;
+            ?>
+        <?php if($this->isEditable() || $entity->mus_acessibilidade_visual): ?>
+        <p>
+            <span class="label">Acessibilidade para pessoas com deficiências auditivas e visuais: </span>
+            <editable-multiselect entity-property="mus_acessibilidade_visual" empty-label="Selecione" allow-other="true" box-title="Acessibilidade para pessoas com deficiências auditivas e visuais" help-text="O museu oferece instalações e serviços destinados às pessoas com deficiências auditivas e visuais?"></editable-multiselect>
+        </p>
+        <?php endif; ?>
+            <?php
+        });
+        
+        $app->hook('template(space.<<*>>.location):after', function(){
+            $this->enqueueScript('app', 'endereco-correspondencia', 'js/endereco-correspondencia.js');
+            $this->part('endereco-correspondencia', ['entity' => $this->data->entity]);
         });
 
         /*
@@ -126,6 +167,35 @@ Descubra o Brasil por meio dos seus museus!<br>
                 'type' => 'boolean'
             ],
             
+            'cod' => [
+                'label' => 'Número na Processada',
+                'type' => 'readonly'
+            ],
+            
+            'instituicaoMantenedora' => [
+                'label' => 'Instituição mantenedora'
+            ],
+            
+            'instumentoCriacao_tipo' => [
+                'label' => 'Instrumento de criação',
+                'type' => 'select',
+                'allowOther' => true,
+                'allowOtherText' => 'Outro',
+                'options' => [
+                    '' => 'Não possui',
+                    'Lei',
+                    'Decreto-Lei',
+                    'Decreto',
+                    'Portaria',
+                    'Resolução',
+                    'Ata de Reunião'
+                ]
+            ],
+            
+            'instumentoCriacao_descricao' => [
+                'label' => 'Descrição do instrumento de criação',
+            ],
+            
             'status' => [
                 'label' => 'Status do Museu',
                 'type' => 'select',
@@ -133,6 +203,51 @@ Descubra o Brasil por meio dos seus museus!<br>
                     'aberto' => 'Aberto',
                     'fechado' => 'Fechado',
                     'implantacao' => 'Em implantação'
+                ]
+            ],
+            
+            'abertura_ano' => [
+                'label' => 'Ano de abertura',
+                'type' => 'int',
+                'validations' => [
+                    'v::intVal()' => 'O ano de abertura deve ser um valor numérico inteiro'
+                ]
+            ],
+            
+            'abertura_publico' => [
+                'label' => 'Tipo de públio ao qual o museu é aberto',
+                'type' => 'select',
+                'options' => [
+                    'Para público em geral',
+                    'SOMENTE para públicos específicos'
+                ]
+            ],
+            
+            'itinerante' => [
+                'label' => 'O museu é itinerante?',
+                'type' => 'select',
+                'options' => ['sim', 'não']
+            ],
+            
+            'itinerante_dependeRecursos' => [
+                'label' => 'O museu depende de recursos financeiros de outra instituição para a itinerância da exposição?',
+                'type' => 'select',
+                'options' => [
+                    '' => 'não se aplica',
+                    'sim', 
+                    'não'
+                ]
+            ],
+            
+            // EXPOSIÇÔES
+            'exposicoes_duracao' => [
+                'label' => 'Duração das exposições',
+                'type' => 'select',
+                'options' => [
+                    'Possui SOMENTE exposição de longa duração (mais de um ano em exposição)',
+                    'Possui exposição de longa duração e realiza exposições de curta duração (até um ano em exposição)',
+                    'Realiza SOMENTE exposições de curta duração',
+                    'NÃO realiza exposições'
                 ]
             ],
             
@@ -220,7 +335,74 @@ Descubra o Brasil por meio dos seus museus!<br>
                     'v::date("H:i:s")'
                 ]
             ],
-            'servicos_instalacoes' => [
+            // tipologia
+            'tipo' => [
+                'label' => 'Tipo',
+                'type' => 'select',
+                'options' => [
+                    'Tradicional/Clássico',
+                    'Virtual',
+                    'Museu de território/Ecomuseu',
+                    'Unidade de conservação da natureza',
+                    'Jardim zoológico, jardim botânico herbário, oceanário ou planetário'
+                ]
+            ],
+            
+            'tipo_tematica' => [
+                'label' => 'Temática do museu',
+                'type' => 'select',
+                'options' => [
+                    'Artes, arquitetura e linguística',
+                    'Antropologia e arqueologia',
+                    'Ciências exatas, da terra, biológicas e da saúde',
+                    'História',
+                    'Educação, esporte e lazer',
+                    'Meios de comunicação e transporte',
+                    'Produção de bens e serviços',
+                    'Defesa e segurança pública',
+                ]
+            ],
+            
+            'tipo_unidadeConservacao' => [
+                'label' => 'Tipo/categoria de manejo da Unidade de Conservação',
+                'type' => 'select',
+                'options' => [
+                    '' => 'Não se aplica',
+                    'Proteção integral',
+                    'Uso sustentável'
+                ]
+            ],
+            
+            'tipo_unidadeConservacao_protecaoIntegral' => [
+                'label' => 'Tipo de unidade de conservação integral',
+                'type' => 'select',
+                'options' => [
+                    '' => 'Não se aplica',
+                    'Estação Ecológica',
+                    'Monumento Natural',
+                    'Parque',
+                    'Refúgio da Vida Silvestre',
+                    'Reserva Biológica'
+                ]
+            ],
+            
+            'tipo_unidadeConservacao_usoSustentavel' => [
+                'label' => 'Tipo de unidade de uso sustentável',
+                'type' => 'select',
+                'options' => [
+                    '' => 'Não se aplica',
+                    'Floresta',
+                    'Reserva Extrativista',
+                    'Reserva de Desenvolvimento Sustentável',
+                    'Reserva de Fauna',
+                    'Área de Proteção Ambiental',
+                    'Área de Relevante Interesse Ecológico',
+                    'RPPN (Reserva Particular do Patrimônio Natural)'
+                ]
+            ],
+            
+            
+            'instalacoes' => [
                 'label' => 'Instalações básicas e serviços oferecidos',
                 'multiselect',
                 'options' => [
@@ -234,7 +416,7 @@ Descubra o Brasil por meio dos seus museus!<br>
                     'Teatro/Auditório'
                 ]
             ],
-            'servicos_instalacoes_capacidadeAuditorio' => [
+            'instalacoes_capacidadeAuditorio' => [
                 'label' => 'Capacidade do teatro/auditório (assentos)',
                 'type' => 'int',
                 'validations' => [
@@ -249,6 +431,8 @@ Descubra o Brasil por meio dos seus museus!<br>
             'servicos_atendimentoEstrangeiros' => [
                 'label' => 'Atendimento em outros idiomas',
                 'multiselect',
+                'allowOther' => true,
+                'allowOtherText' => 'Outros',
                 'options' => [
                     'Sinalização visual',
                     'Material de divulgação impresso',
@@ -256,32 +440,17 @@ Descubra o Brasil por meio dos seus museus!<br>
                     'Guia, monitor e/ou mediador'
                 ]
             ],
-            'acessibilidade_fisica' => [
-                'label' => 'O museu possui infraestrutura para atender visitantes que apresentam dificuldade de locomoção?',
-                'multiselect',
-                'options' => [
-                    'Bebedouro adaptado',
-                    'Cadeira de rodas para uso do visitante',
-                    'Circuito de visitação adaptado',
-                    'Corrimão nas escadas e rampas',
-                    'Elevador adaptado',
-                    'Rampa de acesso',
-                    'Sanitário adaptado',
-                    'Telefone público adaptado',
-                    'Vaga de estacionamento exclusiva para deficientes',
-                    'Vaga de estacionamento exclusiva para idosos'
-                ]
-            ],
             'acessibilidade_visual' => [
                 'label' => 'O museu oferece instalações e serviços destinados às pessoas com deficiências auditivas e visuais?',
                 'multiselect',
+                'allowOther' => true,
+                'allowOtherText' => 'Outros',
                 'options' => [
                     'Guia multimídia (com monitor)',
                     'Maquetes táteis ou mapas em relevo',
                     'Obras e reproduções táteis',
                     'Tradutor de Linguagem Brasileira de Sinais (LIBRAS)',
-                    'Texto/Etiquetas em braile com informações sobre os objetos expostos',
-                    'Outros'
+                    'Texto/Etiquetas em braile com informações sobre os objetos expostos'
                 ]
             ],
             'arquivo_possui' => [
@@ -302,10 +471,85 @@ Descubra o Brasil por meio dos seus museus!<br>
             'biblioteca_acessoPublico' => [
                 'label' => 'A biblioteca tem acesso ao público?',
                 'type' => 'select',
-                'options' => [ 'sim', 'não']
+                'options' => [ 
+                    '' => 'não se aplica',
+                    'sim' => 'sim', 
+                    'não' => 'não',
+                ]
             ],
             
-            //cnpj do baseminc
+            // acervo
+            'acervo_comercializacao' => [
+                'label' => 'Comercialização do acervo',
+                'type' => 'select',
+                'options' => [ 
+                    "APENAS comercializável",
+                    "APENAS Não comercializável",
+                    "Comercializável e não comercializável"
+                ]
+            ],
+            
+            'acervo_propriedade' => [
+                'label' => 'Propriedade do acervo',
+                'type' => 'select',
+                'options' => [ 
+                    'Possui SOMENTE acervo próprio',
+                    'Possui acervo próprio e em comodato',
+                    'Acervo compartilhado entre órgãos/setores da mesma entidade mantenedora',
+                    'Possui SOMENTE acervo em comodato/empréstimo',
+                    'NÃO possui acervo',
+                ]
+            ],
+            
+            'acervo_comodato_formalizado' => [
+                'label' => 'O comodato/empréstimo está formalizado por meio de documento legal?',
+                'type' => 'select',
+                'options' => [
+                    '' => 'não se aplica',
+                    'sim' => 'sim', 
+                    'não' => 'não'
+                ]
+            ],
+            
+            'acervo_comodato_duracao' => [
+                'label' => 'Duração do comodato/empréstimo (em meses)',
+                'type' => 'numeric',
+                'validations' => [
+                    'v::numeric()' => ''
+                ]
+            ],
+            
+            'acervo_material' => [
+                'label' => 'O museu possui também acervo material?',
+                'type' => 'select',
+                'options' => [
+                    'sim' => 'sim', 
+                    'não' => 'não'
+                ]
+            ],
+            
+            'acervo_material_emExposicao' => [
+                'label' => 'O acervo material encontra-se em exposição?',
+                'type' => 'select',
+                'options' => [
+                    '' => 'não se aplica',
+                    'sim' => 'sim', 
+                    'não' => 'não'
+                ]
+            ],
+            
+            'acervo_nucleoEdificado' => [
+                'label' => 'Núcleo Edificado',
+                'type' => 'multiselect',
+                'options' => [
+                    'O museu NÃO possui acervo em exposições em núcleo edificado',
+                    'A exposição do museu está no próprio território',
+                    'O museu possui núcleo(s) edificado(s) com acervo em exposição',
+                    'O Museu possui núcleo edificado apenas como sede técnico-administrativa',
+                    'O Museu NÃO possui núcleo edificado e NÃO possui sede técnico-administrativa',
+                    'O acervo do museu é composto de núcleos edificados'
+                ]
+            ],
             
             'atividadePrincipal' => [
                 'label' => 'Em relação à sua atividade principal, indique a opção que melhor caracterize a instituição',
@@ -319,9 +563,67 @@ Descubra o Brasil por meio dos seus museus!<br>
                 ]
             ],
             
+            'caraterComunitario' => [
+                'label' => 'O museu é de carater comunitário?',
+                'type' => 'select',
+                'options' => [ 'sim', 'não']
+            ],
+            
+            'comunidadeRealizaAtividades' => [
+                'label' => 'A comunidade realiza atividades museológicas?',
+                'type' => 'select',
+                'options' => [ 'sim', 'não']
+            ],
+            
+            'ingresso_cobrado' => [
+                'label' => 'O ingresso ao museu é cobrado?',
+                'type' => 'select',
+                'options' => [ 'sim', 'não', 'contribuição voluntária']
+            ],
+            
+            'ingresso_valor' => [
+                'label' => 'Descrição do valor do ingresso ao museu',
+                'type' => 'text'
+            ],
+            
+            // GESTÂO
+            'gestao_regimentoInterno' => [
+                'label' => 'O museu posui regimento interno?',
+                'type' => 'select',
+                'options' => ['sim', 'não']
+            ],
+            
+            'gestao_planoMuseologico' => [
+                'label' => 'O museu possui plano museológico?',
+                'type' => 'select',
+                'options' => ['sim', 'não']
+            ],
+            
+            'gestao_politicaAquisicao' => [
+                'label' => 'O museu possui política de aquisição de acervo?',
+                'type' => 'select',
+                'options' => ['sim', 'não']
+            ],
+            
+            'gestao_politicaDescarte' => [
+                'label' => 'O museu possui política de descarte de acervo?',
+                'type' => 'select',
+                'options' => ['sim', 'não']
+            ],
+            
             
             
             // FALTA DEFINIR SE VAI PARA O CORE
+            'EnCorrespondencia_mesmo' => [
+                'label' => 'O endereço de correspondência é o mesmo de visitação?',
+                'type' => 'select',
+                'options' => [ 'sim', 'não' ]
+            ],
+            
+            'mus_endereco_correspondencia' => [
+                'label' => 'Endereço de correspondência'
+            ],
+            
             'EnCorrespondencia_CEP' => [
                 'label' => 'CEP',
             ],
@@ -333,6 +635,9 @@ Descubra o Brasil por meio dos seus museus!<br>
             ],
             'EnCorrespondencia_Complemento' => [
                 'label' => 'Complemento',
+            ],
+            'EnCorrespondencia_CaixaPostal' => [
+                'label' => 'Caixa Postal',
             ],
             'EnCorrespondencia_Bairro' => [
                 'label' => 'Bairro',
