@@ -133,6 +133,7 @@ Descubra o Brasil por meio dos seus museus!<br>
             $this->part('endereco-correspondencia', ['entity' => $this->data->entity]);
         });
 
+
         // own
         $app->hook('POST(space.own)', function() use($app){
             $this->requireAuthentication();
@@ -153,6 +154,10 @@ Descubra o Brasil por meio dos seus museus!<br>
         $app->hook('template(space.single.header-image):after', function(){
             $this->enqueueScript('app', 'botao-meu-museu', 'js/botao-meu-museu.js');
             $this->part('botao-meu-museu', ['entity' => $this->data->entity]);
+        });
+
+        $app->hook('view.render(space/<<*>>):before', function(){
+            $this->addTaxonoyTermsToJs('mus_area');
         });
 
         /*
