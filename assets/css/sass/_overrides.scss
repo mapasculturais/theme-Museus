@@ -1,0 +1,45 @@
+//
+// Overrides
+// --------------------------------------------------
+//## Style rules that overrides the default theme's ones.
+//## To make it easy to maintain and to avoid cascading problems,
+//## just before the new rules, document the name of the Sass partial
+//## where the original styles leave, group them per folder and keep
+//## them in the same order as the original styles are imported to the main.scss.
+
+//
+// application/
+// --------------------------------------------------
+
+
+// _header.scss
+// #secondary-menu {
+//      margin-top: 14px;
+// }
+
+//_home.scss
+// #home-watermark {
+// 	background-position: right bottom;
+// }
+#nav-spaces, #home-spaces {
+    background: rgb(136,153,117);
+}
+.new-tab{
+    background-color:#f8f8f8;
+    padding: 1.5em;
+    .servico{
+        border-top:0;
+        margin-top:0;
+        padding-top:0;
+        h5 {
+            margin-bottom:2px;
+            margin-top:15px;
+            font-size: 1em;
+        }
+    }
+}
+
+.bib-horario-dia {
+    width: 90px;
+    display: inline-block;
+}
