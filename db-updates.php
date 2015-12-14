@@ -311,6 +311,16 @@ return [
               [42] => Sábado
               [43] => Domingo
              */
+            
+            /* vou colocar como um metadado e depois resolvemos */
+            
+            $obj->__metadata->mus_segunda   = $d[37];
+            $obj->__metadata->mus_terca     = $d[38];
+            $obj->__metadata->mus_quarta    = $d[37];
+            $obj->__metadata->mus_quinta    = $d[40];
+            $obj->__metadata->mus_sexta     = $d[41];
+            $obj->__metadata->mus_sabado    = $d[42];
+            $obj->__metadata->mus_domingo   = $d[43];
 
             // [44] => O ingresso ao Museu é cobrado?
             if ($d[44] == 'S') {
