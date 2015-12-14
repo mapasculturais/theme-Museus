@@ -729,9 +729,87 @@ return [
                         'MapasCulturais\Entities\Space', '$id', 'links', :val, :val
                     )", ['val' => $link]);
             }
-            
-            
         }
+    },
+
+    'adiciona os termos nos museus' => function() use($app, $conn){
+
+        $data = file_get_contents(__DIR__ . '/museus.csv');
+
+        $data = str_replace('erro no sistema', '', $data);
+
+        $data = explode("\n", $data);
+
+        $labels = explode("\t", $data[0]);
+
+        $museus = [];
+
+        $terms = [];
+
+        $vals = $conn->fetchAll("SELECT object_id, value FROM space_meta WHERE key = 'mus_cod'");
+
+        $cods_ids = [];
+
+        foreach($vals as $o){
+            $cods_ids[$o['value']] = $o['object_id'];
+        }
+
+        
+
+        foreach ($data as $i => $line) {
+            if ($i === 0)
+                continue;
+
+            $d = explode("\t", $line);
+
+            if (count($d) < 119)
+                continue;
+
+
+            foreach($d as $i => $val){
+                $d[$i] = trim($val);
+                if(trim($val) == '-'){
+                    $d[$i] = '';
+                }
+            }
+
+            $obj = new stdClass;
+
+
+            $obj->cod = $d[0];
+
+            $obj->id = $cods_ids[$obj->cod];
+
+            $obj->terms = [];
+
+            for ($i = 24; $i <= 33; $i++) {
+                if($d[$i] != "NULL"){
+                    $term = trim($labels[$i]);
+                    $obj->terms[] = $term;
+
+                    $terms[$term] = true;
+                }
+            }
+            $museus[] = $obj;
+        }
+
+        $_terms = array_keys($terms);
+        foreach($_terms as $term){
+            echo "INSERINDO TERMO $term\n\n";
+            $id = $conn->fetchColumn("SELECT nextval('term_id_seq'::regclass)");
+            $conn->executeQuery('INSERT INTO term (id, taxonomy, term) VALUES (:id, 101, :term)',['id' => $id, 'term' => $term]);
+
+            $terms[$term] = $id;
+        }
+
+        foreach($museus as $m){
+            echo "\n\ninserindo termos ao museu de cod ($m->cod) - id ($m->id)\n";
+            foreach($m->terms as $t){
+                echo "  termo '$t'\n";
+                $conn->executeQuery("INSERT INTO term_relation (term_id, object_type, object_id) VALUES (:id, 'MapasCulturais\Entities\Space', :obj)", ['id' => $terms[$t], 'obj' => $m->id]);
+            }
+        }
+
     }
 ];
         
