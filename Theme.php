@@ -133,6 +133,28 @@ Descubra o Brasil por meio dos seus museus!<br>
             $this->part('endereco-correspondencia', ['entity' => $this->data->entity]);
         });
 
+        // own
+        $app->hook('POST(space.own)', function() use($app){
+            $this->requireAuthentication();
+
+            $entity = $this->getRequestedEntity();
+            if($entity->mus_owned){
+                throw new \MapasCulturais\Exceptions\PermissionDenied($app->user, $entity, 'own');
+            }
+            $app->disableAccessControl();
+            $entity->mus_owned = true;
+            $entity->owner = $app->user->profile;
+            $entity->save(true);
+            $app->enableAccessControl();
+
+            $this->json(true);
+        });
+
+        $app->hook('template(space.single.header-image):after', function(){
+            $this->enqueueScript('app', 'botao-meu-museu', 'js/botao-meu-museu.js');
+            $this->part('botao-meu-museu', ['entity' => $this->data->entity]);
+        });
+
         /*
         $app->hook('template(space.<<create|edit|single>>.acessibilidade):after', function(){
             $this->part('acessibilidade', ['entity' => $this->data->entity]);
@@ -165,6 +187,10 @@ Descubra o Brasil por meio dos seus museus!<br>
             'verificado' => [
                 'label' => 'O Museu é verificado?',
                 'type' => 'boolean'
+            ],
+
+            'owned' => [
+                'label' => 'Se o museu já apropriado por algum usuário'
             ],
             
             'cod' => [
@@ -620,7 +646,7 @@ Descubra o Brasil por meio dos seus museus!<br>
                 'options' => [ 'sim', 'não' ]
             ],
             
-            'mus_endereco_correspondencia' => [
+            'endereco_correspondencia' => [
                 'label' => 'Endereço de correspondência'
             ],
             
@@ -722,4 +748,60 @@ Descubra o Brasil por meio dos seus museus!<br>
         $app->registerTaxonomy('MapasCulturais\Entities\Space', $taxo_def);
     }
 
+
+    /**
+    * Returns a verified entity
+    * @param type $entity_class
+    * @return \MapasCulturais\Entity
+    */
+    function getOneVerifiedEntity($entity_class) {
+        $app = \MapasCulturais\App::i();
+
+        $cache_id = __METHOD__ . ':' . $entity_class;
+
+        if($app->cache->contains($cache_id)){
+            return $app->cache->fetch($cache_id);
+        }
+
+
+
+        $controller = $app->getControllerByEntity($entity_class);
+
+        if ($entity_class === 'MapasCulturais\Entities\Event') {
+            $entities = $controller->apiQueryByLocation(array(
+                '@from' => date('Y-m-d'),
+                '@to' => date('Y-m-d', time() + 28 * 24 * 3600),
+                'isVerified' => 'EQ(true)',
+                '@select' => 'id'
+            ));
+
+        }elseif ($entity_class === 'MapasCulturais\Entities\Space') {
+            $entities = $controller->apiQuery([
+                '@select' => 'id',
+                'mus_verificado' => 'EQ(1)'
+            ]);
+        }else{
+
+            $entities = $controller->apiQuery([
+                '@select' => 'id',
+                'isVerified' => 'EQ(true)'
+            ]);
+        }
+
+        $ids = array_map(function($item) {
+            return $item['id'];
+        }, $entities);
+
+        if ($ids) {
+            $id = $ids[array_rand($ids)];
+            $result = $app->repo($entity_class)->find($id);
+            $result->refresh();
+        } else {
+            $result = null;
+        }
+
+        $app->cache->save($cache_id, $result, 120);
+
+        return $result;
+    }
 }

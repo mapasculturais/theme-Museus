@@ -71,6 +71,9 @@ $this->includeMapAssets();
 
         <article class="objeto clearfix" ng-if="openEntity.space">
             <h1><a href="{{openEntity.space.singleUrl}}">{{openEntity.space.name}}</a></h1>
+            <p ng-show="__mapas__.userId && openEntity.space.owner.user.id != __mapas__.userId && !openEntity.space.mus_owned">
+                <a class="btn btn-danger" ng-click="ownSpace(openEntity.space.id)">Este é o meu museu</a>
+            </p>
             <div class="objeto-content clearfix">
                 <a href="{{openEntity.space.singleUrl}}" class="js-single-url">
                     <img class="objeto-thumb" ng-src="{{openEntity.space['@files:avatar.avatarSmall'].url||assetsUrl.avatarSpace}}">
@@ -87,6 +90,7 @@ $this->includeMapAssets();
                     <div ng-show="openEntity.space.endereco"><span class="label">Endereço:</span>{{openEntity.space.endereco}}</div>
                     <div><span class="label">Acessibilidade:</span> {{openEntity.space.acessibilidade || 'Não Informado'}}</div>
                 </div>
+
             </div>
         </article>
 
