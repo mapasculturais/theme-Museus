@@ -133,6 +133,10 @@ Descubra o Brasil por meio dos seus museus!<br>
             $this->part('endereco-correspondencia', ['entity' => $this->data->entity]);
         });
 
+        $app->hook('view.render(space/<<*>>):before', function(){
+            $this->addTaxonoyTermsToJs('mus_area');
+        });
+
         /*
         $app->hook('template(space.<<create|edit|single>>.acessibilidade):after', function(){
             $this->part('acessibilidade', ['entity' => $this->data->entity]);
