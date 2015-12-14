@@ -316,7 +316,7 @@ return [
             
             $obj->__metadata->mus_segunda   = $d[37];
             $obj->__metadata->mus_terca     = $d[38];
-            $obj->__metadata->mus_quarta    = $d[37];
+            $obj->__metadata->mus_quarta    = $d[39];
             $obj->__metadata->mus_quinta    = $d[40];
             $obj->__metadata->mus_sexta     = $d[41];
             $obj->__metadata->mus_sabado    = $d[42];
