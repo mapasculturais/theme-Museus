@@ -149,6 +149,17 @@
         'mc.module.notifications']);
 
     app.controller('SearchController', ['$scope', '$rootScope', '$location', '$log', '$rison', '$window', '$timeout', 'searchService', 'FindOneService', function($scope, $rootScope, $location, $log, $rison, $window, $timeout, searchService, FindOneService){
+        $scope.__mapas__ = MapasCulturais;
+
+        $scope.ownSpace = function(spaceId){
+            if(confirm('Você confirma que este museu é seu?')){
+                $.post(MapasCulturais.createUrl('space', 'own',[spaceId]), function(){
+                    $scope.openEntity.space.mus_owned = 1;
+                    $scope.$apply();
+                });
+            }
+        };
+
         $scope.defaultLocationRadius = defaultLocationRadius;
 
         $rootScope.resetPagination = function(){
