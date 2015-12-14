@@ -686,7 +686,7 @@ return [
         foreach($museus as $i => $museu){
             $id = $conn->fetchColumn("SELECT nextval('space_id_seq'::regclass)");
 
-            echo "$i - inserindo museu \"$museu->name\" com o id ($id)\n";
+            echo "$i - inserindo museu de id ($id) - \"$museu->name\"\n";
 
             $museu->agent_id = $app->config['museus.ownerAgentId'];
             $museu->name = $conn->quote($museu->name);
@@ -722,8 +722,6 @@ return [
             
             
         }
-        
-        die;
     }
 ];
         
