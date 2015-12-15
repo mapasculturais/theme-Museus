@@ -261,7 +261,7 @@
         $scope.parseHash = function(){
             var newValue = $location.hash();
             if(newValue === '') {
-                $scope.tabClick('agent');
+                $scope.tabClick('space');
                 return;
             }
 
@@ -337,7 +337,7 @@
         $rootScope.$on('$locationChangeSuccess', $scope.parseHash);
 
         if($location.hash() === '') {
-            $scope.tabClick('agent');
+            $scope.tabClick('space');
         } else {
             $scope.parseHash();
         }
