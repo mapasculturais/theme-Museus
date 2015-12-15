@@ -322,14 +322,15 @@
 
         MapasCulturais.entityTypes.agent.unshift({id:null, name: 'Todos'});
 
-//        MapasCulturais.entityTypes.space = [
-//            {id: 1, name: 'Público Federal',   objType: 60, esfera: 'Pública', esfera_tipo: 'Federal'},
-//            {id: 2, name: 'Público Estadual',  objType: 60, esfera: 'Pública', esfera_tipo: 'Estadual'},
-//            {id: 3, name: 'Público Distrital', objType: 60, esfera: 'Pública', esfera_tipo: 'Municipal'},
-//            {id: 4, name: 'Privado',           objType: 61, esfera: 'Privada', esfera_tipo: ''},
-//            {id: 5, name: 'Outro',             objType: 61, esfera: 'Privada', esfera_tipo: ''},
-//            {id: 6, name: 'Não Informado',     objType: 61, esfera: 'Privada', esfera_tipo: ''}
-//        ];
+        //Museus
+        MapasCulturais.entityTypes.space = [
+            {id: 0, name: 'Público Federal',   typeId: 60, esfera: 'EQ(Pública)', esfera_tipo: 'EQ(Federal)'},
+            {id: 1, name: 'Público Estadual',  typeId: 60, esfera: 'EQ(Pública)', esfera_tipo: 'EQ(Estadual)'},
+            {id: 2, name: 'Público Distrital', typeId: 60, esfera: 'EQ(Pública)', esfera_tipo: 'EQ(Municipal)'},
+            {id: 3, name: 'Privado',           typeId: 61, esfera: 'EQ(Privada)', esfera_tipo: 'NULL()'},
+            {id: 4, name: 'Outro',             typeId: 61, esfera: 'NULL()',      esfera_tipo: 'EQ(Outra)'},
+            {id: 5, name: 'Não Informado',     typeId: 61, esfera: 'NULL()',      esfera_tipo: 'NULL()'}
+        ];
         $scope.types = MapasCulturais.entityTypes;
         $scope.location = $location;
 

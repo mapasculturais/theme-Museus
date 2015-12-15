@@ -222,6 +222,34 @@
                     searchData.type = 'IN(' + entityData.types + ')';
                 }
 
+                //Museus mus_types space specific filters
+                if(entityData.types && entityData.types.length && MapasCulturais.entityTypes.space[0].typeId){
+                    var mus_types = MapasCulturais.entityTypes.space,
+                        type_ids = [],
+                        esferas = [],
+                        esfera_tipos = [];
+
+                    entityData.types.forEach(function(i){
+                        console.log(i);
+                        if(type_ids.indexOf(mus_types[i].typeId) === -1){
+                            type_ids.push(mus_types[i].typeId);
+                        }
+                        if(esferas.indexOf(mus_types[i].esfera) === -1){
+                            esferas.push(mus_types[i].esfera);
+                        }
+                        if(esfera_tipos.indexOf(mus_types[i].esfera_tipo) === -1){
+                            esfera_tipos.push(mus_types[i].esfera_tipo);
+                        }
+                    });
+                    searchData.type = 'IN(' + type_ids + ')';
+                    if(esferas.length){
+                        searchData.esfera = 'OR(' + esferas + ')';
+                    }
+                    if(esfera_tipos.length){
+                        searchData.esfera_tipo = 'OR(' + esfera_tipos + ')';
+                    }
+                }
+
                 if(entityData.classificacaoEtaria && entityData.classificacaoEtaria.length){
                     var selectedClassificacoesEtarias = entityData.classificacaoEtaria.map(function(e){
                         return MapasCulturais.classificacoesEtarias[e];
@@ -278,6 +306,7 @@
                         selectData += ',classificacaoEtaria,project.name,project.singleUrl,occurrences';
                         apiExportURL += 'event/findByLocation/?';
                     }
+
                 }else if (entity === 'project'){
                     selectData += ',registrationFrom,registrationTo';
                 }else if(entity === 'event'){
