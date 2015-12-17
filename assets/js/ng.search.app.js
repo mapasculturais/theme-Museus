@@ -322,16 +322,10 @@
 
         MapasCulturais.entityTypes.agent.unshift({id:null, name: 'Todos'});
 
-        //Museus
-        MapasCulturais.entityTypes.space = [
-            {"id": 0, "name": "Público Federal",   "typeId": 60, "esfera": "EQ(Pública)", "esfera_tipo": "EQ(Federal)"},
-            {"id": 1, "name": "Público Estadual",  "typeId": 60, "esfera": "EQ(Pública)", "esfera_tipo": "EQ(Estadual)"},
-            {"id": 2, "name": "Público Distrital", "typeId": 60, "esfera": "EQ(Pública)", "esfera_tipo": "EQ(Municipal)"},
-            {"id": 3, "name": "Privado",           "typeId": 61, "esfera": "EQ(Privada)", "esfera_tipo": "NULL()"},
-            {"id": 4, "name": "Outro",             "typeId": 61, "esfera": "NULL()",      "esfera_tipo": "EQ(Outra)"},
-            {"id": 5, "name": "Não Informado",     "typeId": 61, "esfera": "NULL()",      "esfera_tipo": "NULL()"}
-        ];
         $scope.types = MapasCulturais.entityTypes;
+        //Museus space types overriding default space
+        $scope.types.space = MapasCulturais.mus_spaceTypes;
+
         $scope.location = $location;
 
         $rootScope.$on('$locationChangeSuccess', $scope.parseHash);

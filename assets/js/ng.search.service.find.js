@@ -222,23 +222,22 @@
                     searchData.type = 'IN(' + entityData.types + ')';
                 }
 
-                //Museus mus_types space specific filters
-                if(entityData.types && entityData.types.length && MapasCulturais.entityTypes.space[0].typeId){
-                    var mus_types = MapasCulturais.entityTypes.space,
-                        type_ids = [],
+                //Museus space types specific filters
+                if(entityData.types && entityData.types.length && MapasCulturais.mus_spaceTypes){
+                    var type_ids = [],
                         esferas = [],
                         esfera_tipos = [];
 
                     entityData.types.forEach(function(i){
                         console.log(i);
-                        if(type_ids.indexOf(mus_types[i].typeId) === -1){
-                            type_ids.push(mus_types[i].typeId);
+                        if(type_ids.indexOf(MapasCulturais.mus_spaceTypes[i].typeId) === -1){
+                            type_ids.push(MapasCulturais.mus_spaceTypes[i].typeId);
                         }
-                        if(esferas.indexOf(mus_types[i].esfera) === -1){
-                            esferas.push(mus_types[i].esfera);
+                        if(esferas.indexOf(MapasCulturais.mus_spaceTypes[i].esfera) === -1){
+                            esferas.push(MapasCulturais.mus_spaceTypes[i].esfera);
                         }
-                        if(esfera_tipos.indexOf(mus_types[i].esfera_tipo) === -1){
-                            esfera_tipos.push(mus_types[i].esfera_tipo);
+                        if(esfera_tipos.indexOf(MapasCulturais.mus_spaceTypes[i].esfera_tipo) === -1){
+                            esfera_tipos.push(MapasCulturais.mus_spaceTypes[i].esfera_tipo);
                         }
                     });
                     searchData.type = 'IN(' + type_ids + ')';

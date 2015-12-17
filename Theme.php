@@ -65,8 +65,22 @@ Descubra o Brasil por meio dos seus museus!<br>
         );
     }
 
+    function mus_getSpaceTypes () {
+        return json_decode('[
+            {"id": 0, "name": "Público Federal",   "typeId": 60, "esfera": "EQ(Pública)", "esfera_tipo": "EQ(Federal)"},
+            {"id": 1, "name": "Público Estadual",  "typeId": 60, "esfera": "EQ(Pública)", "esfera_tipo": "EQ(Estadual)"},
+            {"id": 2, "name": "Público Distrital", "typeId": 60, "esfera": "EQ(Pública)", "esfera_tipo": "EQ(Municipal)"},
+            {"id": 3, "name": "Privado",           "typeId": 61, "esfera": "EQ(Privada)", "esfera_tipo": "NULL()"},
+            {"id": 4, "name": "Outro",             "typeId": 61, "esfera": "NULL()",      "esfera_tipo": "EQ(Outra)"},
+            {"id": 5, "name": "Não Informado",     "typeId": 61, "esfera": "NULL()",      "esfera_tipo": "NULL()"}
+        ]');
+    }
+
     protected function _init() {
         $app = App::i();
+
+        // Adds Museus Space Types to JS
+        $this->jsObject['mus_spaceTypes'] = $this->mus_getSpaceTypes();
 
         /*
          *  Modifica a consulta da API de espaços para só retornar Museus

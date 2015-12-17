@@ -80,6 +80,7 @@ $this->includeMapAssets();
                 </a>
                 <p class="objeto-resumo">{{openEntity.space.shortDescription}}</p>
                 <div class="objeto-meta">
+                    {{openEntity.space}}
                     <div><span class="label">Tipo:</span> <a ng-click="toggleSelection(data.space.types, getId(types.space, openEntity.space.type.name))">{{openEntity.space.type.name}}</a></div>
                     <div>
                         <span class="label">Tipologia de Acervo:</span>
