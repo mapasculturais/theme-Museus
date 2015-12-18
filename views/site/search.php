@@ -80,8 +80,7 @@ $this->includeMapAssets();
                 </a>
                 <p class="objeto-resumo">{{openEntity.space.shortDescription}}</p>
                 <div class="objeto-meta">
-                    {{openEntity.space}}
-                    <div><span class="label">Tipo:</span> <a ng-click="toggleSelection(data.space.types, getId(types.space, openEntity.space.type.name))">{{openEntity.space.type.name}}</a></div>
+                    <div><span class="label">Tipo:</span> <a ng-click="toggleSelection(data.space.types, mus_getTypeFromSphere(openEntity.space.esfera, openEntity.space.esfera_tipo).id)">{{mus_getTypeFromSphere(openEntity.space.esfera, openEntity.space.esfera_tipo).name}}</a></div>
                     <div>
                         <span class="label">Tipologia de Acervo:</span>
                         <span ng-repeat="area in openEntity.space.terms.mus_area">
@@ -211,10 +210,10 @@ $this->includeMapAssets();
                     </a>
                     <p class="objeto-resumo">{{space.shortDescription}}</p>
                     <div class="objeto-meta">
-                        <div><span class="label">Tipo:</span> <a ng-click="toggleSelection(data.space.types, getId(types.space, space.type.name))">{{space.type.name}}</a></div>
+                        <div><span class="label">Tipo:</span> <a ng-click="toggleSelection(data.space.types, mus_getTypeFromSphere(openEntity.space.esfera, openEntity.space.esfera_tipo).id)">{{mus_getTypeFromSphere(openEntity.space.esfera, openEntity.space.esfera_tipo).name}}</a></div>
                         <div>
-                            <span class="label">Área de atuação:</span>
-                            <span ng-repeat="area in space.terms.area">
+                            <span class="label">Tipologia de Acervo:</span>
+                            <span ng-repeat="area in openEntity.space.terms.mus_area">
                                 <a ng-click="toggleSelection(data.space.areas, getId(areas, area))">{{area}}</a>{{$last ? '' : ', '}}
                             </span>
                         </div>

@@ -326,6 +326,19 @@
         //Museus space types overriding default space
         $scope.types.space = MapasCulturais.mus_spaceTypes;
 
+        $scope.mus_getTypeFromSphere = function(sphere, sphere_type){
+            var theType;
+            sphere = sphere ?           'EQ(' + sphere + ')'      : 'NULL()';
+            sphere_type = sphere_type ? 'EQ(' + sphere_type + ')' : 'NULL()';
+            MapasCulturais.mus_spaceTypes.find(function(type) {
+                if (type.esfera === sphere && type.esfera_tipo === sphere_type) {
+                    theType = type;
+                    return;
+                }
+            });
+            return theType;
+        };
+
         $scope.location = $location;
 
         $rootScope.$on('$locationChangeSuccess', $scope.parseHash);
