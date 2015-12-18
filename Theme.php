@@ -156,8 +156,9 @@ Descubra o Brasil por meio dos seus museus!<br>
             $this->part('botao-meu-museu', ['entity' => $this->data->entity]);
         });
 
-        $app->hook('view.render(space/<<*>>):before', function(){
+        $app->hook('view.render(space/<<*>>):before', function() {
             $this->addTaxonoyTermsToJs('mus_area');
+            $this->includeOpeningTimeAssets();
         });
 
         /*
