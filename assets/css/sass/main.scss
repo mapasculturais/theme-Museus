@@ -3,34 +3,3 @@
 @import "variables";
 @import "../../../../mapasculturais-baseminc/assets/css/sass/main";
 @import "overrides";
-
-.register-museum {
-    margin: 20px 0 0 15px;
-    position: absolute;
-    z-index: 1;
-    @media screen and (min-width: 360px) {
-        margin: 20px 0 0 25px;
-    }
-    @media screen and (min-width: 411px) {
-        margin: 20px 0 0 40px;
-    }
-    @media screen and (min-width: 568px) {
-        margin: 20px 0 0 110px;
-    }
-    @media screen and (min-width: $screen-sm-min) {
-        font-size: 14px;
-        margin: 18px 0 0 0;
-        position: static;
-        .icon {
-            font-size: 18px;
-        }
-    }
-}
-
-body.action-search {
-    @media screen and (max-width: $screen-xs-max) {
-        .register-museum {
-            display: none;
-        }
-    }
-}
