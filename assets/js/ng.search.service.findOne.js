@@ -6,7 +6,7 @@
         return function(data){
 
             if(data.global.viewMode === 'list') return;
-            var select = 'id,singleUrl,name,subTitle,type,shortDescription,terms,project.name,project.singleUrl,mus_owned,owner.user.id,mus_cod,esfera,esfera_tipo',
+            var select = 'id,singleUrl,name,subTitle,type,shortDescription,terms,project.name,project.singleUrl,mus_owned,owner.user.id,mus_cod',
                 requestAction = 'findOne',
                 page=null,
                 result = {},
