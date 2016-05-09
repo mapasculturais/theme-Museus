@@ -222,6 +222,33 @@
                     searchData.type = 'IN(' + entityData.types + ')';
                 }
 
+                //Museus space types specific filters
+                if(entityData.types && entityData.types.length && MapasCulturais.mus_spaceTypes){
+                    var type_ids = [],
+                        esferas = [],
+                        esfera_tipos = [];
+
+                    entityData.types.forEach(function(i){
+                        console.log(i);
+                        if(type_ids.indexOf(MapasCulturais.mus_spaceTypes[i].typeId) === -1){
+                            type_ids.push(MapasCulturais.mus_spaceTypes[i].typeId);
+                        }
+                        if(esferas.indexOf(MapasCulturais.mus_spaceTypes[i].esfera) === -1){
+                            esferas.push(MapasCulturais.mus_spaceTypes[i].esfera);
+                        }
+                        if(esfera_tipos.indexOf(MapasCulturais.mus_spaceTypes[i].esfera_tipo) === -1){
+                            esfera_tipos.push(MapasCulturais.mus_spaceTypes[i].esfera_tipo);
+                        }
+                    });
+                    searchData.type = 'IN(' + type_ids + ')';
+                    if(esferas.length){
+                        searchData.esfera = 'OR(' + esferas + ')';
+                    }
+                    if(esfera_tipos.length){
+                        searchData.esfera_tipo = 'OR(' + esfera_tipos + ')';
+                    }
+                }
+
                 if(entityData.classificacaoEtaria && entityData.classificacaoEtaria.length){
                     var selectedClassificacoesEtarias = entityData.classificacaoEtaria.map(function(e){
                         return MapasCulturais.classificacoesEtarias[e];
@@ -278,6 +305,7 @@
                         selectData += ',classificacaoEtaria,project.name,project.singleUrl,occurrences';
                         apiExportURL += 'event/findByLocation/?';
                     }
+
                 }else if (entity === 'project'){
                     selectData += ',registrationFrom,registrationTo';
                 }else if(entity === 'event'){

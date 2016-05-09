@@ -10,7 +10,8 @@ $num_verified_spaces    = $this->getNumEntities($class_space, true);
 $space_areas = array_values($app->getRegisteredTaxonomy($class_space, 'mus_area')->restrictedTerms);
 sort($space_areas);
 
-$space_types = $app->getRegisteredEntityTypes($class_space);
+//$space_types = $app->getRegisteredEntityTypes($class_space);
+$space_types = $this->mus_getSpaceTypes();
 
 $space_img_attributes = 'class="random-feature no-image"';
 

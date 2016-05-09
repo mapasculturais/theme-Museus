@@ -261,7 +261,7 @@
         $scope.parseHash = function(){
             var newValue = $location.hash();
             if(newValue === '') {
-                $scope.tabClick('agent');
+                $scope.tabClick('space');
                 return;
             }
 
@@ -322,21 +322,29 @@
 
         MapasCulturais.entityTypes.agent.unshift({id:null, name: 'Todos'});
 
-//        MapasCulturais.entityTypes.space = [
-//            {id: 1, name: 'Público Federal',   objType: 60, esfera: 'Pública', esfera_tipo: 'Federal'},
-//            {id: 2, name: 'Público Estadual',  objType: 60, esfera: 'Pública', esfera_tipo: 'Estadual'},
-//            {id: 3, name: 'Público Distrital', objType: 60, esfera: 'Pública', esfera_tipo: 'Municipal'},
-//            {id: 4, name: 'Privado',           objType: 61, esfera: 'Privada', esfera_tipo: ''},
-//            {id: 5, name: 'Outro',             objType: 61, esfera: 'Privada', esfera_tipo: ''},
-//            {id: 6, name: 'Não Informado',     objType: 61, esfera: 'Privada', esfera_tipo: ''}
-//        ];
         $scope.types = MapasCulturais.entityTypes;
+        //Museus space types overriding default space
+        $scope.types.space = MapasCulturais.mus_spaceTypes;
+
+        $scope.mus_getTypeFromSphere = function(sphere, sphere_type){
+            var theType;
+            sphere = sphere ?           'EQ(' + sphere + ')'      : 'NULL()';
+            sphere_type = sphere_type ? 'EQ(' + sphere_type + ')' : 'NULL()';
+            MapasCulturais.mus_spaceTypes.find(function(type) {
+                if (type.esfera === sphere && type.esfera_tipo === sphere_type) {
+                    theType = type;
+                    return;
+                }
+            });
+            return theType;
+        };
+
         $scope.location = $location;
 
         $rootScope.$on('$locationChangeSuccess', $scope.parseHash);
 
         if($location.hash() === '') {
-            $scope.tabClick('agent');
+            $scope.tabClick('space');
         } else {
             $scope.parseHash();
         }
