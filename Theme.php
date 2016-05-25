@@ -40,16 +40,16 @@ Descubra o Brasil por meio dos seus museus!<br>
 //
 //            'search: verified results' => 'Resultados Verificados',
 //            'search: verified' => "Verificados"
-            
-                        
+
+
             'entities: Spaces of the agent'=> 'Museus do agente',
             'entities: Space Description'=> 'Descrição do Museu',
             'entities: My Spaces'=> 'Meus Museus',
             'entities: My spaces'=> 'Meus museus',
-            
+
             'entities: no registered spaces'=> 'nenhum museu cadastrado',
             'entities: no spaces'=> 'nenhum museu',
-            
+
             'entities: Space' => 'Museu',
             'entities: Spaces' => 'Museus',
             'entities: space' => 'museu',
@@ -70,7 +70,7 @@ Descubra o Brasil por meio dos seus museus!<br>
 
         /*
          *  Modifica a consulta da API de espaços para só retornar Museus
-         * 
+         *
          * @see protectec/application/conf/space-types.php
          */
         $app->hook('API.<<*>>(space).query', function(&$data, &$select_properties, &$dql_joins, &$dql_where) {
@@ -78,14 +78,14 @@ Descubra o Brasil por meio dos seus museus!<br>
         });
 
         parent::_init();
-        
+
         // BUSCA POR CÓDIGO DO MUSEU
         // adiciona o join do metadado
         $app->hook('repo(<<*>>).getIdsByKeywordDQL.join', function(&$joins, $keyword) {
             $joins .= "
-                LEFT JOIN 
+                LEFT JOIN
                         e.__metadata mus_cod
-                WITH 
+                WITH
                         mus_cod.key = 'mus_cod'";
         });
 
@@ -93,12 +93,13 @@ Descubra o Brasil por meio dos seus museus!<br>
         $app->hook('repo(<<*>>).getIdsByKeywordDQL.where', function(&$where, $keyword) {
             $where .= "OR lower(mus_cod.value) LIKE lower(:keyword)";
         });
-        
-        
+
+
         // modificações nos templates
         $app->hook('template(space.<<*>>.num-sniic):before', function(){
             $entity = $this->data->entity;
-            if($entity->mus_cod){
+
+            if($this->isEditable() && $entity->mus_cod){
                 echo "<small><span class='label'>Código:</span> {$entity->mus_cod}</small>";
             }
         });
@@ -111,7 +112,7 @@ Descubra o Brasil por meio dos seus museus!<br>
             $this->part('tab-publico', ['entity' => $this->data->entity]);
             $this->part('tab-mais', ['entity' => $this->data->entity]);
         });
-        
+
         $app->hook('template(space.<<create|edit|single>>.tab-about-service):begin', function(){
             $this->part('about-servive-begin', ['entity' => $this->data->entity]);
         });
@@ -127,7 +128,7 @@ Descubra o Brasil por meio dos seus museus!<br>
         <?php endif; ?>
             <?php
         });
-        
+
         $app->hook('template(space.<<*>>.location):after', function(){
             $this->enqueueScript('app', 'endereco-correspondencia', 'js/endereco-correspondencia.js');
             $this->part('endereco-correspondencia', ['entity' => $this->data->entity]);
@@ -182,7 +183,7 @@ Descubra o Brasil por meio dos seus museus!<br>
     protected function _getEventMetadata() {
         return [];
     }
-    
+
     protected function _getProjectMetadata() {
         return [];
     }
@@ -197,16 +198,16 @@ Descubra o Brasil por meio dos seus museus!<br>
             'owned' => [
                 'label' => 'Se o museu já apropriado por algum usuário'
             ],
-            
+
             'cod' => [
                 'label' => 'Número na Processada',
                 'type' => 'readonly'
             ],
-            
+
             'instituicaoMantenedora' => [
                 'label' => 'Instituição mantenedora'
             ],
-            
+
             'instumentoCriacao_tipo' => [
                 'label' => 'Instrumento de criação',
                 'type' => 'select',
@@ -222,11 +223,11 @@ Descubra o Brasil por meio dos seus museus!<br>
                     'Ata de Reunião'
                 ]
             ],
-            
+
             'instumentoCriacao_descricao' => [
                 'label' => 'Descrição do instrumento de criação',
             ],
-            
+
             'status' => [
                 'label' => 'Status do Museu',
                 'type' => 'select',
@@ -236,7 +237,7 @@ Descubra o Brasil por meio dos seus museus!<br>
                     'implantacao' => 'Em implantação'
                 ]
             ],
-            
+
             'abertura_ano' => [
                 'label' => 'Ano de abertura',
                 'type' => 'int',
@@ -244,7 +245,7 @@ Descubra o Brasil por meio dos seus museus!<br>
                     'v::intVal()' => 'O ano de abertura deve ser um valor numérico inteiro'
                 ]
             ],
-            
+
             'abertura_publico' => [
                 'label' => 'Tipo de públio ao qual o museu é aberto',
                 'type' => 'select',
@@ -253,23 +254,23 @@ Descubra o Brasil por meio dos seus museus!<br>
                     'SOMENTE para públicos específicos'
                 ]
             ],
-            
+
             'itinerante' => [
                 'label' => 'O museu é itinerante?',
                 'type' => 'select',
                 'options' => ['sim', 'não']
             ],
-            
+
             'itinerante_dependeRecursos' => [
                 'label' => 'O museu depende de recursos financeiros de outra instituição para a itinerância da exposição?',
                 'type' => 'select',
                 'options' => [
                     '' => 'não se aplica',
-                    'sim', 
+                    'sim',
                     'não'
                 ]
             ],
-            
+
             // EXPOSIÇÔES
             'exposicoes_duracao' => [
                 'label' => 'Duração das exposições',
@@ -281,7 +282,7 @@ Descubra o Brasil por meio dos seus museus!<br>
                     'NÃO realiza exposições'
                 ]
             ],
-            
+
             'horario_segunda_das' => [
                 'label' => 'Aberto nas segundas-feiras das (00:00)',
                 'validations' => [
@@ -378,7 +379,7 @@ Descubra o Brasil por meio dos seus museus!<br>
                     'Jardim zoológico, jardim botânico herbário, oceanário ou planetário'
                 ]
             ],
-            
+
             'tipo_tematica' => [
                 'label' => 'Temática do museu',
                 'type' => 'select',
@@ -393,7 +394,7 @@ Descubra o Brasil por meio dos seus museus!<br>
                     'Defesa e segurança pública',
                 ]
             ],
-            
+
             'tipo_unidadeConservacao' => [
                 'label' => 'Tipo/categoria de manejo da Unidade de Conservação',
                 'type' => 'select',
@@ -403,7 +404,7 @@ Descubra o Brasil por meio dos seus museus!<br>
                     'Uso sustentável'
                 ]
             ],
-            
+
             'tipo_unidadeConservacao_protecaoIntegral' => [
                 'label' => 'Tipo de unidade de conservação integral',
                 'type' => 'select',
@@ -416,7 +417,7 @@ Descubra o Brasil por meio dos seus museus!<br>
                     'Reserva Biológica'
                 ]
             ],
-            
+
             'tipo_unidadeConservacao_usoSustentavel' => [
                 'label' => 'Tipo de unidade de uso sustentável',
                 'type' => 'select',
@@ -431,8 +432,8 @@ Descubra o Brasil por meio dos seus museus!<br>
                     'RPPN (Reserva Particular do Patrimônio Natural)'
                 ]
             ],
-            
-            
+
+
             'instalacoes' => [
                 'label' => 'Instalações básicas e serviços oferecidos',
                 'multiselect',
@@ -502,28 +503,28 @@ Descubra o Brasil por meio dos seus museus!<br>
             'biblioteca_acessoPublico' => [
                 'label' => 'A biblioteca tem acesso ao público?',
                 'type' => 'select',
-                'options' => [ 
+                'options' => [
                     '' => 'não se aplica',
-                    'sim' => 'sim', 
+                    'sim' => 'sim',
                     'não' => 'não',
                 ]
             ],
-            
+
             // acervo
             'acervo_comercializacao' => [
                 'label' => 'Comercialização do acervo',
                 'type' => 'select',
-                'options' => [ 
+                'options' => [
                     "APENAS comercializável",
                     "APENAS Não comercializável",
                     "Comercializável e não comercializável"
                 ]
             ],
-            
+
             'acervo_propriedade' => [
                 'label' => 'Propriedade do acervo',
                 'type' => 'select',
-                'options' => [ 
+                'options' => [
                     'Possui SOMENTE acervo próprio',
                     'Possui acervo próprio e em comodato',
                     'Acervo compartilhado entre órgãos/setores da mesma entidade mantenedora',
@@ -531,17 +532,17 @@ Descubra o Brasil por meio dos seus museus!<br>
                     'NÃO possui acervo',
                 ]
             ],
-            
+
             'acervo_comodato_formalizado' => [
                 'label' => 'O comodato/empréstimo está formalizado por meio de documento legal?',
                 'type' => 'select',
                 'options' => [
                     '' => 'não se aplica',
-                    'sim' => 'sim', 
+                    'sim' => 'sim',
                     'não' => 'não'
                 ]
             ],
-            
+
             'acervo_comodato_duracao' => [
                 'label' => 'Duração do comodato/empréstimo (em meses)',
                 'type' => 'numeric',
@@ -549,26 +550,26 @@ Descubra o Brasil por meio dos seus museus!<br>
                     'v::numeric()' => ''
                 ]
             ],
-            
+
             'acervo_material' => [
                 'label' => 'O museu possui também acervo material?',
                 'type' => 'select',
                 'options' => [
-                    'sim' => 'sim', 
+                    'sim' => 'sim',
                     'não' => 'não'
                 ]
             ],
-            
+
             'acervo_material_emExposicao' => [
                 'label' => 'O acervo material encontra-se em exposição?',
                 'type' => 'select',
                 'options' => [
                     '' => 'não se aplica',
-                    'sim' => 'sim', 
+                    'sim' => 'sim',
                     'não' => 'não'
                 ]
             ],
-            
+
             'acervo_nucleoEdificado' => [
                 'label' => 'Núcleo Edificado',
                 'type' => 'multiselect',
@@ -581,7 +582,7 @@ Descubra o Brasil por meio dos seus museus!<br>
                     'O acervo do museu é composto de núcleos edificados'
                 ]
             ],
-            
+
             'atividadePrincipal' => [
                 'label' => 'Em relação à sua atividade principal, indique a opção que melhor caracterize a instituição',
                 'type' => 'singleselect',
@@ -593,68 +594,68 @@ Descubra o Brasil por meio dos seus museus!<br>
                     'Galeria'
                 ]
             ],
-            
+
             'caraterComunitario' => [
                 'label' => 'O museu é de carater comunitário?',
                 'type' => 'select',
                 'options' => [ 'sim', 'não']
             ],
-            
+
             'comunidadeRealizaAtividades' => [
                 'label' => 'A comunidade realiza atividades museológicas?',
                 'type' => 'select',
                 'options' => [ 'sim', 'não']
             ],
-            
+
             'ingresso_cobrado' => [
                 'label' => 'O ingresso ao museu é cobrado?',
                 'type' => 'select',
                 'options' => [ 'sim', 'não', 'contribuição voluntária']
             ],
-            
+
             'ingresso_valor' => [
                 'label' => 'Descrição do valor do ingresso ao museu',
                 'type' => 'text'
             ],
-            
+
             // GESTÂO
             'gestao_regimentoInterno' => [
                 'label' => 'O museu posui regimento interno?',
                 'type' => 'select',
                 'options' => ['sim', 'não']
             ],
-            
+
             'gestao_planoMuseologico' => [
                 'label' => 'O museu possui plano museológico?',
                 'type' => 'select',
                 'options' => ['sim', 'não']
             ],
-            
+
             'gestao_politicaAquisicao' => [
                 'label' => 'O museu possui política de aquisição de acervo?',
                 'type' => 'select',
                 'options' => ['sim', 'não']
             ],
-            
+
             'gestao_politicaDescarte' => [
                 'label' => 'O museu possui política de descarte de acervo?',
                 'type' => 'select',
                 'options' => ['sim', 'não']
             ],
-            
-            
-            
+
+
+
             // FALTA DEFINIR SE VAI PARA O CORE
             'EnCorrespondencia_mesmo' => [
                 'label' => 'O endereço de correspondência é o mesmo de visitação?',
                 'type' => 'select',
                 'options' => [ 'sim', 'não' ]
             ],
-            
+
             'endereco_correspondencia' => [
                 'label' => 'Endereço de correspondência'
             ],
-            
+
             'EnCorrespondencia_CEP' => [
                 'label' => 'CEP',
             ],
@@ -734,7 +735,7 @@ Descubra o Brasil por meio dos seus museus!<br>
                 }
             });
         });
-        
+
         $terms = [
             'Antropologia e Etnografia',
             'Arqueologia',
