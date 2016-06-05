@@ -368,7 +368,7 @@ Descubra o Brasil por meio dos seus museus!<br>
                 ]
             ],
             // tipologia
-            'tipo' => [
+            'tipo_acervo' => [
                 'label' => 'Tipo',
                 'type' => 'select',
                 'options' => [

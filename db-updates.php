@@ -6,7 +6,7 @@ $conn = $em->getConnection();
 
 return [
     'importa base de museus' => function() use ( $app, $conn ) {
-   /*    
+   /*
     [0] => Número na Processada
     [1] => Nome do Museu
     [2] => Natureza Administrativa
@@ -129,8 +129,8 @@ return [
     [119] => 6.6 - O museu possui política de aquisição de acervo?
     [120] => 6.7 - O museu possui política de descarte de acervo?
 */
-    
-    
+
+
         $data = file_get_contents(__DIR__ . '/museus.csv');
 
         $data = str_replace('erro no sistema', '', $data);
@@ -138,7 +138,7 @@ return [
         $data = explode("\n", $data);
 
         $labels = explode("\t", $data[0]);
-        
+
         $museus = [];
 
         foreach ($data as $i => $line) {
@@ -149,7 +149,7 @@ return [
 
             if (count($d) < 119)
                 continue;
-            
+
             foreach($d as $i => $val){
                 $d[$i] = trim($val);
                 if(trim($val) == '-'){
@@ -160,9 +160,9 @@ return [
             $obj = new stdClass;
 
             $obj->__metadata = new stdClass;
-            
+
             $obj->__metadata->mus_verificado = '1';
-            
+
             $obj->__links = [];
             $obj->__terms = ['mus_area' => []];
 
@@ -194,7 +194,7 @@ return [
                     $obj->__metadata->esfera_tipo = 'Outra';
                     $obj->type = 61;
                     break;
-                
+
                 default:
                     $obj->type = 61;
                     break;
@@ -227,7 +227,7 @@ return [
             if($d[11] && $d[12]){
                 $obj->location = "({$d[11]},{$d[12]})";
                 $obj->_geo_location = "ST_GeographyFromText('POINT({$d[11]} {$d[12]})')";
-                
+
             } else {
                 $obj->location = "(0,0)";
                 $obj->_geo_location = "ST_GeographyFromText('POINT(0 0)')";
@@ -242,17 +242,17 @@ return [
             $obj->__metadata->mus_EnCorrespondencia_CEP = $d[18];
             $obj->__metadata->mus_EnCorrespondencia_Municipio = $d[19];
             $obj->__metadata->mus_EnCorrespondencia_Estado = $d[20];
-            
+
             if ($d[15]) {
                 $obj->__metadata->mus_endereco_correspondencia = "{$d[13]} {$d[14]}, {$d[15]}, {$d[17]}, {$d[18]}, {$d[19]}, {$d[20]}";
             } else {
                 $obj->__metadata->mus_endereco_correspondencia = "{$d[13]} {$d[14]}, {$d[17]}, {$d[18]}, {$d[19]}, {$d[20]}";
             }
-            
+
             if($d[16]){
                 $obj->__metadata->mus_endereco_correspondencia .= ' - Caixa Postal: ' . $d[16];
             }
-            
+
 
 
             if ($obj->__metadata->mus_EnCorrespondencia_Nome_Logradouro == $obj->__metadata->En_Nome_Logradouro && $obj->__metadata->mus_EnCorrespondencia_Num == $obj->__metadata->En_Num) {
@@ -269,7 +269,7 @@ return [
                 if(!$url){
                     continue;
                 }
-                
+
                 if (!preg_match('#^https?://#', $url)) {
                     $url = 'http://' . $url;
                 }
@@ -311,9 +311,9 @@ return [
               [42] => Sábado
               [43] => Domingo
              */
-            
+
             /* vou colocar como um metadado e depois resolvemos */
-            
+
             $obj->__metadata->mus_segunda   = $d[37];
             $obj->__metadata->mus_terca     = $d[38];
             $obj->__metadata->mus_quarta    = $d[39];
@@ -328,11 +328,11 @@ return [
             } else if ($d[44] == 'N') {
                 $obj->__metadata->mus_ingresso_cobrado = 'não';
             }
-            
-            
+
+
             // [45] => Valor
             $obj->__metadata->mus_ingresso_valor = $d[45];
-            
+
             $instalacoes = [
                 46 => "Bebedouro",
                 47 => "Estacionamento",
@@ -473,7 +473,7 @@ return [
             }
 
             // [86] => 2.2.1 -  A instituição possui acervo:
-            
+
             $obj->__metadata->mus_acervo_comercializacao = $d[86];
             /* mudei de idéia
             switch ($d[86]) {
@@ -514,7 +514,7 @@ return [
 //                $obj->__metadata->mus_acervo_propriedade = $d[90];
 //            }
 
-            
+
               switch ($d[90]) {
                 case 'Possui SOMENTE acervo próprio':
                     $obj->__metadata->mus_acervo_propriedade = 'próprio';
@@ -570,14 +570,14 @@ return [
             } else if ($d[96] == 'Não') {
                 $obj->__metadata->mus_acervo_material = 'não';
             }
-            
+
             // [97] => 2.10.1 - Esse acervo encontra-se em exposição presencial?
             if ($d[97] == 'Sim') {
                 $obj->__metadata->mus_acervo_material_emExposicao = 'sim';
             } else if ($d[97] == 'Não') {
                 $obj->__metadata->mus_acervo_material_emExposicao = 'não';
             }
-            
+
             $nucleo_edificado = [
                 98 => 'O museu NÃO possui acervo em exposições em núcleo edificado',
                 99 => 'A exposição do museu está no próprio território',
@@ -586,7 +586,7 @@ return [
                 102 => 'O Museu NÃO possui núcleo edificado e NÃO possui sede técnico-administrativa',
                 103 => 'O acervo do museu é composto de núcleos edificados'
             ];
-            
+
             $nedi = [];
             foreach ($acessibilidade_visual as $i => $val) {
                 if ($d[$i] == 'Sim') {
@@ -594,30 +594,30 @@ return [
                 }
             }
             $obj->__metadata->mus_acervo_nucleoEdificado = implode(';', $nedi);
-            
+
             // [104] => 2.12 -  Identifique o tipo/categoria de manejo da Unidade de Conservação:
             if (strlen($d[104]) > 3) {
                 $obj->__metadata->mus_tipo_unidadeConservacao = $d[104];
             }
-            
+
             // Tipo de unidade de proteção integral
             if (strlen($d[105]) > 3) {
                 $obj->__metadata->mus_tipo_unidadeConservacao_protecaoIntegral = $d[105];
             }
-            
+
             // Tipo de unidade de uso sustentável
             if (strlen($d[106]) > 3) {
                 $obj->__metadata->mus_tipo_unidadeConservacao_usoSustentavel = $d[106];
             }
-            
+
             // [107] => 3.3 - O museu é aberto ao púbico em geral ou somente para públicos específicos?
             if (strlen($d[107]) > 3) {
                 $obj->__metadata->mus_abertura_publico = $d[107];
             }
-            
+
             if ($d[108] == 'Sim') {
                 $obj->__metadata->mus_instumentoCriacao_tipo = $d[109];
-                
+
                 /*
                  * Lei
                  * Decreto-Lei
@@ -627,53 +627,53 @@ return [
                  * Ata de Reunião
                  * Outro
                  */
-                
+
                 switch ($d[109]){
                     case 'Lei':
                         $obj->__metadata->mus_instumentoCriacao_tipo = $d[110];
                         break;
-                    
+
                     case 'Decreto-Lei':
                         $obj->__metadata->mus_instumentoCriacao_tipo = $d[111];
                         break;
-                    
+
                     case 'Decreto':
                         $obj->__metadata->mus_instumentoCriacao_tipo = $d[112];
                         break;
-                    
+
                     case 'Portaria':
                         $obj->__metadata->mus_instumentoCriacao_tipo = $d[113];
                         break;
-                    
+
                     case 'Resolução':
                         $obj->__metadata->mus_instumentoCriacao_tipo = $d[114];
                         break;
-                    
+
                     case 'Ata de Reunião':
                         $obj->__metadata->mus_instumentoCriacao_tipo = $d[115];
                         break;
-                    
+
                     case 'Outro':
                         $obj->__metadata->mus_instumentoCriacao_tipo = $d[116];
                         break;
-                    
+
                 }
             }
-            
+
             // [117] => 4.2 - O museu possui regimento interno?
             if ($d[117] == 'Sim') {
                 $obj->__metadata->mus_gestao_regimentoInterno = 'sim';
             } else if ($d[117] == 'Não') {
                 $obj->__metadata->mus_gestao_regimentoInterno = 'não';
             }
-            
+
             // [118] => 4.3 -  O museu possui plano museológico?
             if ($d[118] == 'Sim') {
                 $obj->__metadata->mus_gestao_planoMuseologico = 'sim';
             } else if ($d[118] == 'Não') {
                 $obj->__metadata->mus_gestao_planoMuseologico = 'não';
             }
-            
+
             // [119] => 6.6 - O museu possui política de aquisição de acervo?
             if ($d[119] == 'Sim') {
                 $obj->__metadata->mus_gestao_politicaAquisicao = 'sim';
@@ -687,11 +687,11 @@ return [
             } else if ($d[120] == 'Não') {
                 $obj->__metadata->mus_gestao_politicaDescarte = 'não';
             }
-            
+
             $museus[] = $obj;
         }
-        
-        
+
+
         // importa pro banco de dados
         foreach($museus as $i => $museu){
             $id = $conn->fetchColumn("SELECT nextval('space_id_seq'::regclass)");
@@ -720,7 +720,7 @@ return [
                         '$id', '$key', :val
                     )", ['val' => $val]);
             }
-            
+
             foreach($museu->__links as $link){
                 $conn->executeQuery("
                     INSERT INTO metalist (
@@ -754,7 +754,7 @@ return [
             $cods_ids[$o['value']] = $o['object_id'];
         }
 
-        
+
 
         foreach ($data as $i => $line) {
             if ($i === 0)
@@ -802,14 +802,21 @@ return [
             $terms[$term] = $id;
         }
 
+        echo "INSERINDO TERMO Área de Atuação: Museu\n\n";
+        $id_area_museu = $conn->fetchColumn("SELECT nextval('term_id_seq'::regclass)");
+        $conn->executeQuery('INSERT INTO term (id, taxonomy, term) VALUES (:id, 2, :term)',
+                            ['id' => $id_area_museu, 'term' => 'Museu']);
+
+
         foreach($museus as $m){
             echo "\n\ninserindo termos ao museu de cod ($m->cod) - id ($m->id)\n";
             foreach($m->terms as $t){
                 echo "  termo '$t'\n";
                 $conn->executeQuery("INSERT INTO term_relation (term_id, object_type, object_id) VALUES (:id, 'MapasCulturais\Entities\Space', :obj)", ['id' => $terms[$t], 'obj' => $m->id]);
             }
+            echo " termo Área de Atuação: Museu'\n";
+            $conn->executeQuery("INSERT INTO term_relation (term_id, object_type, object_id) VALUES (:id, 'MapasCulturais\Entities\Space', :obj)", ['id' => $id_area_museu, 'obj' => $m->id]);
         }
 
     }
 ];
-        
