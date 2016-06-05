@@ -79,6 +79,43 @@ Descubra o Brasil por meio dos seus museus!<br>
 
         parent::_init();
 
+
+        $app->hook('entity(<<Space>>).save:after', function() use ($app){
+            if(!$this->getValidationErrors() && !$this->mus_cod){
+                $getDvFromNumeroIdent = function($numIdent)
+                {
+                       $dgs = array();
+                       for($i=0; $i < strlen($numIdent); $i++)
+                               $dgs[] = $numIdent{$i};
+
+                       $ft  = 9;
+                       $sm  = 0;
+                       foreach($dgs as $dg)
+                       {
+                               $sm += ($dg*$ft);
+                               $ft -= 1;
+                       }
+                       $resto = $sm % 11;
+                       return $resto > 1 ? (11 - $resto) : 0;
+                };
+
+                $geraNumeroIdent = function () use($getDvFromNumeroIdent){
+                       $pdg = array(1,2,5,6,8,9);
+                       shuffle($pdg);
+
+                       $dgs = array($pdg[0]);
+                       for ($i=2; $i<=8; $i++)
+                               $dgs[$i] = rand(0,9);
+
+                       $nId = implode('',$dgs);
+                       $nId .= $getDvFromNumeroIdent($nId);
+
+                       return $nId;
+                };
+                $this->mus_cod = $geraNumeroIdent();
+            }
+        });
+
         // BUSCA POR CÓDIGO DO MUSEU
         // adiciona o join do metadado
         $app->hook('repo(<<*>>).getIdsByKeywordDQL.join', function(&$joins, $keyword) {
@@ -100,7 +137,7 @@ Descubra o Brasil por meio dos seus museus!<br>
             $entity = $this->data->entity;
 
             if($this->isEditable() && $entity->mus_cod){
-                echo "<small><span class='label'>Código:</span> {$entity->mus_cod}</small>";
+                echo "<small><span class='icon icon-private-info'></span><span class='label'>Código:</span> {$entity->mus_cod}</small>";
             }
         });
 
