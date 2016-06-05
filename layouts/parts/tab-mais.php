@@ -29,7 +29,7 @@ $show_acervo = $this->isEditable() ||
 $show_gestao = $this->isEditable();
 
 $show_tipologia = $this->isEditable() ||
-        $entity->mus_tipo ||
+        $entity->mus_tipo_acervo ||
         $entity->mus_tipo_tematica;
 
 ?>
@@ -114,11 +114,11 @@ $show_tipologia = $this->isEditable() ||
 
         <?php if ($show_tipologia): ?>
             <h5>Tipologia</h5> <!-- mover para o local apropriado -->
-            <?php if($this->isEditable() || $entity->mus_tipo): ?>
+            <?php if($this->isEditable() || $entity->mus_tipo_acervo): ?>
             <p>
                 <span class="label">Tipo:</span>
-                <span class="js-editable" data-edit="mus_tipo" data-original-title="Tipo do museu" data-emptytext="Selecione">
-                    <?php echo $entity->mus_tipo; ?>
+                <span class="js-editable" data-edit="mus_tipo_acervo" data-original-title="Tipo do museu" data-emptytext="Selecione">
+                    <?php echo $entity->mus_tipo_acervo; ?>
                 </span>
             </p>
             <?php endif; ?>
@@ -138,7 +138,7 @@ $show_tipologia = $this->isEditable() ||
         <p style="margin-top:1em"><em>somente para o o tipo "Unidade de conservação da natureza"</em></p>
         <?php endif; ?>
 
-        <?php if($this->isEditable() || $entity->mus_tipo === 'Unidade de conservação da natureza'): ?>
+        <?php if($this->isEditable() || $entity->mus_tipo_acervo === 'Unidade de conservação da natureza'): ?>
             <?php if($this->isEditable() || $entity->mus_tipo_unidadeConservacao): ?>
             <p>
                 <span class="label">Tipo/categoria de manejo da Unidade de Conservação:</span>
@@ -258,7 +258,8 @@ $show_tipologia = $this->isEditable() ||
         <?php endif; ?>
 
         <?php if($this->isEditable()): ?>
-        <p>
+        <p class="privado">
+            <span class="icon icon-private-info"></span>
             <span class="label">Propriedade:</span>
             <span class="js-editable" data-edit="mus_acervo_propriedade" data-original-title="Comercialização do acervo" data-emptytext="Selecione">
                 <?php echo $entity->mus_acervo_propriedade; ?>
@@ -285,7 +286,8 @@ $show_tipologia = $this->isEditable() ||
         <?php endif; ?>
 
         <?php if($this->isEditable()): ?>
-        <p>
+        <p class="privado">
+            <span class="icon icon-private-info"></span>
             <span class="label">Possui acervo material:</span>
             <span class="js-editable" data-edit="mus_acervo_material" data-original-title="O museu possui acervo material?" data-emptytext="Selecione">
                 <?php echo $entity->mus_acervo_material; ?>
@@ -310,7 +312,8 @@ $show_tipologia = $this->isEditable() ||
         <?php endif; ?>
 
         <?php if($this->isEditable()): ?>
-        <p>
+        <p class="privado">
+            <span class="icon icon-private-info"></span>
             <span class="label">Duração das exposições:</span>
             <span class="js-editable" data-edit="mus_exposicoes_duracao" data-original-title="Duração das exposições" data-emptytext="Selecione">
                 <?php echo $entity->mus_exposicoes_duracao; ?>
@@ -319,7 +322,8 @@ $show_tipologia = $this->isEditable() ||
         <?php endif; ?>
 
         <?php if($this->isEditable()): ?>
-        <p>
+        <p class="privado">
+            <span class="icon icon-private-info"></span>
             <span class="label">O museu é itinerante:</span>
             <span class="js-editable" data-edit="mus_itinerante" data-original-title="O museu é itinerante?" data-emptytext="Selecione">
                 <?php echo $entity->mus_itinerante; ?>
@@ -328,7 +332,8 @@ $show_tipologia = $this->isEditable() ||
         <?php endif; ?>
 
         <?php if($this->isEditable()): ?>
-        <p>
+        <p class="privado">
+            <span class="icon icon-private-info"></span>
             <span class="label">Depende de recursos financeiros de outra instituição para a itinerância da exposição:</span>
             <span class="js-editable" data-edit="mus_itinerante_dependeRecursos" data-original-title="O museu depende de recursos financeiros de outra instituição para a itinerância da exposição?" data-emptytext="Selecione">
                 <?php echo $entity->mus_itinerante_dependeRecursos; ?>
@@ -338,25 +343,29 @@ $show_tipologia = $this->isEditable() ||
 
         <?php if($show_gestao): ?>
             <h5>Gestão</h5>
-            <p>
+            <p class="privado">
+                <span class="icon icon-private-info"></span>
                 <span class="label">Posui regimento interno?</span>
                 <span class="js-editable" data-edit="mus_gestao_regimentoInterno" data-original-title="O museu posui regimento interno?" data-emptytext="Selecione">
                     <?php echo $entity->mus_gestao_regimentoInterno; ?>
                 </span>
             </p>
-            <p>
+            <p class="privado">
+                <span class="icon icon-private-info"></span>
                 <span class="label">Possui plano museológico?</span>
                 <span class="js-editable" data-edit="mus_gestao_planoMuseologico" data-original-title="O museu possui plano museológico?" data-emptytext="Selecione">
                     <?php echo $entity->mus_gestao_planoMuseologico; ?>
                 </span>
             </p>
-            <p>
+            <p class="privado">
+                <span class="icon icon-private-info"></span>
                 <span class="label">Possui política de aquisição de acervo?</span>
                 <span class="js-editable" data-edit="mus_gestao_politicaAquisicao" data-original-title="O museu possui política de aquisição de acervo?" data-emptytext="Selecione">
                     <?php echo $entity->mus_gestao_politicaAquisicao; ?>
                 </span>
             </p>
-            <p>
+            <p class="privado">
+                <span class="icon icon-private-info"></span>
                 <span class="label">Possui política de descarte de acervo?</span>
                 <span class="js-editable" data-edit="mus_gestao_politicaDescarte" data-original-title="O museu possui política de descarte de acervo?" data-emptytext="Selecione">
                     <?php echo $entity->mus_gestao_politicaDescarte; ?>
