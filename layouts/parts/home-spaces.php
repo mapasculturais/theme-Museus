@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 if(!$app->isEnabled('spaces')){
     return;
@@ -28,10 +28,6 @@ $url_search_spaces = $this->searchSpacesUrl;
             <div class="statistics">
                 <div class="statistic"><?php echo $num_spaces ?></div>
                 <div class="statistic-label"><?php $this->dict('entities: registered spaces') ?></div>
-            </div>
-            <div class="statistics">
-                <div class="statistic"><?php echo $num_verified_spaces; ?></div>
-                <div class="statistic-label"><?php $this->dict('entities: spaces') ?> da <?php $this->dict('home: abbreviation'); ?></div>
             </div>
         </div>
         <p><?php $this->dict('home: spaces'); ?></p>

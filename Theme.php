@@ -60,7 +60,7 @@ Descubra o Brasil por meio dos seus museus!<br>
             'entities: of the space' => 'do museu',
             'entities: In this space' => 'Neste museu',
             'entities: in this space' => 'neste museu',
-            'entities: registered spaces' => 'museus cadastrados',
+            'entities: registered spaces' => 'Museus Identificados',
             'entities: new space' => 'novo museu',
         );
     }
@@ -413,7 +413,7 @@ Descubra o Brasil por meio dos seus museus!<br>
                     'Virtual',
                     'Museu de território/Ecomuseu',
                     'Unidade de conservação da natureza',
-                    'Jardim zoológico, jardim botânico herbário, oceanário ou planetário'
+                    'Jardim zoológico, botânico, herbário, oceanário ou planetário'
                 ]
             ],
 
@@ -443,7 +443,7 @@ Descubra o Brasil por meio dos seus museus!<br>
             ],
 
             'tipo_unidadeConservacao_protecaoIntegral' => [
-                'label' => 'Tipo de unidade de conservação integral',
+                'label' => 'Tipo de unidade de proteção integral',
                 'type' => 'select',
                 'options' => [
                     '' => 'Não se aplica',
@@ -466,7 +466,7 @@ Descubra o Brasil por meio dos seus museus!<br>
                     'Reserva de Fauna',
                     'Área de Proteção Ambiental',
                     'Área de Relevante Interesse Ecológico',
-                    'RPPN (Reserva Particular do Patrimônio Natural)'
+                    'Reserva Particular do Patrimônio Natural'
                 ]
             ],
 
@@ -639,7 +639,7 @@ Descubra o Brasil por meio dos seus museus!<br>
             ],
 
             'comunidadeRealizaAtividades' => [
-                'label' => 'A comunidade realiza atividades museológicas?',
+                'label' => 'Em caso de museus comunitários, a comunidade realiza atividades museológicas?',
                 'type' => 'select',
                 'options' => [ 'sim', 'não']
             ],

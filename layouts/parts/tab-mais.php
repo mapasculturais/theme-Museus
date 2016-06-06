@@ -96,8 +96,8 @@ $show_tipologia = $this->isEditable() ||
 
         <?php if($this->isEditable() || $entity->mus_caraterComunitario): ?>
         <p>
-            <span class="label">O museu é de carater comunitário?</span>
-            <span class="js-editable" data-edit="mus_caraterComunitario" data-original-title="O museu é de carater comunitário?" data-emptytext="Selecione">
+            <span class="label">O museu é de caráter comunitário?</span>
+            <span class="js-editable" data-edit="mus_caraterComunitario" data-original-title="O museu é de caráter comunitário?" data-emptytext="Selecione">
                 <?php echo $entity->mus_caraterComunitario; ?>
             </span>
         </p>
@@ -105,8 +105,8 @@ $show_tipologia = $this->isEditable() ||
 
         <?php if($this->isEditable() || $entity->mus_comunidadeRealizaAtividades): ?>
         <p>
-            <span class="label">A comunidade realiza atividades museológicas?</span>
-            <span class="js-editable" data-edit="mus_comunidadeRealizaAtividades" data-original-title="O museu é de carater comunitário?" data-emptytext="Selecione">
+            <span class="label">Em caso de museus comunitários, a comunidade realiza atividades museológicas?</span>
+            <span class="js-editable" data-edit="mus_comunidadeRealizaAtividades" data-original-title="Em caso de museus comunitários, a comunidade realiza atividades museológicas?" data-emptytext="Selecione">
                 <?php echo $entity->mus_comunidadeRealizaAtividades; ?>
             </span>
         </p>
@@ -135,7 +135,7 @@ $show_tipologia = $this->isEditable() ||
         <?php endif; ?>
 
         <?php if($this->isEditable()): ?>
-        <p style="margin-top:1em"><em>somente para o o tipo "Unidade de conservação da natureza"</em></p>
+        <p style="margin-top:1em"><em>somente para o tipo "Unidade de conservação da natureza"</em></p>
         <?php endif; ?>
 
         <?php if($this->isEditable() || $entity->mus_tipo_acervo === 'Unidade de conservação da natureza'): ?>
@@ -150,8 +150,8 @@ $show_tipologia = $this->isEditable() ||
 
             <?php if($this->isEditable() || $entity->mus_tipo_unidadeConservacao_protecaoIntegral): ?>
             <p>
-                <span class="label">Tipo de unidade de conservação integral:</span>
-                <span class="js-editable" data-edit="mus_tipo_unidadeConservacao_protecaoIntegral" data-original-title="Tipo de unidade de conservação integral" data-emptytext="Selecione">
+                <span class="label">Tipo de unidade de proteção integral:</span>
+                <span class="js-editable" data-edit="mus_tipo_unidadeConservacao_protecaoIntegral" data-original-title="Tipo de unidade de proteção integral" data-emptytext="Selecione">
                     <?php echo $entity->mus_tipo_unidadeConservacao_protecaoIntegral; ?>
                 </span>
             </p>
