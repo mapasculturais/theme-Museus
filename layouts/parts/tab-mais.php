@@ -50,11 +50,17 @@ $show_tipologia = $this->isEditable() ||
             <?php if($this->isEditable() || $entity->mus_instumentoCriacao_tipo): ?>
                 <editable-singleselect entity-property="mus_instumentoCriacao_tipo" empty-label="Selecione" allow-other="true" box-title="O museu possui instrumento de criação?"></editable-singleselect>
             <?php endif; ?>
-
+        </p>
+        <p>
+            <span class="label">Descrição:</span>
             <?php if($this->isEditable() || $entity->mus_instumentoCriacao_descricao): ?>
-                <span class="js-editable" data-edit="mus_instumentoCriacao_descricao" data-original-title="Descrição do instrumento de criação" data-emptytext="Informe uma descrição">
+                <span
+                    class="js-editable" data-edit="mus_instumentoCriacao_descricao"
+                    data-original-title="Descrição do instrumento de criação" data-emptytext="Informe uma descrição"
+                    >
                     <?php echo $entity->mus_instumentoCriacao_descricao; ?>
                 </span>
+                <em>somente para instrumento do tipo "Outros"</em>
             <?php endif; ?>
         </p>
         <?php endif; ?>

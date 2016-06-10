@@ -60,14 +60,18 @@
             keyword: '',
             areas: [],
             type: null,
-            isVerified: false
+            isVerified: false,
+            showAdvancedFilters:false,
+            advancedFilters: {}
         },
         space: {
             keyword: '',
             areas: [],
             types: [],
             acessibilidade: false,
-            isVerified: false
+            isVerified: false,
+            showAdvancedFilters:false,
+            advancedFilters: {}
         },
         event: {
             keyword: '',
@@ -75,7 +79,9 @@
             from: moment().format('YYYY-MM-DD'),
             to: moment().add(1, 'month').format('YYYY-MM-DD'),
             classificacaoEtaria: [],
-            isVerified: false
+            isVerified: false,
+            showAdvancedFilters:false,
+            advancedFilters: {}
         },
         project: {
             keyword: '',
@@ -83,9 +89,22 @@
             types: [],
             isVerified: false,
             // registration open
-            ropen: false
+            ropen: false,
+            showAdvancedFilters:false,
+            advancedFilters: {}
         }
     };
+    
+    // adiciona os filtros avançados utilizados pelo tema ao skeleton acima
+    ['space', 'agent', 'event', 'project'].forEach(function(entity){
+        MapasCulturais.advancedFilters[entity].forEach(function(filter){
+            if(filter.isArray){
+                skeletonData[entity].advancedFilters[filter.filter.param] = [];
+            } else {
+                skeletonData[entity].advancedFilters[filter.filter.param] = null;
+            }
+        });
+    });
 
     var diffFilter = function (input) {
         return _diffFilter(input, skeletonData);
@@ -170,6 +189,9 @@
                 project: 1
             };
         }
+        
+        $scope.advancedFilters = MapasCulturais.advancedFilters;
+        
         $rootScope.resetPagination();
 
         $scope.assetsUrl = MapasCulturais.assets;
@@ -207,7 +229,11 @@
                 return $scope.data.global.enabled[entity];
             else
                 return $scope.data.global.filterEntity === entity;
-        }
+        };
+        
+        $scope.hasAdvancedFilters = function(entity){
+            return MapasCulturais.advancedFilters[entity].length > 0;
+        };
 
         $scope.hasFilter = function() {
             var ctx = {has: false};
@@ -441,13 +467,23 @@
         };
 
         $scope.$watch('data.event.from', function(){
-            if(new Date($scope.data.event.from) > new Date($scope.data.event.to))
+            if(!/^[0-9]{4}(\-[0-9]{2}){2}$/.test($scope.data.event.from)){
+                $scope.data.event.from = moment($scope.data.event.from).format('YYYY-MM-DD');
+            }
+            
+            if(new Date($scope.data.event.from) > new Date($scope.data.event.to)){
                 $scope.data.event.to = $scope.data.event.from;
+            }
         });
 
-        $scope.$watch('data.event.to', function(newValue, oldValue){
-            if(new Date($scope.data.event.to) < new Date($scope.data.event.from))
+        $scope.$watch('data.event.to', function(){
+            if(!/^[0-9]{4}(\-[0-9]{2}){2}$/.test($scope.data.event.to)){
+                $scope.data.event.to = moment($scope.data.event.to).format('YYYY-MM-DD');
+            }
+            
+            if(new Date($scope.data.event.to) < new Date($scope.data.event.from)){
                 $scope.data.event.from = $scope.data.event.to;
+            }
         });
 
 
@@ -482,14 +518,25 @@
 
             return from !== to ? 'de ' + from + ' a ' + to : from;
         };
-
+        
         $scope.collapsedFilters = true;
+        
         $scope.toggleAdvancedFilters = function(){
+            
             $scope.collapsedFilters = !$scope.collapsedFilters;
             setTimeout(function(){
                 window.adjustHeader();
             }, 10);
         };
+        
+        $scope.showSearch = function(){
+            
+            if (document.body.clientWidth > 768) {
+                return true;
+            } else {
+                return !$scope.collapsedFilters && !$scope.showInfobox();
+            }
+        }
 
     }]);
 })(angular);

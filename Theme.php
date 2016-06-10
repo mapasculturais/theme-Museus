@@ -847,4 +847,113 @@ Descubra o Brasil por meio dos seus museus!<br>
 
         return $result;
     }
+
+    protected function _getAdvancedFilters(){
+          return [
+              'space' => [
+                    [
+                        'fieldType' => 'checklist',
+                        'isArray' => true,
+                        'label' => 'Tipologia',
+                        'filter' => [
+                            'param' => 'mus_tipo_acervo',
+                            'value' => 'IN({val})'
+                        ],
+                        'placeholder' => 'Selecione a Tipologia',
+                        'parseValue' => ['join'],
+                        'options' => [
+                            ['value' => 'Tradicional/Clássico', 'label' => 'Tradicional/Clássico'],
+                            ['value' => 'Virtual', 'label' => 'Virtual'],
+                            ['value' => 'Museu de território/Ecomuseu', 'label' => 'Museu de território/Ecomuseu'],
+                            ['value' => 'Unidade de conservação da natureza', 'label' => 'Unidade de conservação da natureza'],
+                            ['value' => 'Jardim zoológico, botânico, herbário, oceanário ou planetário',
+                                'label' =>'Jardim zoológico, botânico, herbário, oceanário ou planetário'],
+                        ]
+                    ],
+                    [
+                        'fieldType' => 'checklist',
+                        'isArray' => true,
+                        'label' => 'Temática do museu',
+                        'filter' => [
+                            'param' => 'mus_tipo_acervo',
+                            'value' => 'IN({val})'
+                        ],
+                        'placeholder' => 'Selecione a Temática',
+                        'parseValue' => ['join'],
+                        'options' => [
+
+                            ['value' => 'Artes, arquitetura e linguística', 'label' => 'Artes, arquitetura e linguística'],
+                            ['value' => 'Antropologia e arqueologia', 'label' => 'Antropologia e arqueologia'],
+                            ['value' => 'Ciências exatas, da terra, biológicas e da saúde', 'label' => 'Ciências exatas, da terra, biológicas e da saúde'],
+                            ['value' => 'História', 'label' => 'História'],
+                            ['value' => 'Educação, esporte e lazer', 'label' => 'Educação, esporte e lazer'],
+                            ['value' => 'Meios de comunicação e transporte', 'label' => 'Meios de comunicação e transporte'],
+                            ['value' => 'Produção de bens e serviços', 'label' => 'Produção de bens e serviços'],
+                            ['value' => 'Defesa e segurança pública', 'label' => 'Defesa e segurança pública'],
+
+                        ],
+                    ],
+                     [
+                        'fieldType' => 'checklist',
+                        'isArray' => true,
+                        'label' => 'Status do Museu',
+                        'filter' => [
+                            'param' => 'mus_tipo_acervo',
+                            'value' => 'IN({val})'
+                        ],
+                        'placeholder' => 'Selecione a Tipologia',
+                        'parseValue' => ['join'],
+                        'options' => [
+                            ['value' => 'aberto', 'label' => 'Aberto'] ,
+                            ['value' => 'fechado', 'label' => 'Fechado'] ,
+                            ['value' => 'implantacao', 'label' => 'Em implantação'] ,
+                        ],
+                    ],
+
+                    [
+                      'fieldType' => 'checklist',
+                      'isArray' => true,
+                      'label' => 'Estado',
+                      'placeholder' => 'Filtre por Estado',
+                      'filter' => [
+                          'param' => 'En_Estado',
+                          'value' => 'IN({val})'
+                      ],
+                      'parseValue' => ['join'],
+                      'options' => [
+                          ['value' => 'AC', 'label' => 'Acre'],
+                          ['value' => 'AL', 'label' => 'Alagoas'],
+                          ['value' => 'AP', 'label' => 'Amapá'],
+                          ['value' => 'AM', 'label' => 'Amazonas'],
+                          ['value' => 'BA', 'label' => 'Bahia'],
+                          ['value' => 'CE', 'label' => 'Ceará'],
+                          ['value' => 'DF', 'label' => 'Distrito Federal'],
+                          ['value' => 'ES', 'label' => 'Espírito Santo'],
+                          ['value' => 'GO', 'label' => 'Goiás'],
+                          ['value' => 'MA', 'label' => 'Maranhão'],
+                          ['value' => 'MT', 'label' => 'Mato Grosso'],
+                          ['value' => 'MS', 'label' => 'Mato Grosso do Sul'],
+                          ['value' => 'MG', 'label' => 'Minas Gerais'],
+                          ['value' => 'PA', 'label' => 'Pará'],
+                          ['value' => 'PB', 'label' => 'Paraíba'],
+                          ['value' => 'PR', 'label' => 'Paraná'],
+                          ['value' => 'PE', 'label' => 'Pernambuco'],
+                          ['value' => 'PI', 'label' => 'Piauí'],
+                          ['value' => 'RJ', 'label' => 'Rio de Janeiro'],
+                          ['value' => 'RN', 'label' => 'Rio Grande do Norte'],
+                          ['value' => 'RS', 'label' => 'Rio Grande do Sul'],
+                          ['value' => 'RO', 'label' => 'Rondônia'],
+                          ['value' => 'RR', 'label' => 'Roraima'],
+                          ['value' => 'SC', 'label' => 'Santa Catarina'],
+                          ['value' => 'SP', 'label' => 'São Paulo'],
+                          ['value' => 'SE', 'label' => 'Sergipe'],
+                          ['value' => 'TO', 'label' => 'Tocantins'],
+                      ],
+                  ],
+              ],
+              'agent' => [],
+              'event' => [],
+              'project' => []
+          ];
+      }
 }
