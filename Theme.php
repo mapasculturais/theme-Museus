@@ -98,7 +98,11 @@ Descubra o Brasil por meio dos seus museus!<br>
                        $resto = $sm % 11;
                        return $resto > 1 ? (11 - $resto) : 0;
                 };
-
+                $existMusCod = function($new_cod) use($app){
+                    $conn = $app->em->getConnection();
+                    $tot = $conn->fetchColumn("SELECT count(*) FROM space_meta WHERE key = 'mus_cod' and value = '".$new_cod."'");
+                    return $tot > 0;
+                };
                 $geraNumeroIdent = function () use($getDvFromNumeroIdent){
                        $pdg = array(1,2,5,6,8,9);
                        shuffle($pdg);
@@ -112,7 +116,13 @@ Descubra o Brasil por meio dos seus museus!<br>
 
                        return $nId;
                 };
-                $this->mus_cod = $geraNumeroIdent();
+                do{
+                    $mus_cod = $geraNumeroIdent();
+                    // format mus_cod in mask 0.00.00.0000
+                    $mus_cod = substr($mus_cod, 0, 1).'.'.substr($mus_cod, 1, 2).'.'.substr($mus_cod, 3, 2).'.'.substr($mus_cod, 5, 4);
+                    $mus_cod = substr($a, 0, 1).'.'.substr($a, 1, 2).'.'.substr($a, 3, 2).'.'.substr($a, 5, 4);
+                } while($existMusCod($mus_cod));
+                $this->mus_cod = $mus_cod;
             }
         });
 
