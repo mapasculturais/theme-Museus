@@ -888,6 +888,7 @@ Descubra o Brasil por meio dos seus museus!<br>
                             'param' => 'mus_tipo_acervo',
                             'value' => 'IN({val})'
                         ],
+                        'isInline' => true,
                         'placeholder' => 'Selecione a Temática',
                         'parseValue' => ['join'],
                         'options' => [

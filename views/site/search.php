@@ -6,7 +6,7 @@ $this->bodyProperties['ng-controller'] = "SearchController";
 $this->bodyProperties['ng-class'] = "{'infobox-open': showInfobox()}";
 
 $this->addTaxonoyTermsToJs('area');
-$this->addTaxonoyTermsToJs('mus_area');
+// $this->addTaxonoyTermsToJs('mus_area');
 $this->addTaxonoyTermsToJs('linguagem');
 
 $this->addEntityTypesToJs('MapasCulturais\Entities\Space');
@@ -38,15 +38,15 @@ $this->includeMapAssets();
             <?php if($app->isEnabled('events')): ?>
                 <a class="hltip hltip-auto-update btn-map btn-map-event" ng-class="{active: data.global.enabled.event}" ng-click="data.global.enabled.event = !data.global.enabled.event" title="{{(data.global.enabled.event) && 'Ocultar' || 'Mostrar'}} eventos"></a>
             <?php endif; ?>
-                
+
             <?php if($app->isEnabled('spaces')): ?>
                 <a class="hltip hltip-auto-update btn-map btn-map-space" ng-class="{active: data.global.enabled.space}" ng-click="data.global.enabled.space = !data.global.enabled.space" title="{{(data.global.enabled.space) && 'Ocultar' || 'Mostrar'}} <?php $this->dict('entities: spaces') ?>"></a>
             <?php endif; ?>
-                
+
             <?php if($app->isEnabled('agents')): ?>
                 <a class="hltip hltip-auto-update btn-map btn-map-agent"  ng-class="{active: data.global.enabled.agent}" ng-click="data.global.enabled.agent = !data.global.enabled.agent" title="{{(data.global.enabled.agent) && 'Ocultar' || 'Mostrar'}} agentes"></a>
             <?php endif; ?>
-            
+
         </div>
     </div>
 
