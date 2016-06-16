@@ -757,6 +757,10 @@ Descubra o Brasil por meio dos seus museus!<br>
                     'TO'=>'Tocantins',
                 )
             ],
+            'add_info' => [
+                'label' => 'Informações adicionais',
+                'type' => 'text',
+            ],
         ];
     }
 

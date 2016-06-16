@@ -862,5 +862,103 @@ return [
         }
 
     },
+    'mascaras erradas para metadado add_info' =>  function() use($app, $conn){
+
+        $data = file_get_contents(__DIR__ . '/museus.csv');
+        $data = explode("\n", str_replace('erro no sistema', '', $data));
+
+        $museus = [];
+        $vals = $conn->fetchAll("SELECT object_id, value FROM space_meta WHERE key = 'mus_cod'");
+        $cods_ids = [];
+
+        foreach($vals as $o)
+            $cods_ids[$o['value']] = $o['object_id'];
+
+        foreach ($data as $i => $line) {
+            if ($i === 0)
+                continue;
+            $d = explode("\t", $line);
+            if (count($d) < 119)
+                continue;
+            foreach($d as $i => $val){
+                $d[$i] = trim($val);
+                if(trim($val) == '-')
+                    $d[$i] = '';
+            }
+            $id_museu = $cods_ids[$d[0]];
+            if (!$id_museu){
+                echo "Pulando museu de código $d[0]";
+                continue;
+            }
+            $original_email = explode(';', $d[22])[0];
+
+            if (filter_var($original_email, FILTER_VALIDATE_EMAIL)){
+                $db_email = $conn->fetchColumn(
+                    "select value from space_meta where key=:key and object_id=:object_id",
+                    ['key'=>'emailPublico', 'object_id' => $id_museu]
+                );
+                if (!$db_email){
+                    echo "Inserindo email $original_email ao museu de cod ($d[0]) - id ($id_museu)\n";
+                    $conn->executeQuery(
+                        "INSERT INTO space_meta (object_id, key, value) VALUES (:object_id, :key, :value)",
+                        ['object_id'=>$id_museu, 'key'=>'emailPublico', 'value'=>$original_email]
+                    );
+                } elseif (!filter_var($db_email, FILTER_VALIDATE_EMAIL)){
+                    echo "Atualizando email $original_email para o museu de cod ($d[0]) - id ($id_museu)\n";
+                    $conn->executeQuery(
+                        "UPDATE space_meta set value=:value where object_id=:object_id and key=:key",
+                        ['object_id'=>$id_museu, 'key'=>'emailPublico', 'value'=>$original_email]
+                    );
+                } else
+                    echo "Pulando e-mail valido $original_email\n";
+            }
+            else
+                echo "E-mail Inválido $original_email\n";
+
+            $update_phone = function($phone) use($conn, $id_museu, $d){
+                $phone_regex = '^\(+[0-9]{2,3}\) [0-9]{4}-[0-9]{4}$^';
+                if(preg_match($phone_regex, $phone)) {
+                    $db_phone = $conn->fetchColumn(
+                        "SELECT value from space_meta where key=:key and object_id=:object_id",
+                        ['key'=>'telefonePublico', 'object_id' => $id_museu]
+                    );
+                    if (!$db_phone){
+                        echo "Inserindo telefone $phone ao museu de cod ($d[0]) - id ($id_museu)\n";
+                        $conn->executeQuery(
+                            "INSERT INTO space_meta (object_id, key, value) VALUES (:object_id, :key, :value)",
+                            ['object_id'=>$id_museu, 'key'=>'telefonePublico', 'value'=>$phone]
+                        );
+                    } elseif (strlen($db_phone) !== 14 || !preg_match($phone_regex, $db_phone)){
+                        echo "Atualizando telefone $phone para o museu de cod ($d[0]) - id ($id_museu)\n";
+                        $conn->executeQuery(
+                            "UPDATE space_meta set value=:value where object_id=$id_museu and key=:key",
+                            ['key'=>'telefonePublico', 'value'=>$phone]
+                        );
+                    } else echo "Pulando telefone válido $db_phone";
+                } else echo "Pulando fone inválido $phone";
+
+
+            };
+
+            $tels = explode('/', $d[21]);
+            if(strlen($tels[0]) == 2)
+                $tels = explode('/', $d[22]);
+            $update_phone(substr(trim($tels[0]), 0, 14));
+
+            $add_info = $conn->fetchColumn(
+                "SELECT id from space_meta where key=:key and object_id=:object_id",
+                ['key'=>'mus_add_info', 'object_id' => $id_museu ]
+            );
+            if (!$add_info) {
+                echo "Inserindo informações adicionaos para o museu de cod ($d[0]) - id ($id_museu)\n";
+                $add_info = $d[21]."\n\n".$d[22];
+                $conn->executeQuery(
+                    "INSERT INTO space_meta (object_id, key, value) VALUES (:object_id, :key, :value)",
+                    ['object_id'=> $id_museu, 'key'=>'mus_add_info', 'value'=>$add_info]
+                );
+            }
+        }
+
+    },
 
 ];
