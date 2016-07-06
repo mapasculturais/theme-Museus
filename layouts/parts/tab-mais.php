@@ -267,7 +267,7 @@ $show_tipologia = $this->isEditable() ||
         <p class="privado">
             <span class="icon icon-private-info"></span>
             <span class="label">Propriedade:</span>
-            <span class="js-editable" data-edit="mus_acervo_propriedade" data-original-title="Comercialização do acervo" data-emptytext="Selecione">
+            <span class="js-editable" data-edit="mus_acervo_propriedade" data-original-title="Propriedade do acervo" data-emptytext="Selecione">
                 <?php echo $entity->mus_acervo_propriedade; ?>
             </span>
         </p>
