@@ -953,12 +953,12 @@ Descubra o Brasil por meio dos seus museus!<br>
                      [
                         'fieldType' => 'checklist',
                         'isArray' => true,
-                        'label' => 'Status do Museu',
+                        'label' => 'Situação de funcionamento',
                         'filter' => [
                             'param' => 'mus_status',
                             'value' => 'IN({val})'
                         ],
-                        'placeholder' => 'Selecione o Status do Museu',
+                        'placeholder' => 'Selecione a Situação de funcionamento',
                         'parseValue' => ['join'],
                         'options' => [
                             ['value' => 'aberto', 'label' => 'Aberto'] ,
