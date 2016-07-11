@@ -415,7 +415,7 @@ Descubra o Brasil por meio dos seus museus!<br>
                 ]
             ],
             // tipologia
-            'mus_tipo_tematica' => [
+            'tipo' => [
                 'label' => 'Tipo',
                 'type' => 'select',
                 'options' => [
@@ -911,7 +911,7 @@ Descubra o Brasil por meio dos seus museus!<br>
                         'isArray' => true,
                         'label' => 'Tipologia',
                         'filter' => [
-                            'param' => 'mus_tipo_tematica',
+                            'param' => 'mus_tipo',
                             'value' => 'IN({val})'
                         ],
                         'isInline' => true,
@@ -922,7 +922,7 @@ Descubra o Brasil por meio dos seus museus!<br>
                             ['value' => 'Virtual', 'label' => 'Virtual'],
                             ['value' => 'Museu de território/Ecomuseu', 'label' => 'Museu de território/Ecomuseu'],
                             ['value' => 'Unidade de conservação da natureza', 'label' => 'Unidade de conservação da natureza'],
-                            ['value' => 'Jardim zoológico, botânico, herbário, oceanário ou planetário',
+                            ['value' => 'Jardim zoológico\\, botânico\\, herbário\\, oceanário ou planetário',
                                 'label' =>'Jardim zoológico, botânico, herbário, oceanário ou planetário'],
                         ]
                     ],
@@ -939,11 +939,11 @@ Descubra o Brasil por meio dos seus museus!<br>
                         'parseValue' => ['join'],
                         'options' => [
 
-                            ['value' => 'Artes, arquitetura e linguística', 'label' => 'Artes, arquitetura e linguística'],
+                            ['value' => "Artes\\, arquitetura e linguística", 'label' => 'Artes, arquitetura e linguística'],
                             ['value' => 'Antropologia e arqueologia', 'label' => 'Antropologia e arqueologia'],
-                            ['value' => 'Ciências exatas, da terra, biológicas e da saúde', 'label' => 'Ciências exatas, da terra, biológicas e da saúde'],
+                            ['value' => 'Ciências exatas\\, da terra\\, biológicas e da saúde', 'label' => 'Ciências exatas, da terra, biológicas e da saúde'],
                             ['value' => 'História', 'label' => 'História'],
-                            ['value' => 'Educação, esporte e lazer', 'label' => 'Educação, esporte e lazer'],
+                            ['value' => 'Educação\\, esporte e lazer', 'label' => 'Educação, esporte e lazer'],
                             ['value' => 'Meios de comunicação e transporte', 'label' => 'Meios de comunicação e transporte'],
                             ['value' => 'Produção de bens e serviços', 'label' => 'Produção de bens e serviços'],
                             ['value' => 'Defesa e segurança pública', 'label' => 'Defesa e segurança pública'],
@@ -955,7 +955,7 @@ Descubra o Brasil por meio dos seus museus!<br>
                         'isArray' => true,
                         'label' => 'Status do Museu',
                         'filter' => [
-                            'param' => 'mus_tipo_tematica',
+                            'param' => 'mus_status',
                             'value' => 'IN({val})'
                         ],
                         'placeholder' => 'Selecione o Status do Museu',

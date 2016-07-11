@@ -960,5 +960,30 @@ return [
         }
 
     },
+    'acerta tematicas importadas com a lista de tematicas' =>  function() use($app, $conn){
+        $space_metas = [
+             ['Artes, arquitetura e linguística', 'Artes, Arquitetura e Linguística'],
+             ['Antropologia e arqueologia', 'Antropologia e arqueologia'],
+             ['Ciências exatas, da terra, biológicas e da saúde', 'Ciências Exatas, da Terra, Biológicas e da Saúde'],
+             // ['História', 'História'],
+             ['Educação, esporte e lazer', 'Educação, Esporte e Lazer'],
+             ['Meios de comunicação e transporte', 'Meios de Comunicação e de Transporte'],
+             ['Produção de bens e serviços', 'Produção de Bens e Serviços'],
+             ['Defesa e segurança pública', 'Defesa e Segurança Pública'],
 
+             // ['Tradicional/Clássico', 'Tradicional/Clássico'],
+             ['Unidade de conservação da natureza', 'Unidade de Conservação da Natureza (Parque, Reserva, Floresta, etc.)'],
+             // ['Virtual', 'Virtual'],
+             ['Museu de território/Ecomuseu', 'Museu de Território/Ecomuseu'],
+             ['Jardim zoológico, botânico, herbário, oceanário ou planetário', 'Jardim Zoológico, Jardim Botânico, Herbário ou Planetário']
+
+        ];
+        foreach ($space_metas as $val) {
+            echo "Alterando termos importados como \"$val[1]\" para \"$val[0]\"\n";
+            $conn->executeQuery(
+                "UPDATE space_meta set value = :new_value where value = :old_value",
+                ['new_value' => $val[0], 'old_value' => $val[1]]
+            );
+        }
+    }
 ];
