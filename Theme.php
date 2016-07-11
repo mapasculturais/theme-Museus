@@ -415,7 +415,7 @@ Descubra o Brasil por meio dos seus museus!<br>
                 ]
             ],
             // tipologia
-            'tipo_acervo' => [
+            'mus_tipo_tematica' => [
                 'label' => 'Tipo',
                 'type' => 'select',
                 'options' => [
@@ -867,13 +867,55 @@ Descubra o Brasil por meio dos seus museus!<br>
               'space' => [
                     [
                         'fieldType' => 'checklist',
+                        'isInline' => true,
+                        'isArray' => true,
+                        'label' => 'Estado',
+                        'placeholder' => 'Selecione os Estados',
+                        'filter' => [
+                            'param' => 'En_Estado',
+                            'value' => 'IN({val})'
+                        ],
+                        'parseValue' => ['join'],
+                        'options' => [
+                            ['value' => 'AC', 'label' => 'Acre'],
+                            ['value' => 'AL', 'label' => 'Alagoas'],
+                            ['value' => 'AP', 'label' => 'Amapá'],
+                            ['value' => 'AM', 'label' => 'Amazonas'],
+                            ['value' => 'BA', 'label' => 'Bahia'],
+                            ['value' => 'CE', 'label' => 'Ceará'],
+                            ['value' => 'DF', 'label' => 'Distrito Federal'],
+                            ['value' => 'ES', 'label' => 'Espírito Santo'],
+                            ['value' => 'GO', 'label' => 'Goiás'],
+                            ['value' => 'MA', 'label' => 'Maranhão'],
+                            ['value' => 'MT', 'label' => 'Mato Grosso'],
+                            ['value' => 'MS', 'label' => 'Mato Grosso do Sul'],
+                            ['value' => 'MG', 'label' => 'Minas Gerais'],
+                            ['value' => 'PA', 'label' => 'Pará'],
+                            ['value' => 'PB', 'label' => 'Paraíba'],
+                            ['value' => 'PR', 'label' => 'Paraná'],
+                            ['value' => 'PE', 'label' => 'Pernambuco'],
+                            ['value' => 'PI', 'label' => 'Piauí'],
+                            ['value' => 'RJ', 'label' => 'Rio de Janeiro'],
+                            ['value' => 'RN', 'label' => 'Rio Grande do Norte'],
+                            ['value' => 'RS', 'label' => 'Rio Grande do Sul'],
+                            ['value' => 'RO', 'label' => 'Rondônia'],
+                            ['value' => 'RR', 'label' => 'Roraima'],
+                            ['value' => 'SC', 'label' => 'Santa Catarina'],
+                            ['value' => 'SP', 'label' => 'São Paulo'],
+                            ['value' => 'SE', 'label' => 'Sergipe'],
+                            ['value' => 'TO', 'label' => 'Tocantins'],
+                        ],
+                    ],
+                    [
+                        'fieldType' => 'checklist',
                         'isArray' => true,
                         'label' => 'Tipologia',
                         'filter' => [
-                            'param' => 'mus_tipo_acervo',
+                            'param' => 'mus_tipo_tematica',
                             'value' => 'IN({val})'
                         ],
-                        'placeholder' => 'Selecione a Tipologia',
+                        'isInline' => true,
+                        'placeholder' => 'Selecione os Tipos',
                         'parseValue' => ['join'],
                         'options' => [
                             ['value' => 'Tradicional/Clássico', 'label' => 'Tradicional/Clássico'],
@@ -889,11 +931,11 @@ Descubra o Brasil por meio dos seus museus!<br>
                         'isArray' => true,
                         'label' => 'Temática do museu',
                         'filter' => [
-                            'param' => 'mus_tipo_acervo',
+                            'param' => 'mus_tipo_tematica',
                             'value' => 'IN({val})'
                         ],
                         'isInline' => true,
-                        'placeholder' => 'Selecione a Temática',
+                        'placeholder' => 'Selecione as Temáticas',
                         'parseValue' => ['join'],
                         'options' => [
 
@@ -913,10 +955,10 @@ Descubra o Brasil por meio dos seus museus!<br>
                         'isArray' => true,
                         'label' => 'Status do Museu',
                         'filter' => [
-                            'param' => 'mus_tipo_acervo',
+                            'param' => 'mus_tipo_tematica',
                             'value' => 'IN({val})'
                         ],
-                        'placeholder' => 'Selecione a Tipologia',
+                        'placeholder' => 'Selecione o Status do Museu',
                         'parseValue' => ['join'],
                         'options' => [
                             ['value' => 'aberto', 'label' => 'Aberto'] ,
@@ -924,47 +966,6 @@ Descubra o Brasil por meio dos seus museus!<br>
                             ['value' => 'implantacao', 'label' => 'Em implantação'] ,
                         ],
                     ],
-
-                    [
-                      'fieldType' => 'checklist',
-                      'isArray' => true,
-                      'label' => 'Estado',
-                      'placeholder' => 'Filtre por Estado',
-                      'filter' => [
-                          'param' => 'En_Estado',
-                          'value' => 'IN({val})'
-                      ],
-                      'parseValue' => ['join'],
-                      'options' => [
-                          ['value' => 'AC', 'label' => 'Acre'],
-                          ['value' => 'AL', 'label' => 'Alagoas'],
-                          ['value' => 'AP', 'label' => 'Amapá'],
-                          ['value' => 'AM', 'label' => 'Amazonas'],
-                          ['value' => 'BA', 'label' => 'Bahia'],
-                          ['value' => 'CE', 'label' => 'Ceará'],
-                          ['value' => 'DF', 'label' => 'Distrito Federal'],
-                          ['value' => 'ES', 'label' => 'Espírito Santo'],
-                          ['value' => 'GO', 'label' => 'Goiás'],
-                          ['value' => 'MA', 'label' => 'Maranhão'],
-                          ['value' => 'MT', 'label' => 'Mato Grosso'],
-                          ['value' => 'MS', 'label' => 'Mato Grosso do Sul'],
-                          ['value' => 'MG', 'label' => 'Minas Gerais'],
-                          ['value' => 'PA', 'label' => 'Pará'],
-                          ['value' => 'PB', 'label' => 'Paraíba'],
-                          ['value' => 'PR', 'label' => 'Paraná'],
-                          ['value' => 'PE', 'label' => 'Pernambuco'],
-                          ['value' => 'PI', 'label' => 'Piauí'],
-                          ['value' => 'RJ', 'label' => 'Rio de Janeiro'],
-                          ['value' => 'RN', 'label' => 'Rio Grande do Norte'],
-                          ['value' => 'RS', 'label' => 'Rio Grande do Sul'],
-                          ['value' => 'RO', 'label' => 'Rondônia'],
-                          ['value' => 'RR', 'label' => 'Roraima'],
-                          ['value' => 'SC', 'label' => 'Santa Catarina'],
-                          ['value' => 'SP', 'label' => 'São Paulo'],
-                          ['value' => 'SE', 'label' => 'Sergipe'],
-                          ['value' => 'TO', 'label' => 'Tocantins'],
-                      ],
-                  ],
               ],
               'agent' => [],
               'event' => [],

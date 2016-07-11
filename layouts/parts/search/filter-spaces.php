@@ -31,7 +31,7 @@
         </div>
         <span ng-repeat-end></span>
         <!--.filter-->
-        <div class="filter search-filter--tipo">
+        <!-- <div class="filter search-filter--tipo">
             <span class="label">Tipo</span>
             <div class="dropdown">
                 <div class="placeholder">Selecione os tipos</div>
@@ -43,7 +43,7 @@
                     </ul>
                 </div>
             </div>
-        </div>
+        </div> -->
 
         <!--.filter-->
         <div class="filter search-filter--acessibilidade">

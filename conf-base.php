@@ -4,6 +4,7 @@ return [
     'app.enabled.projects' => false,
     'app.enabled.events'   => false,
     'app.enabled.apps'     => false,
-    
-    'museus.ownerAgentId' => 11348,
+    'app.enabled.seals'    => false,
+
+    'museus.ownerAgentId'   => 11348,
 ];
