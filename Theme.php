@@ -966,6 +966,46 @@ Descubra o Brasil por meio dos seus museus!<br>
                             ['value' => 'implantacao', 'label' => 'Em implantação'] ,
                         ],
                     ],
+                    [
+                        'fieldType' => 'checklist',
+                        'isArray' => true,
+                        'label' => 'Esfera',
+                        'filter' => [
+                            'param' => 'esfera',
+                            'value' => 'IN({val})'
+                        ],
+                        'placeholder' => 'Selecione a esfera',
+                        'parseValue' => ['join'],
+                        'options' => [
+                            ['value' => 'Pública', 'label' => 'Pública'] ,
+                            ['value' => 'Privada', 'label' => 'Privada'] ,
+                        ],
+                    ],
+                    [
+                        'fieldType' => 'checklist',
+                        'isArray' => true,
+                        'label' => 'Tipo de Esfera',
+                        'filter' => [
+                            'param' => 'esfera_tipo',
+                            'value' => 'IN({val})'
+                        ],
+                        'placeholder' => 'Selecione o tipo da esfera',
+                        'parseValue' => ['join'],
+                        'options' => [
+                            ['value' => 'Federal', 'label' => 'Federal'],
+                            ['value' => 'Estadual', 'label' => 'Estadual'],
+                            ['value' => 'Distrital', 'label' => 'Distrital'],
+                            ['value' => 'Municipal', 'label' => 'Municipal'],
+                            ['value' => 'Associação', 'label' => 'Associação'],
+                            ['value' => 'Empresa', 'label' => 'Empresa'],
+                            ['value' => 'Fundação', 'label' => 'Fundação'],
+                            ['value' => 'Particular', 'label' => 'Particular'],
+                            ['value' => 'Religiosa', 'label' => 'Religiosa'],
+                            ['value' => 'Mista', 'label' => 'Mista'],
+                            ['value' => 'Entidade Sindical', 'label' => 'Entidade Sindical'],
+                            ['value' => 'Outra', 'label' => 'Outra'],
+                        ],
+                    ],
               ],
               'agent' => [],
               'event' => [],
