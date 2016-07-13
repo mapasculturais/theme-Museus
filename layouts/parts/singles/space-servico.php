@@ -45,7 +45,7 @@
     <?php $this->applyTemplateHook('tab-about-service','end'); ?>
 
     <?php if ( $this->isEditable() || $entity->mus_add_info ): ?>
-    <p><span class="label">Informações Adicionais de Contato:</span>
+    <p><span class="label">Informações Adicionais de Contato:</span><br>
         <span
             class="js-editable"
             data-edit="mus_add_info"
