@@ -758,7 +758,7 @@ Descubra o Brasil por meio dos seus museus!<br>
                 )
             ],
             'add_info' => [
-                'label' => 'Informações adicionais',
+                'label' => 'Informações Adicionais de Contato',
                 'type' => 'text',
             ],
         ];

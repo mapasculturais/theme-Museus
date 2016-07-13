@@ -43,4 +43,14 @@
         <p class="privado"><span class="icon icon-private-info"></span><span class="label">Telefone Privado 2:</span> <span class="js-editable js-mask-phone" data-edit="telefone2" data-original-title="Telefone Privado" data-emptytext="Insira um telefone que não será exibido publicamente"><?php echo $entity->telefone2; ?></span></p>
     <?php endif; ?>
     <?php $this->applyTemplateHook('tab-about-service','end'); ?>
+
+    <?php if ( $this->isEditable() || $entity->mus_add_info ): ?>
+    <p><span class="label">Informações Adicionais de Contato:</span>
+        <span
+            class="js-editable"
+            data-edit="mus_add_info"
+            data-original-title="Informações adicionais de contato <?php $this->dict('entities: of the Space') ?>"
+            data-emptytext="Insira informações adicionais de contato <?php $this->dict('entities: of the space') ?>" ><?php echo $this->isEditable() ? $entity->mus_add_info : nl2br($entity->mus_add_info); ?></span>
+    </p>
+<?php endif; ?>
 </div>
