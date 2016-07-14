@@ -120,7 +120,6 @@ Descubra o Brasil por meio dos seus museus!<br>
                     $mus_cod = $geraNumeroIdent();
                     // format mus_cod in mask 0.00.00.0000
                     $mus_cod = substr($mus_cod, 0, 1).'.'.substr($mus_cod, 1, 2).'.'.substr($mus_cod, 3, 2).'.'.substr($mus_cod, 5, 4);
-                    $mus_cod = substr($a, 0, 1).'.'.substr($a, 1, 2).'.'.substr($a, 3, 2).'.'.substr($a, 5, 4);
                 } while($existMusCod($mus_cod));
                 $this->mus_cod = $mus_cod;
             }
