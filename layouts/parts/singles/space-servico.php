@@ -17,6 +17,10 @@
     <?php endif; ?>
     <?php $this->applyTemplateHook('acessibilidade','after'); ?>
 
+    <?php if($this->isEditable() || $entity->horario): ?>
+        <p><span class="label">Horário de funcionamento: </span><span class="js-editable" data-edit="horario" data-original-title="Horário de Funcionamento" data-emptytext="Insira o horário de abertura e fechamento"><?php echo $entity->horario; ?></span></p>
+    <?php endif; ?>
+
     <?php if($this->isEditable() || $entity->site): ?>
         <p><span class="label">Site:</span>
         <?php if($this->isEditable()): ?>
