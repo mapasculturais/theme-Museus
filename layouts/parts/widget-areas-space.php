@@ -1,14 +1,14 @@
 <?php
 $entityClass = $entity->getClassName();
 $entityName = strtolower(array_slice(explode('\\', $entityClass),-1)[0]);
+$areas = array_values($app->getRegisteredTaxonomy($entityClass, 'mus_area')->restrictedTerms);
+sort($areas);
 ?>
+<div class="widget">
+    <h3>Tipologia de Acervo</h3>
     <?php if($this->isEditable()): ?>
-        <span style="display: none" class="js-editable-taxonomy" data-original-title="Área de Atuação" data-taxonomy="area">Museu</span>
-    <?php endif;?>
--<div class="widget">
-<h3>Tipologia de Acervo</h3>
-    <?php if($this->isEditable()): ?>
-         <span class="js-editable-taxonomy" data-original-title="Tipologia de Acervo" data-emptytext="Selecione pelo menos uma tipologia" data-restrict="true" data-taxonomy="mus_area"><?php echo implode('; ', $entity->terms['mus_area'])?></span>
+         <span class="js-editable-taxonomy" data-original-title="Tipologia de Acervo" data-emptytext="Selecione pelo menos uma tipologia" data-restrict="true"
+         data-taxonomy="mus_area"><?php echo implode('; ', $entity->terms['mus_area'])?></span>
          <span style="display:none" class="js-editable-taxonomy" data-original-title="Área de Atuação" data-taxonomy="area">Museu</span>
     <?php else: ?>
         <?php foreach($areas as $i => $t): if(in_array($t, $entity->terms['mus_area'])): ?>

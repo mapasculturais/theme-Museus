@@ -121,7 +121,7 @@ $child_entity_request = isset($child_entity_request) ? $child_entity_request : n
             <?php endif; ?>
         <?php endif; ?>
     </div>
-    <?php $this->part('widget-areas', array('entity'=>$entity)); ?>
+    <?php $this->part('widget-areas-space', array('entity'=>$entity)); ?>
     <?php $this->part('widget-tags', array('entity'=>$entity)); ?>
     <?php $this->part('redes-sociais', array('entity'=>$entity)); ?>
 </div>
