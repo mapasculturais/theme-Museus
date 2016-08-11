@@ -51,7 +51,6 @@ $child_entity_request = isset($child_entity_request) ? $child_entity_request : n
     <ul class="abas clearfix clear">
         <?php $this->applyTemplateHook('tabs','begin'); ?>
         <li class="active"><a href="#sobre">Sobre</a></li>
-        <li><a href="#agenda">Agenda</a></li>
         <?php $this->applyTemplateHook('tabs','end'); ?>
     </ul>
     <?php $this->applyTemplateHook('tabs','after'); ?>
@@ -83,12 +82,10 @@ $child_entity_request = isset($child_entity_request) ? $child_entity_request : n
             <!-- Image Gallery BEGIN -->
             <?php $this->part('gallery.php', array('entity'=>$entity)); ?>
             <!-- Image Gallery END -->
+            <?php $this->applyTemplateHook('tab-about','end'); ?>
+
         </div>
         <!-- #sobre -->
-        <div id="agenda" class="aba-content">
-            <?php $this->part('agenda', array('entity' => $entity)); ?>
-        </div>
-        <!-- #agenda -->
 
         <?php $this->applyTemplateHook('tabs-content','end'); ?>
     </div>

@@ -73,7 +73,7 @@ Descubra o Brasil por meio dos seus museus!<br>
          *
          * @see protectec/application/conf/space-types.php
          */
-        $app->hook('API.<<*>>(space).query', function(&$data, &$select_properties, &$dql_joins, &$dql_where) {
+        $app->hook('API.<<*>>(space).query', function(&$data, &$select_properties, &$dql_joins, &$dql_where) use ($app) {
             $dql_where .= ' AND e._type >= 60 AND e._type <= 69';
         });
 
@@ -861,149 +861,60 @@ Descubra o Brasil por meio dos seus museus!<br>
         return $result;
     }
 
-    protected function _getAdvancedFilters(){
+    protected function _getFilters(){
           return [
               'space' => [
                     [
                         'fieldType' => 'checklist',
-                        'isInline' => true,
-                        'isArray' => true,
                         'label' => 'Estado',
                         'placeholder' => 'Selecione os Estados',
                         'filter' => [
                             'param' => 'En_Estado',
                             'value' => 'IN({val})'
                         ],
-                        'parseValue' => ['join'],
-                        'options' => [
-                            ['value' => 'AC', 'label' => 'Acre'],
-                            ['value' => 'AL', 'label' => 'Alagoas'],
-                            ['value' => 'AP', 'label' => 'Amapá'],
-                            ['value' => 'AM', 'label' => 'Amazonas'],
-                            ['value' => 'BA', 'label' => 'Bahia'],
-                            ['value' => 'CE', 'label' => 'Ceará'],
-                            ['value' => 'DF', 'label' => 'Distrito Federal'],
-                            ['value' => 'ES', 'label' => 'Espírito Santo'],
-                            ['value' => 'GO', 'label' => 'Goiás'],
-                            ['value' => 'MA', 'label' => 'Maranhão'],
-                            ['value' => 'MT', 'label' => 'Mato Grosso'],
-                            ['value' => 'MS', 'label' => 'Mato Grosso do Sul'],
-                            ['value' => 'MG', 'label' => 'Minas Gerais'],
-                            ['value' => 'PA', 'label' => 'Pará'],
-                            ['value' => 'PB', 'label' => 'Paraíba'],
-                            ['value' => 'PR', 'label' => 'Paraná'],
-                            ['value' => 'PE', 'label' => 'Pernambuco'],
-                            ['value' => 'PI', 'label' => 'Piauí'],
-                            ['value' => 'RJ', 'label' => 'Rio de Janeiro'],
-                            ['value' => 'RN', 'label' => 'Rio Grande do Norte'],
-                            ['value' => 'RS', 'label' => 'Rio Grande do Sul'],
-                            ['value' => 'RO', 'label' => 'Rondônia'],
-                            ['value' => 'RR', 'label' => 'Roraima'],
-                            ['value' => 'SC', 'label' => 'Santa Catarina'],
-                            ['value' => 'SP', 'label' => 'São Paulo'],
-                            ['value' => 'SE', 'label' => 'Sergipe'],
-                            ['value' => 'TO', 'label' => 'Tocantins'],
-                        ],
                     ],
                     [
-                        'fieldType' => 'checklist',
-                        'isArray' => true,
                         'label' => 'Tipologia',
+                        'placeholder' => 'Selecione os Tipos',
                         'filter' => [
                             'param' => 'mus_tipo',
                             'value' => 'IN({val})'
                         ],
-                        'isInline' => true,
-                        'placeholder' => 'Selecione os Tipos',
-                        'parseValue' => ['join'],
-                        'options' => [
-                            ['value' => 'Tradicional/Clássico', 'label' => 'Tradicional/Clássico'],
-                            ['value' => 'Virtual', 'label' => 'Virtual'],
-                            ['value' => 'Museu de território/Ecomuseu', 'label' => 'Museu de território/Ecomuseu'],
-                            ['value' => 'Unidade de conservação da natureza', 'label' => 'Unidade de conservação da natureza'],
-                            ['value' => 'Jardim zoológico\\, botânico\\, herbário\\, oceanário ou planetário',
-                                'label' =>'Jardim zoológico, botânico, herbário, oceanário ou planetário'],
-                        ]
                     ],
                     [
-                        'fieldType' => 'checklist',
-                        'isArray' => true,
                         'label' => 'Temática do museu',
+                        'placeholder' => 'Selecione as Temáticas',
                         'filter' => [
                             'param' => 'mus_tipo_tematica',
                             'value' => 'IN({val})'
                         ],
-                        'isInline' => true,
-                        'placeholder' => 'Selecione as Temáticas',
-                        'parseValue' => ['join'],
-                        'options' => [
-
-                            ['value' => "Artes\\, arquitetura e linguística", 'label' => 'Artes, arquitetura e linguística'],
-                            ['value' => 'Antropologia e arqueologia', 'label' => 'Antropologia e arqueologia'],
-                            ['value' => 'Ciências exatas\\, da terra\\, biológicas e da saúde', 'label' => 'Ciências exatas, da terra, biológicas e da saúde'],
-                            ['value' => 'História', 'label' => 'História'],
-                            ['value' => 'Educação\\, esporte e lazer', 'label' => 'Educação, esporte e lazer'],
-                            ['value' => 'Meios de comunicação e transporte', 'label' => 'Meios de comunicação e transporte'],
-                            ['value' => 'Produção de bens e serviços', 'label' => 'Produção de bens e serviços'],
-                            ['value' => 'Defesa e segurança pública', 'label' => 'Defesa e segurança pública'],
-
-                        ],
                     ],
-                     [
-                        'fieldType' => 'checklist',
-                        'isArray' => true,
+                    [
+                        'isInline' => false,
                         'label' => 'Situação de funcionamento',
+                        'placeholder' => 'Selecione a Situação de funcionamento',
                         'filter' => [
                             'param' => 'mus_status',
                             'value' => 'IN({val})'
                         ],
-                        'placeholder' => 'Selecione a Situação de funcionamento',
-                        'parseValue' => ['join'],
-                        'options' => [
-                            ['value' => 'aberto', 'label' => 'Aberto'] ,
-                            ['value' => 'fechado', 'label' => 'Fechado'] ,
-                            ['value' => 'implantacao', 'label' => 'Em implantação'] ,
-                        ],
                     ],
                     [
-                        'fieldType' => 'checklist',
-                        'isArray' => true,
                         'label' => 'Esfera',
+                        'placeholder' => 'Selecione a esfera',
+                        'isInline' => false,
                         'filter' => [
                             'param' => 'esfera',
                             'value' => 'IN({val})'
                         ],
-                        'placeholder' => 'Selecione a esfera',
-                        'parseValue' => ['join'],
-                        'options' => [
-                            ['value' => 'Pública', 'label' => 'Pública'] ,
-                            ['value' => 'Privada', 'label' => 'Privada'] ,
-                        ],
                     ],
                     [
-                        'fieldType' => 'checklist',
-                        'isArray' => true,
+                        'isInline' => false,
                         'label' => 'Tipo de Esfera',
+                        'placeholder' => 'Selecione o tipo da esfera',
                         'filter' => [
                             'param' => 'esfera_tipo',
                             'value' => 'IN({val})'
-                        ],
-                        'placeholder' => 'Selecione o tipo da esfera',
-                        'parseValue' => ['join'],
-                        'options' => [
-                            ['value' => 'Federal', 'label' => 'Federal'],
-                            ['value' => 'Estadual', 'label' => 'Estadual'],
-                            ['value' => 'Distrital', 'label' => 'Distrital'],
-                            ['value' => 'Municipal', 'label' => 'Municipal'],
-                            ['value' => 'Associação', 'label' => 'Associação'],
-                            ['value' => 'Empresa', 'label' => 'Empresa'],
-                            ['value' => 'Fundação', 'label' => 'Fundação'],
-                            ['value' => 'Particular', 'label' => 'Particular'],
-                            ['value' => 'Religiosa', 'label' => 'Religiosa'],
-                            ['value' => 'Mista', 'label' => 'Mista'],
-                            ['value' => 'Entidade Sindical', 'label' => 'Entidade Sindical'],
-                            ['value' => 'Outra', 'label' => 'Outra'],
-                        ],
+                        ]
                     ],
               ],
               'agent' => [],
