@@ -985,5 +985,19 @@ return [
                 ['new_value' => $val[0], 'old_value' => $val[1]]
             );
         }
+    },
+    'importa museus para o agente ibraam' => function() use($app, $conn){
+        $space_ids = file_get_contents(__DIR__ . '/museus-ibram.csv');
+        $space_ids = explode("\n", $space_ids);
+        $space_ids = implode(",", $space_ids);
+        $conn->executeQuery(
+            "UPDATE space set agent_id = :agent_id where id in (".$space_ids.")",
+            [
+                'agent_id'  => $app->config['museus.ownerAgentId']
+                // , 'space_ids' => $space_ids
+            ],
+            [\PDO::PARAM_INT, \Doctrine\DBAL\Connection::PARAM_INT_ARRAY]
+            // array(\PDO::PARAM_INT, \PDO::PARAM_INT, \PDO::PARAM_INT, \PDO::PARAM_INT, \PDO::PARAM_INT, \PDO::PARAM_INT)
+        );
     }
 ];
