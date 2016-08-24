@@ -29,7 +29,7 @@ $show_acervo = $this->isEditable() ||
 $show_gestao = $this->isEditable();
 
 $show_tipologia = $this->isEditable() ||
-        $entity->mus_tipo_tematica ||
+        $entity->mus_tipo ||
         $entity->mus_tipo_tematica;
 
 ?>
@@ -120,11 +120,11 @@ $show_tipologia = $this->isEditable() ||
 
         <?php if ($show_tipologia): ?>
             <h5>Tipologia</h5> <!-- mover para o local apropriado -->
-            <?php if($this->isEditable() || $entity->mus_tipo_tematica): ?>
+            <?php if($this->isEditable() || $entity->mus_tipo): ?>
             <p>
                 <span class="label">Tipo:</span>
-                <span class="js-editable" data-edit="mus_tipo_tematica" data-original-title="Tipo do museu" data-emptytext="Selecione">
-                    <?php echo $entity->mus_tipo_tematica; ?>
+                <span class="js-editable" data-edit="mus_tipo" data-original-title="Tipo do museu" data-emptytext="Selecione">
+                    <?php echo $entity->mus_tipo; ?>
                 </span>
             </p>
             <?php endif; ?>
