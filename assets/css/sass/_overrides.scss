@@ -61,3 +61,15 @@
 p.endereco {
     display: none;
 }
+
+ul.abas{
+    @media print{
+        display: none;
+    }
+}
+
+.tabs-content .aba-content{
+    @media print{
+        display: block !important;
+    }
+}
