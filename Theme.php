@@ -874,6 +874,16 @@ Descubra o Brasil por meio dos seus museus!<br>
                         ],
                     ],
                     [
+                        'fieldType' => 'text',
+                        'label' => 'Município',
+                        'isArray' => false,
+                        'placeholder' => 'Pesquisar por Município',
+                        'filter' => [
+                            'param' => 'En_Municipio',
+                            'value' => 'ILIKE(*{val}*)'
+                        ]
+                    ],
+                    [
                         'label' => 'Tipologia',
                         'placeholder' => 'Selecione os Tipos',
                         'filter' => [
