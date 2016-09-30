@@ -39,7 +39,7 @@ Descubra o Brasil por meio dos seus museus!<br>
 //            'home: home_devs' => 'Existem algumas maneiras de desenvolvedores interagirem com o Mapas Culturais. A primeira é através da nossa <a href="https://github.com/hacklabr/mapasculturais/blob/master/doc/api.md" target="_blank">API</a>. Com ela você pode acessar os dados públicos no nosso banco de dados e utilizá-los para desenvolver aplicações externas. Além disso, o Mapas Culturais é construído a partir do sofware livre <a href="http://institutotim.org.br/project/mapas-culturais/" target="_blank">Mapas Culturais</a>, criado em parceria com o <a href="http://institutotim.org.br" target="_blank">Instituto TIM</a>, e você pode contribuir para o seu desenvolvimento através do <a href="https://github.com/hacklabr/mapasculturais/" target="_blank">GitHub</a>.',
 //
 //            'search: verified results' => 'Resultados Verificados',
-//            'search: verified' => "Verificados"
+//            'search: verified' => "Verificado
 
 
             'entities: Spaces of the agent'=> 'Museus do agente',
@@ -74,7 +74,7 @@ Descubra o Brasil por meio dos seus museus!<br>
          * @see protectec/application/conf/space-types.php
          */
         $app->hook('API.<<*>>(space).query', function(&$data, &$select_properties, &$dql_joins, &$dql_where) use ($app) {
-            $dql_where .= ' AND e._type >= 60 AND e._type <= 69 AND (e.isVerified = true OR e._ownerId = '.$app->config['museus.ownerAgentId']. ')';
+            $dql_where .= ' AND e._type >= 60 AND e._type <= 69';
         });
 
         parent::_init();
