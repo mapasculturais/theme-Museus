@@ -95,29 +95,10 @@ $child_entity_request = isset($child_entity_request) ? $child_entity_request : n
     <?php $this->part('owner', array('entity' => $entity, 'owner' => $entity->owner)) ?>
 </article>
 <div class="sidebar-left sidebar space">
-    <?php $this->part('verified', array('entity' => $entity)); ?>
-    <div class="widget">
-        <h3>Status</h3>
-        <?php if($this->isEditable()): ?>
-            <div id="editable-space-status" class="js-editable" data-edit="public" data-type="select" data-value="<?php echo $entity->public ? '1' : '0' ?>"  data-source="[{value: 0, text: 'Publicação restrita - requer autorização para criar eventos'},{value: 1, text:'Publicação livre - qualquer pessoa pode criar eventos'}]">
-                <?php if ($entity->public) : ?>
-                    <div class="venue-status"><div class="icon icon-publication-status-open"></div>Publicação livre</div>
-                    <p class="venue-status-definition">Qualquer pessoa pode criar eventos.</p>
-                <?php else: ?>
-                    <div class="venue-status"><div class="icon icon-publication-status-locked"></div>Publicação restrita</div>
-                    <p class="venue-status-definition">Requer autorização para criar eventos.</p>
-                <?php endif; ?>
-            </div>
-        <?php else: ?>
-            <?php if ($entity->public) : ?>
-                <div class="venue-status"><div class="icon icon-publication-status-open"></div>Publicação livre</div>
-                <p class="venue-status-definition">Qualquer pessoa pode criar eventos.</p>
-            <?php else: ?>
-                <div class="venue-status"><div class="icon icon-publication-status-locked"></div>Publicação restrita</div>
-                <p class="venue-status-definition">Requer autorização para criar eventos.</p>
-            <?php endif; ?>
-        <?php endif; ?>
-    </div>
+    <?php $this->part('related-seals.php', array('entity'=>$entity)); ?>
+
+    <?php $this->part('singles/space-public', ['entity' => $entity]) ?>
+
     <?php $this->part('widget-areas-space', array('entity'=>$entity)); ?>
     <?php $this->part('widget-tags', array('entity'=>$entity)); ?>
     <?php $this->part('redes-sociais', array('entity'=>$entity)); ?>

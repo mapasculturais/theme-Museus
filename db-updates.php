@@ -999,5 +999,80 @@ return [
             [\PDO::PARAM_INT, \Doctrine\DBAL\Connection::PARAM_INT_ARRAY]
             // array(\PDO::PARAM_INT, \PDO::PARAM_INT, \PDO::PARAM_INT, \PDO::PARAM_INT, \PDO::PARAM_INT, \PDO::PARAM_INT)
         );
+    },
+    'adiciona selos padrao' => function() use($app, $conn) {
+        $agent = $app->config['museus.ownerAgentId'];
+        $seal_id = $conn->fetchColumn("select max(id) from seal;");
+        $seal_id++;
+        $conn->executeQuery(
+            "INSERT INTO seal (
+                id,
+                agent_id,
+                name,
+                valid_period,
+                create_timestamp,
+                status
+            ) VALUES(
+                $seal_id,
+                $agent,
+                'RENIM - Rede Nacional de Identificação de Museus',
+                0,
+                CURRENT_TIMESTAMP,
+                1
+            );"
+        );
+        $seal_id++;
+        $conn->executeQuery(
+            "INSERT INTO seal (
+                id,
+                agent_id,
+                name,
+                valid_period,
+                create_timestamp,
+                status
+            ) VALUES(
+                $seal_id,
+                $agent,
+                'SBM - Sistema Brasileiro de Museus',
+                0,
+                CURRENT_TIMESTAMP,
+                1
+            );"
+        );
+    },
+    'remove selo padrao adicionado' => function() use($conn){
+        $conn->executeQuery("
+            DELETE FROM seal_relation
+            WHERE   object_type = 'MapasCulturais\Entities\Space'
+                AND object_id in (
+                    SELECT  id
+                    FROM    space
+                    WHERE   is_verified = 't'
+                        AND type >= 60
+                        AND type <= 69
+                )"
+        );
+    },
+    'adiciona selo renim para museus verificados' => function() use($app, $conn){
+        $agent = $app->config['museus.ownerAgentId'];
+        $seal_id = $conn->fetchColumn("
+            SELECT  id
+            FROM    seal
+            WHERE   name = 'RENIM - Rede Nacional de Identificação de Museus';"
+        );
+        $conn->executeQuery("
+            INSERT INTO seal_relation
+                SELECT  nextval('seal_relation_id_seq'),
+                        $seal_id,
+                        id,
+                        CURRENT_TIMESTAMP,
+                        1,
+                        'MapasCulturais\Entities\Space',
+                        $agent
+                FROM    space
+                WHERE   is_verified = 't'
+                    AND type >= 60
+                    AND type <= 69;"
+        );
     }
 ];
