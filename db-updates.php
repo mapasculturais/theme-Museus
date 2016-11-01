@@ -1074,5 +1074,49 @@ return [
                     AND type >= 60
                     AND type <= 69;"
         );
+    },
+    'mus: adiciona selo fva 2014' => function() use($app, $conn){
+        $agent = $app->config['museus.ownerAgentId'];
+        //FVA 2014 http://museus.cultura.gov.br/selo/4/
+        $seal_id = 4;
+        $mus_cods = explode("\n", file_get_contents(__DIR__ . '/apply-seals/seal_fva2014.csv'));
+        $conn->executeQuery("
+            INSERT INTO seal_relation
+                SELECT  nextval('seal_relation_id_seq'),
+                        $seal_id,
+                        s.id,
+                        CURRENT_TIMESTAMP,
+                        1,
+                        'MapasCulturais\Entities\Space',
+                        $agent
+                FROM
+                    space s JOIN space_meta cod
+                        ON cod.key = 'mus_cod'
+                        AND cod.value IN ('" . implode("','", $mus_cods) . "')
+                        AND s.id = cod.object_id;
+                "
+        );
+    },
+    'mus: adiciona selo fva 2015' => function() use($app, $conn){
+        $agent = $app->config['museus.ownerAgentId'];
+        //FVA 2015 http://museus.cultura.gov.br/selo/5/
+        $seal_id = 5;
+        $mus_cods = explode("\n", file_get_contents(__DIR__ . '/apply-seals/seal_fva2015.csv'));
+        $conn->executeQuery("
+            INSERT INTO seal_relation
+                SELECT  nextval('seal_relation_id_seq'),
+                        $seal_id,
+                        s.id,
+                        CURRENT_TIMESTAMP,
+                        1,
+                        'MapasCulturais\Entities\Space',
+                        $agent
+                FROM
+                    space s JOIN space_meta cod
+                        ON cod.key = 'mus_cod'
+                        AND cod.value IN ('" . implode("','", $mus_cods) . "')
+                        AND s.id = cod.object_id;
+                "
+        );
     }
 ];
