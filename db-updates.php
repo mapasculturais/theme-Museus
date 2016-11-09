@@ -1118,5 +1118,21 @@ return [
                         AND s.id = cod.object_id;
                 "
         );
+    },
+    'mus: remove notificacoes' => function() use($app, $conn) {
+        $agent_id = $app->config['museus.ownerAgentId'];
+        $conn->executeQuery("
+            DELETE FROM notification WHERE id IN (
+                SELECT
+                    n.id
+                FROM
+                    notification n
+                        LEFT JOIN request r ON
+                            r.id = n.request_id
+                WHERE
+                    r.id is NULL
+                    AND user_id = $agent_id
+            )
+        ");
     }
 ];
