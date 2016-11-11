@@ -212,6 +212,10 @@ Descubra o Brasil por meio dos seus museus!<br>
             $this->part('acessibilidade', ['entity' => $this->data->entity]);
         });
         */
+
+        $app->hook('view.render(<<*>>):before', function() use ($app) {
+            $app->view->enqueueScript('app', 'agenda-single', 'js/analytics.js', array('mapasculturais'));
+        });
     }
 
     static function getThemeFolder() {
