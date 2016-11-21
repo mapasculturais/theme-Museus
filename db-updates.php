@@ -1131,7 +1131,7 @@ return [
                             r.id = n.request_id
                 WHERE
                     r.id is NULL
-                    AND user_id = $agent_id
+                    AND n.user_id = (SELECT id FROM usr WHERE profile_id = $agent_id)
             )
         ");
     }
