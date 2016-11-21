@@ -1119,7 +1119,7 @@ return [
                 "
         );
     },
-    'mus: remove notificacoes' => function() use($app, $conn) {
+    'mus: remove notificacoes do Ibram' => function() use($app, $conn) {
         $agent_id = $app->config['museus.ownerAgentId'];
         $conn->executeQuery("
             DELETE FROM notification WHERE id IN (
