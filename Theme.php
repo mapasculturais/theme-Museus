@@ -282,6 +282,23 @@ Descubra o Brasil por meio dos seus museus!<br>
                 ]
             ],
 
+            // caso status == Fechado î
+            'previsao_abertura_mes' =>[
+                'label' => 'Previsão de Abertura (Mês)',
+                'type' => 'int',
+                'validations' => [
+                    'v::intVal()' => 'O Mês deve ser um campo inteiro'
+                ]
+            ],
+
+            'previsao_abertura_ano' =>[
+                'label' => 'Previsão de Abertura (Ano)',
+                'type' => 'int',
+                'validations' => [
+                    'v::intVal()' => 'O Ano deve ser um campo inteiro'
+                ]
+            ],
+
             'abertura_ano' => [
                 'label' => 'Ano de abertura',
                 'type' => 'int',
@@ -590,6 +607,113 @@ Descubra o Brasil por meio dos seus museus!<br>
                 'label' => 'Informações Adicionais de Contato',
                 'type' => 'text',
             ],
+            'atividade_pub_especif' => [
+                'label' => 'O museu realiza atividades educativas e culturais para públicos específicos?',
+                'type' => 'select',
+                'options' => [
+                    's' => 'Sim',
+                    'n' => 'Não'
+                ]
+            ],
+            'atividade_pub_especif_s' => [
+                'label' => 'Em caso positivo, especifique: escolha a(s) que mais se adeque(m)',
+                'type' => 'multiselect',
+                'allowOther' => true,
+                'allowOtherText' => 'Outro',
+                'options' => [
+                    'Estudantes de ensino fundamental',
+                    'Estudantes de ensino médio',
+                    'Estudantes universitários',
+                    'Professores',
+                    'Terceira idade',
+                    'Pessoas com deficiência',
+                    'Indígenas, quilombolas ou outras comunidades tradicionais',
+                    'Turistas nacionais ',
+                    'Turistas estrangeiros',
+                    'Pessoas em situação de vulnerabilidade social '
+                ]
+            ],
+            'esfera_tipo_federal' => [
+                'label' => 'Agricultura, Pecuária e Abastecimento'
+                'type' => 'select',
+                'allowOther' => true,
+                'allowOtherText' => 'Outro',
+                'options' => [
+                    'Cidades',
+                    'Ciência, Tecnologia, Inovação e Comunicações',
+                    'Cultura',
+                    'Defesa',
+                    'Desenvolvimento, Indústria e Comércio Exterior ',
+                    'Desenvolvimento Social e Agrário',
+                    'Educação',
+                    'Esporte',
+                    'Fazenda',
+                    'Integração Nacional',
+                    'Justiça e Cidadania',
+                    'Meio Ambiente',
+                    'Minas e Energia',
+                    'Planejamento, Orçamento e Gestão',
+                    'Relações Exteriores',
+                    'Saúde',
+                    'Trabalho e Previdência Social',
+                    'Transparência, Fiscalização e Controle    ',
+                    'Transportes, Portos e Aviação Civil',
+                    'Turismo ',
+                    'Secretaria de Governo  ',
+                    'Casa Civil   ',
+                    'Gabinete de Segurança Institucional'
+                ]
+            ],
+            'contrato_gestao' => [
+                'label' => 'O museu possui algum contrato para sua gestão?',
+                'type' => 'select',
+                'options' => [
+                    's' => 'Sim',
+                    'n' => 'Não'
+                ]
+            ],
+            'contrato_gestao_s' => [
+                'label' => 'Em caso positivo especifique a estrutura jurídica da instituição contratada',
+                'type' => 'select',
+                'allowOther' => true,
+                'allowOtherText' => 'Outra',
+                'options' => [
+                    'Associação',
+                    'Fundação',
+                    'Sociedade (incluem-se aqui as sociedades de economia mista, empresas públicas e privadas)'
+                ]
+            ],
+            'contrato_qualificacoes' => [
+                'label' => 'A contratada possui qualificações?',
+                'type' => 'select',
+                'allowOther' => true,
+                'allowOtherText' => 'Outra',
+                'options' => [
+                    'OS',
+                    'OSCIP',
+                    'Outra',
+                    'Não possui qualificações'
+                ]
+            ],
+            'num_pessoas' => [
+                'label' => 'Quantas pessoas trabalham no museu (contabilizar terceirizados, estagiários e voluntários)?'
+                'type' => 'int',
+                'validations' => [
+                    'v::intVal()' => 'O Mês deve ser um campo inteiro'
+                ]
+            ],
+
+19 - *O museu possui funcionários terceirizados?
+ [    ] Sim   [    ] Não
+ 19.1 - *Em caso positivo, especifique quantos:     [______]
+
+20 - *O museu possui voluntários?
+Serviço voluntário é uma atividade não remunerada prestada por pessoa física, não gerando vínculo empregatício ou funcional, nem obrigação trabalhista.
+[    ] Sim   [    ] Não
+
+21  - *O museu possui estagiários?
+Estágio é uma atividade educativa supervisionada, desenvolvida no ambiente de trabalho, que visa à preparação do estudante que esteja frequentando o ensino regular nos níveis em que a prática de estágio se aplique.
+[    ] Sim   [    ] Não
         ];
     }
 
