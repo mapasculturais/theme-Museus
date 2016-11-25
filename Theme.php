@@ -54,7 +54,7 @@ Descubra o Brasil por meio dos seus museus!<br>
             'entities: Spaces' => 'Museus',
             'entities: space' => 'museu',
             'entities: spaces' => 'museus',
-            'entities: parent space' => 'museu mãe',
+            'entities: parent space' => 'museu matriz',
             'entities: a space' => 'um museu',
             'entities: the space' => 'o museu',
             'entities: of the space' => 'do museu',
@@ -160,19 +160,13 @@ Descubra o Brasil por meio dos seus museus!<br>
         });
 
         $app->hook('template(space.<<create|edit|single>>.tab-about-service):begin', function(){
-            $this->part('about-servive-begin', ['entity' => $this->data->entity]);
+            $this->part('about-service-begin', ['entity' => $this->data->entity]);
         });
 
         $app->hook('template(space.<<create|edit|single>>.acessibilidade):after', function(){
             $entity = $this->data->entity;
             ?>
-        <?php if($this->isEditable() || $entity->mus_acessibilidade_visual): ?>
-        <p>
-            <span class="label">Acessibilidade para pessoas com deficiências auditivas e visuais: </span>
-            <editable-multiselect entity-property="mus_acessibilidade_visual" empty-label="Selecione" allow-other="true" box-title="Acessibilidade para pessoas com deficiências auditivas e visuais" help-text="O museu oferece instalações e serviços destinados às pessoas com deficiências auditivas e visuais?"></editable-multiselect>
-        </p>
-        <?php endif; ?>
-            <?php
+        <?php
         });
 
         $app->hook('template(space.<<*>>.location):after', function(){
@@ -296,127 +290,12 @@ Descubra o Brasil por meio dos seus museus!<br>
                 ]
             ],
 
-            'abertura_publico' => [
-                'label' => 'Tipo de públio ao qual o museu é aberto',
-                'type' => 'select',
-                'options' => [
-                    'Para público em geral',
-                    'SOMENTE para públicos específicos'
-                ]
-            ],
-
             'itinerante' => [
                 'label' => 'O museu é itinerante?',
                 'type' => 'select',
                 'options' => ['sim', 'não']
             ],
 
-            'itinerante_dependeRecursos' => [
-                'label' => 'O museu depende de recursos financeiros de outra instituição para a itinerância da exposição?',
-                'type' => 'select',
-                'options' => [
-                    '' => 'não se aplica',
-                    'sim',
-                    'não'
-                ]
-            ],
-
-            // EXPOSIÇÔES
-            'exposicoes_duracao' => [
-                'label' => 'Duração das exposições',
-                'type' => 'select',
-                'options' => [
-                    'Possui SOMENTE exposição de longa duração (mais de um ano em exposição)',
-                    'Possui exposição de longa duração e realiza exposições de curta duração (até um ano em exposição)',
-                    'Realiza SOMENTE exposições de curta duração',
-                    'NÃO realiza exposições'
-                ]
-            ],
-
-            'horario_segunda_das' => [
-                'label' => 'Aberto nas segundas-feiras das (00:00)',
-                'validations' => [
-                    'v::date("H:i:s")'
-                ]
-            ],
-            'horario_segunda_ate' => [
-                'label' => 'Aberto nas segundas-feiras até as (00:00)',
-                'validations' => [
-                    'v::date("H:i:s")'
-                ]
-            ],
-            'horario_terca_das' => [
-                'label' => 'Aberto nas terças-feiras das (00:00)',
-                'validations' => [
-                    'v::date("H:i:s")'
-                ]
-            ],
-            'horario_terca_ate' => [
-                'label' => 'Aberto nas terças-feiras até as (00:00)',
-                'validations' => [
-                    'v::date("H:i:s")'
-                ]
-            ],
-            'horario_quarta_das' => [
-                'label' => 'Aberto nas quartas-feiras das (00:00)',
-                'validations' => [
-                    'v::date("H:i:s")'
-                ]
-            ],
-            'horario_quarta_ate' => [
-                'label' => 'Aberto nas quartas-feiras até as (00:00)',
-                'validations' => [
-                    'v::date("H:i:s")'
-                ]
-            ],
-            'horario_quinta_das' => [
-                'label' => 'Aberto nas quintas-feiras das (00:00)',
-                'validations' => [
-                    'v::date("H:i:s")'
-                ]
-            ],
-            'horario_quinta_ate' => [
-                'label' => 'Aberto nas quintas-feiras até as (00:00)',
-                'validations' => [
-                    'v::date("H:i:s")'
-                ]
-            ],
-            'horario_sexta_das' => [
-                'label' => 'Aberto nas sextas-feiras das (00:00)',
-                'validations' => [
-                    'v::date("H:i:s")'
-                ]
-            ],
-            'horario_sexta_ate' => [
-                'label' => 'Aberto nas sextas-feiras até as (00:00)',
-                'validations' => [
-                    'v::date("H:i:s")'
-                ]
-            ],
-            'horario_sabado_das' => [
-                'label' => 'Aberto nos sábados das (00:00)',
-                'validations' => [
-                    'v::date("H:i:s")'
-                ]
-            ],
-            'horario_sabado_ate' => [
-                'label' => 'Aberto nos sábados até as (00:00)',
-                'validations' => [
-                    'v::date("H:i:s")'
-                ]
-            ],
-            'horario_domingo_das' => [
-                'label' => 'Aberto nos domingos das (00:00)',
-                'validations' => [
-                    'v::date("H:i:s")'
-                ]
-            ],
-            'horario_domingo_ate' => [
-                'label' => 'Aberto nos domingos até as (00:00)',
-                'validations' => [
-                    'v::date("H:i:s")'
-                ]
-            ],
             // tipologia
             'tipo' => [
                 'label' => 'Tipo',
@@ -561,16 +440,6 @@ Descubra o Brasil por meio dos seus museus!<br>
             ],
 
             // acervo
-            'acervo_comercializacao' => [
-                'label' => 'Comercialização do acervo',
-                'type' => 'select',
-                'options' => [
-                    "APENAS comercializável",
-                    "APENAS Não comercializável",
-                    "Comercializável e não comercializável"
-                ]
-            ],
-
             'acervo_propriedade' => [
                 'label' => 'Propriedade do acervo',
                 'type' => 'select',
@@ -580,24 +449,6 @@ Descubra o Brasil por meio dos seus museus!<br>
                     'Acervo compartilhado entre órgãos/setores da mesma entidade mantenedora',
                     'Possui SOMENTE acervo em comodato/empréstimo',
                     'NÃO possui acervo',
-                ]
-            ],
-
-            'acervo_comodato_formalizado' => [
-                'label' => 'O comodato/empréstimo está formalizado por meio de documento legal?',
-                'type' => 'select',
-                'options' => [
-                    '' => 'não se aplica',
-                    'sim' => 'sim',
-                    'não' => 'não'
-                ]
-            ],
-
-            'acervo_comodato_duracao' => [
-                'label' => 'Duração do comodato/empréstimo (em meses)',
-                'type' => 'numeric',
-                'validations' => [
-                    'v::numeric()' => ''
                 ]
             ],
 
@@ -617,31 +468,6 @@ Descubra o Brasil por meio dos seus museus!<br>
                     '' => 'não se aplica',
                     'sim' => 'sim',
                     'não' => 'não'
-                ]
-            ],
-
-            'acervo_nucleoEdificado' => [
-                'label' => 'Núcleo Edificado',
-                'type' => 'multiselect',
-                'options' => [
-                    'O museu NÃO possui acervo em exposições em núcleo edificado',
-                    'A exposição do museu está no próprio território',
-                    'O museu possui núcleo(s) edificado(s) com acervo em exposição',
-                    'O Museu possui núcleo edificado apenas como sede técnico-administrativa',
-                    'O Museu NÃO possui núcleo edificado e NÃO possui sede técnico-administrativa',
-                    'O acervo do museu é composto de núcleos edificados'
-                ]
-            ],
-
-            'atividadePrincipal' => [
-                'label' => 'Em relação à sua atividade principal, indique a opção que melhor caracterize a instituição',
-                'type' => 'singleselect',
-                'options' => [
-                    'Arquivo',
-                    'Biblioteca',
-                    'Centro cultural',
-                    'Museu',
-                    'Galeria'
                 ]
             ],
 
