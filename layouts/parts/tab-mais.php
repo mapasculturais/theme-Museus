@@ -17,6 +17,12 @@ $show_tipologia = $this->isEditable() ||
             <p class="esfera"><span class="label">Esfera: </span><span class="js-editable" data-edit="esfera" data-original-title="Esfera"><?php echo $entity->esfera; ?></span></p>
         <?php endif; ?>
 
+        <?php if($this->isEditable() || $entity->mus_esfera_tipo_federal): ?>
+            <p>
+                <span class="label">Agricultura, Pecuária e Abastecimento: </span> <?php if ($this->isEditable()){ ?><em>Somente para Esfera Federal</em><?php } ?><span class="js-editable" data-edit="mus_esfera_tipo_federal" data-original-title="Agricultura, Pecuária e Abastecimento"><?php echo $entity->mus_esfera_tipo_federal; ?></span>
+            </p>
+        <?php endif; ?>
+
         <?php if($this->isEditable() || $entity->esfera_tipo): ?>
             <p class="esfera"><span class="label">Tipo de Esfera: </span><span class="js-editable" data-edit="esfera_tipo" data-original-title="Tipo de Esfera"><?php echo $entity->esfera_tipo; ?></span></p>
         <?php endif; ?>
@@ -72,8 +78,64 @@ $show_tipologia = $this->isEditable() ||
         </p>
         <?php endif; ?>
 
-        <!-- todo: questões -->
         <?php if($this->isEditable()): ?>
+            <p class="privado">
+                <span class="icon icon-private-info"></span>
+                <span class="label">O museu possui algum contrato para sua gestão?</span>
+                <span class="js-editable" data-edit="mus_contrato_gestao" data-original-title="O museu possui algum contrato para sua gestão?" data-emptytext="Selecione">
+                    <?php echo $entity->mus_contrato_gestao; ?>
+                </span>
+            </p>
+            <p class="privado">
+                <span class="icon icon-private-info"></span>
+                <span class="label">Em caso positivo especifique a estrutura jurídica da instituição contratada</span>
+                <span class="js-editable" data-edit="mus_contrato_gestao_s" data-original-title="Em caso positivo especifique a estrutura jurídica da instituição contratada" data-emptytext="Selecione">
+                    <?php echo $entity->mus_contrato_gestao_s; ?>
+                </span>
+            </p>
+            <p class="privado">
+                <span class="icon icon-private-info"></span>
+                <span class="label">A contratada possui qualificações?</span>
+                <span class="js-editable" data-edit="mus_contrato_qualificacoes" data-original-title="A contratada possui qualificações?" data-emptytext="Selecione">
+                    <?php echo $entity->mus_contrato_qualificacoes; ?>
+                </span>
+            </p>
+            <p class="privado">
+                <span class="icon icon-private-info"></span>
+                <span class="label">Quantas pessoas trabalham no museu (contabilizar terceirizados, estagiários e voluntários)?</span>
+                <span class="js-editable" data-edit="mus_num_pessoas" data-original-title="Quantas pessoas trabalham no museu (contabilizar terceirizados, estagiários e voluntários)?" data-emptytext="Informe">
+                    <?php echo $entity->mus_num_pessoas; ?>
+                </span>
+            </p>
+            <p class="privado">
+                <span class="icon icon-private-info"></span>
+                <span class="label">O museu possui funcionários terceirizados?</span>
+                <span class="js-editable" data-edit="mus_func_tercerizado" data-original-title="O museu possui funcionários terceirizados?" data-emptytext="Selecione">
+                    <?php echo $entity->mus_func_tercerizado; ?>
+                </span>
+            </p>
+            <p class="privado">
+                <span class="icon icon-private-info"></span>
+                <span class="label">Em caso positivo, especifique quantos</span>
+                <span class="js-editable" data-edit="mus_func_tercerizado_s" data-original-title="Em caso positivo, especifique quantos" data-emptytext="Informe">
+                    <?php echo $entity->mus_func_tercerizado_s; ?>
+                </span>
+            </p>
+            <p class="privado">
+                <span class="icon icon-private-info"></span>
+                <span class="label">O museu possui voluntários?</span>
+                <span class="js-editable" data-edit="mus_func_voluntario" data-original-title="O museu possui voluntários?" data-emptytext="Selecione">
+                    <?php echo $entity->mus_func_voluntario; ?>
+                </span>
+            </p>
+            <p class="privado">
+                <span class="icon icon-private-info"></span>
+                <span class="label">O museu possui estagiários?</span>
+                <span class="js-editable" data-edit="mus_func_estagiario" data-original-title="O museu possui estagiários?" data-emptytext="Selecione">
+                    <?php echo $entity->mus_func_estagiario; ?>
+                </span>
+            </p>
+
             <p class="privado">
                 <span class="icon icon-private-info"></span>
                 <span class="label">Posui regimento interno?</span>
@@ -145,19 +207,33 @@ $show_tipologia = $this->isEditable() ||
         </p>
         <?php endif; ?>
 
-        <!-- todo: inserir questões -->
-
         <?php if($this->isEditable()): ?>
             <p class="privado">
                 <span class="icon icon-private-info"></span>
-                <span class="label">Possui política de aquisição de acervo?</span>
-                <span class="js-editable" data-edit="mus_gestao_politicaAquisicao" data-original-title="O museu possui política de aquisição de acervo?" data-emptytext="Selecione">
+                <span class="label">Indique os instrumentos de documentação de acervo utilizados pelo Museu</span>
+                <span class="js-editable" data-edit="mus_instr_documento" data-original-title="Indique os instrumentos de documentação de acervo utilizados pelo Museu" data-emptytext="Selecione">
+                    <?php echo $entity->mus_instr_documento; ?>
+                </span>
+            </p>
+
+            <p class="privado">
+                <span class="icon icon-private-info"></span>
+                <span class="label">Caso o Museu não realize nenhuma ação de documentação de seu acervo, justifique</span>
+                <span class="js-editable" data-edit="mus_instr_documento_n" data-original-title="Caso o Museu não realize nenhuma ação de documentação de seu acervo, justifique" data-emptytext="Informe">
+                    <?php echo $entity->mus_instr_documento_n; ?>
+                </span>
+            </p>
+
+            <p class="privado">
+                <span class="icon icon-private-info"></span>
+                <span class="label">Indique os instrumentos de documentação de acervo utilizados pelo Museu</span>
+                <span class="js-editable" data-edit="mus_gestao_politicaAquisicao" data-oIndique os instrumentos de documentação de acervo utilizados pelo Museude acervo?" data-emptytext="Selecione">
                     <?php echo $entity->mus_gestao_politicaAquisicao; ?>
                 </span>
             </p>
             <p class="privado">
                 <span class="icon icon-private-info"></span>
-                <span class="label">Possui política de descarte de acervo?</span>
+                        <span class="label">Possui política de descarte de acervo?</span>
                 <span class="js-editable" data-edit="mus_gestao_politicaDescarte" data-original-title="O museu possui política de descarte de acervo?" data-emptytext="Selecione">
                     <?php echo $entity->mus_gestao_politicaDescarte; ?>
                 </span>

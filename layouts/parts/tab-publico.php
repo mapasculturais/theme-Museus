@@ -13,9 +13,6 @@ $show_instalacoes = $this->isEditable() ||
     $entity->mus_arquivo_acessoPublico ||
     $entity->mus_biblioteca_possui ||
     $entity->mus_biblioteca_acessoPublico;
-
-$show_atividades = true; // todo: inserir if metadados
-
 ?>
 
 <div id="tab-publico" class="aba-content new-tab">
@@ -27,7 +24,19 @@ $show_atividades = true; // todo: inserir if metadados
         </p>
         <?php endif; ?>
 
-        <!-- todo: museu fechado -->
+        <?php if($this->isEditable() || $entity->mus_previsao_abertura_mes || $entity->mus_previsao_abertura_ano): ?>
+            <p>
+                <span class="label">Em caso de museu fechado, qual a previsão de abertura?</span><br>
+                <?php if ($this->isEditable() || $entity->mus_previsao_abertura_mes): ?>
+                    <span class="label">Mês:</span>
+                    <span class="js-editable" data-edit="mus_previsao_abertura_mes" data-original-title="Previsão de Abertura (Mês)" data-emptytext="Selecione o mês"><?php echo $entity->mus_previsao_abertura_mes; ?></span><br>
+                <?php endif; ?>
+                <?php if ($this->isEditable() || $entity->mus_previsao_abertura_ano): ?>
+                    <span class="label">Ano:</span>
+                    <span class="js-editable" data-edit="mus_previsao_abertura_ano" data-original-title="Previsão de Abertura (Ano)" data-emptytext="Selecione o ano"><?php echo $entity->mus_previsao_abertura_ano; ?></span>
+                <?php endif; ?>
+            </p>
+        <?php endif; ?>
 
         <?php if($this->isEditable() || $entity->horario): ?>
             <p><span class="label">Horário de funcionamento: </span><span class="js-editable" data-edit="horario" data-original-title="Horário de Funcionamento" data-emptytext="Insira o horário de abertura e fechamento"><?php echo $entity->horario; ?></span></p>
@@ -143,6 +152,24 @@ $show_atividades = true; // todo: inserir if metadados
                 <?php echo $entity->mus_servicos_visitaGuiada; ?>
             </span>
         </p>
+        <?php endif; ?>
+
+        <?php if($this->isEditable() || $entity->mus_atividade_pub_especif || $entity->mus_atividade_pub_especif_s): ?>
+            <h5>Atividades educativas e culturais</h5>
+        <?php endif; ?>
+
+        <?php if($this->isEditable() || $entity->mus_atividade_pub_especif): ?>
+            <p>
+                <span class="label">O museu realiza atividades educativas e culturais para públicos específicos?</span>
+                <span class="js-editable" data-edit="mus_atividade_pub_especif" data-original-title="O museu realiza atividades educativas e culturais para públicos específicos?" data-emptytext="Selecione"><?php echo $entity->mus_atividade_pub_especif; ?></span>
+            </p>
+        <?php endif; ?>
+
+        <?php if($this->isEditable() || $entity->mus_atividade_pub_especif_s): ?>
+            <p>
+                <span class="label">Em caso positivo, especifique: escolha a(s) que mais se adeque(m)</span>
+                <span class="js-editable" data-edit="mus_atividade_pub_especif_s" data-original-title="Em caso positivo, especifique: escolha a(s) que mais se adeque(m)" data-emptytext="Selecione"><?php echo $entity->mus_atividade_pub_especif_s; ?></span>
+            </p>
         <?php endif; ?>
     </div>
 </div>

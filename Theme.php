@@ -634,7 +634,7 @@ Descubra o Brasil por meio dos seus museus!<br>
                 ]
             ],
             'esfera_tipo_federal' => [
-                'label' => 'Agricultura, Pecuária e Abastecimento'
+                'label' => 'Agricultura, Pecuária e Abastecimento',
                 'type' => 'select',
                 'allowOther' => true,
                 'allowOtherText' => 'Outro',
@@ -691,29 +691,63 @@ Descubra o Brasil por meio dos seus museus!<br>
                 'options' => [
                     'OS',
                     'OSCIP',
-                    'Outra',
                     'Não possui qualificações'
                 ]
             ],
             'num_pessoas' => [
-                'label' => 'Quantas pessoas trabalham no museu (contabilizar terceirizados, estagiários e voluntários)?'
+                'label' => 'Quantas pessoas trabalham no museu (contabilizar terceirizados, estagiários e voluntários)?',
                 'type' => 'int',
                 'validations' => [
                     'v::intVal()' => 'O Mês deve ser um campo inteiro'
                 ]
             ],
-
-19 - *O museu possui funcionários terceirizados?
- [    ] Sim   [    ] Não
- 19.1 - *Em caso positivo, especifique quantos:     [______]
-
-20 - *O museu possui voluntários?
-Serviço voluntário é uma atividade não remunerada prestada por pessoa física, não gerando vínculo empregatício ou funcional, nem obrigação trabalhista.
-[    ] Sim   [    ] Não
-
-21  - *O museu possui estagiários?
-Estágio é uma atividade educativa supervisionada, desenvolvida no ambiente de trabalho, que visa à preparação do estudante que esteja frequentando o ensino regular nos níveis em que a prática de estágio se aplique.
-[    ] Sim   [    ] Não
+            'func_tercerizado' => [
+                'label' => 'O museu possui funcionários terceirizados?',
+                'type' => 'select',
+                'options' => [
+                    's' => 'Sim',
+                    'n' => 'Não'
+                ]
+            ],
+            'func_tercerizado_s' => [
+                'label' => 'Em caso positivo, especifique quantos',
+                'type' => 'int',
+                'validations' => [
+                    'v::intVal()' => 'O número de funcionários deve ser um número inteiro'
+                ]
+            ],
+            'func_voluntario' => [
+                'label' => 'O museu possui voluntários?',
+                'type' => 'select',
+                'options' => [
+                    's' => 'Sim',
+                    'n' => 'Não'
+                ]
+            ],
+            'func_estagiario' => [
+                'label' => 'O museu possui estagiários?',
+                'type' => 'select',
+                'options' => [
+                    's' => 'Sim',
+                    'n' => 'Não'
+                ]
+            ],
+            'instr_documento' => [
+                'label' => 'Indique os instrumentos de documentação de acervo utilizados pelo Museu',
+                'type' => 'multiselect',
+                'allowOther' => true,
+                'allowOtherText' => 'Outro(s)',
+                'options' => [
+                    'Livro de registro/tombo/inventário manuscritos',
+                    'Listagem digital (Word, Excel...)',
+                    'Ficha de catalogação',
+                    'Software/sistemas de catalogação informatizado'
+                ]
+            ],
+            'instr_documento_n' => [
+                'label' => 'Caso o Museu não realize nenhuma ação de documentação de seu acervo, justifique',
+                'type' => 'text'
+            ]
         ];
     }
 
