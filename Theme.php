@@ -65,7 +65,7 @@ Descubra o Brasil por meio dos seus museus!<br>
         );
     }
 
-    protected function _init() {
+    public function _init() {
         $app = App::i();
 
         /*
