@@ -74,7 +74,10 @@ Descubra o Brasil por meio dos seus museus!<br>
          * @see protectec/application/conf/space-types.php
          */
         $app->hook('API.<<*>>(space).query', function(&$data, &$select_properties, &$dql_joins, &$dql_where) use ($app) {
-            $dql_where .= ' AND e._type >= 60 AND e._type <= 69 AND  e._ownerId = ' . $app->config['museus.ownerAgentId'];
+            $dql_where .= ' AND e._type >= 60 AND e._type <= 69';
+
+            if($app->view->controller->id !== 'panel')
+                $dql_where .=' AND  e._ownerId = ' . $app->config['museus.ownerAgentId'];
         });
 
         parent::_init();
@@ -192,10 +195,10 @@ Descubra o Brasil por meio dos seus museus!<br>
             $this->json(true);
         });
 
-        $app->hook('template(space.single.header-image):after', function(){
-            $this->enqueueScript('app', 'botao-meu-museu', 'js/botao-meu-museu.js');
-            $this->part('botao-meu-museu', ['entity' => $this->data->entity]);
-        });
+        // $app->hook('template(space.single.header-image):after', function(){
+        //     $this->enqueueScript('app', 'botao-meu-museu', 'js/botao-meu-museu.js');
+        //     $this->part('botao-meu-museu', ['entity' => $this->data->entity]);
+        // });
 
         $app->hook('view.render(space/<<*>>):before', function(){
             $this->addTaxonoyTermsToJs('mus_area');
