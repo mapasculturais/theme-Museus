@@ -4,6 +4,7 @@ namespace MapasMuseus;
 
 use BaseMinc;
 use MapasCulturais\App;
+use MapasCulturais\Definitions;
 
 class Theme extends BaseMinc\Theme {
 
@@ -794,6 +795,15 @@ Descubra o Brasil por meio dos seus museus!<br>
         $taxo_def = new \MapasCulturais\Definitions\Taxonomy(101, 'mus_area', 'Tipologia de Acervo', $terms, false, true);
 
         $app->registerTaxonomy('MapasCulturais\Entities\Space', $taxo_def);
+
+
+        $add_project_types = [
+            120 => 'Inscrições',
+            121 => 'Pesquisa',
+            122 => 'Consulta'
+        ];
+        foreach($add_project_types as $k => $v)
+            $app->registerEntityType(new Definitions\EntityType('MapasCulturais\Entities\Project', $k, $v));
     }
 
 
