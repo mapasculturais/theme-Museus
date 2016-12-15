@@ -114,7 +114,7 @@ $button = "";
             <div class="activity clearfix">
                 <p>
                     <span class="small">Em <?php echo $notification->createTimestamp->format('d/m/Y - H:i') ?></span><br/>
-                    <?php echo $msg; ?>
+                    <?php echo $notification->message; ?>
                 </p>
                 <?php if ($notification->request): ?>
                     <div>
