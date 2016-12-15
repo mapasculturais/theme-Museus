@@ -211,9 +211,9 @@ Descubra o Brasil por meio dos seus museus!<br>
         });
         */
 
-        $app->hook('view.render(<<*>>):before', function() use ($app) {
-            $app->view->enqueueScript('app', 'agenda-single', 'js/analytics.js', array('mapasculturais'));
-        });
+        // $app->hook('view.render(<<*>>):before', function() use ($app) {
+        //     $app->view->enqueueScript('app', 'agenda-single', 'js/analytics.js', array('mapasculturais'));
+        // });
     }
 
     static function getThemeFolder() {
