@@ -17,15 +17,16 @@ $show_tipologia = $this->isEditable() ||
             <p class="esfera"><span class="label">Esfera: </span><span class="js-editable" data-edit="esfera" data-original-title="Esfera"><?php echo $entity->esfera; ?></span></p>
         <?php endif; ?>
 
+        <?php if($this->isEditable() || $entity->esfera_tipo): ?>
+            <p class="esfera"><span class="label">Tipo de Esfera: </span><span class="js-editable" data-edit="esfera_tipo" data-original-title="Tipo de Esfera"><?php echo $entity->esfera_tipo; ?></span></p>
+        <?php endif; ?>
+
         <?php if($this->isEditable() || $entity->mus_esfera_tipo_federal): ?>
             <p>
                 <span class="label">Em caso de Museu federal, especifique vinculação ministerial:</span> <?php if ($this->isEditable()){ ?><em>Somente para Esfera Federal</em><br><?php } ?><span class="js-editable" data-edit="mus_esfera_tipo_federal" data-original-title="Em caso de Museu federal, especifique vinculação ministerial"><?php echo $entity->mus_esfera_tipo_federal; ?></span>
             </p>
         <?php endif; ?>
 
-        <?php if($this->isEditable() || $entity->esfera_tipo): ?>
-            <p class="esfera"><span class="label">Tipo de Esfera: </span><span class="js-editable" data-edit="esfera_tipo" data-original-title="Tipo de Esfera"><?php echo $entity->esfera_tipo; ?></span></p>
-        <?php endif; ?>
 
         <?php if($this->isEditable() || $entity->certificado): ?>
             <p class="esfera"><span class="label">Títulos e Certificados: </span><span class="js-editable" data-edit="certificado" data-original-title="Títulos e Certificados"><?php echo $entity->certificado; ?></span></p>

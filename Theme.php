@@ -411,6 +411,14 @@ Descubra o Brasil por meio dos seus museus!<br>
                 'type' => 'select',
                 'options' => [ 'sim', 'não']
             ],
+            'servicos_visitaGuiada_s' => [
+                'label' => 'Em caso positivo, especifique',
+                'type' => 'select',
+                'options' => [
+                    'SOMENTE mediante agendamento',
+                    'Sem necessidade de agendamento'
+                ]
+            ],
             'servicos_atendimentoEstrangeiros' => [
                 'label' => 'Atendimento em outros idiomas',
                 'multiselect',

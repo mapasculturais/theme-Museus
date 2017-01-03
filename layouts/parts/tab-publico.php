@@ -154,6 +154,15 @@ $show_instalacoes = $this->isEditable() ||
         </p>
         <?php endif; ?>
 
+        <?php if($this->isEditable() || $entity->mus_servicos_visitaGuiada_s): ?>
+        <p>
+            <span class="label">Em caso positivo, especifique:</span>
+            <span class="js-editable" data-edit="mus_servicos_visitaGuiada_s" data-original-title="Em caso positivo, especifique" data-emptytext="Selecione">
+                <?php echo $entity->mus_servicos_visitaGuiada_s; ?>
+            </span>
+        </p>
+        <?php endif; ?>
+
         <?php if($this->isEditable() || $entity->mus_atividade_pub_especif || $entity->mus_atividade_pub_especif_s): ?>
             <h5>Atividades educativas e culturais</h5>
         <?php endif; ?>
