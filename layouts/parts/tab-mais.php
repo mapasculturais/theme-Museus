@@ -19,7 +19,7 @@ $show_tipologia = $this->isEditable() ||
 
         <?php if($this->isEditable() || $entity->mus_esfera_tipo_federal): ?>
             <p>
-                <span class="label">Agricultura, Pecuária e Abastecimento: </span> <?php if ($this->isEditable()){ ?><em>Somente para Esfera Federal</em><?php } ?><span class="js-editable" data-edit="mus_esfera_tipo_federal" data-original-title="Agricultura, Pecuária e Abastecimento"><?php echo $entity->mus_esfera_tipo_federal; ?></span>
+                <span class="label">Em caso de Museu federal, especifique vinculação ministerial:</span> <?php if ($this->isEditable()){ ?><em>Somente para Esfera Federal</em><br><?php } ?><span class="js-editable" data-edit="mus_esfera_tipo_federal" data-original-title="Em caso de Museu federal, especifique vinculação ministerial"><?php echo $entity->mus_esfera_tipo_federal; ?></span>
             </p>
         <?php endif; ?>
 
@@ -211,9 +211,7 @@ $show_tipologia = $this->isEditable() ||
             <p class="privado">
                 <span class="icon icon-private-info"></span>
                 <span class="label">Indique os instrumentos de documentação de acervo utilizados pelo Museu</span>
-                <span class="js-editable" data-edit="mus_instr_documento" data-original-title="Indique os instrumentos de documentação de acervo utilizados pelo Museu" data-emptytext="Selecione">
-                    <?php echo $entity->mus_instr_documento; ?>
-                </span>
+                <editable-multiselect entity-property="mus_instr_documento" empty-label="Selecione" allow-other="true" box-title="Indique os instrumentos de documentação de acervo utilizados pelo Museu:"></editable-multiselect>
             </p>
 
             <p class="privado">
@@ -226,8 +224,8 @@ $show_tipologia = $this->isEditable() ||
 
             <p class="privado">
                 <span class="icon icon-private-info"></span>
-                <span class="label">Indique os instrumentos de documentação de acervo utilizados pelo Museu</span>
-                <span class="js-editable" data-edit="mus_gestao_politicaAquisicao" data-oIndique os instrumentos de documentação de acervo utilizados pelo Museude acervo?" data-emptytext="Selecione">
+                <span class="label">O museu possui política de aquisição de acervo?</span>
+                <span class="js-editable" data-edit="mus_gestao_politicaAquisicao" data-original-title="O museu possui política de aquisição de acervo?" data-emptytext="Selecione">
                     <?php echo $entity->mus_gestao_politicaAquisicao; ?>
                 </span>
             </p>

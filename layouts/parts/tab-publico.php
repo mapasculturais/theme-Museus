@@ -168,7 +168,7 @@ $show_instalacoes = $this->isEditable() ||
         <?php if($this->isEditable() || $entity->mus_atividade_pub_especif_s): ?>
             <p>
                 <span class="label">Em caso positivo, especifique: escolha a(s) que mais se adeque(m)</span>
-                <span class="js-editable" data-edit="mus_atividade_pub_especif_s" data-original-title="Em caso positivo, especifique: escolha a(s) que mais se adeque(m)" data-emptytext="Selecione"><?php echo $entity->mus_atividade_pub_especif_s; ?></span>
+                <editable-multiselect entity-property="mus_atividade_pub_especif_s" empty-label="Selecione" allow-other="true" box-title="Em caso positivo, especifique: escolha a(s) que mais se adeque(m):"></editable-multiselect>
             </p>
         <?php endif; ?>
     </div>

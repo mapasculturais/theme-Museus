@@ -149,8 +149,8 @@ Descubra o Brasil por meio dos seus museus!<br>
         $app->hook('template(space.<<*>>.num-sniic):before', function(){
             $entity = $this->data->entity;
 
-            if($this->isEditable() && $entity->mus_cod){
-                echo "<small><span class='icon icon-private-info'></span><span class='label'>Código:</span> {$entity->mus_cod}</small>";
+            if($entity->mus_cod){
+                echo "<small><span class='label'>Código:</span> {$entity->mus_cod}</small>";
             }
         });
 
@@ -639,11 +639,12 @@ Descubra o Brasil por meio dos seus museus!<br>
                 ]
             ],
             'esfera_tipo_federal' => [
-                'label' => 'Agricultura, Pecuária e Abastecimento',
+                'label' => 'Em caso de Museu federal, especifique vinculação ministerial',
                 'type' => 'select',
                 'allowOther' => true,
                 'allowOtherText' => 'Outro',
                 'options' => [
+                    'Agricultura, Pecuária e Abastecimento',
                     'Cidades',
                     'Ciência, Tecnologia, Inovação e Comunicações',
                     'Cultura',
