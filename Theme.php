@@ -149,9 +149,10 @@ Descubra o Brasil por meio dos seus museus!<br>
         $app->hook('template(space.<<*>>.num-sniic):before', function(){
             $entity = $this->data->entity;
 
-            if($entity->mus_cod){
+            if($entity->mus_cod)
                 echo "<small><span class='label'>Código:</span> {$entity->mus_cod}</small>";
-            }
+            else
+                echo "<small><span class=\"label\">Código: </span><span>Preencha os campos obrigatorios e clique em salvar para gerar</span></small>";
         });
 
         $app->hook('template(space.<<create|edit|single>>.tabs):end', function(){
