@@ -874,74 +874,71 @@ Descubra o Brasil por meio dos seus museus!<br>
     }
 
     protected function _getFilters(){
-          return [
-              'space' => [
-                    [
-                        'fieldType' => 'checklist',
-                        'label' => 'Estado',
-                        'placeholder' => 'Selecione os Estados',
-                        'filter' => [
-                            'param' => 'En_Estado',
-                            'value' => 'IN({val})'
-                        ],
+          $filters = parent::_getFilters();
+          $filters['space'] = [
+                [
+                    'fieldType' => 'checklist',
+                    'label' => 'Estado',
+                    'placeholder' => 'Selecione os Estados',
+                    'filter' => [
+                        'param' => 'En_Estado',
+                        'value' => 'IN({val})'
                     ],
-                    [
-                        'fieldType' => 'text',
-                        'label' => 'Município',
-                        'isArray' => false,
-                        'placeholder' => 'Pesquisar por Município',
-                        'filter' => [
-                            'param' => 'En_Municipio',
-                            'value' => 'ILIKE(*{val}*)'
-                        ]
+                ],
+                [
+                    'fieldType' => 'text',
+                    'label' => 'Município',
+                    'isArray' => false,
+                    'placeholder' => 'Pesquisar por Município',
+                    'filter' => [
+                        'param' => 'En_Municipio',
+                        'value' => 'ILIKE(*{val}*)'
+                    ]
+                ],
+                [
+                    'label' => 'Tipologia',
+                    'placeholder' => 'Selecione os Tipos',
+                    'filter' => [
+                        'param' => 'mus_tipo',
+                        'value' => 'IN({val})'
                     ],
-                    [
-                        'label' => 'Tipologia',
-                        'placeholder' => 'Selecione os Tipos',
-                        'filter' => [
-                            'param' => 'mus_tipo',
-                            'value' => 'IN({val})'
-                        ],
+                ],
+                [
+                    'label' => 'Temática do museu',
+                    'placeholder' => 'Selecione as Temáticas',
+                    'filter' => [
+                        'param' => 'mus_tipo_tematica',
+                        'value' => 'IN({val})'
                     ],
-                    [
-                        'label' => 'Temática do museu',
-                        'placeholder' => 'Selecione as Temáticas',
-                        'filter' => [
-                            'param' => 'mus_tipo_tematica',
-                            'value' => 'IN({val})'
-                        ],
+                ],
+                [
+                    'isInline' => false,
+                    'label' => 'Situação de funcionamento',
+                    'placeholder' => 'Selecione a Situação de funcionamento',
+                    'filter' => [
+                        'param' => 'mus_status',
+                        'value' => 'IN({val})'
                     ],
-                    [
-                        'isInline' => false,
-                        'label' => 'Situação de funcionamento',
-                        'placeholder' => 'Selecione a Situação de funcionamento',
-                        'filter' => [
-                            'param' => 'mus_status',
-                            'value' => 'IN({val})'
-                        ],
+                ],
+                [
+                    'label' => 'Esfera',
+                    'placeholder' => 'Selecione a esfera',
+                    'isInline' => false,
+                    'filter' => [
+                        'param' => 'esfera',
+                        'value' => 'IN({val})'
                     ],
-                    [
-                        'label' => 'Esfera',
-                        'placeholder' => 'Selecione a esfera',
-                        'isInline' => false,
-                        'filter' => [
-                            'param' => 'esfera',
-                            'value' => 'IN({val})'
-                        ],
-                    ],
-                    [
-                        'isInline' => false,
-                        'label' => 'Tipo de Esfera',
-                        'placeholder' => 'Selecione o tipo da esfera',
-                        'filter' => [
-                            'param' => 'esfera_tipo',
-                            'value' => 'IN({val})'
-                        ]
-                    ],
-              ],
-              'agent' => [],
-              'event' => [],
-              'project' => []
+                ],
+                [
+                    'isInline' => false,
+                    'label' => 'Tipo de Esfera',
+                    'placeholder' => 'Selecione o tipo da esfera',
+                    'filter' => [
+                        'param' => 'esfera_tipo',
+                        'value' => 'IN({val})'
+                    ]
+                ]
           ];
+          return $filters;
       }
 }
