@@ -14,3 +14,4 @@ Para contato sobre dúvidas, sugestões, por favor, utilize o endereço cnm@muse
 
 <img class="sobre-logo-prefeitura alignleft" src="/assets/museus/img/instituto-tim-white.png" alt="Insituto TIM" />
 <img class="sobre-logo-prefeitura alignleft" src="/assets/museus/img/logo-site.png" alt="Museusbr" />
+<img class="sobre-logo-prefeitura alignleft" src="/assets/bib/img/minc_logo.png" alt="MinC - Ministério da Cultura" />
