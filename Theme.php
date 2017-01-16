@@ -206,6 +206,10 @@ Descubra o Brasil por meio dos seus museus!<br>
             $this->addTaxonoyTermsToJs('mus_area');
         });
 
+        $app->hook('view.render(<<*>>):before', function() use($app) {
+            $this->assetManager->publishAsset('img/logo-ibram.png');
+        });
+
         /*
         $app->hook('template(space.<<create|edit|single>>.acessibilidade):after', function(){
             $this->part('acessibilidade', ['entity' => $this->data->entity]);
