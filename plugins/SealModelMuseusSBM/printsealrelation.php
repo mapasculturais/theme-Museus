@@ -1,5 +1,5 @@
-<div id="certificate-model-museus">
-    <img class ="background" src="<?php $view->asset('img/modelo_certificado_museus.jpg') ?>"/>
+<div id="certificate-model-museus-sbm">
+    <img class ="background" src="<?php $view->asset('img/modelo_certificado_museus_sbm.jpg') ?>"/>
     <p class="certificate-content"><?php echo nl2br($msg) ?></p>
     <div class="footer">
         <div class="entity-url">

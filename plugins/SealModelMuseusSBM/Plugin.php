@@ -14,7 +14,7 @@ class Plugin extends SealModelTab\SealModelTemplatePlugin
             'name' => 'SealModelMuseusSBM',
             'css' => 'model-tab-museus-sbm.css',
             'background' => 'modelo_certificado_museus_sbm.jpg',
-            'preview' => 'preview-model-museus.png'
+            'preview' => 'preview-model-museus-sbm.png'
         ];
     }
 }
