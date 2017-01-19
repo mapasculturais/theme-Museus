@@ -19,12 +19,12 @@
       font-size: 22px;
       font-style: italic; }
   #certificate-model-museus .footer {
-    width: 100%; }
+    width: 100%;
+    text-align: right; }
     #certificate-model-museus .footer .entity-url {
-      margin-left: 160px;
-      margin-top: 95px;
-      width: 240px;
-      font-size: 13px;
+      margin-right: 60px;
+      margin-top: 105px;
+      font-size: 12px;
       overflow: visible; }
     #certificate-model-museus .footer .footer-signatures {
       width: 730px;
