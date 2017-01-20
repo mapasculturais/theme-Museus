@@ -73,3 +73,19 @@ ul.abas{
         display: block !important;
     }
 }
+
+.sobre-logo-prefeitura {
+    @media screen and (min-width: $screen-xs) {
+        max-height: 50px;
+        margin-top: 15px;
+    }
+    @media screen and (min-width: $screen-sm) {
+        max-height: 50px;
+        margin-top: 20px;
+    }
+     @media screen and (min-width: $screen-md) {
+        max-height: 42px;
+    }
+
+
+}
