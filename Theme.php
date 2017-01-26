@@ -74,11 +74,10 @@ Descubra o Brasil por meio dos seus museus!<br>
          *
          * @see protectec/application/conf/space-types.php
          */
-        $app->hook('API.<<*>>(space).query', function(&$data, &$select_properties, &$dql_joins, &$dql_where) use ($app) {
-            $dql_where .= ' AND e._type >= 60 AND e._type <= 69';
-
+        $app->hook('API.<<*>>(space).params', function(&$api_params) use ($app) {
+            $api_params['type'] = 'BET(60,69)';
             if($app->view->controller->id !== 'panel')
-                $dql_where .=' AND  e._ownerId = ' . $app->config['museus.ownerAgentId'];
+                $api_params['owner'] = 'EQ('.$app->config['museus.ownerAgentId'].')';
         });
 
         parent::_init();
