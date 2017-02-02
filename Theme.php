@@ -842,7 +842,7 @@ Descubra o Brasil por meio dos seus museus!<br>
             $entities = $controller->apiQueryByLocation(array(
                 '@from' => date('Y-m-d'),
                 '@to' => date('Y-m-d', time() + 28 * 24 * 3600),
-                'isVerified' => 'EQ(true)',
+                '@verified' => 'IN(1)',
                 '@select' => 'id'
             ));
 
@@ -855,7 +855,7 @@ Descubra o Brasil por meio dos seus museus!<br>
 
             $entities = $controller->apiQuery([
                 '@select' => 'id',
-                'isVerified' => 'EQ(true)'
+                '@verified' => 'IN(1)',
             ]);
         }
 
