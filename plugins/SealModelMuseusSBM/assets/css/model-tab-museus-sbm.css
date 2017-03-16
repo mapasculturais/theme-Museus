@@ -5,7 +5,7 @@
   height: 100%;
   overflow: hidden;
   margin: auto; }
-  #certificate-model-museus-sbm img.background {
+  #certificate-model-museus-sbm img.cert-background {
     position: absolute;
     z-index: -1;
     width: 1250px; }
