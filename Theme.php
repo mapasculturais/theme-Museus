@@ -209,6 +209,10 @@ Descubra o Brasil por meio dos seus museus!<br>
             $this->assetManager->publishAsset('img/logo-ibram.png');
         });
 
+        $app->hook('template(panel.<<*>>.highlighted-message):end', function() use($app){
+            $this->part( 'panel/highlighted-message--numsniic');
+        });
+
         /*
         $app->hook('template(space.<<create|edit|single>>.acessibilidade):after', function(){
             $this->part('acessibilidade', ['entity' => $this->data->entity]);
