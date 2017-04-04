@@ -76,8 +76,8 @@ Descubra o Brasil por meio dos seus museus!<br>
          */
         $app->hook('API.<<*>>(space).params', function(&$api_params) use ($app) {
             $api_params['type'] = 'BET(60,69)';
-            if($app->view->controller->id !== 'panel')
-                $api_params['owner'] = 'EQ('.$app->config['museus.ownerAgentId'].')';
+            // if($app->view->controller->id !== 'panel')
+            //     $api_params['owner'] = 'EQ('.$app->config['museus.ownerAgentId'].')';
         });
 
         parent::_init();
@@ -889,16 +889,6 @@ Descubra o Brasil por meio dos seus museus!<br>
                     ],
                 ],
                 [
-                    'fieldType' => 'text',
-                    'label' => 'Município',
-                    'isArray' => false,
-                    'placeholder' => 'Pesquisar por Município',
-                    'filter' => [
-                        'param' => 'En_Municipio',
-                        'value' => 'ILIKE(*{val}*)'
-                    ]
-                ],
-                [
                     'label' => 'Tipologia',
                     'placeholder' => 'Selecione os Tipos',
                     'filter' => [
@@ -913,6 +903,29 @@ Descubra o Brasil por meio dos seus museus!<br>
                         'param' => 'mus_tipo_tematica',
                         'value' => 'IN({val})'
                     ],
+                ],
+                'verificados' => [
+                    'label' => $this->dict('search: verified results', false),
+                    'tag' => $this->dict('search: verified', false),
+                    'placeholder' => 'Exibir somente ' . $this->dict('search: verified results', false),
+                    'fieldType' => 'checkbox-verified',
+                    'addClass' => 'verified-filter',
+                    'isArray' => false,
+                    'filter' => [
+                        'param' => '@verified',
+                        'value' => 'IN(1)'
+                    ]
+                ],
+                [
+                    'fieldType' => 'text',
+                    'label' => 'Município',
+                    'isArray' => false,
+                    'placeholder' => 'Pesquisar por Município',
+                    'isInline' => false,
+                    'filter' => [
+                        'param' => 'En_Municipio',
+                        'value' => 'ILIKE(*{val}*)'
+                    ]
                 ],
                 [
                     'isInline' => false,
