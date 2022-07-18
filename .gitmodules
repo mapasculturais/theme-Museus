@@ -1,9 +1,6 @@
 [submodule "plugins/MultipleLocalAuth"]
 	path = plugins/MultipleLocalAuth
 	url = https://github.com/mapasculturais/plugin-MultipleLocalAuth
-[submodule "themes/BaseMinc"]
-	path = themes/BaseMinc
-	url = git@github.com:hacklabr/mapasculturais-baseminc.git
 [submodule "themes/MapasMuseus"]
 	path = themes/MapasMuseus
 	url = git@github.com:medialab-ufg/mapasculturais-museus.git
@@ -13,3 +10,6 @@
 [submodule "plugins/LocationPatch"]
 	path = plugins/LocationPatch
 	url = git@github.com:mapasculturais/plugin-LocationPatch.git
+[submodule "plugins/MapasBlame"]
+	path = plugins/MapasBlame
+	url = git@github.com:mapasculturais/plugin-MapasBlame.git

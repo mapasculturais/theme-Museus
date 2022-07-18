@@ -16,5 +16,6 @@ return [
                 "cutoff" => env("LOCATION_PATCH_CUTOFF", "19800101000001"),
             ],
         ],
+        'MapasBlame' => ['namespace' => 'MapasBlame'],
     ]
 ];
