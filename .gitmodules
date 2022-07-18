@@ -10,3 +10,6 @@
 [submodule "plugins/Fva"]
 	path = plugins/Fva
 	url = git@github.com:medialab-ufg/museus-fva.git
+[submodule "plugins/LocationPatch"]
+	path = plugins/LocationPatch
+	url = git@github.com:mapasculturais/plugin-LocationPatch.git
