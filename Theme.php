@@ -17,52 +17,6 @@ class Theme extends BaseV1\Theme{
             'site: by the site owner' => 'pelo Ministério da Cultura',
             'home: abbreviation' => "SNB",
             'home: title' => "Bem-vind@!",
-//            'home: colabore' => "Colabore com o Mapas Culturais",
-//             'home: welcome' => "Bem-vindo ao <strong>Museus BR</strong> - a maior plataforma de informações sobre os museus existentes no Brasil.<br><br>
-
-// Você vai descobrir que nosso país é muito rico e que tem museus para todos os gostos e interesses. Em Museus BR você encontrará Museus de Arte, de História, de Ciências, de Antropologia, Museus Comunitários, Museus de Território, Museus das mais variadas temáticas e muitos outros que você sequer imagina.<br><br>
-
-// Aqui você verificará onde estão localizados os museus do seu estado, do seu município ou de qualquer outro lugar de seu interesse, encontrando os dados de contato e serviços oferecidos como: visitas guiadas, acessibilidade, bibliotecas, arquivos, atendimento a visitantes estrangeiros e muito mais.<br><br>
-
-// Seja qual for a pesquisa, a Plataforma Museus BR permitirá extrair os dados dos museus em formato de planilha, por meio de filtros e cruzamentos. <br><br>
-
-// Como a Plataforma é colaborativa, você também pode participar, indicando um museu que você conheça e que ainda não faça parte da Museus BR, ou atualizando alguma informação. Basta seguir os passos na seção Como Participar. <br><br>
-
-// Aventure-se!<br>
-// Participe!<br>
-// Descubra o Brasil por meio dos seus museus!<br>
-
-// <p style='text-align:right'>Rede Nacional de Identificação de Museus</p>",
-// //            'home: events' => "Você pode pesquisar eventos culturais nos campos de busca combinada. Como usuário cadastrado, você pode incluir seus eventos na plataforma e divulgá-los gratuitamente.",
-// //            'home: agents' => "Você pode colaborar na gestão da cultura com suas próprias informações, preenchendo seu perfil de agente cultural. Neste espaço, estão registrados artistas, gestores e produtores; uma rede de atores envolvidos na cena cultural paulistana. Você pode cadastrar um ou mais agentes (grupos, coletivos, bandas instituições, empresas, etc.), além de associar ao seu perfil eventos e espaços culturais com divulgação gratuita.",
-//             'home: spaces' => "Procure os museus incluídos na plataforma, acessando os campos de busca combinado que ajudam na precisão de sua pesqusia.",
-// //            'home: projects' => "Reúne projetos culturais ou agrupa eventos de todos os tipos. Neste espaço, você encontra leis de fomento, mostras, convocatórias e editais criados, além de diversas iniciativas cadastradas pelos usuários da plataforma. Cadastre-se e divulgue seus projetos.",
-// //            'home: home_devs' => 'Existem algumas maneiras de desenvolvedores interagirem com o Mapas Culturais. A primeira é através da nossa <a href="https://github.com/hacklabr/mapasculturais/blob/master/doc/api.md" target="_blank">API</a>. Com ela você pode acessar os dados públicos no nosso banco de dados e utilizá-los para desenvolver aplicações externas. Além disso, o Mapas Culturais é construído a partir do sofware livre <a href="http://institutotim.org.br/project/mapas-culturais/" target="_blank">Mapas Culturais</a>, criado em parceria com o <a href="http://institutotim.org.br" target="_blank">Instituto TIM</a>, e você pode contribuir para o seu desenvolvimento através do <a href="https://github.com/hacklabr/mapasculturais/" target="_blank">GitHub</a>.',
-// //
-// //            'search: verified results' => 'Resultados Verificados',
-// //            'search: verified' => "Verificado
-
-
-//             'entities: Spaces of the agent'=> 'Museus do agente',
-//             'entities: Space Description'=> 'Descrição do Museu',
-//             'entities: My Spaces'=> 'Meus Museus',
-//             'entities: My spaces'=> 'Meus museus',
-
-//             'entities: no registered spaces'=> 'nenhum museu cadastrado',
-//             'entities: no spaces'=> 'nenhum museu',
-
-//             'entities: Space' => 'Museu',
-//             'entities: Spaces' => 'Museus',
-//             'entities: space' => 'museu',
-//             'entities: spaces' => 'museus',
-//             'entities: parent space' => 'museu matriz',
-//             'entities: a space' => 'um museu',
-//             'entities: the space' => 'o museu',
-//             'entities: of the space' => 'do museu',
-//             'entities: In this space' => 'Neste museu',
-//             'entities: in this space' => 'neste museu',
-//             'entities: registered spaces' => 'Museus Identificados',
-//             'entities: new space' => 'novo museu',
         );
     }
 
@@ -76,8 +30,6 @@ class Theme extends BaseV1\Theme{
          */
         $app->hook('API.<<*>>(space).params', function(&$api_params) use ($app) {
             $api_params['type'] = 'BET(60,69)';
-            // if($app->view->controller->id !== 'panel')
-            //     $api_params['owner'] = 'EQ('.$app->config['museus.ownerAgentId'].')';
         });
 
         parent::_init();
@@ -196,11 +148,6 @@ class Theme extends BaseV1\Theme{
             $this->json(true);
         });
 
-        // $app->hook('template(space.single.header-image):after', function(){
-        //     $this->enqueueScript('app', 'botao-meu-museu', 'js/botao-meu-museu.js');
-        //     $this->part('botao-meu-museu', ['entity' => $this->data->entity]);
-        // });
-
         $app->hook('view.render(space/<<*>>):before', function(){
             $this->addTaxonoyTermsToJs('mus_area');
         });
@@ -212,16 +159,6 @@ class Theme extends BaseV1\Theme{
         $app->hook('template(panel.<<*>>.highlighted-message):end', function() use($app){
             $this->part( 'panel/highlighted-message--numsniic');
         });
-
-        /*
-        $app->hook('template(space.<<create|edit|single>>.acessibilidade):after', function(){
-            $this->part('acessibilidade', ['entity' => $this->data->entity]);
-        });
-        */
-
-        // $app->hook('view.render(<<*>>):before', function() use ($app) {
-        //     $app->view->enqueueScript('app', 'agenda-single', 'js/analytics.js', array('mapasculturais'));
-        // });
     }
 
     static function getThemeFolder() {
