@@ -2,11 +2,11 @@
 
 namespace MapasMuseus;
 
-use BaseMinc;
 use MapasCulturais\App;
 use MapasCulturais\Definitions;
+use MapasCulturais\Themes\BaseV1;
 
-class Theme extends BaseMinc\Theme {
+class Theme extends BaseV1\Theme{
 
     protected static function _getTexts() {
         return array(
