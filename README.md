@@ -1,1 +1,1 @@
-# Tema para o Cadastro Nacional de Museus
+# Tema para o Cadastro Estatual de Museus
