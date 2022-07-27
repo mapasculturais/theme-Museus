@@ -7,9 +7,6 @@
         $scope.editBox = EditBox;
         
         var types = MapasCulturais.agentTypes;
-        var n1 = MapasCulturais.entity.tipologia_nivel1;
-        var n2 = MapasCulturais.entity.tipologia_nivel2;
-        var n3 = MapasCulturais.entity.tipologia_nivel3;
         
         types.__values = Object.keys(types);
         types.__values.forEach(function(val){
@@ -44,12 +41,6 @@
                 $scope.data._valores_nivel3 = types[$scope.data._tipo1][$scope.data._tipo2];
                 $scope.data._tipo3 = '';
             }
-        };
-        
-        var setEditables = function(){
-            $('#tipologia_nivel1').first().editable('setValue', $scope.data.tipologia1);
-            $('#tipologia_nivel2').first().editable('setValue', $scope.data.tipologia2);
-            $('#tipologia_nivel3').first().editable('setValue', $scope.data.tipologia3);  
         };
         
         setEditables();

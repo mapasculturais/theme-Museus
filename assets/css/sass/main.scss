@@ -1,7 +1,7 @@
 // Child theme main
 
 @import "variables";
-@import "../../../../mapasculturais-baseminc/assets/css/sass/main";
+@import "../../../../BaseV1/assets/css/sass/main";
 @import "overrides";
 
 .register-museum {
@@ -24,7 +24,7 @@
 }
 
 body.action-search {
-    @media screen and (max-width: $screen-xs-max) {
+    @media screen and (max-width: 1024) {
         .register-museum {
             display: none;
         }

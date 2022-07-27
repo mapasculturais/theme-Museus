@@ -867,23 +867,7 @@ class Theme extends BaseV1\Theme{
                 'num_sniic' => [
                     'label' => 'Nº SNIIC:',
                     'private' => false
-                ],
-
-                'tipologia_nivel1' => [
-                    'label' => 'Tipologia Nível 1',
-                    'private' => false
-                ],
-                'tipologia_nivel2' => [
-                    'label' => 'Tipologia Nível 2',
-                    'private' => false
-                ],
-                'tipologia_nivel3' => [
-                    'label' => 'Tipologia Nível 3',
-                    'private' => false,
-                    'validations' => [
-                        'required' => 'A tipologia deve ser informada.'
-                    ]
-                ],
+                ]
             ]
         ];
                     
