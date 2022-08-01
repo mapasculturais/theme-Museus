@@ -4,9 +4,19 @@ namespace MapasMuseus;
 
 use MapasCulturais\App;
 use MapasCulturais\Definitions;
-use MapasCulturais\Themes\BaseV1;
+use MapasCulturais\i;
 
 class Theme extends \Subsite\Theme{
+
+    static function _dict() {
+        $dict = parent::_dict();
+
+        foreach($dict as $key => $dic){
+            $dict[$key]['text'] = str_replace(["espaços culturais", "Espaços culturais", "Espaços", "espaços", "Espaço", "espaço",], [i::__('museus'), i::__('Museus'), i::__('Museus'), i::__('museus'), i::__('Museu'), i::__('museu')], $dic['text']);
+        }
+        
+        return $dict;
+    }
 
 
     public function _init() {
