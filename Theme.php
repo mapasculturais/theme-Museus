@@ -8,17 +8,6 @@ use MapasCulturais\Themes\BaseV1;
 
 class Theme extends \Subsite\Theme{
 
-    protected static function _getTexts() {
-        return array(
-            'site: name' => 'Museus',
-            'site: in the region' => 'SNB',
-            'site: of the region' => 'SNB',
-            'site: owner' => 'SNB',
-            'site: by the site owner' => 'pelo Ministério da Cultura',
-            'home: abbreviation' => "SNB",
-            'home: title' => "Bem-vind@!",
-        );
-    }
 
     public function _init() {
         $app = App::i();
