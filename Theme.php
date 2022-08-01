@@ -6,7 +6,7 @@ use MapasCulturais\App;
 use MapasCulturais\Definitions;
 use MapasCulturais\Themes\BaseV1;
 
-class Theme extends BaseV1\Theme{
+class Theme extends \Subsite\Theme{
 
     protected static function _getTexts() {
         return array(
