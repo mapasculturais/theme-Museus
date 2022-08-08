@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'app.enabled.agents'            => false,
+    'app.enabled.agents'            => true,
     'app.enabled.projects'          => true,
     'app.enabled.events'            => true,
     'app.enabled.apps'              => false,
