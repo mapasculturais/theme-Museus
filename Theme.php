@@ -158,14 +158,7 @@ class Theme extends \Subsite\Theme{
         $app->hook('template(panel.<<*>>.highlighted-message):end', function() use($app){
             $this->part( 'panel/highlighted-message--numsniic');
         });
-
-        $app->hook('entity(<<Agent|Space|Event|Project>>).save:after', function() use ($app){
-            if(!$this->getValidationErrors()){
-                $num = strtoupper(substr($this->entityType, 0, 2)) . '-' . $this->id;
-                $this->num_sniic = $num;
-            }
-        });
-        
+      
         $app->hook('view.render(<<*>>):before', function() use($app) {
             $this->jsObject['angularAppDependencies'][] = 'entity.controller.agentTypes';
         });
