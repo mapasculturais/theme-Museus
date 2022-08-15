@@ -984,15 +984,6 @@ class Theme extends \Subsite\Theme{
           $filters = parent::_getFilters();
           $filters['space'] = [
                 [
-                    'fieldType' => 'checklist',
-                    'label' => 'Estado',
-                    'placeholder' => 'Selecione os Estados',
-                    'filter' => [
-                        'param' => 'En_Estado',
-                        'value' => 'IN({val})'
-                    ],
-                ],
-                [
                     'label' => 'Tipologia',
                     'placeholder' => 'Selecione os Tipos',
                     'filter' => [
