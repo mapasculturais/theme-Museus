@@ -158,14 +158,7 @@ class Theme extends \Subsite\Theme{
         $app->hook('template(panel.<<*>>.highlighted-message):end', function() use($app){
             $this->part( 'panel/highlighted-message--numsniic');
         });
-
-        $app->hook('entity(<<Agent|Space|Event|Project>>).save:after', function() use ($app){
-            if(!$this->getValidationErrors()){
-                $num = strtoupper(substr($this->entityType, 0, 2)) . '-' . $this->id;
-                $this->num_sniic = $num;
-            }
-        });
-        
+      
         $app->hook('view.render(<<*>>):before', function() use($app) {
             $this->jsObject['angularAppDependencies'][] = 'entity.controller.agentTypes';
         });
@@ -990,15 +983,6 @@ class Theme extends \Subsite\Theme{
     protected function _getFilters(){
           $filters = parent::_getFilters();
           $filters['space'] = [
-                [
-                    'fieldType' => 'checklist',
-                    'label' => 'Estado',
-                    'placeholder' => 'Selecione os Estados',
-                    'filter' => [
-                        'param' => 'En_Estado',
-                        'value' => 'IN({val})'
-                    ],
-                ],
                 [
                     'label' => 'Tipologia',
                     'placeholder' => 'Selecione os Tipos',
