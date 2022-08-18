@@ -10,5 +10,6 @@ return [
     // 'notifications.entities.update' => 1825,
     'notifications.entities.update' => 0,
     'notifications.user.access'     => 182,
-    'notifications.seal.toExpire'   => 0
+    'notifications.seal.toExpire'   => 0,
+    'busca.lista.municipios' => [],
 ];

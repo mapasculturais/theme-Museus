@@ -33,6 +33,16 @@ class Theme extends \Subsite\Theme{
 
         parent::_init();
 
+        $app->hook('GET(site.search):before', function () use ($app) {
+            if ((count($app->config['busca.lista.municipios']) > 0)) {
+                $metadata = $app->getRegisteredMetadataByMetakey("En_Municipio", "MapasCulturais\\Entities\\Space");
+                $metadata->field_type = "select";
+                $meta_config = $metadata->config;
+
+                $meta_config['options'] = $app->config['busca.lista.municipios'];
+                $metadata->config = $meta_config;
+            }
+        });
 
         $app->hook('entity(<<Space>>).save:after', function() use ($app){
             if(!$this->getValidationErrors() && !$this->mus_cod){
@@ -980,76 +990,96 @@ class Theme extends \Subsite\Theme{
         return $result;
     }
 
-    protected function _getFilters(){
-          $filters = parent::_getFilters();
-          $filters['space'] = [
-                [
-                    'label' => 'Tipologia',
-                    'placeholder' => 'Selecione os Tipos',
-                    'filter' => [
-                        'param' => 'mus_tipo',
-                        'value' => 'IN({val})'
-                    ],
+    protected function _getFilters()
+    {
+        $filters = parent::_getFilters();
+
+        $app = App::i();
+
+
+        $filter_municipio_selext  = [
+            'label' => 'Município',
+            'placeholder' => 'Pesquisar por Município',
+            'filter' => [
+                'param' => 'En_Municipio',
+                'value' => 'LIKE({val})'
+            ]
+        ];
+
+        $fielder_municipio_txt = [
+            'fieldType' => 'text',
+            'label' => 'Município',
+            'isArray' => false,
+            'placeholder' => 'Pesquisar por Município',
+            'isInline' => false,
+            'filter' => [
+                'param' => 'En_Municipio',
+                'value' => 'ILIKE(*{val}*)'
+            ]
+        ];
+
+        $filter_municipio = (count($app->config['busca.lista.municipios']) > 0) ? $filter_municipio_selext : $fielder_municipio_txt;
+
+        $filters['space'] = [
+            $filter_municipio,
+            [
+                'label' => 'Tipologia',
+                'placeholder' => 'Selecione os Tipos',
+                'filter' => [
+                    'param' => 'mus_tipo',
+                    'value' => 'IN({val})'
                 ],
-                [
-                    'label' => 'Temática do museu',
-                    'placeholder' => 'Selecione as Temáticas',
-                    'filter' => [
-                        'param' => 'mus_tipo_tematica',
-                        'value' => 'IN({val})'
-                    ],
+            ],
+            [
+                'label' => 'Temática do museu',
+                'placeholder' => 'Selecione as Temáticas',
+                'filter' => [
+                    'param' => 'mus_tipo_tematica',
+                    'value' => 'IN({val})'
                 ],
-                'verificados' => [
-                    'label' => $this->dict('search: verified results', false),
-                    'tag' => $this->dict('search: verified', false),
-                    'placeholder' => 'Exibir somente ' . $this->dict('search: verified results', false),
-                    'fieldType' => 'checkbox-verified',
-                    'addClass' => 'verified-filter',
-                    'isArray' => false,
-                    'filter' => [
-                        'param' => '@verified',
-                        'value' => 'IN(1)'
-                    ]
-                ],
-                [
-                    'fieldType' => 'text',
-                    'label' => 'Município',
-                    'isArray' => false,
-                    'placeholder' => 'Pesquisar por Município',
-                    'isInline' => false,
-                    'filter' => [
-                        'param' => 'En_Municipio',
-                        'value' => 'ILIKE(*{val}*)'
-                    ]
-                ],
-                [
-                    'isInline' => false,
-                    'label' => 'Situação de funcionamento',
-                    'placeholder' => 'Selecione a Situação de funcionamento',
-                    'filter' => [
-                        'param' => 'mus_status',
-                        'value' => 'IN({val})'
-                    ],
-                ],
-                [
-                    'label' => 'Esfera',
-                    'placeholder' => 'Selecione a esfera',
-                    'isInline' => false,
-                    'filter' => [
-                        'param' => 'esfera',
-                        'value' => 'IN({val})'
-                    ],
-                ],
-                [
-                    'isInline' => false,
-                    'label' => 'Tipo de Esfera',
-                    'placeholder' => 'Selecione o tipo da esfera',
-                    'filter' => [
-                        'param' => 'esfera_tipo',
-                        'value' => 'IN({val})'
-                    ]
+            ],
+            'verificados' => [
+                'label' => $this->dict('search: verified results', false),
+                'tag' => $this->dict('search: verified', false),
+                'placeholder' => 'Exibir somente ' . $this->dict('search: verified results', false),
+                'fieldType' => 'checkbox-verified',
+                'addClass' => 'verified-filter',
+                'isArray' => false,
+                'filter' => [
+                    'param' => '@verified',
+                    'value' => 'IN(1)'
                 ]
-          ];
-          return $filters;
-      }
+            ],
+
+            [
+                'isInline' => false,
+                'label' => 'Situação de funcionamento',
+                'placeholder' => 'Selecione a Situação de funcionamento',
+                'filter' => [
+                    'param' => 'mus_status',
+                    'value' => 'IN({val})'
+                ],
+            ],
+            [
+                'label' => 'Esfera',
+                'placeholder' => 'Selecione a esfera',
+                'isInline' => false,
+                'filter' => [
+                    'param' => 'esfera',
+                    'value' => 'IN({val})'
+                ],
+            ],
+            [
+                'isInline' => false,
+                'label' => 'Tipo de Esfera',
+                'placeholder' => 'Selecione o tipo da esfera',
+                'filter' => [
+                    'param' => 'esfera_tipo',
+                    'value' => 'IN({val})'
+                ]
+            ]
+        ];
+
+        return $filters;
+    }
 }
