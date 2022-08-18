@@ -1002,7 +1002,7 @@ class Theme extends \Subsite\Theme{
             'placeholder' => 'Pesquisar por Município',
             'filter' => [
                 'param' => 'En_Municipio',
-                'value' => 'LIKE({val})'
+                'value' => 'IIN({val})'
             ]
         ];
 
