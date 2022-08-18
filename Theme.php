@@ -769,6 +769,7 @@ class Theme extends \Subsite\Theme{
             ]
         ];
     }
+
     function register() {
         parent::register();
         $app = App::i();
