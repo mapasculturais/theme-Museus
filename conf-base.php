@@ -2,8 +2,8 @@
 
 return [
     'app.enabled.agents'            => true,
-    'app.enabled.projects'          => true,
-    'app.enabled.events'            => true,
+    'app.enabled.projects'          => false,
+    'app.enabled.events'            => false,
     'app.enabled.apps'              => false,
     'app.enabled.seals'             => true,
     'museus.ownerAgentId'           => 11348,

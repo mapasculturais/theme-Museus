@@ -23,8 +23,12 @@
     </span>
 <?php $fake_options = ob_get_clean(); endif; ?>
 
+
+<?php $this->applyTemplateHook('btn-site-nav','begin'); ?>
+
 <nav id="main-nav" class="clearfix">
     <ul class="menu entities-menu clearfix">
+            
         <?php if($app->isEnabled('events')): ?>
             <?php $this->applyTemplateHook('nav.main.events','before'); ?>
             <li id="entities-menu-event" ng-class="{'active':data.global.filterEntity === 'event'}" ng-click="tabClick('event')">
