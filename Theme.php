@@ -44,11 +44,6 @@ class Theme extends \Subsite\Theme{
             }
         });
 
-        $app->hook("template(site.index.btn-site-nav):begin", function() use ($app){
-            $this->part("btn-site-nav", ['url' => $app->config['url.main.site']]);
-        });
-
-        $this->enqueueStyle('app', 'style-museus', 'css/style-museus.css');
 
         $app->hook('entity(<<Space>>).save:after', function() use ($app){
             if(!$this->getValidationErrors() && !$this->mus_cod){
