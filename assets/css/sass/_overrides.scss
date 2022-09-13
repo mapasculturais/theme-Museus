@@ -21,8 +21,12 @@
 // #home-watermark {
 // 	background-position: right bottom;
 // }
-#nav-spaces, #home-spaces {
-    background: rgb(136,153,117);
+#nav-agents, #home-agents {
+    color: black !important;
+    h1, h4, .abas li a{
+        color: black;
+    }
+
 }
 .new-tab{
     background-color:#f8f8f8;

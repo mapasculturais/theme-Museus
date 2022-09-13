@@ -156,7 +156,7 @@ hgroup {
 
 /* Text elements */
 p {
-  margin-bottom: 1.3rem; }
+  margin-bottom: 0px; }
 
 ul {
   list-style: disc;
@@ -1072,7 +1072,7 @@ h6 {
   padding: 0.65rem;
   background: #f5f5f5;
   border-radius: 2px;
-  font-size: 0.875rem;
+  font-size: 0.75rem;
   color: #888; }
   @media screen and (min-width: 768px) {
     .ficha-spcultura {
@@ -1122,8 +1122,72 @@ h6 {
   margin-left: 1.1rem; }
 
 .main-content-header {
+  margin: 0;
   margin-bottom: 2rem;
   position: relative; }
+  .main-content-header .button-position-delete {
+    position: absolute;
+    bottom: -4px;
+    right: 1px; }
+  .main-content-header #header-banner {
+    display: flex; }
+  .main-content-header .container-card {
+    border: 20px solid;
+    border-color: #EEEEEE;
+    border-radius: 5px;
+    padding: 20px; }
+    .main-content-header .container-card .social-card {
+      padding: 0;
+      margin: 0; }
+  .main-content-header .ficha-spcultura .widget {
+    border: none;
+    padding-bottom: 0em;
+    margin-top: 1em;
+    margin-bottom: 0; }
+    .main-content-header .ficha-spcultura .widget .areas .card-event {
+      display: flex;
+      flex-direction: row; }
+    .main-content-header .ficha-spcultura .widget .areas .tags {
+      display: flex; }
+    .main-content-header .ficha-spcultura .widget .areas .h3 {
+      margin-bottom: 0; }
+    .main-content-header .ficha-spcultura .widget .areas > h3 {
+      margin-bottom: 0em !important; }
+  .main-content-header .ficha-spcultura .label p {
+    margin-bottom: 0.65rem;
+    font-size: .70rem;
+    line-height: 1.3rem;
+    font-family: "Open Sans", Helvetica, Arial, sans-serif;
+    font-weight: bold;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: #888; }
+  .main-content-header .ficha-spcultura .label:last-child {
+    padding: 0px;
+    margin: 0; }
+  .main-content-header .ficha-spcultura .site-info {
+    margin: 10px 0; }
+    .main-content-header .ficha-spcultura .site-info .url {
+      color: #888;
+      font-weight: 400; }
+    .main-content-header .ficha-spcultura .site-info p {
+      margin: 0;
+      font-family: "Open Sans", Helvetica, Arial, sans-serif;
+      font-weight: bold;
+      font-size: .75rem;
+      text-transform: uppercase;
+      margin-bottom: 0.65rem;
+      color: #888; }
+    .main-content-header .ficha-spcultura .site-info .js-editable {
+      padding: 0; }
+  .main-content-header .ficha-spcultura .site-description {
+    margin-top: 25px; }
+    .main-content-header .ficha-spcultura .site-description .short-description {
+      margin-top: 10px; }
+    .main-content-header .ficha-spcultura .site-description .short-description :first-child {
+      margin-right: 5px; }
+    .main-content-header .ficha-spcultura .site-description .site span {
+      margin-right: 5px; }
   @media screen and (min-width: 768px) {
     .main-content-header {
       margin-bottom: 3.75rem; } }
@@ -1166,7 +1230,7 @@ h6 {
       margin: -2rem -2rem 2rem; } }
   @media screen and (min-width: 1200px) {
     .header-image {
-      margin: -4rem -4rem 4rem; } }
+      margin: -4rem -4rem 2rem; } }
 
 article.agent .header-image {
   background-color: #1dabc6; }
@@ -1189,11 +1253,34 @@ article.subsite .header-image {
 article.seal .header-image {
   background-color: #cc0033; }
 
+.edit-card {
+  padding: 0 !important; }
+
 .header-content {
   position: relative;
   margin-top: 3.75rem;
   padding-top: 3.75rem;
   text-align: center; }
+  .header-content .widget .card-event {
+    display: inline; }
+  .header-content .edit-card-header {
+    display: flex; }
+    .header-content .edit-card-header .avatar {
+      display: flex;
+      position: relative; }
+    .header-content .edit-card-header-avatar {
+      margin-right: 20px; }
+    .header-content .edit-card-header-widgets {
+      display: flex; }
+    .header-content .edit-card-header-body {
+      width: 100%; }
+    .header-content .edit-card-header .edit-card-header-widgets > div {
+      float: left;
+      width: 50%; }
+    .header-content .edit-card-header .edit-card-header-body h2 {
+      margin: 5px; }
+  .header-content .edit-card-header > p {
+    margin-bottom: 0rem; }
   .header-content .avatar {
     position: absolute;
     left: 50%;
@@ -1232,6 +1319,10 @@ article.seal .header-image {
     color: #b3b921; }
   .header-content .space-type {
     color: #ffa5a5; }
+    .header-content .space-type .editable-input {
+      width: 75%; }
+      .header-content .space-type .editable-input select {
+        width: 100%; }
   .header-content .subsite-type {
     color: #cc0033; }
   .header-content .seal-type {
@@ -3432,12 +3523,11 @@ nav.sidebar-panel ul {
 
 .widget {
   position: relative;
-  margin-bottom: 1.3rem;
   padding-bottom: 1.3rem;
   border-bottom: 1px solid #fff;
   font-size: 0.875rem; }
   .widget > h3 {
-    margin-bottom: 0.65rem;
+    margin-bottom: 0;
     font-size: .70rem;
     line-height: 1.3rem;
     font-family: "Open Sans", Helvetica, Arial, sans-serif;
@@ -3497,12 +3587,6 @@ nav.sidebar-panel ul {
     cursor: pointer; }
   .widget-list a.icon {
     font-size: 1.5rem; }
-
-.areas {
-  padding-bottom: 0em;
-  margin-bottom: 0em; }
-  .areas > h3 {
-    margin-bottom: 0em !important; }
 
 .search-agent {
   position: relative;
@@ -5261,6 +5345,13 @@ h1 .icon {
     .registration-fieldset h4.opportunity-toggle-form {
       margin-bottom: 0 !important;
       cursor: pointer; }
+  .registration-fieldset .evaluationFields > span {
+    margin-bottom: 0.5em;
+    display: block;
+    border-bottom: 1px dotted #eee;
+    padding-bottom: 0.5em; }
+  .registration-fieldset .evaluationFields .evaluation-fields-filter {
+    width: 100%; }
   .registration-fieldset .opportunity-togglable-form-content {
     margin-top: 0.65rem; }
   .registration-fieldset .dropdown {
@@ -6105,10 +6196,14 @@ a.editable-click:hover {
   width: 100%; }
 
 .editable-input input,
-.editable-input select,
 .editable-buttons button {
   margin-bottom: 0;
   display: inline-block; }
+
+.editable-input select {
+  margin-bottom: 0;
+  display: inline-block;
+  max-width: 400px; }
 
 .editable-buttons button.editable-cancel {
   margin-left: 0; }
@@ -6638,8 +6733,10 @@ button.mfp-arrow-left {
   height: 0.5rem;
   margin-top: 0.5rem; }
 
-#nav-spaces, #home-spaces {
-  background: #889975; }
+#nav-agents, #home-agents {
+  color: black !important; }
+  #nav-agents h1, #nav-agents h4, #nav-agents .abas li a, #home-agents h1, #home-agents h4, #home-agents .abas li a {
+    color: black; }
 
 .new-tab {
   background-color: #f8f8f8;
