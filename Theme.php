@@ -44,6 +44,10 @@ class Theme extends \Subsite\Theme{
             }
         });
 
+        $app->hook("view.partial(entity-opportunities--tabs-edit).params", function(&$data, &$template){
+            $template = "_empty";
+        });
+
 
         $app->hook('entity(<<Space>>).save:after', function() use ($app){
             if(!$this->getValidationErrors() && !$this->mus_cod){
