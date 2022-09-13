@@ -174,9 +174,11 @@ class Theme extends \Subsite\Theme{
             $this->jsObject['angularAppDependencies'][] = 'entity.controller.agentTypes';
         });
         
-        $app->hook('template(<<space|agent|project|event>>.<<create|edit|single>>.name):after', function(){
+        $app->hook('template(<<space|agent|project|event>>.<<create|edit|single>>.name):after', function() use ($app){
             $this->enqueueScript('app', 'num-sniic', 'js/num-sniic.js');
-            $this->part('num-sniic', ['entity' => $this->data->entity]);
+            if($app->user->profile->num_sniic){
+                $this->part('num-sniic', ['entity' => $this->data->entity]);
+            }
         });
         
         // BUSCA POR NÚMERO SNIIC
