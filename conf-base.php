@@ -11,7 +11,6 @@ return [
     'notifications.entities.update' => 0,
     'notifications.user.access'     => 182,
     'notifications.seal.toExpire'   => 0,
-    'url.main.site' => 'https://www.mapacultural.pe.gov.br/',
     'busca.lista.municipios' => [
         'Abreu E Lima' => 'Abreu E Lima',
         'Afogados da Ingazeira' => 'Afogados da Ingazeira',

@@ -44,11 +44,10 @@ class Theme extends \Subsite\Theme{
             }
         });
 
-        $app->hook("template(site.index.btn-site-nav):begin", function() use ($app){
-            $this->part("btn-site-nav", ['url' => $app->config['url.main.site']]);
+        $app->hook("view.partial(entity-opportunities--tabs-edit).params", function(&$data, &$template){
+            $template = "_empty";
         });
 
-        $this->enqueueStyle('app', 'style-museus', 'css/style-museus.css');
 
         $app->hook('entity(<<Space>>).save:after', function() use ($app){
             if(!$this->getValidationErrors() && !$this->mus_cod){
@@ -179,9 +178,11 @@ class Theme extends \Subsite\Theme{
             $this->jsObject['angularAppDependencies'][] = 'entity.controller.agentTypes';
         });
         
-        $app->hook('template(<<space|agent|project|event>>.<<create|edit|single>>.name):after', function(){
+        $app->hook('template(<<space|agent|project|event>>.<<create|edit|single>>.name):after', function() use ($app){
             $this->enqueueScript('app', 'num-sniic', 'js/num-sniic.js');
-            $this->part('num-sniic', ['entity' => $this->data->entity]);
+            if($app->user->profile->num_sniic){
+                $this->part('num-sniic', ['entity' => $this->data->entity]);
+            }
         });
         
         // BUSCA POR NÚMERO SNIIC
