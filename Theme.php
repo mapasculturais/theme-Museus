@@ -267,7 +267,57 @@ class Theme extends \Subsite\Theme{
             'instituicaoMantenedora' => [
                 'label' => 'Instituição mantenedora'
             ],
-
+            'outros_cadastros' => [
+                'label' => 'A instituição já possui cadastro',
+                'type' => 'select',
+                'options' => [
+                    '' => 'Não possui',
+                    'Museusbr',
+                    'Cadastro nacional de museus',
+                    'ICOM',
+                    'Outros',
+                ]
+            ],
+            'resp_formacao' => [
+                'label' => 'Formação do responsável pela instituição',
+                'type' => 'select',
+                'options' => [
+                    'Ensino fundamental',
+                    'Ensino médio',
+                    'Ensino técnico',
+                    'Ensino tecnólogo',
+                    'Ensino superior incompleto',
+                    'Ensino superior completo',
+                ]
+            ],
+            'area_formacao' => [
+                'label' => 'Em caso de superior completo, especifique a área',
+                'type' => 'text',
+            ],
+            'equipe_tecnica' => [
+                'label' => 'O Museu possui equipe técnica',
+                'type' => 'select',
+                'options' => [
+                    'Sim',
+                    'Não',
+                ]
+            ],
+            'periodo_museologico' => [
+                'label' => 'Período de vigência do plano museológico',
+                'type' => 'select',
+                'options' => [
+                    '1',
+                    '2',
+                    '3',
+                    '4',
+                    '5',
+                    '6',
+                    '7',
+                    '8',
+                    '9',
+                    '10',
+                ]
+            ],
             'instumentoCriacao_tipo' => [
                 'label' => 'Instrumento de criação',
                 'type' => 'select',
@@ -525,6 +575,18 @@ class Theme extends \Subsite\Theme{
                 'options' => [ 'sim', 'não']
             ],
 
+            'metodo_contagem_pub' => [
+                'label' => 'Método de contagem de publico',
+                'type' => 'select',
+                'options' => [
+                    'Livro de assinaturas',
+                    'Ingressos impressos',
+                    'Catraca',
+                    'Agendamento',
+                    'Outros'
+                ]
+            ],
+
             'ingresso_cobrado' => [
                 'label' => 'O ingresso ao museu é cobrado?',
                 'type' => 'select',
@@ -568,6 +630,16 @@ class Theme extends \Subsite\Theme{
                 'label' => 'O endereço de correspondência é o mesmo de visitação?',
                 'type' => 'select',
                 'options' => [ 'sim', 'não' ]
+            ],
+
+            'EnRegiao_desenvilvimento' => [
+                'label' => 'Região de desenvolvimento',
+                'type' => 'text',
+            ],
+
+            'EnMacro_regiao' => [
+                'label' => 'Macro região',
+                'type' => 'text',
             ],
 
             'endereco_correspondencia' => [
