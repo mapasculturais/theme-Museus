@@ -42,6 +42,10 @@ $show_instalacoes = $this->isEditable() ||
             <p><span class="label">Horário de funcionamento: </span><span class="js-editable" data-edit="horario" data-original-title="Horário de Funcionamento" data-emptytext="Insira o horário de abertura e fechamento"><?php echo $entity->horario; ?></span></p>
         <?php endif; ?>
 
+        <?php if($this->isEditable() || $entity->mus_metodo_contagem_pub): ?>
+            <p><span class="label">Método de contagem de publico: </span><span class="js-editable" data-edit="mus_metodo_contagem_pub" data-original-title="Método de contagem de publico" data-emptytext="Método de contagem de publico"><?php echo $entity->mus_metodo_contagem_pub; ?></span></p>
+        <?php endif; ?>
+            <br>
         <?php if($this->isEditable() || $entity->mus_ingresso_cobrado || $entity->mus_ingresso_valor): ?>
         <h5 style="margin-top:0">Entrada</h5>
         <?php endif; ?>

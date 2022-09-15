@@ -22,6 +22,8 @@
                 <?php endif; ?>
                 <p><span class="label">Bairro:</span> <span class="js-editable" id="mus_EnCorrespondencia_Bairro" data-edit="mus_EnCorrespondencia_Bairro" data-original-title="Bairro" data-emptytext="Insira o Bairro" data-showButtons="bottom"><?php echo $entity->mus_EnCorrespondencia_Bairro ?></span></p>
                 <p><span class="label">Município:</span> <span class="js-editable" id="mus_EnCorrespondencia_Municipio" data-edit="mus_EnCorrespondencia_Municipio" data-original-title="Município" data-emptytext="Insira o Município" data-showButtons="bottom"><?php echo $entity->mus_EnCorrespondencia_Municipio ?></span></p>
+                <p><span class="label"><?php \MapasCulturais\i::_e("Região de desenvolvimento:");?></span> <span class="js-editable" id="EnRegiao_desenvilvimento" data-edit="EnRegiao_desenvilvimento" data-original-title="Região de desenvolvimento" data-emptytext="Insira o Município" data-showButtons="bottom"><?php echo $entity->EnRegiao_desenvilvimento ?></span></p>
+                <p><span class="label"><?php \MapasCulturais\i::_e("Macro região:");?></span> <span class="js-editable" id="EnMacro_regiao" data-edit="EnMacro_regiao" data-original-title="Macro região" data-emptytext="Insira o Município" data-showButtons="bottom"><?php echo $entity->EnMacro_regiao ?></span></p>
                 <p><span class="label">Estado:</span> <span class="js-editable" id="mus_EnCorrespondencia_Estado" data-edit="mus_EnCorrespondencia_Estado" data-original-title="Estado" data-emptytext="Insira o Estado" data-showButtons="bottom"><?php echo $entity->mus_EnCorrespondencia_Estado ?></span></p>
 
             <?php else: ?>
