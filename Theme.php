@@ -48,6 +48,27 @@ class Theme extends \Subsite\Theme{
             $template = "_empty";
         });
 
+        $app->hook("view.partial(entity-opportunities--content-edit).params", function(&$data, &$template){
+            $template = "_empty";
+        });
+
+        $app->hook("view.partial(tab).params", function(&$data, &$template){
+            if($data['id'] == 'permissao'){
+                $template = "_empty";
+            }
+        });
+
+        $app->hook("view.partial(permissions).params", function(&$data, &$template){
+            if($this->controller->id == "space"){
+                $template = "_empty";
+            }
+        });
+
+        $app->hook("view.partial(widget-areas).params", function(&$data, &$template){
+            if($this->controller->id == "space"){
+                $template = "_empty";
+            }
+        });
 
         $app->hook('entity(<<Space>>).save:after', function() use ($app){
             if(!$this->getValidationErrors() && !$this->mus_cod){
