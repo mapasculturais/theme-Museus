@@ -467,7 +467,6 @@ class Theme extends \Subsite\Theme{
                 ]
             ],
 
-
             'instalacoes' => [
                 'label' => 'Instalações básicas e serviços oferecidos',
                 'multiselect',
@@ -488,6 +487,11 @@ class Theme extends \Subsite\Theme{
                 'validations' => [
                     'v::numeric()' => 'a capacidade do teatro/auditório deve ser um número inteiro'
                 ]
+            ],
+            'equipe_dev_educativo' => [
+                'label' => 'O museu possui equipe PRÓPRIA para desenvolvimento e realização de ações educativas e culturais?',
+                'type' => 'select',
+                'options' => ['Sim','Não']
             ],
             'servicos_visitaGuiada' => [
                 'label' => 'O museu promove visitas guiadas?',
@@ -511,9 +515,15 @@ class Theme extends \Subsite\Theme{
                     'Sinalização visual',
                     'Material de divulgação impresso',
                     'Audioguia',
-                    'Guia, monitor e/ou mediador'
+                    'Guia, monitor,orientador e/ou mediador'
                 ]
             ],
+            'acess_visual_auditiva' => [
+                'label' => 'O museu oferece instalações e serviços destinados às pessoas com deficiências auditivas e/ou visuais?',
+                'type' => 'select',
+                'options' => ['Sim','Não']
+            ],
+
             'acessibilidade_visual' => [
                 'label' => 'O museu oferece instalações e serviços destinados às pessoas com deficiências auditivas e visuais?',
                 'multiselect',
@@ -523,9 +533,11 @@ class Theme extends \Subsite\Theme{
                     'Guia multimídia (com monitor)',
                     'Maquetes táteis ou mapas em relevo',
                     'Obras e reproduções táteis',
+                    'Piso tátil',
+                    'Sinalização em braile',
                     'Tradutor de Linguagem Brasileira de Sinais (LIBRAS)',
                     'Texto/Etiquetas em braile com informações sobre os objetos expostos'
-                ]
+                ],
             ],
             'arquivo_possui' => [
                 'label' => 'O museu possui arquivo histórico?',
@@ -615,8 +627,18 @@ class Theme extends \Subsite\Theme{
             ],
 
             'ingresso_valor' => [
-                'label' => 'Descrição do valor do ingresso ao museu',
+                'label' => 'Em caso positivo, informe o valor cobrado SOMENTE para o público em geral:',
                 'type' => 'text'
+            ],
+
+            'desc_valor_ingresso' => [
+                'label' => 'Observações sobre cobrança de entrada',
+                'type' => 'text',
+            ],
+
+            'obs_horario' => [
+                'label' => 'Observações dias e horários de abertura',
+                'type' => 'text',
             ],
 
             // GESTÂO
