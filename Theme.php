@@ -64,10 +64,9 @@ class Theme extends \Subsite\Theme{
             }
         });
 
-        $app->hook("view.partial(widget-areas).params", function(&$data, &$template){
-            if($this->controller->id == "space"){
-                $template = "_empty";
-            }
+        $app->hook("template(space.<<*>>.sidebar-left):begin", function(){
+            $entity = $this->controller->requestedEntity;
+            $this->part('widget-areas-space', array('entity'=>$entity));
         });
 
         $app->hook('entity(<<Space>>).save:after', function() use ($app){
