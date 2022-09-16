@@ -14,11 +14,15 @@ $show_tipologia = $this->isEditable() ||
 <div id="tab-mais" class="aba-content new-tab">
     <div class="servico">
         <?php if($this->isEditable() || $entity->esfera): ?>
-            <p class="esfera"><span class="label">Esfera: </span><span class="js-editable" data-edit="esfera" data-original-title="Esfera"><?php echo $entity->esfera; ?></span></p>
+            <p class="esfera"><span class="label">Identifique dentre as opções abaixo aquela que caracteriza o museu:</span><span class="js-editable" data-edit="esfera" data-original-title="Identifique dentre as opções abaixo aquela que caracteriza o museu:"><?php echo $entity->esfera; ?></span></p>
         <?php endif; ?>
 
         <?php if($this->isEditable() || $entity->esfera_tipo): ?>
-            <p class="esfera"><span class="label">Tipo de Esfera: </span><span class="js-editable" data-edit="esfera_tipo" data-original-title="Tipo de Esfera"><?php echo $entity->esfera_tipo; ?></span></p>
+            <p class="esfera"><span class="label">Em caso de público, especifique:</span><span class="js-editable" data-edit="esfera_tipo" data-original-title="Tipo de Esfera"><?php echo $entity->esfera_tipo; ?></span></p>
+        <?php endif; ?>
+
+        <?php if($this->isEditable() || $entity->mus_mais_ent_federal): ?>
+            <p class="esfera"><span class="label">Caso o museu seja formado por dois ou mais entes da Federação, especifique quais:</span><span class="js-editable" data-edit="mus_mais_ent_federal" data-original-title="Caso o museu seja formado por dois ou mais entes da Federação, especifique quais:"><?php echo $entity->mus_mais_ent_federal; ?></span></p>
         <?php endif; ?>
 
         <?php if($this->isEditable() || $entity->mus_esfera_tipo_federal): ?>
@@ -27,6 +31,9 @@ $show_tipologia = $this->isEditable() ||
             </p>
         <?php endif; ?>
 
+        <?php if($this->isEditable() || $entity->mus_priv_esfera_tipo): ?>
+            <p class="esfera"><span class="label">Em caso de privado, especifique:</span><span class="js-editable" data-edit="mus_priv_esfera_tipo" data-original-title="Em caso de privado, especifique:"><?php echo $entity->mus_priv_esfera_tipo; ?></span></p>
+        <?php endif; ?>
 
         <?php if($this->isEditable() || $entity->certificado): ?>
             <p class="esfera"><span class="label">Títulos e Certificados: </span><span class="js-editable" data-edit="certificado" data-original-title="Títulos e Certificados"><?php echo $entity->certificado; ?></span></p>
@@ -40,8 +47,8 @@ $show_tipologia = $this->isEditable() ||
 
         <?php if($this->isEditable() || $entity->mus_abertura_ano): ?>
         <p>
-            <span class="label">Ano de abertura:</span>
-            <span class="js-editable" data-edit="mus_abertura_ano" data-original-title="Ano de abertura" data-emptytext="Informe">
+            <span class="label">Ano de abertura do museu ao público:</span>
+            <span class="js-editable" data-edit="mus_abertura_ano" data-original-title="Ano de abertura do museu ao público:" data-emptytext="Informe">
                 <?php echo $entity->mus_abertura_ano; ?>
             </span>
         </p>
@@ -50,39 +57,22 @@ $show_tipologia = $this->isEditable() ||
         <?php if($this->isEditable() || $entity->mus_instumentoCriacao_tipo || $entity->mus_instumentoCriacao_descricao): ?>
         <p class="privado">
             <span class="icon icon-private-info"></span>
-            <span class="label">Instrumento de criação:</span>
+            <span class="label">Especifique o instrumento de criação do museu</span>
             <?php if($this->isEditable() || $entity->mus_instumentoCriacao_tipo): ?>
-                <editable-singleselect entity-property="mus_instumentoCriacao_tipo" empty-label="Selecione" allow-other="true" box-title="O museu possui instrumento de criação?"></editable-singleselect>
+                <editable-singleselect entity-property="mus_instumentoCriacao_tipo" empty-label="Selecione" allow-other="true" box-title="Especifique o instrumento de criação do museu"></editable-singleselect>
             <?php endif; ?>
         </p>
         <p class="privado">
             <span class="icon icon-private-info"></span>
-            <span class="label">Descrição:</span>
+            <span class="label">Descrição do instrumento de criação</span>
             <?php if($this->isEditable() || $entity->mus_instumentoCriacao_descricao): ?>
                 <span
                     class="js-editable" data-edit="mus_instumentoCriacao_descricao"
-                    data-original-title="Descrição do instrumento de criação" data-emptytext="Informe uma descrição"
-                    >
+                    data-original-title="Descrição do instrumento de criação" data-emptytext="Informe uma descrição">
+                    
                     <?php echo $entity->mus_instumentoCriacao_descricao; ?>
                 </span>
-                <em>somente para instrumento do tipo "Outros"</em>
             <?php endif; ?>
-        </p>
-        <?php endif; ?>
-
-        <?php if($this->isEditable() || $entity->mus_instituicaoMantenedora): ?>
-        <p>
-            <span class="label">Instituição mantenedora:</span>
-            <span class="js-editable" data-edit="mus_instituicaoMantenedora" data-original-title="Instituição mantenedora" data-emptytext="Informe">
-                <?php echo $entity->mus_instituicaoMantenedora; ?>
-            </span>
-        </p>
-
-        <p>
-            <span class="label">A instituição já possui cadastro:</span>
-            <span class="js-editable" data-edit="mus_outros_cadastros" data-original-title="A instituição já possui cadastro" data-emptytext="Selecione">
-                <?php echo $entity->mus_outros_cadastros; ?>
-            </span>
         </p>
         <?php endif; ?>
 
@@ -92,6 +82,13 @@ $show_tipologia = $this->isEditable() ||
                 <span class="label">O museu possui algum contrato para sua gestão?</span>
                 <span class="js-editable" data-edit="mus_contrato_gestao" data-original-title="O museu possui algum contrato para sua gestão?" data-emptytext="Selecione">
                     <?php echo $entity->mus_contrato_gestao; ?>
+                </span>
+            </p>
+            <p class="privado">
+                <span class="icon icon-private-info"></span>
+                <span class="label">Caso outros, informe</span>
+                <span class="js-editable" data-edit="mus_contrato_gestao_s_outros" data-original-title="Caso outros, informe" data-emptytext="Informe">
+                    <?php echo $entity->mus_contrato_gestao_s_outros; ?>
                 </span>
             </p>
             <p class="privado">
@@ -115,6 +112,33 @@ $show_tipologia = $this->isEditable() ||
                     <?php echo $entity->mus_num_pessoas; ?>
                 </span>
             </p>
+            <p class="privado">
+                <span class="icon icon-private-info"></span>
+                <span class="label">O museu possui funcionários terceirizados?</span>
+                <span class="js-editable" data-edit="mus_func_tercerizado" data-original-title="O museu possui funcionários terceirizados?" data-emptytext="Selecione">
+                    <?php echo $entity->mus_func_tercerizado; ?>
+                </span>
+            </p>
+        <?php endif; ?>
+
+        <?php if($this->isEditable() || $entity->mus_instituicaoMantenedora): ?>
+        <p>
+            <span class="label">Instituição mantenedora:</span>
+            <span class="js-editable" data-edit="mus_instituicaoMantenedora" data-original-title="Instituição mantenedora" data-emptytext="Informe">
+                <?php echo $entity->mus_instituicaoMantenedora; ?>
+            </span>
+        </p>
+
+        <p>
+            <span class="label">A instituição já possui cadastro:</span>
+            <span class="js-editable" data-edit="mus_outros_cadastros" data-original-title="A instituição já possui cadastro" data-emptytext="Selecione">
+                <?php echo $entity->mus_outros_cadastros; ?>
+            </span>
+        </p>
+        <?php endif; ?>
+
+        <?php if($this->isEditable()): ?>
+            
 
             <p class="privado">
                 <span class="icon icon-private-info"></span>
@@ -140,13 +164,7 @@ $show_tipologia = $this->isEditable() ||
                 </span>
             </p>
 
-            <p class="privado">
-                <span class="icon icon-private-info"></span>
-                <span class="label">O museu possui funcionários terceirizados?</span>
-                <span class="js-editable" data-edit="mus_func_tercerizado" data-original-title="O museu possui funcionários terceirizados?" data-emptytext="Selecione">
-                    <?php echo $entity->mus_func_tercerizado; ?>
-                </span>
-            </p>
+           
             <p class="privado">
                 <span class="icon icon-private-info"></span>
                 <span class="label">Em caso positivo, especifique quantos</span>

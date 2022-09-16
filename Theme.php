@@ -356,7 +356,8 @@ class Theme extends \Subsite\Theme{
             ],
 
             'instumentoCriacao_descricao' => [
-                'label' => 'Descrição do instrumento de criação',
+                'label' => 'Ex: Lei XXX Nº 000 DATA DD/MM/AAAA',
+                'type' => 'text',
             ],
 
             'status' => [
@@ -773,6 +774,10 @@ class Theme extends \Subsite\Theme{
                     'Pessoas em situação de vulnerabilidade social '
                 ]
             ],
+            'mais_ent_federal' => [
+                'label' => 'Caso o museu seja formado por dois ou mais entes da Federação, especifique quais:',
+                'type' => 'text',
+            ],
             'esfera_tipo_federal' => [
                 'label' => 'Em caso de Museu federal, especifique vinculação ministerial',
                 'type' => 'select',
@@ -805,6 +810,16 @@ class Theme extends \Subsite\Theme{
                     'Gabinete de Segurança Institucional'
                 ]
             ],
+            'priv_esfera_tipo' => [
+                'label' => 'Em caso de privado, especifique',
+                'type' => 'select',
+                'options' => [
+                   'Associação',
+                   'Fundação',
+                   'Organização Religiosa',
+                   'Entidade Sindical'
+                ]
+            ],
             'contrato_gestao' => [
                 'label' => 'O museu possui algum contrato para sua gestão?',
                 'type' => 'select',
@@ -812,6 +827,10 @@ class Theme extends \Subsite\Theme{
                     's' => 'Sim',
                     'n' => 'Não'
                 ]
+            ],
+            'contrato_gestao_s_outros' => [
+                'label' => 'Caso outros, informe',
+                'type' => 'text'
             ],
             'contrato_gestao_s' => [
                 'label' => 'Em caso positivo especifique a estrutura jurídica da instituição contratada',
@@ -821,7 +840,8 @@ class Theme extends \Subsite\Theme{
                 'options' => [
                     'Associação',
                     'Fundação',
-                    'Sociedade (incluem-se aqui as sociedades de economia mista, empresas públicas e privadas)'
+                    'Sociedade (incluem-se aqui as sociedades de economia mista, empresas públicas e privadas)',
+                    'Outros'
                 ]
             ],
             'contrato_qualificacoes' => [
@@ -832,7 +852,8 @@ class Theme extends \Subsite\Theme{
                 'options' => [
                     'OS',
                     'OSCIP',
-                    'Não possui qualificações'
+                    'Não possui qualificações',
+                    'Outra'
                 ]
             ],
             'num_pessoas' => [
