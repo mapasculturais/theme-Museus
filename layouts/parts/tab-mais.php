@@ -119,6 +119,42 @@ $show_tipologia = $this->isEditable() ||
                     <?php echo $entity->mus_func_tercerizado; ?>
                 </span>
             </p>
+            <p class="privado">
+                <span class="icon icon-private-info"></span>
+                <span class="label">Em caso positivo, especifique quantos</span>
+                <span class="js-editable" data-edit="mus_func_tercerizado_s" data-original-title="Em caso positivo, especifique quantos" data-emptytext="Informe">
+                    <?php echo $entity->mus_func_tercerizado_s; ?>
+                </span>
+            </p>
+            <p class="privado">
+                <span class="icon icon-private-info"></span>
+                <span class="label">O museu possui voluntários?</span>
+                <span class="js-editable" data-edit="mus_func_voluntario" data-original-title="O museu possui voluntários?" data-emptytext="Selecione">
+                    <?php echo $entity->mus_func_voluntario; ?>
+                </span>
+            </p>
+            <p class="privado">
+                <span class="icon icon-private-info"></span>
+                <span class="label">O museu possui estagiários?</span>
+                <span class="js-editable" data-edit="mus_func_estagiario" data-original-title="O museu possui estagiários?" data-emptytext="Selecione">
+                    <?php echo $entity->mus_func_estagiario; ?>
+                </span>
+            </p>
+
+            <p class="privado">
+                <span class="icon icon-private-info"></span>
+                <span class="label">O museu possui Regimento Interno?</span>
+                <span class="js-editable" data-edit="mus_gestao_regimentoInterno" data-original-title="O museu O museu possui Regimento Interno?" data-emptytext="Selecione">
+                    <?php echo $entity->mus_gestao_regimentoInterno; ?>
+                </span>
+            </p>
+            <p class="privado">
+                <span class="icon icon-private-info"></span>
+                <span class="label">O museu possui Plano Museológico?</span>
+                <span class="js-editable" data-edit="mus_gestao_planoMuseologico" data-original-title="O museu O museu possui Plano Museológico?" data-emptytext="Selecione">
+                    <?php echo $entity->mus_gestao_planoMuseologico; ?>
+                </span>
+            </p>
         <?php endif; ?>
 
         <?php if($this->isEditable() || $entity->mus_instituicaoMantenedora): ?>
