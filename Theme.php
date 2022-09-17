@@ -33,6 +33,14 @@ class Theme extends \Subsite\Theme{
 
         parent::_init();
 
+         $app->hook('view.partial(modal/<<*>>):after', function($template, &$html){
+            $terms = [
+                i::__('espaço') => i::__('museu'),
+            ];
+            
+            $html = str_replace(array_keys($terms), array_values($terms), $html);
+         });
+
         $app->hook('GET(site.search):before', function () use ($app) {
             if ((count($app->config['busca.lista.municipios']) > 0)) {
                 $metadata = $app->getRegisteredMetadataByMetakey("En_Municipio", "MapasCulturais\\Entities\\Space");
