@@ -33,6 +33,14 @@ class Theme extends \Subsite\Theme{
 
         parent::_init();
 
+         $app->hook('view.partial(modal/<<*>>):after', function($template, &$html){
+            $terms = [
+                i::__('espaço') => i::__('museu'),
+            ];
+            
+            $html = str_replace(array_keys($terms), array_values($terms), $html);
+         });
+
         $app->hook('GET(site.search):before', function () use ($app) {
             if ((count($app->config['busca.lista.municipios']) > 0)) {
                 $metadata = $app->getRegisteredMetadataByMetakey("En_Municipio", "MapasCulturais\\Entities\\Space");
@@ -200,8 +208,9 @@ class Theme extends \Subsite\Theme{
         
         $app->hook('template(<<space|agent|project|event>>.<<create|edit|single>>.name):after', function() use ($app){
             $this->enqueueScript('app', 'num-sniic', 'js/num-sniic.js');
-            if($app->user->profile->num_sniic){
-                $this->part('num-sniic', ['entity' => $this->data->entity]);
+            $entity = $this->data->entity;
+            if($entity->num_sniic){
+                $this->part('num-sniic', ['entity' => $entity]);
             }
         });
         
