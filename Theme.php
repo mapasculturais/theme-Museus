@@ -200,8 +200,9 @@ class Theme extends \Subsite\Theme{
         
         $app->hook('template(<<space|agent|project|event>>.<<create|edit|single>>.name):after', function() use ($app){
             $this->enqueueScript('app', 'num-sniic', 'js/num-sniic.js');
-            if($app->user->profile->num_sniic){
-                $this->part('num-sniic', ['entity' => $this->data->entity]);
+            $entity = $this->data->entity;
+            if($entity->num_sniic){
+                $this->part('num-sniic', ['entity' => $entity]);
             }
         });
         
