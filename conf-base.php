@@ -6,6 +6,7 @@ return [
     'app.enabled.events'            => false,
     'app.enabled.apps'              => false,
     'app.enabled.seals'             => true,
+    'app.enabled.opportunities'             => false,
     'museus.ownerAgentId'           => 11348,
     // 'notifications.entities.update' => 1825,
     'notifications.entities.update' => 0,
