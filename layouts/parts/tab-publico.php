@@ -17,6 +17,7 @@ $show_instalacoes = $this->isEditable() ||
 
 <div id="tab-publico" class="aba-content new-tab">
     <div class="servico">
+        <h5>Público, Acessibilidade e Serviços</h5>
         <?php if($this->isEditable() || $entity->mus_status): ?>
         <p>
             <span class="label">O Museu encontra-se:</span>

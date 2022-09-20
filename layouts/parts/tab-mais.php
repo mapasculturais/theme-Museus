@@ -13,6 +13,7 @@ $show_tipologia = $this->isEditable() ||
 ?>
 <div id="tab-mais" class="aba-content new-tab">
     <div class="servico">
+        <h5>Gestão</h5>
         <?php if($this->isEditable() || $entity->esfera): ?>
             <p class="esfera"><span class="label">Identifique dentre as opções abaixo aquela que caracteriza o museu:</span><span class="js-editable" data-edit="esfera" data-original-title="Identifique dentre as opções abaixo aquela que caracteriza o museu:"><?php echo $entity->esfera; ?></span></p>
         <?php endif; ?>
@@ -156,7 +157,7 @@ $show_tipologia = $this->isEditable() ||
                 </span>
             </p>
         <?php endif; ?>
-
+            <h5>Caracterização</h5>
         <?php if($this->isEditable() || $entity->mus_tipo): ?>
             <p>
                 <span class="label">O Museu é:</span>
@@ -201,7 +202,7 @@ $show_tipologia = $this->isEditable() ||
             </span>
         </p>
         <?php endif; ?>
-
+            <h5>Acervo</h5>
         <?php if($this->isEditable() || $entity->mus_num_total_acervo): ?>
         <p>
             <span class="label">Informe o número total de bens culturais de caráter museológico que compõem o acervo:</span>
@@ -238,7 +239,26 @@ $show_tipologia = $this->isEditable() ||
                 </span>
             </p>
 
-             <p class="privado">
+        <?php if($this->isEditable()): ?>
+            <p class="privado">
+                <span class="icon icon-private-info"></span>
+                <span class="label">Classifique as tipologias de acervo existentes no museu:</span>
+                    <?php if($this->isEditable()): ?>
+                <span class="js-editable-taxonomy" data-original-title="Tipologia de Acervo" data-emptytext="Selecione pelo menos uma tipologia" data-restrict="true"
+                data-taxonomy="mus_area"><?php echo implode('; ', $entity->terms['mus_area'])?></span>
+                <span style="display:none" class="js-editable-taxonomy" data-original-title="Área de Atuação" data-taxonomy="area">Museu</span>
+        <?php else: ?>
+        <?php foreach($areas as $i => $t): if(in_array($t, $entity->terms['mus_area'])): ?>
+                <a class="tag tag-<?php echo $this->controller->id ?>" href="<?php echo $app->createUrl('site', 'search') ?>##(<?php echo $entityName ?>:(areas:!(<?php echo $i ?>)),global:(enabled:(<?php echo $entityName ?>:!t),filterEntity:<?php echo $entityName ?>))">
+                    <?php echo $t ?>
+                </a>
+        <?php endif; endforeach; ?>
+        <?php endif;?>
+            </p>
+
+        <?php endif; ?>
+
+            <p class="privado">
                 <span class="icon icon-private-info"></span>
                 <span class="label">Indique os instrumentos de documentação de acervo utilizados pelo Museu</span>
                 <editable-multiselect entity-property="mus_instr_documento" empty-label="Selecione" allow-other="true" box-title="Indique os instrumentos de documentação de acervo utilizados pelo Museu:"></editable-multiselect>
@@ -319,11 +339,6 @@ $show_tipologia = $this->isEditable() ||
                     <?php echo $entity->mus_periodo_museologico; ?>
                 </span>
             </p>
-        <?php endif; ?>
-
-        <?php if($this->isEditable()): ?>
-           
-            <p style="margin-top:1em"><em>somente para o tipo "Unidade de conservação da natureza"</em></p>
         <?php endif; ?>
 
         <?php if($this->isEditable() || $entity->mus_tipo_tematica === 'Unidade de conservação da natureza' || $entity->mus_tipo_unidadeConservacao): ?>

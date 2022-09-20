@@ -72,11 +72,6 @@ class Theme extends \Subsite\Theme{
             }
         });
 
-        $app->hook("template(space.<<*>>.sidebar-left):begin", function(){
-            $entity = $this->controller->requestedEntity;
-            $this->part('widget-areas-space', array('entity'=>$entity));
-        });
-
         $app->hook('entity(<<Space>>).save:after', function() use ($app){
             if(!$this->getValidationErrors() && !$this->mus_cod){
                 $getDvFromNumeroIdent = function($numIdent)
@@ -996,9 +991,7 @@ class Theme extends \Subsite\Theme{
                 'cnpj' => [
                     'label' => 'CNPJ',
                     'private' => false,
-                    'validations' => [
-                        'v::cnpj()' => 'O CNPJ informado é inválido'
-                    ]
+                    
                 ],
                 
                 'esfera' => [
