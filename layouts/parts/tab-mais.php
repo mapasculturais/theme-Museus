@@ -157,65 +157,11 @@ $show_tipologia = $this->isEditable() ||
             </p>
         <?php endif; ?>
 
-        <?php if($this->isEditable() || $entity->mus_instituicaoMantenedora): ?>
-        <p>
-            <span class="label">Instituição mantenedora:</span>
-            <span class="js-editable" data-edit="mus_instituicaoMantenedora" data-original-title="Instituição mantenedora" data-emptytext="Informe">
-                <?php echo $entity->mus_instituicaoMantenedora; ?>
-            </span>
-        </p>
-
-        <p>
-            <span class="label">A instituição já possui cadastro:</span>
-            <span class="js-editable" data-edit="mus_outros_cadastros" data-original-title="A instituição já possui cadastro" data-emptytext="Selecione">
-                <?php echo $entity->mus_outros_cadastros; ?>
-            </span>
-        </p>
-        <?php endif; ?>
-
-        <?php if($this->isEditable()): ?>
-            
-
-            <p class="privado">
-                <span class="icon icon-private-info"></span>
-                <span class="label">Formação do responsável pela instituição</span>
-                <span class="js-editable" data-edit="mus_resp_formacao" data-original-title="Formação do responsável pela instituição" data-emptytext="Selecione">
-                    <?php echo $entity->mus_resp_formacao; ?>
-                </span>
-            </p>
-
-            <p class="privado">
-                <span class="icon icon-private-info"></span>
-                <span class="label">Em caso de superior completo, especifique a área</span>
-                <span class="js-editable" data-edit="mus_area_formacao" data-original-title="Em caso de superior completo, especifique a área" data-emptytext="Informe">
-                    <?php echo $entity->mus_area_formacao; ?>
-                </span>
-            </p>
-
-            <p class="privado">
-                <span class="icon icon-private-info"></span>
-                <span class="label">O Museu possui equipe técnica</span>
-                <span class="js-editable" data-edit="mus_equipe_tecnica" data-original-title="O Museu possui equipe técnica" data-emptytext="Selecione">
-                    <?php echo $entity->mus_equipe_tecnica; ?>
-                </span>
-            </p>
-
-        <?php endif; ?>
-
         <?php if($this->isEditable() || $entity->mus_tipo): ?>
             <p>
-                <span class="label">Tipo:</span>
-                <span class="js-editable" data-edit="mus_tipo" data-original-title="Tipo do museu" data-emptytext="Selecione">
+                <span class="label">O Museu é:</span>
+                <span class="js-editable" data-edit="mus_tipo" data-original-title="O Museu é" data-emptytext="Selecione">
                     <?php echo $entity->mus_tipo; ?>
-                </span>
-            </p>
-        <?php endif; ?>
-
-        <?php if($this->isEditable() || $entity->mus_periodo_museologico): ?>
-            <p>
-                <span class="label">Período de vigência do plano museológico:</span>
-                <span class="js-editable" data-edit="mus_periodo_museologico" data-original-title="Período de vigência do plano museológico" data-emptytext="Selecione">
-                    <?php echo $entity->mus_periodo_museologico; ?>
                 </span>
             </p>
         <?php endif; ?>
@@ -237,37 +183,62 @@ $show_tipologia = $this->isEditable() ||
                 <?php echo $entity->mus_caraterComunitario; ?>
             </span>
         </p>
-        <?php endif; ?>
 
-        <?php if($this->isEditable()): ?>
         <p class="privado">
             <span class="icon icon-private-info"></span>
-            <span class="label">Em caso de museus comunitários, a comunidade realiza atividades museológicas?</span>
-            <span class="js-editable" data-edit="mus_comunidadeRealizaAtividades" data-original-title="Em caso de museus comunitários, a comunidade realiza atividades museológicas?" data-emptytext="Selecione">
+            <span class="label">A comunidade realiza atividades museológicas (inventário participativo, museografia etc.)?</span>
+            <span class="js-editable" data-edit="mus_comunidadeRealizaAtividades" data-original-title="A comunidade realiza atividades museológicas (inventário participativo, museografia etc.)?" data-emptytext="Selecione">
                 <?php echo $entity->mus_comunidadeRealizaAtividades; ?>
             </span>
         </p>
 
-        <p class="privado">
-            <span class="icon icon-private-info"></span>
-            <span class="label">Propriedade:</span>
-            <span class="js-editable" data-edit="mus_acervo_propriedade" data-original-title="Propriedade do acervo" data-emptytext="Selecione">
-                <?php echo $entity->mus_acervo_propriedade; ?>
-            </span>
-        </p>
         <?php endif; ?>
-
         <?php if($this->isEditable() || $entity->mus_tipo_tematica): ?>
         <p>
-            <span class="label">Tipologia acervo/coleção:</span>
-            <span class="js-editable" data-edit="mus_tipo_tematica" data-original-title="Temática do museu" data-emptytext="Selecione">
+            <span class="label">Em relação à temática do museu, classifique a instituição em APENAS UMA opção:</span>
+            <span class="js-editable" data-edit="mus_tipo_tematica" data-original-title="Em relação à temática do museu, classifique a instituição em APENAS UMA opção:" data-emptytext="Selecione">
                 <?php echo $entity->mus_tipo_tematica; ?>
             </span>
         </p>
         <?php endif; ?>
 
+        <?php if($this->isEditable() || $entity->mus_num_total_acervo): ?>
+        <p>
+            <span class="label">Informe o número total de bens culturais de caráter museológico que compõem o acervo:</span>
+            <span class="js-editable" data-edit="mus_num_total_acervo" data-original-title="Informe o número total de bens culturais de caráter museológico que compõem o acervo:" data-emptytext="Selecione">
+                <?php echo $entity->mus_num_total_acervo; ?>
+            </span>
+        </p>
+        <?php endif; ?>
+
+        <?php if($this->isEditable() || $entity->mus_num_total_acervo_prec): ?>
+            <p>
+                <span class="label">O número informado é:</span>
+                <span class="js-editable" data-edit="mus_num_total_acervo_prec" data-emptytext="Selecione">
+                    <?php echo $entity->mus_num_total_acervo_prec; ?>
+                </span>
+            </p>
+        <?php endif; ?>
+
         <?php if($this->isEditable()): ?>
             <p class="privado">
+                <span class="icon icon-private-info"></span>
+                <span class="label">Com relação ao acervo, indique a opção que melhor caracterize a instituição:</span>
+                <span class="js-editable" data-edit="mus_acervo_propriedade" data-original-title="Com relação ao acervo, indique a opção que melhor caracterize a instituição:" data-emptytext="Selecione">
+                    <?php echo $entity->mus_acervo_propriedade; ?>
+                </span>
+            </p>
+        <?php endif; ?>
+
+        <?php if($this->isEditable() || $entity->mus_num_acervo_prest): ?>
+            <p>
+                <span class="label">O comodato/empréstimo está formalizado por meio de documento legal?</span>
+                <span class="js-editable" data-edit="mus_num_acervo_prest" data-emptytext="Selecione">
+                    <?php echo $entity->mus_num_acervo_prest; ?>
+                </span>
+            </p>
+
+             <p class="privado">
                 <span class="icon icon-private-info"></span>
                 <span class="label">Indique os instrumentos de documentação de acervo utilizados pelo Museu</span>
                 <editable-multiselect entity-property="mus_instr_documento" empty-label="Selecione" allow-other="true" box-title="Indique os instrumentos de documentação de acervo utilizados pelo Museu:"></editable-multiselect>
@@ -295,9 +266,65 @@ $show_tipologia = $this->isEditable() ||
                     <?php echo $entity->mus_gestao_politicaDescarte; ?>
                 </span>
             </p>
-            <p style="margin-top:1em"><em>somente para o tipo "Unidade de conservação da natureza"</em></p>
+        <?php endif; ?>
+        
+        <?php if($this->isEditable() || $entity->mus_instituicaoMantenedora): ?>
+            <p>
+                <span class="label">Instituição mantenedora:</span>
+                <span class="js-editable" data-edit="mus_instituicaoMantenedora" data-original-title="Instituição mantenedora" data-emptytext="Informe">
+                    <?php echo $entity->mus_instituicaoMantenedora; ?>
+                </span>
+            </p>
+
+            <p>
+                <span class="label">A instituição já possui cadastro:</span>
+                <span class="js-editable" data-edit="mus_outros_cadastros" data-original-title="A instituição já possui cadastro" data-emptytext="Selecione">
+                    <?php echo $entity->mus_outros_cadastros; ?>
+                </span>
+            </p>
         <?php endif; ?>
 
+        <?php if($this->isEditable()): ?>
+
+            <p class="privado">
+                <span class="icon icon-private-info"></span>
+                <span class="label">Formação do responsável pela instituição</span>
+                <span class="js-editable" data-edit="mus_resp_formacao" data-original-title="Formação do responsável pela instituição" data-emptytext="Selecione">
+                    <?php echo $entity->mus_resp_formacao; ?>
+                </span>
+            </p>
+
+            <p class="privado">
+                <span class="icon icon-private-info"></span>
+                <span class="label">Em caso de superior completo, especifique a área</span>
+                <span class="js-editable" data-edit="mus_area_formacao" data-original-title="Em caso de superior completo, especifique a área" data-emptytext="Informe">
+                    <?php echo $entity->mus_area_formacao; ?>
+                </span>
+            </p>
+
+            <p class="privado">
+                <span class="icon icon-private-info"></span>
+                <span class="label">O Museu possui equipe técnica</span>
+                <span class="js-editable" data-edit="mus_equipe_tecnica" data-original-title="O Museu possui equipe técnica" data-emptytext="Selecione">
+                    <?php echo $entity->mus_equipe_tecnica; ?>
+                </span>
+            </p>
+
+        <?php endif; ?>
+
+        <?php if($this->isEditable() || $entity->mus_periodo_museologico): ?>
+            <p>
+                <span class="label">Período de vigência do plano museológico:</span>
+                <span class="js-editable" data-edit="mus_periodo_museologico" data-original-title="Período de vigência do plano museológico" data-emptytext="Selecione">
+                    <?php echo $entity->mus_periodo_museologico; ?>
+                </span>
+            </p>
+        <?php endif; ?>
+
+        <?php if($this->isEditable()): ?>
+           
+            <p style="margin-top:1em"><em>somente para o tipo "Unidade de conservação da natureza"</em></p>
+        <?php endif; ?>
 
         <?php if($this->isEditable() || $entity->mus_tipo_tematica === 'Unidade de conservação da natureza' || $entity->mus_tipo_unidadeConservacao): ?>
             <p>

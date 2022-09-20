@@ -437,6 +437,19 @@ class Theme extends \Subsite\Theme{
                     'Defesa e segurança pública',
                 ]
             ],
+                
+            'num_total_acervo' => [
+                'label' => 'Informe o número total de bens culturais de caráter museológico que compõem o acervo:',
+                'type' => 'text',
+            ],
+
+            'num_total_acervo_prec' => [
+                'label' => 'O número informado é:',
+                'type' => 'select',
+                'options' => [
+                    'Exato','Aproximado',
+                ],
+            ],
 
             'tipo_unidadeConservacao' => [
                 'label' => 'Tipo/categoria de manejo da Unidade de Conservação',
@@ -584,6 +597,21 @@ class Theme extends \Subsite\Theme{
                     'Possui SOMENTE acervo em comodato/empréstimo',
                     'NÃO possui acervo',
                 ]
+            ],
+            'num_acervo_prest' => [
+                'label' => 'O comodato/empréstimo está formalizado por meio de documento legal?',
+                 'type' => 'select',
+                 'options' => [
+                 'Sim','Não',
+                ],
+            ],
+
+            'num_acervo_prest' => [
+                'label' => 'O comodato/empréstimo está formalizado por meio de documento legal?',
+                 'type' => 'select',
+                 'options' => [
+                 'Sim','Não',
+                ],
             ],
 
             'acervo_material' => [
