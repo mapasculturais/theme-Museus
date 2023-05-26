@@ -64,7 +64,7 @@ $url_search_spaces = $this->searchSpacesUrl;
                 </div>
             </a>
         <?php endif; ?>
-        <a class="btn btn-accent btn-large add" href="<?php echo $app->createUrl('space', 'create') ?>">Adicionar <?php $this->dict('entities: space') ?></a>
+        <a class="btn btn-accent btn-large add" href="<?php echo $app->createUrl('panel', 'spaces') ?>">Adicionar <?php $this->dict('entities: space') ?></a>
         <a class="btn btn-accent btn-large" href="<?php echo $url_search_spaces ?>">Ver tudo</a>
     </div>
 </article>
