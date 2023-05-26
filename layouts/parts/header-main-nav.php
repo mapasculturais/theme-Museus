@@ -142,7 +142,7 @@
                         <?php $this->applyTemplateHook('nav.dropdown.events','before'); ?>
                         <li>
                             <a href="<?php echo $app->createUrl('panel', 'events') ?>">Meus Eventos</a>
-                            <a class="add" href="<?php echo $app->createUrl('event', 'create') ?>" ></a>
+                            <?=$this->renderModalFor('event');?>
                         </li>
                         <?php $this->applyTemplateHook('nav.dropdown.events','after'); ?>
                     <?php endif; ?>
@@ -151,7 +151,7 @@
                         <?php $this->applyTemplateHook('nav.dropdown.agents','before'); ?>
                         <li>
                             <a href="<?php echo $app->createUrl('panel', 'agents') ?>">Meus Agentes</a>
-                            <a class="add" href="<?php echo $app->createUrl('agent', 'create') ?>"></a>
+                            <?=$this->renderModalFor('agent');?>
                         </li>
                         <?php $this->applyTemplateHook('nav.dropdown.agents','after'); ?>
                     <?php else: ?>
@@ -164,7 +164,7 @@
                         <?php $this->applyTemplateHook('nav.dropdown.spaces','before'); ?>
                         <li>
                             <a href="<?php echo $app->createUrl('panel', 'spaces') ?>"><?php $this->dict('entities: My Spaces') ?></a>
-                            <a class="add"href="<?php echo $app->createUrl('space', 'create') ?>"></a>
+                            <?=$this->renderModalFor('space');?>
                         </li>
                         <?php $this->applyTemplateHook('nav.dropdown.spaces','after'); ?>
                     <?php endif; ?>
@@ -180,7 +180,7 @@
                         <?php $this->applyTemplateHook('nav.dropdown.seals','before'); ?>
                         <li>
                             <a href="<?php echo $app->createUrl('panel', 'seals') ?>"><?php $this->dict('entities: My Seals') ?></a>
-                            <a class="add"href="<?php echo $app->createUrl('seal', 'create') ?>"></a>
+                            <?=$this->renderModalFor('seal');?>
                         </li>
                         <?php $this->applyTemplateHook('nav.dropdown.seals','after'); ?>
                     <?php endif; ?>
@@ -189,7 +189,7 @@
                         <?php $this->applyTemplateHook('nav.dropdown.projects','before'); ?>
                         <li>
                             <a href="<?php echo $app->createUrl('panel', 'projects') ?>">Meus Projetos</a>
-                            <a class="add" href="<?php echo $app->createUrl('project', 'create') ?>"></a>
+                            <?=$this->renderModalFor('project');?>
                         </li>
                         <?php $this->applyTemplateHook('nav.dropdown.projects','after'); ?>
 
@@ -204,7 +204,6 @@
                         <?php $this->applyTemplateHook('nav.dropdown.subsite','before'); ?>
                         <li>
                             <a href="<?php echo $app->createUrl('panel', 'subsite') ?>"><?php $this->dict('entities: My Subsites') ?></a>
-                            <a class="add"href="<?php echo $app->createUrl('subsite', 'create') ?>"></a>
                         </li>
                         <?php $this->applyTemplateHook('nav.dropdown.subsite','after'); ?>
                     <?php endif; ?>
