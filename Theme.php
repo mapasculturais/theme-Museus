@@ -6,18 +6,7 @@ use MapasCulturais\App;
 use MapasCulturais\Definitions;
 use MapasCulturais\i;
 
-class Theme extends \Subsite\Theme{
-
-    static function _dict() {
-        $dict = parent::_dict();
-
-        foreach($dict as $key => $dic){
-            $dict[$key]['text'] = str_replace(["espaços culturais", "Espaços culturais", "Espaços", "espaços", "Espaço", "espaço",], [i::__('museus'), i::__('Museus'), i::__('Museus'), i::__('museus'), i::__('Museu'), i::__('museu')], $dic['text']);
-        }
-        
-        return $dict;
-    }
-
+class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
 
     public function _init() {
         $app = App::i();
@@ -33,52 +22,13 @@ class Theme extends \Subsite\Theme{
 
         parent::_init();
 
-         $app->hook('view.partial(modal/<<*>>):after', function($template, &$html){
-            $terms = [
-                i::__('espaço') => i::__('museu'),
-            ];
-            
-            $html = str_replace(array_keys($terms), array_values($terms), $html);
-         });
-
-        $app->hook('GET(site.search):before', function () use ($app) {
-            if ((count($app->config['busca.lista.municipios']) > 0)) {
-                $metadata = $app->getRegisteredMetadataByMetakey("En_Municipio", "MapasCulturais\\Entities\\Space");
-                $metadata->field_type = "select";
-                $meta_config = $metadata->config;
-
-                $meta_config['options'] = $app->config['busca.lista.municipios'];
-                $metadata->config = $meta_config;
-            }
-        });
-
-        $app->hook("view.partial(entity-opportunities--tabs-edit).params", function(&$data, &$template){
-            $template = "_empty";
-        });
-
-        $app->hook("view.partial(entity-opportunities--content-edit).params", function(&$data, &$template){
-            $template = "_empty";
-        });
-
-        $app->hook("view.partial(tab).params", function(&$data, &$template){
-            if($data['id'] == 'permissao'){
-                $template = "_empty";
-            }
-        });
-
-        $app->hook("view.partial(permissions).params", function(&$data, &$template){
-            if($this->controller->id == "space"){
-                $template = "_empty";
-            }
-        });
-
-        $app->hook('entity(<<Space>>).save:after', function() use ($app){
+        $app->hook('entity(Space).save:after', function() use ($app){
             if(!$this->getValidationErrors() && !$this->mus_cod){
                 $getDvFromNumeroIdent = function($numIdent)
                 {
                        $dgs = array();
                        for($i=0; $i < strlen($numIdent); $i++)
-                               $dgs[] = $numIdent{$i};
+                               $dgs[] = $numIdent[$i];
 
                        $ft  = 9;
                        $sm  = 0;
@@ -92,7 +42,7 @@ class Theme extends \Subsite\Theme{
                 };
                 $existMusCod = function($new_cod) use($app){
                     $conn = $app->em->getConnection();
-                    $tot = $conn->fetchColumn("SELECT count(*) FROM space_meta WHERE key = 'mus_cod' and value = '".$new_cod."'");
+                    $tot = $conn->fetchScalar("SELECT count(*) FROM space_meta WHERE key = 'mus_cod' and value = '".$new_cod."'");
                     return $tot > 0;
                 };
                 $geraNumeroIdent = function () use($getDvFromNumeroIdent){
@@ -132,42 +82,6 @@ class Theme extends \Subsite\Theme{
             $where .= "OR lower(mus_cod.value) LIKE lower(:keyword)";
         });
 
-
-        // modificações nos templates
-        $app->hook('template(space.<<*>>.num-sniic):before', function(){
-            $entity = $this->data->entity;
-
-            if($entity->mus_cod)
-                echo "<small><span class='label'>Código:</span> {$entity->mus_cod}</small>";
-            else
-                echo "<small><span class=\"label\">Código: </span><span>Preencha os campos obrigatorios e clique em salvar para gerar</span></small>";
-        });
-
-        $app->hook('template(space.<<create|edit|single>>.tabs):end', function(){
-            $this->part('tabs-museu', ['entity' => $this->data->entity]);
-        });
-
-        $app->hook('template(space.<<create|edit|single>>.tabs-content):end', function(){
-            $this->part('tab-publico', ['entity' => $this->data->entity]);
-            $this->part('tab-mais', ['entity' => $this->data->entity]);
-        });
-
-        $app->hook('template(space.<<create|edit|single>>.tab-about-service):begin', function(){
-            $this->part('about-service-begin', ['entity' => $this->data->entity]);
-        });
-
-        $app->hook('template(space.<<create|edit|single>>.acessibilidade):after', function(){
-            $entity = $this->data->entity;
-            ?>
-        <?php
-        });
-
-        $app->hook('template(space.<<*>>.location):after', function(){
-            $this->enqueueScript('app', 'endereco-correspondencia', 'js/endereco-correspondencia.js');
-            $this->part('endereco-correspondencia', ['entity' => $this->data->entity]);
-        });
-
-
         // own
         $app->hook('POST(space.own)', function() use($app){
             $this->requireAuthentication();
@@ -183,30 +97,6 @@ class Theme extends \Subsite\Theme{
             $app->enableAccessControl();
 
             $this->json(true);
-        });
-
-        $app->hook('view.render(space/<<*>>):before', function(){
-            $this->addTaxonoyTermsToJs('mus_area');
-        });
-
-        $app->hook('view.render(<<*>>):before', function() use($app) {
-            $this->assetManager->publishAsset('img/logo-ibram.png');
-        });
-
-        $app->hook('template(panel.<<*>>.highlighted-message):end', function() use($app){
-            $this->part( 'panel/highlighted-message--numsniic');
-        });
-      
-        $app->hook('view.render(<<*>>):before', function() use($app) {
-            $this->jsObject['angularAppDependencies'][] = 'entity.controller.agentTypes';
-        });
-        
-        $app->hook('template(<<space|agent|project|event>>.<<create|edit|single>>.name):after', function() use ($app){
-            $this->enqueueScript('app', 'num-sniic', 'js/num-sniic.js');
-            $entity = $this->data->entity;
-            if($entity->num_sniic){
-                $this->part('num-sniic', ['entity' => $entity]);
-            }
         });
         
         // BUSCA POR NÚMERO SNIIC
@@ -238,18 +128,6 @@ class Theme extends \Subsite\Theme{
         $app->hook('repo(<<*>>).getIdsByKeywordDQL.where', function(&$where, $keyword) {
             $where .= "OR lower(En_Municipio.value) LIKE lower(:keyword)";
         });
-    }
-
-    public function includeAngularEntityAssets($entity) {
-        parent::includeAngularEntityAssets($entity);
-        
-        $this->enqueueScript('app', 'entity.controller.agentType', 'js/ng.entity.controller.agentTypes.js', ['entity.app']);
-    }
-
-    public function includeOpeningTimeAssets(){
-        $this->jsObject['templateUrl']['spaceOpeningTime'] = $this->asset('js/directives/openingTime.html', false);
-        $this->jsObject['angularAppDependencies'][] = 'entity.directive.openingTime';
-        $this->enqueueScript('app', 'entity.directive.openingTime', 'js/ng.entity.directive.openingTime.js', array('ng-mapasculturais'));
     }
 
     static function getThemeFolder() {
@@ -1111,56 +989,6 @@ class Theme extends \Subsite\Theme{
     * @param type $entity_class
     * @return \MapasCulturais\Entity
     */
-    function getOneVerifiedEntity($entity_class) {
-        $app = \MapasCulturais\App::i();
-
-        $cache_id = __METHOD__ . ':' . $entity_class;
-
-        if($app->cache->contains($cache_id)){
-            return $app->cache->fetch($cache_id);
-        }
-
-
-
-        $controller = $app->getControllerByEntity($entity_class);
-
-        if ($entity_class === 'MapasCulturais\Entities\Event') {
-            $entities = $controller->apiQueryByLocation(array(
-                '@from' => date('Y-m-d'),
-                '@to' => date('Y-m-d', time() + 28 * 24 * 3600),
-                '@verified' => 'IN(1)',
-                '@select' => 'id'
-            ));
-
-        }elseif ($entity_class === 'MapasCulturais\Entities\Space') {
-            $entities = $controller->apiQuery([
-                '@select' => 'id',
-                'mus_verificado' => 'EQ(1)'
-            ]);
-        }else{
-
-            $entities = $controller->apiQuery([
-                '@select' => 'id',
-                '@verified' => 'IN(1)',
-            ]);
-        }
-
-        $ids = array_map(function($item) {
-            return $item['id'];
-        }, $entities);
-
-        if ($ids) {
-            $id = $ids[array_rand($ids)];
-            $result = $app->repo($entity_class)->find($id);
-            $result->refresh();
-        } else {
-            $result = null;
-        }
-
-        $app->cache->save($cache_id, $result, 120);
-
-        return $result;
-    }
 
     protected function _getFilters()
     {
