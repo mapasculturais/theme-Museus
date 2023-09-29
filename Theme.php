@@ -128,6 +128,12 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
         $app->hook('repo(<<*>>).getIdsByKeywordDQL.where', function(&$where, $keyword) {
             $where .= "OR lower(En_Municipio.value) LIKE lower(:keyword)";
         });
+        
+        $app->hook("template(space.edit.tabs):end", function () {
+            $this->part('museus/tab-edit-visitacao');
+            $this->part('museus/tab-edit-acervo');
+            $this->part('museus/tab-edit-gestao');
+        });
     }
 
     static function getThemeFolder() {
