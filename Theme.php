@@ -177,7 +177,7 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
             ],
             'outros_cadastros' => [
                 'label' => 'A instituição já possui cadastro',
-                'type' => 'select',
+                'type' => 'radio',
                 'options' => [
                     '' => 'Não possui',
                     'Museusbr',
@@ -188,7 +188,7 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
             ],
             'resp_formacao' => [
                 'label' => 'Formação do responsável pela instituição',
-                'type' => 'select',
+                'type' => 'radio',
                 'options' => [
                     'Ensino fundamental',
                     'Ensino médio',
@@ -204,7 +204,7 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
             ],
             'equipe_tecnica' => [
                 'label' => 'O Museu possui equipe técnica',
-                'type' => 'select',
+                'type' => 'radio',
                 'options' => [
                     'Sim',
                     'Não',
@@ -249,7 +249,7 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
 
             'status' => [
                 'label' => 'Status do Museu',
-                'type' => 'select',
+                'type' => 'radio',
                 'options' => [
                     'aberto' => 'Aberto',
                     'fechado' => 'Fechado',
@@ -261,7 +261,7 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
             // caso status == Fechado î
             'previsao_abertura_mes' =>[
                 'label' => 'Previsão de Abertura (Mês)',
-                'type' => 'int',
+                'type' => 'date',
                 'validations' => [
                     'v::intVal()' => 'O Mês deve ser um campo inteiro'
                 ]
@@ -269,7 +269,7 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
 
             'previsao_abertura_ano' =>[
                 'label' => 'Previsão de Abertura (Ano)',
-                'type' => 'int',
+                'type' => 'date',
                 'validations' => [
                     'v::intVal()' => 'O Ano deve ser um campo inteiro'
                 ]
@@ -324,7 +324,7 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
 
             'num_total_acervo_prec' => [
                 'label' => 'O número informado é:',
-                'type' => 'select',
+                'type' => 'radio',
                 'options' => [
                     'Exato','Aproximado',
                 ],
@@ -332,7 +332,7 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
 
             'tipo_unidadeConservacao' => [
                 'label' => 'Tipo/categoria de manejo da Unidade de Conservação',
-                'type' => 'select',
+                'type' => 'radio',
                 'options' => [
                     '' => 'Não se aplica',
                     'Proteção integral',
@@ -342,7 +342,7 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
 
             'tipo_unidadeConservacao_protecaoIntegral' => [
                 'label' => 'Tipo de unidade de proteção integral',
-                'type' => 'select',
+                'type' => 'radio',
                 'options' => [
                     '' => 'Não se aplica',
                     'Estação Ecológica',
@@ -355,7 +355,7 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
 
             'tipo_unidadeConservacao_usoSustentavel' => [
                 'label' => 'Tipo de unidade de uso sustentável',
-                'type' => 'select',
+                'type' => 'radio',
                 'options' => [
                     '' => 'Não se aplica',
                     'Floresta',
@@ -370,7 +370,7 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
 
             'instalacoes' => [
                 'label' => 'Instalações básicas e serviços oferecidos',
-                'multiselect',
+                'type' => 'multiselect',
                 'options' => [
                     'Bebedouro',
                     'Estacionamento',
@@ -384,7 +384,7 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
             ],
             'instalacoes_capacidadeAuditorio' => [
                 'label' => 'Capacidade do teatro/auditório (assentos)',
-                'type' => 'int',
+                'type' => 'number',
                 'validations' => [
                     'v::numeric()' => 'a capacidade do teatro/auditório deve ser um número inteiro'
                 ]
@@ -396,12 +396,12 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
             ],
             'servicos_visitaGuiada' => [
                 'label' => 'O museu promove visitas guiadas?',
-                'type' => 'select',
+                'type' => 'radio',
                 'options' => [ 'sim', 'não']
             ],
             'servicos_visitaGuiada_s' => [
                 'label' => 'Em caso positivo, especifique',
-                'type' => 'select',
+                'type' => 'radio',
                 'options' => [
                     'SOMENTE mediante agendamento',
                     'Sem necessidade de agendamento'
@@ -409,7 +409,7 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
             ],
             'servicos_atendimentoEstrangeiros' => [
                 'label' => 'Atendimento em outros idiomas',
-                'multiselect',
+                'type' =>'multiselect',
                 'allowOther' => true,
                 'allowOtherText' => 'Outros',
                 'options' => [
@@ -427,7 +427,7 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
 
             'acessibilidade_visual' => [
                 'label' => 'O museu oferece instalações e serviços destinados às pessoas com deficiências auditivas e visuais?',
-                'multiselect',
+                'type'=>'multiselect',
                 'allowOther' => true,
                 'allowOtherText' => 'Outros',
                 'options' => [
@@ -442,7 +442,7 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
             ],
             'arquivo_possui' => [
                 'label' => 'O museu possui arquivo histórico?',
-                'type' => 'select',
+                'type' => 'radio',
                 'options' => [ 'sim', 'não']
             ],
             'arquivo_acessoPublico' => [
@@ -452,7 +452,7 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
             ],
             'biblioteca_possui' => [
                 'label' => 'O Museu possui biblioteca?',
-                'type' => 'select',
+                'type' => 'radio',
                 'options' => [ 'sim', 'não']
             ],
             'biblioteca_acessoPublico' => [
@@ -468,7 +468,7 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
             // acervo
             'acervo_propriedade' => [
                 'label' => 'Propriedade do acervo',
-                'type' => 'select',
+                'type' => 'radio',
                 'options' => [
                     'Possui SOMENTE acervo próprio',
                     'Possui acervo próprio e em comodato',
@@ -495,7 +495,7 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
 
             'acervo_material' => [
                 'label' => 'O museu possui também acervo material?',
-                'type' => 'select',
+                'type' => 'radio',
                 'options' => [
                     'sim' => 'sim',
                     'não' => 'não'
@@ -504,7 +504,7 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
 
             'acervo_material_emExposicao' => [
                 'label' => 'O acervo material encontra-se em exposição?',
-                'type' => 'select',
+                'type' => 'radio',
                 'options' => [
                     '' => 'não se aplica',
                     'sim' => 'sim',
@@ -538,7 +538,7 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
 
             'ingresso_cobrado' => [
                 'label' => 'O ingresso ao museu é cobrado?',
-                'type' => 'select',
+                'type' => 'radio',
                 'options' => [ 'sim', 'não', 'contribuição voluntária']
             ],
 
@@ -572,13 +572,13 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
 
             'gestao_politicaAquisicao' => [
                 'label' => 'O museu possui política de aquisição de acervo?',
-                'type' => 'select',
+                'type' => 'radio',
                 'options' => ['sim', 'não']
             ],
 
             'gestao_politicaDescarte' => [
                 'label' => 'O museu possui política de descarte de acervo?',
-                'type' => 'select',
+                'type' => 'radio',
                 'options' => ['sim', 'não']
             ],
 
@@ -665,7 +665,7 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
             ],
             'atividade_pub_especif' => [
                 'label' => 'O museu realiza atividades educativas e culturais para públicos específicos?',
-                'type' => 'select',
+                'type' => 'radio',
                 'options' => [
                     's' => 'Sim',
                     'n' => 'Não'
