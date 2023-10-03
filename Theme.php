@@ -134,6 +134,7 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
             $this->part('museus/tab-edit-acervo');
             $this->part('museus/tab-edit-gestao');
         });
+               
     }
 
     static function getThemeFolder() {
@@ -228,7 +229,7 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
             ],
             'instumentoCriacao_tipo' => [
                 'label' => 'Instrumento de criação',
-                'type' => 'select',
+                'type' => 'radio',
                 'allowOther' => true,
                 'allowOtherText' => 'Outro',
                 'options' => [
@@ -277,7 +278,7 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
 
             'abertura_ano' => [
                 'label' => 'Ano de abertura',
-                'type' => 'int',
+                'type' => 'integer',
                 'validations' => [
                     'v::intVal()' => 'O ano de abertura deve ser um valor numérico inteiro'
                 ]
@@ -285,14 +286,14 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
 
             'itinerante' => [
                 'label' => 'O museu é itinerante?',
-                'type' => 'select',
+                'type' => 'radio',
                 'options' => ['sim', 'não']
             ],
 
             // tipologia
             'tipo' => [
                 'label' => 'Tipo',
-                'type' => 'select',
+                'type' => 'radio',
                 'options' => [
                     'Tradicional/Clássico',
                     'Virtual',
@@ -304,7 +305,7 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
 
             'tipo_tematica' => [
                 'label' => 'Temática do museu',
-                'type' => 'select',
+                'type' => 'radio',
                 'options' => [
                     'Artes, arquitetura e linguística',
                     'Antropologia e arqueologia',
@@ -421,7 +422,7 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
             ],
             'acess_visual_auditiva' => [
                 'label' => 'O museu oferece instalações e serviços destinados às pessoas com deficiências auditivas e/ou visuais?',
-                'type' => 'select',
+                'type' => 'radio',
                 'options' => ['Sim','Não']
             ],
 
@@ -447,7 +448,7 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
             ],
             'arquivo_acessoPublico' => [
                 'label' => 'O arquivo tem acesso ao público?',
-                'type' => 'select',
+                'type' => 'radio',
                 'options' => [ 'sim', 'não']
             ],
             'biblioteca_possui' => [
@@ -520,7 +521,7 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
 
             'comunidadeRealizaAtividades' => [
                 'label' => 'Em caso de museus comunitários, a comunidade realiza atividades museológicas?',
-                'type' => 'select',
+                'type' => 'radio',
                 'options' => [ 'sim', 'não']
             ],
 
@@ -560,13 +561,13 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
             // GESTÂO
             'gestao_regimentoInterno' => [
                 'label' => 'O museu posui regimento interno?',
-                'type' => 'select',
+                'type' => 'radio',
                 'options' => ['sim', 'não']
             ],
 
             'gestao_planoMuseologico' => [
                 'label' => 'O museu possui plano museológico?',
-                'type' => 'select',
+                'type' => 'radio',
                 'options' => ['sim', 'não']
             ],
 
@@ -737,7 +738,7 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
             ],
             'contrato_gestao' => [
                 'label' => 'O museu possui algum contrato para sua gestão?',
-                'type' => 'select',
+                'type' => 'radio',
                 'options' => [
                     's' => 'Sim',
                     'n' => 'Não'
@@ -749,7 +750,7 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
             ],
             'contrato_gestao_s' => [
                 'label' => 'Em caso positivo especifique a estrutura jurídica da instituição contratada',
-                'type' => 'select',
+                'type' => 'radio',
                 'allowOther' => true,
                 'allowOtherText' => 'Outra',
                 'options' => [
@@ -761,7 +762,7 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
             ],
             'contrato_qualificacoes' => [
                 'label' => 'A contratada possui qualificações?',
-                'type' => 'select',
+                'type' => 'radio',
                 'allowOther' => true,
                 'allowOtherText' => 'Outra',
                 'options' => [
@@ -773,14 +774,14 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
             ],
             'num_pessoas' => [
                 'label' => 'Quantas pessoas trabalham no museu (contabilizar terceirizados, estagiários e voluntários)?',
-                'type' => 'int',
+                'type' => 'integer',
                 'validations' => [
                     'v::intVal()' => 'O Mês deve ser um campo inteiro'
                 ]
             ],
             'func_tercerizado' => [
                 'label' => 'O museu possui funcionários terceirizados?',
-                'type' => 'select',
+                'type' => 'radio',
                 'options' => [
                     's' => 'Sim',
                     'n' => 'Não'
@@ -788,7 +789,7 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
             ],
             'func_tercerizado_s' => [
                 'label' => 'Em caso positivo, especifique quantos',
-                'type' => 'int',
+                'type' => 'integer',
                 'validations' => [
                     'v::intVal()' => 'O número de funcionários deve ser um número inteiro'
                 ]
@@ -803,7 +804,7 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
             ],
             'func_estagiario' => [
                 'label' => 'O museu possui estagiários?',
-                'type' => 'select',
+                'type' => 'radio',
                 'options' => [
                     's' => 'Sim',
                     'n' => 'Não'
