@@ -182,7 +182,7 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
                 'label' => 'Instituição mantenedora'
             ],
             'outros_cadastros' => [
-                'label' => 'A instituição já possui cadastro',
+                'label' => 'A instituição já possui cadastro?',
                 'type' => 'radio',
                 'options' => [
                     '' => 'Não possui',
@@ -267,7 +267,7 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
             // caso status == Fechado î
             'previsao_abertura_mes' =>[
                 'label' => 'Previsão de Abertura (Mês)',
-                'type' => 'date',
+                'type' => 'text',
                 'validations' => [
                     'v::intVal()' => 'O Mês deve ser um campo inteiro'
                 ]
@@ -275,7 +275,7 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
 
             'previsao_abertura_ano' =>[
                 'label' => 'Previsão de Abertura (Ano)',
-                'type' => 'date',
+                'type' => 'text',
                 'validations' => [
                     'v::intVal()' => 'O Ano deve ser um campo inteiro'
                 ]
@@ -880,6 +880,7 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
                 
                 'cnpj' => [
                     'label' => 'CNPJ',
+                    'type' => 'CNPJ',
                     'private' => false,
                     
                 ],
