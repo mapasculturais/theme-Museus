@@ -37,29 +37,8 @@ $home-opportunities: #FFA4A3;
 $home-feature: #75C8FF;
 $home-register: #002842;
 
-// // Neutral colors
-// $low-500: #1E1E1E;
-// $high-500: #FFFFFF;
-
-// // FONTS
-// $font-body: 'Open Sans', sans-serif;
-// $font-headings: 'Open Sans', sans-serif;
-
-// // Borders radius
-// $border-radius-xs: 4px;
-// $border-radius-sm: 8px;
-// $border-radius-pill: 64px;
-
-// // Borders
-// $border-hairline: 1px solid;
-// $border-solid: 2px solid;
-
-// // Shadows
-// $shadow-lv-1: 0px 4px 8px rgba(0, 0, 0, 0.16);
-// $shadow-lv-2: 0px 8px 16px rgba(0, 0, 0, 0.16);
-// $shadow-lv-3: 0px 8px 24px rgba(0, 0, 0, 0.16);
-// $shadow-lv-4: 0px 16px 48px rgba(0, 0, 0, 0.16);
-// $shadow-lv-1-up: 0px -4px 8px rgba(0, 0, 0, 0.16);
+// PAGES
+@import 'pages/entities';
 
 @import '../../../BaseV2/assets-src/sass/theme-BaseV2';
 

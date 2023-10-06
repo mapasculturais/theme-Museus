@@ -17,9 +17,9 @@ $this->import('
 
 <mc-tab label="<?= i::esc_attr__('Visitação') ?>" slug="visit">
     <mc-container>
-        <p class="fulwidth"><?php i::_e("Informe aos visitantes o horário de funcionamento do museu, formas de entrada, acessibilidade e instalações  do local e as atividades realizadas.") ?></p>
+        <p class="fullwidth"><?php i::_e("Informe aos visitantes o horário de funcionamento do museu, formas de entrada, acessibilidade e instalações  do local e as atividades realizadas.") ?></p>
 
-        <mc-card class="fulwidth">
+        <mc-card class="fullwidth">
             <template #title>
                 <label><?php i::_e("Público, acessibilidade e serviços"); ?></label>
                 <p class="card__title--description"><?php i::_e("Os dados inseridos abaixo serão exibidos para todos os usuários") ?></p>
@@ -48,7 +48,7 @@ $this->import('
             </template>
         </mc-card>
 
-        <mc-card class="fulwidth">
+        <mc-card class="fullwidth">
             <template #title>
                 <label><?php i::_e("Acessibilidade"); ?></label>
             </template>
@@ -70,7 +70,7 @@ $this->import('
             </template>
         </mc-card>
 
-        <mc-card class="fulwidth">
+        <mc-card class="fullwidth">
             <template #title>
                 <label><?php i::_e("Instalações"); ?></label>
             </template>
@@ -98,7 +98,7 @@ $this->import('
             </template>
         </mc-card>
 
-        <mc-card class="fulwidth">
+        <mc-card class="fullwidth">
             <template #title>
                 <label><?php i::_e("Atividades educativas e culturais "); ?></label>
             </template>

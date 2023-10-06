@@ -17,9 +17,9 @@ $this->import('
 
 <mc-tab label="<?= i::esc_attr__('Gestao') ?>" slug="gest">
     <mc-container>
-        <p class="fulwidth"><?php i::_e("Forneça algumas informações administrativos do museu sobre a gestão e como esse museu se caracteriza") ?></p>
+        <p class="fullwidth"><?php i::_e("Forneça algumas informações administrativos do museu sobre a gestão e como esse museu se caracteriza") ?></p>
 
-        <mc-card class="fulwidth">
+        <mc-card class="fullwidth">
             <template #title>
                 <label><?php i::_e("Informações sobre a gestão"); ?></label>
             </template>
@@ -68,7 +68,7 @@ $this->import('
             </template>
         </mc-card>
 
-        <mc-card class="fulwidth">
+        <mc-card class="fullwidth">
             <template #title>
                 <label><?php i::_e("Caracterização"); ?></label>
             </template>

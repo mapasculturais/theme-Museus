@@ -18,7 +18,7 @@ $this->import('
 <mc-tab label="<?= i::esc_attr__('Acervo') ?>" slug="acervo">
     <div class="tabs__info">
         <mc-container>
-            <mc-card class="fulwidth">
+            <mc-card class="fullwidth">
                 <template #title>
                     <label><?php i::_e("Sobre o acervo do museu"); ?></label>
                 </template>
@@ -75,7 +75,7 @@ $this->import('
                     </div>
                 </template>
             </mc-card>
-            <mc-card class="fulwidth">
+            <mc-card class="fullwidth">
                 <template #title>
                     <label><?php i::_e("Somente para museus virtuais"); ?></label>
                 </template>
