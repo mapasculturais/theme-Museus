@@ -12,85 +12,38 @@ $this->import('
     entity-field
     mc-card
     mc-container
+    mc-title
 ');
 ?>
 
-<mc-tab label="<?= i::esc_attr__('Gestao') ?>" slug="gest">
+<mc-tab label="<?= i::esc_attr__('Gestao') ?>" slug="management">
     <mc-container>
-        <p class="fullwidth"><?php i::_e("Forneça algumas informações administrativos do museu sobre a gestão e como esse museu se caracteriza") ?></p>
+        <main class="fullwidth">
+            <div class="grid-12">
+                <mc-title tag="h4" size="medium" class="bold col-12"><?= i::__("Gestão e administração"); ?></mc-title>
+                <entity-data :entity="entity" prop="mus_esfera_tipo_federal" class="col-12"></entity-data>
+                <entity-data :entity="entity" prop="mus_abertura_ano" class="col-12"></entity-data>
+                <entity-data :entity="entity" prop="mus_instumentoCriacao_tipo" class="col-12"></entity-data>
+                <entity-data :entity="entity" prop="mus_instumentoCriacao_descricao" class="col-12"></entity-data>
+                <entity-data :entity="entity" prop="mus_contrato_gestao" class="col-12"></entity-data>
+                <entity-data :entity="entity" prop="mus_contrato_gestao_s_outros" class="col-12"></entity-data>
+                <entity-data :entity="entity" prop="mus_contrato_gestao_s" class="col-12"></entity-data>
+                <entity-data :entity="entity" prop="mus_contrato_qualificacoes" class="col-12"></entity-data>
+                <entity-data :entity="entity" prop="mus_num_pessoas" class="col-12"></entity-data>
+                <entity-data :entity="entity" prop="mus_func_tercerizado_s" class="col-12"></entity-data>
+                <entity-data :entity="entity" prop="mus_func_estagiario" class="col-12"></entity-data>
+                <entity-data :entity="entity" prop="mus_gestao_regimentoInterno" class="col-12"></entity-data>
+                <entity-data :entity="entity" prop="mus_gestao_planoMuseologico" class="col-12"></entity-data>
 
-        <mc-card class="fullwidth">
-            <template #title>
-                <label><?php i::_e("Informações sobre a gestão"); ?></label>
-            </template>
-            <template #content>
-                <div class="grid-12">
-                    <div class="col-12">
-                        <entity-data :entity="entity" prop="mus_esfera_tipo_federal"></entity-data>
-                    </div>
-                    <div class="col-12">
-                        <entity-data :entity="entity" prop="mus_abertura_ano"></entity-data>
-                    </div>
-                    <div class="col-12">
-                        <entity-data :entity="entity" prop="mus_instumentoCriacao_tipo"></entity-data>
-                    </div>
-                    <div class="col-12">
-                        <entity-data :entity="entity" prop="mus_instumentoCriacao_descricao"></entity-data>
-                    </div>
-                    <div class="col-12">
-                        <entity-data :entity="entity" prop="mus_contrato_gestao"></entity-data>
-                    </div>
-                    <div class="col-12">
-                        <entity-data :entity="entity" prop="mus_contrato_gestao_s_outros"></entity-data>
-                    </div>
-                    <div class="col-12">
-                        <entity-data :entity="entity" prop="mus_contrato_gestao_s"></entity-data>
-                    </div>
-                    <div class="col-12">
-                        <entity-data :entity="entity" prop="mus_contrato_qualificacoes"></entity-data>
-                    </div>
-                    <div class="col-12">
-                        <entity-data :entity="entity" prop="mus_num_pessoas"></entity-data>
-                    </div>
-                    <div class="col-12">
-                        <entity-data :entity="entity" prop="mus_func_tercerizado_s"></entity-data>
-                    </div>
-                    <div class="col-12">
-                        <entity-data :entity="entity" prop="mus_func_estagiario"></entity-data>
-                    </div>
-                    <div class="col-12">
-                        <entity-data :entity="entity" prop="mus_gestao_regimentoInterno"></entity-data>
-                    </div>
-                    <div class="col-12">
-                        <entity-data :entity="entity" prop="mus_gestao_planoMuseologico"></entity-data>
-                    </div>
-                </div>
-            </template>
-        </mc-card>
+                <div class="divider col-12"></div>
 
-        <mc-card class="fullwidth">
-            <template #title>
-                <label><?php i::_e("Caracterização"); ?></label>
-            </template>
-            <template #content>
-                <div class="grid-12">
-                    <div class="col-12">
-                        <entity-data :entity="entity" prop="mus_gestao_planoMuseologico"></entity-data>
-                    </div>
-                    <div class="col-12">
-                        <entity-data :entity="entity" prop="mus_tipo"></entity-data>
-                    </div>
-                    <div class="col-12">
-                        <entity-data :entity="entity" prop="mus_itinerante"></entity-data>
-                    </div>
-                    <div class="col-12">
-                        <entity-data :entity="entity" prop="mus_comunidadeRealizaAtividades"></entity-data>
-                    </div>
-                    <div class="col-12">
-                        <entity-data :entity="entity" prop="mus_tipo_tematica"></entity-data>
-                    </div>
-                </div>
-            </template>
-        </mc-card>
+                <mc-title tag="h4" size="medium" class="bold col-12"><?= i::__("Caracterização"); ?></mc-title>
+                <entity-data :entity="entity" prop="mus_gestao_planoMuseologico" class="col-12"></entity-data>
+                <entity-data :entity="entity" prop="mus_tipo" class="col-12"></entity-data>
+                <entity-data :entity="entity" prop="mus_itinerante" class="col-12"></entity-data>
+                <entity-data :entity="entity" prop="mus_comunidadeRealizaAtividades" class="col-12"></entity-data>
+                <entity-data :entity="entity" prop="mus_tipo_tematica" class="col-12"></entity-data>
+            </div>
+        </main>
     </mc-container>
 </mc-tab>

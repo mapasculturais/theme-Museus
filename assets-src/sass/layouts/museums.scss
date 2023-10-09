@@ -1,0 +1,19 @@
+@use '../../../../BaseV2/assets-src/sass/0.settings/mixins' as *;
+
+.layout-entity {
+    .fullwidth {
+        grid-column: span 2;
+    }
+
+    &.action-single {
+        .tab-component {
+            &.visit,
+            &.collection,
+            &.management {
+                .grid-12 {
+                    gap: size(40) size(24);
+                }
+            }
+        } 
+    }
+}

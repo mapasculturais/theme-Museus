@@ -12,107 +12,46 @@ $this->import('
     entity-field
     mc-container
     mc-card
+    mc-title
 ');
 ?>
 
 <mc-tab label="<?= i::esc_attr__('Visitação') ?>" slug="visit">
     <mc-container>
-        <p class="fullwidth"><?php i::_e("Informe aos visitantes o horário de funcionamento do museu, formas de entrada, acessibilidade e instalações  do local e as atividades realizadas.") ?></p>
+        <main class="fullwidth">
+            <div class="grid-12">
+                <mc-title tag="h4" size="medium" class="bold col-12"><?= i::__("Sobre o acervo do museu"); ?></mc-title>
+                <entity-data :entity="entity" prop="mus_status" class="col-12"></entity-data>
+                <entity-data :entity="entity" prop="mus_previsao_abertura_ano" class="col-12"></entity-data>
+                <entity-data :entity="entity" prop="mus_previsao_abertura_mes" class="col-12"></entity-data>
+                <entity-data :entity="entity" prop="mus_ingresso_cobrado" class="col-12"></entity-data>
+                <entity-data v-if="mus_ingresso_cobrado" :entity="entity" prop="mus_ingresso_valor" class="col-12"></entity-data>
+                <entity-data :entity="entity" prop="mus_obs_horario" class="col-12"></entity-data>
 
-        <mc-card class="fullwidth">
-            <template #title>
-                <label><?php i::_e("Público, acessibilidade e serviços"); ?></label>
-                <p class="card__title--description"><?php i::_e("Os dados inseridos abaixo serão exibidos para todos os usuários") ?></p>
-            </template>
-            <template #content>
-                <div class="grid-12">
-                    <div class="col-12">
-                        <entity-data :entity="entity" prop="mus_status"></entity-data>
-                    </div>
-                    <div class="col-12">
-                        <entity-data :entity="entity" prop="mus_previsao_abertura_ano"></entity-data>
-                    </div>
-                    <div class="col-12">
-                        <entity-data :entity="entity" prop="mus_previsao_abertura_mes"></entity-data>
-                    </div>
-                    <div class="col-12">
-                        <entity-data :entity="entity" prop="mus_ingresso_cobrado"></entity-data>
-                    </div>
-                    <div class="col-12">
-                        <entity-data :entity="entity" prop="mus_ingresso_valor"></entity-data>
-                    </div>
-                    <div class="col-12">
-                        <entity-data :entity="entity" prop="mus_obs_horario"></entity-data>
-                    </div>
-                </div>
-            </template>
-        </mc-card>
+                <div class="divider col-12"></div>
 
-        <mc-card class="fullwidth">
-            <template #title>
-                <label><?php i::_e("Acessibilidade"); ?></label>
-            </template>
-            <template #content>
-                <div class="grid-12">
-                    <div class="col-12">
-                        <entity-data :entity="entity" prop="mus_arquivo_acessoPublico"></entity-data>
-                    </div>
-                    <div class="col-12">
-                        <entity-data :entity="entity" prop="mus_acessibilidade_visual"></entity-data>
-                    </div>
-                    <div class="col-12">
-                        <entity-data :entity="entity" prop="mus_acess_visual_auditiva"></entity-data>
-                    </div>
-                    <div class="col-12">
-                        <entity-data :entity="entity" prop="mus_servicos_atendimentoEstrangeiros"></entity-data>
-                    </div>
-                </div>
-            </template>
-        </mc-card>
+                <mc-title tag="h4" size="medium" class="bold col-12"><?= i::__("Recursos de acessibilidade"); ?></mc-title>
+                <entity-data :entity="entity" prop="mus_arquivo_acessoPublico" class="col-12"></entity-data>
+                <entity-data :entity="entity" prop="mus_acessibilidade_visual" class="col-12"></entity-data>
+                <entity-data :entity="entity" prop="mus_acess_visual_auditiva" class="col-12"></entity-data>
+                <entity-data :entity="entity" prop="mus_servicos_atendimentoEstrangeiros" class="col-12"></entity-data>
 
-        <mc-card class="fullwidth">
-            <template #title>
-                <label><?php i::_e("Instalações"); ?></label>
-            </template>
-            <template #content>
-                <div class="grid-12">
-                    <div class="col-12">
-                        <entity-data :entity="entity" prop="mus_instalacoes"></entity-data>
-                    </div>
-                    <div class="col-12">
-                        <entity-data :entity="entity" prop="mus_instalacoes_capacidadeAuditorio"></entity-data>
-                    </div>
-                    <div class="col-12">
-                        <entity-data :entity="entity" prop="mus_arquivo_possui"></entity-data>
-                    </div>
-                    <div class="col-12">
-                        <entity-data :entity="entity" prop="mus_biblioteca_possui"></entity-data>
-                    </div>
-                    <div class="col-12">
-                        <entity-data :entity="entity" prop="mus_servicos_visitaGuiada"></entity-data>
-                    </div>
-                    <div class="col-12">
-                        <entity-data :entity="entity" prop="mus_servicos_visitaGuiada_s"></entity-data>
-                    </div>
-                </div>
-            </template>
-        </mc-card>
+                <div class="divider col-12"></div>
 
-        <mc-card class="fullwidth">
-            <template #title>
-                <label><?php i::_e("Atividades educativas e culturais "); ?></label>
-            </template>
-            <template #content>
-                <div class="grid-12">
-                    <div class="col-12">
-                        <entity-data :entity="entity" prop="mus_atividade_pub_especif"></entity-data>
-                    </div>
-                    <div class="col-12">
-                        <entity-data :entity="entity" prop="mus_atividade_pub_especif_s"></entity-data>
-                    </div>
-                </div>
-            </template>
-        </mc-card>
+                <mc-title tag="h4" size="medium" class="bold col-12"><?= i::__("Instalações que o museu oferece aos visitantes"); ?></mc-title>
+                <entity-data :entity="entity" prop="mus_instalacoes" class="col-12"></entity-data>
+                <entity-data :entity="entity" prop="mus_instalacoes_capacidadeAuditorio" class="col-12"></entity-data>
+                <entity-data :entity="entity" prop="mus_arquivo_possui" class="col-12"></entity-data>
+                <entity-data :entity="entity" prop="mus_biblioteca_possui" class="col-12"></entity-data>
+                <entity-data :entity="entity" prop="mus_servicos_visitaGuiada" class="col-12"></entity-data>
+                <entity-data :entity="entity" prop="mus_servicos_visitaGuiada_s" class="col-12"></entity-data>
 
+                <div class="divider col-12"></div>
+
+                <mc-title tag="h4" size="medium" class="bold col-12"><?= i::__("Atividades educativas e culturais para públicos específicos"); ?></mc-title>
+                <entity-data :entity="entity" prop="mus_atividade_pub_especif" class="col-12"></entity-data>
+                <entity-data :entity="entity" prop="mus_atividade_pub_especif_s" class="col-12"></entity-data>
+            </div>
+        </main>
     </mc-container>
 </mc-tab>
