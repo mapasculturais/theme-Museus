@@ -16,7 +16,7 @@ $this->import('
 
 <mc-tab label="<?= i::esc_attr__('Acervo') ?>" slug="acervo">
     <mc-container>
-        <p class="fullwidth"><?php i::_e("Nos dê informações sobre o acervo que o museu abriga.") ?></p>
+        <p class="fullwidth semibold"><?php i::_e("Nos dê informações sobre o acervo que o museu abriga.") ?></p>
 
         <mc-card class="fullwidth">
             <template #title>

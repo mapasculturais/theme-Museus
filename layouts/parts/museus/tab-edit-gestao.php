@@ -16,7 +16,7 @@ $this->import('
 
 <mc-tab label="<?= i::esc_attr__('Gestao') ?>" slug="gest">
     <mc-container>
-        <p class="fullwidth"><?php i::_e("Forneça algumas informações administrativos do museu sobre a gestão e como esse museu se caracteriza") ?></p>
+        <p class="fullwidth semibold"><?php i::_e("Forneça algumas informações administrativos do museu sobre a gestão e como esse museu se caracteriza") ?></p>
 
         <mc-card class="fullwidth">
             <template #title>
