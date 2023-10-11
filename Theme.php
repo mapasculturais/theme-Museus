@@ -487,19 +487,12 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
                     'NÃO possui acervo',
                 ]
             ],
-            'num_acervo_prest' => [
-                'label' => 'O comodato/empréstimo está formalizado por meio de documento legal?',
-                 'type' => 'select',
-                 'options' => [
-                 'Sim','Não',
-                ],
-            ],
 
             'num_acervo_prest' => [
                 'label' => 'O comodato/empréstimo está formalizado por meio de documento legal?',
-                 'type' => 'select',
+                 'type' => 'radio',
                  'options' => [
-                 'Sim','Não',
+                 'Sim', 'Não',
                 ],
             ],
 
@@ -792,7 +785,7 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
                 'label' => 'O museu possui funcionários terceirizados?',
                 'type' => 'radio',
                 'options' => [
-                    's' => 'Sim',
+                    's' => 'Sim', 
                     'n' => 'Não'
                 ]
             ],
@@ -805,7 +798,7 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
             ],
             'func_voluntario' => [
                 'label' => 'O museu possui voluntários?',
-                'type' => 'select',
+                'type' => 'radio',
                 'options' => [
                     's' => 'Sim',
                     'n' => 'Não'
@@ -832,7 +825,7 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
                 ]
             ],
             'instr_documento_n' => [
-                'label' => 'Caso o Museu não realize nenhuma ação de documentação de seu acervo, justifique',
+                'label' => 'Caso o Museu não realize nenhuma ação de documentação de seu acervo, justifique', 
                 'type' => 'text'
             ]
         ];
