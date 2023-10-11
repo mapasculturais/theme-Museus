@@ -140,6 +140,10 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
             $this->part('museus/tab-single-acervo');
             $this->part('museus/tab-single-gestao');
         });
+
+        $app->hook("template(space.edit.entity-info):end", function(){
+            $this->part('museus/entity-info-fields');
+        });
     }
 
     static function getThemeFolder() {
