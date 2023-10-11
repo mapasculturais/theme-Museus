@@ -24,7 +24,9 @@ $this->import('
             </template>
             <template #content>
                 <div class="grid-12">
+                    <entity-field :entity="entity" classes="col-12" prop="mus_mais_ent_federal"></entity-field>
                     <entity-field :entity="entity" classes="col-12" prop="mus_esfera_tipo_federal"></entity-field>
+                    <entity-field :entity="entity" classes="col-12" prop="mus_priv_esfera_tipo"></entity-field>
                     <entity-field :entity="entity" classes="col-12" prop="mus_abertura_ano"></entity-field>
                     <entity-field :entity="entity" classes="col-12" prop="mus_instumentoCriacao_tipo"></entity-field>
                     <entity-field :entity="entity" classes="col-12" prop="mus_instumentoCriacao_descricao"></entity-field>
@@ -34,7 +36,8 @@ $this->import('
                     <entity-field :entity="entity" classes="col-12" prop="mus_contrato_qualificacoes"></entity-field>
                     <entity-field :entity="entity" classes="col-12" prop="mus_num_pessoas"></entity-field>
                     <entity-field :entity="entity" classes="col-12" prop="mus_func_tercerizado"></entity-field>
-                    <entity-field :entity="entity" classes="col-12" prop="mus_func_tercerizado_s"></entity-field>
+                    <entity-field v-if="entity.mus_func_tercerizado == 's'":entity="entity" classes="col-12" prop="mus_func_tercerizado_s"></entity-field>
+                    <entity-field :entity="entity" classes="col-12" prop="mus_func_voluntario"></entity-field>
                     <entity-field :entity="entity" classes="col-12" prop="mus_func_estagiario"></entity-field>
                     <entity-field :entity="entity" classes="col-12" prop="mus_gestao_regimentoInterno"></entity-field>
                     <entity-field :entity="entity" classes="col-12" prop="mus_gestao_planoMuseologico"></entity-field>

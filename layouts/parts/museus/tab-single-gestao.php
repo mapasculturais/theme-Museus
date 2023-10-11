@@ -21,7 +21,9 @@ $this->import('
         <main class="fullwidth">
             <div class="grid-12">
                 <mc-title tag="h4" size="medium" class="bold col-12"><?= i::__("Gestão e administração"); ?></mc-title>
+                <entity-data :entity="entity" prop="mus_mais_ent_federal" class="col-12"></entity-data>
                 <entity-data :entity="entity" prop="mus_esfera_tipo_federal" class="col-12"></entity-data>
+                <entity-data :entity="entity" classes="col-12" prop="mus_priv_esfera_tipo"></entity-data>
                 <entity-data :entity="entity" prop="mus_abertura_ano" class="col-12"></entity-data>
                 <entity-data :entity="entity" prop="mus_instumentoCriacao_tipo" class="col-12"></entity-data>
                 <entity-data :entity="entity" prop="mus_instumentoCriacao_descricao" class="col-12"></entity-data>
@@ -30,7 +32,8 @@ $this->import('
                 <entity-data :entity="entity" prop="mus_contrato_gestao_s" class="col-12"></entity-data>
                 <entity-data :entity="entity" prop="mus_contrato_qualificacoes" class="col-12"></entity-data>
                 <entity-data :entity="entity" prop="mus_num_pessoas" class="col-12"></entity-data>
-                <entity-data :entity="entity" prop="mus_func_tercerizado_s" class="col-12"></entity-data>
+                <entity-data v-if="entity.mus_func_tercerizado == 's'":entity="entity" prop="mus_func_tercerizado_s" class="col-12"></entity-data>
+                <entity-data :entity="entity" prop="mus_func_voluntario" class="col-12"></entity-data>
                 <entity-data :entity="entity" prop="mus_func_estagiario" class="col-12"></entity-data>
                 <entity-data :entity="entity" prop="mus_gestao_regimentoInterno" class="col-12"></entity-data>
                 <entity-data :entity="entity" prop="mus_gestao_planoMuseologico" class="col-12"></entity-data>
