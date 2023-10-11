@@ -26,8 +26,10 @@ $this->import('
                 <div class="grid-12">
                     <entity-field :entity="entity" classes="col-12" prop="mus_num_total_acervo"></entity-field>
                     <entity-field :entity="entity" classes="col-12" prop="mus_num_total_acervo_prec"></entity-field>
+                    <entity-field :entity="entity" classes="col-12" prop="mus_num_acervo_prest"></entity-field>
                     <entity-field :entity="entity" classes="col-12" prop="mus_acervo_propriedade"></entity-field>
                     <entity-field :entity="entity" classes="col-12" prop="mus_instr_documento"></entity-field>
+                    <entity-field :entity="entity" classes="col-12" prop="mus_instr_documento_n"></entity-field>
                     <entity-field :entity="entity" classes="col-12" prop="mus_gestao_politicaAquisicao"></entity-field>
                     <entity-field :entity="entity" classes="col-12" prop="mus_gestao_politicaDescarte"></entity-field>
                     <entity-field :entity="entity" classes="col-12" prop="mus_instituicaoMantenedora"></entity-field>
