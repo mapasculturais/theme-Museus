@@ -401,7 +401,7 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
             ],
             'equipe_dev_educativo' => [
                 'label' => 'O museu possui equipe PRÓPRIA para desenvolvimento e realização de ações educativas e culturais?',
-                'type' => 'select',
+                'type' => 'radio',
                 'options' => ['Sim','Não']
             ],
             'servicos_visitaGuiada' => [
@@ -432,7 +432,7 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
             'acess_visual_auditiva' => [
                 'label' => 'O museu oferece instalações e serviços destinados às pessoas com deficiências auditivas e/ou visuais?',
                 'type' => 'radio',
-                'options' => ['Sim','Não']
+                'options' => ['Sim', 'Não']
             ],
 
             'acessibilidade_visual' => [
@@ -677,7 +677,7 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
                 'label' => 'O museu realiza atividades educativas e culturais para públicos específicos?',
                 'type' => 'radio',
                 'options' => [
-                    's' => 'Sim',
+                    's' => 'Sim', 
                     'n' => 'Não'
                 ]
             ],
