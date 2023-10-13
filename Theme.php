@@ -178,8 +178,8 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
             ],
 
             'cod' => [
-                'label' => 'Número na Processada',
-                'type' => 'readonly'
+                'label' => 'Código do museu',
+                'type' => 'text'
             ],
 
             'instituicaoMantenedora' => [
