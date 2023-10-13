@@ -883,8 +883,8 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
                 ],
                 
                 'esfera' => [
-                    'label' => 'Esfera',
-                    'type' => 'select',
+                    'label' => 'Identifique dentre as opções abaixo aquela que caracteriza o museu:',
+                    'type' => 'radio',
                     'options' => [
                         'Pública',
                         'Privada'
