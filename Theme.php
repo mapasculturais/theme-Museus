@@ -892,7 +892,7 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
                 ],
                 
                 'esfera_tipo' => [
-                    'label' => 'Tipo de esfera',
+                    'label' => 'Em caso de público, especifique:',
                     'type' => 'select',
                     'options' => [
                         'Federal',
