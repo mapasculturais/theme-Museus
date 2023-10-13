@@ -22,8 +22,9 @@ $this->import('
             <div class="grid-12">
                 <mc-title tag="h4" size="medium" class="bold col-12"><?= i::__("Sobre o acervo do museu"); ?></mc-title>
                 <entity-data :entity="entity" prop="mus_status" class="col-12"></entity-data>
-                <entity-data :entity="entity" prop="mus_previsao_abertura_ano" class="col-12"></entity-data>
-                <entity-data :entity="entity" prop="mus_previsao_abertura_mes" class="col-12"></entity-data>
+                <entity-data v-if="entity.mus_status == 'fechado'" :entity="entity" prop="mus_previsao_abertura_ano" class="col-12"></entity-data>
+                <entity-data v-if="entity.mus_status == 'fechado'" :entity="entity" prop="mus_previsao_abertura_mes" class="col-12"></entity-data>
+                <entity-data :entity="entity" prop="mus_metodo_contagem_pub" class="col-12"></entity-data>
                 <entity-data :entity="entity" prop="mus_ingresso_cobrado" class="col-12"></entity-data>
                 <entity-data v-if="mus_ingresso_cobrado" :entity="entity" prop="mus_ingresso_valor" class="col-12"></entity-data>
                 <entity-data v-if="mus_ingresso_cobrado" :entity="entity" prop="mus_desc_valor_ingresso" class="col-12"></entity-data>
