@@ -24,6 +24,7 @@ $this->import('
                     <mc-title tag="h4" size="medium" class="bold col-12"><?= i::__("Sobre o acervo do museu"); ?></mc-title>
                     <entity-data :entity="entity" prop="mus_num_total_acervo" class="col-12"></entity-data>
                     <entity-data :entity="entity" prop="mus_num_total_acervo_prec" class="col-12"></entity-data>
+                    <entity-data :entity="entity" prop="mus_num_acervo_prest" class="col-12"></entity-data>
                     <entity-data :entity="entity" prop="mus_acervo_propriedade" class="col-12"></entity-data>
                     <entity-data :entity="entity" prop="mus_instr_documento" class="col-12"></entity-data>
                     <entity-data :entity="entity" prop="mus_gestao_politicaAquisicao" class="col-12"></entity-data>
