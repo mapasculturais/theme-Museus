@@ -14,15 +14,15 @@ $lightness-300: 25%;
 $lightness-700: 25%;
 
 // Brand colors
-$primary-500: #0077B2;
-$secondary-500: #CE3683;
+$primary-500: #4D00FF;
+$secondary-500: #DF0D23;
 
 // Entities colors
-$opportunities-500: #CE3683;
-$events-500: #0077B2;
-$agents-500: #9756D8;
-$projects-500: #EF7B45;
-$spaces-500: #498200;
+$opportunities-500: #2BA100;
+$events-500: #4D00FF;
+$agents-500: #FF6400;
+$projects-500: #DF0D23;
+$spaces-500: #1C66F9;
 
 $seals-500: #1E1E1E;
 
@@ -35,7 +35,7 @@ $helper-500: #0074C1;
 // home
 $home-opportunities: #FFA4A3;
 $home-feature: #75C8FF;
-$home-register: #002842;
+$home-register: #0074C1;
 
 // PAGES
 @import 'layouts/museums.scss';
