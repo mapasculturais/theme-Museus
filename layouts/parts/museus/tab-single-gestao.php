@@ -21,9 +21,13 @@ $this->import('
         <main class="fullwidth">
             <div class="grid-12">
                 <mc-title tag="h4" size="medium" class="bold col-12"><?= i::__("Gestão e administração"); ?></mc-title>
+                <entity-data :entity="entity" prop="esfera" class="col-12"></entity-data>
+                <entity-data v-if="entity.esfera == 'Pública'":entity="entity" classes="col-12" prop="esfera_tipo">></entity-data>
                 <entity-data :entity="entity" prop="mus_mais_ent_federal" class="col-12"></entity-data>
                 <entity-data :entity="entity" prop="mus_esfera_tipo_federal" class="col-12"></entity-data>
                 <entity-data :entity="entity" classes="col-12" prop="mus_priv_esfera_tipo"></entity-data>
+                <entity-data :entity="entity" prop="certificado" class="col-12"></entity-data>
+                <entity-data :entity="entity" prop="cnpj" class="col-12"></entity-data>
                 <entity-data :entity="entity" prop="mus_abertura_ano" class="col-12"></entity-data>
                 <entity-data :entity="entity" prop="mus_instumentoCriacao_tipo" class="col-12"></entity-data>
                 <entity-data :entity="entity" prop="mus_instumentoCriacao_descricao" class="col-12"></entity-data>
