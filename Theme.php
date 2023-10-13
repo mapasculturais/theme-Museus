@@ -877,8 +877,11 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
                 
                 'cnpj' => [
                     'label' => 'CNPJ',
-                    'type' => 'CNPJ',
-                    'private' => false,
+                    'type' => 'text',
+                'validations' => array(
+                    'unique' => 'Este CNPJ já está cadastrado em nosso sistema.',
+                    'v::cnpj()' => 'O CNPJ é inválido.'
+                )
                     
                 ],
                 
