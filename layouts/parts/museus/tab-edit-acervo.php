@@ -9,8 +9,9 @@ use MapasCulturais\i;
 
 $this->import('
     entity-field
-    mc-container
+    entity-terms
     mc-card
+    mc-container
 ');
 ?>
 
@@ -28,6 +29,10 @@ $this->import('
                     <entity-field :entity="entity" classes="col-12" prop="mus_num_total_acervo_prec"></entity-field>
                     <entity-field :entity="entity" classes="col-12" prop="mus_num_acervo_prest"></entity-field>
                     <entity-field :entity="entity" classes="col-12" prop="mus_acervo_propriedade"></entity-field>
+                    <div class="field col-12">
+                        <label><?= i::__('Classifique as tipologias de acervo existentes no museu:')?></label>
+                        <entity-terms :entity="entity" taxonomy="mus_area" editable></entity-terms>
+                    </div> 
                     <entity-field :entity="entity" classes="col-12" prop="mus_instr_documento"></entity-field>
                     <entity-field :entity="entity" classes="col-12" prop="mus_instr_documento_n"></entity-field>
                     <entity-field :entity="entity" classes="col-12" prop="mus_gestao_politicaAquisicao"></entity-field>

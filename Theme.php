@@ -450,40 +450,13 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
                     'Texto/Etiquetas em braile com informações sobre os objetos expostos'
                 ],
             ],
-            'acessibilidade_locomocao' => [
-                'label' => 'Recursos de acessibilibidade física?',
-                'type'=>'multiselect',
-                'allowOther' => true,
-                'allowOtherText' => 'Outros',
-                'options' => [
-                    'Banheiros adaptados',
-                    'Elevador',
-                    'Bebedouro adaptado',
-                    'Circuito de visitação adaptado',
-                    'Elevador adaptado',
-                    'Telefone público adaptado',
-                    'Vaga de estacionamento exclusiva para idosos',
-                    'Rampa de acesso',
-                    'Sinalização tátil',
-                    'Cadeira de rodas para uso do visitante',
-                    'Corrimão nas escadas e rampas',
-                    'Sanitário adaptado',
-                    'Vaga de estacionamento exclusiva para deficientes'
-
-                ],
-            ],
-            'acessibilidade_possui' => [
-                    'label' => 'O espaço oferece acessibilidade??',
-                    'type' => 'radio',
-                    'options' => [ 'sim', 'não']
-            ],
             'arquivo_possui' => [
                 'label' => 'O museu possui arquivo histórico?',
                 'type' => 'radio',
                 'options' => [ 'sim', 'não']
             ],
             'arquivo_acessoPublico' => [
-                'label' => 'O arquivo tem acesso ao público?',
+                'label' => 'O arquivo histórico está aberto para consulta de usuários externos?',
                 'type' => 'radio',
                 'options' => [ 'sim', 'não']
             ],
@@ -493,8 +466,8 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
                 'options' => [ 'sim', 'não']
             ],
             'biblioteca_acessoPublico' => [
-                'label' => 'A biblioteca tem acesso ao público?',
-                'type' => 'select',
+                'label' => 'O acervo bibliográfico está aberto para consulta de usuários externos?',
+                'type' => 'radio',
                 'options' => [
                     '' => 'não se aplica',
                     'sim' => 'sim',

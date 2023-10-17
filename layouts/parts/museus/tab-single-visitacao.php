@@ -44,7 +44,9 @@ $this->import('
                 <entity-data :entity="entity" prop="mus_instalacoes" class="col-12"></entity-data>
                 <entity-data :entity="entity" prop="mus_instalacoes_capacidadeAuditorio" class="col-12"></entity-data>
                 <entity-data :entity="entity" prop="mus_arquivo_possui" class="col-12"></entity-data>
+                <entity-data :entity="entity" prop="mus_arquivo_acessoPublico" class="col-12"></entity-data>
                 <entity-data :entity="entity" prop="mus_biblioteca_possui" class="col-12"></entity-data>
+                <entity-data :entity="entity" prop="mus_biblioteca_acessoPublico" class="col-12"></entity-data>
                 <entity-data :entity="entity" prop="mus_equipe_dev_educativo" class="col-12"></entity-data>
                 <entity-data :entity="entity" prop="mus_servicos_visitaGuiada" class="col-12"></entity-data>
                 <entity-data :entity="entity" prop="mus_servicos_visitaGuiada_s" class="col-12"></entity-data>
