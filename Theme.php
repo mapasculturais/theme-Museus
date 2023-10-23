@@ -22,6 +22,10 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
 
         parent::_init();
 
+        $app->hook("component(mc-icon).iconset", function(&$icon){
+            $icon['space'] = "fluent:building-bank-16-filled";
+        });
+
         $app->hook('entity(Space).save:after', function() use ($app){
             if(!$this->getValidationErrors() && !$this->mus_cod){
                 $getDvFromNumeroIdent = function($numIdent)
