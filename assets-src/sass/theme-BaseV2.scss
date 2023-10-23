@@ -42,3 +42,14 @@ $home-register: #0074C1;
 
 @import '../../../BaseV2/assets-src/sass/theme-BaseV2';
 
+.main-footer .theme-logo.onlyImg .theme-logo__logo--img img {
+    max-height: 5rem;
+    @media (min-width: 800px) {
+        margin-bottom: 4rem;
+    }
+}
+
+.mc-header-logo {
+    width: 146.14px;
+}
+
