@@ -10,7 +10,7 @@ $queryParams =  [
     '@select' => 'id,name,shortDescription,terms,seals,singleUrl', 
     'type'=> 'BET(60,69)',
 ];
-$queryParams = array_merge($queryParams, (array) $app->config['home.spaces.filter']);
+
 $querySpaces = new MapasCulturais\ApiQuery(MapasCulturais\Entities\Space::class, $queryParams);
 
 $this->jsObject['home']['spaces'] =[
