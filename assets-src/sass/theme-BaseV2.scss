@@ -40,6 +40,10 @@ $home-register: #0074C1;
 // PAGES
 @import 'layouts/museums.scss';
 
+
+// Components
+@import 'assets-src/sass/components/home-spaces';
+
 @import '../../../BaseV2/assets-src/sass/theme-BaseV2';
 
 .main-footer .theme-logo.onlyImg .theme-logo__logo--img img {
