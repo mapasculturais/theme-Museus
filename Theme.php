@@ -148,6 +148,10 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
         $app->hook("template(space.edit.entity-info):end", function(){
             $this->part('museus/entity-info-fields');
         });
+
+        $app->hook('template(site.index.home-header-content):after', function(){
+            $this->part('museus/home-header-content');
+        });
     }
 
     static function getThemeFolder() {
