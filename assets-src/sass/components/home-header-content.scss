@@ -1,0 +1,20 @@
+@use '../../../../BaseV2/assets-src/sass/0.settings/mixins' as *;
+
+.home-header-content {
+    position: relative;
+    z-index: 4;
+
+    &__button {
+        width: size(350); 
+        height: size(60);
+        max-width: 100%; 
+        font-size: size(20);
+    }
+}
+
+.home-header {
+    &__content {
+        align-items: flex-end;
+        flex-wrap: wrap;
+    }
+}
