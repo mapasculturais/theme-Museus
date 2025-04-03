@@ -152,6 +152,10 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
         $app->hook('template(site.index.home-header-content):after', function(){
             $this->part('museus/home-header-content');
         });
+
+        $app->hook('template(site.index.mc-header-menu):end', function() {
+            $this->part('museus/mc-header-menu-memory-point');
+        });
     }
 
     static function getThemeFolder() {
