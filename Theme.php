@@ -43,6 +43,7 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
             }
         });
 
+        // Quando abrir a tela de busca atravez do menu ponto de memoria carrega ja filtrado
         $app->hook('GET(search.spaces)', function() use ($app) {
             if(isset($this->data['ponto_memoria'])) {
                 $app->hook('search-spaces-initial-pseudo-query', function(&$initial_pseudo_query) use ($app) {
