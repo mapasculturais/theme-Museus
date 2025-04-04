@@ -116,8 +116,8 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
         });
 
         // filtra pelo valor do keyword
-        $app->hook('repo(<<*>>).getIdsByKeywordDQL.where', function(&$where, $keyword) {
-            $where .= "OR lower(mus_cod.value) LIKE lower(:keyword)";
+        $app->hook('repo(<<*>>).getIdsByKeywordDQL.where', function(&$where, $keyword, $alias) {
+            $where .= "OR lower(mus_cod.value) LIKE lower(:{$alias})";
         });
 
         // own
@@ -148,8 +148,8 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
         });
 
         // filtra pelo valor do keyword
-        $app->hook('repo(<<*>>).getIdsByKeywordDQL.where', function(&$where, $keyword) {
-            $where .= "OR lower(num_sniic.value) LIKE lower(:keyword)";
+        $app->hook('repo(<<*>>).getIdsByKeywordDQL.where', function(&$where, $keyword, $alias) {
+            $where .= "OR lower(num_sniic.value) LIKE lower(:{$alias})";
         });
         
         // BUSCA POR NÚMERO MUNICIPIO
@@ -163,8 +163,8 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
         });
 
         // filtra pelo valor do keyword
-        $app->hook('repo(<<*>>).getIdsByKeywordDQL.where', function(&$where, $keyword) {
-            $where .= "OR lower(En_Municipio.value) LIKE lower(:keyword)";
+        $app->hook('repo(<<*>>).getIdsByKeywordDQL.where', function(&$where, $keyword, $alias) {
+            $where .= "OR lower(En_Municipio.value) LIKE lower(:{$alias})";
         });
         
         $app->hook("template(space.edit.tabs):end", function () {
