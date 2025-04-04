@@ -199,4 +199,5 @@ return [
         'Vitória de Santo Antão' => 'Vitória de Santo Antão',
         'Xexéu' => 'Xexéu',
     ],
+    'museus.memoryPoint.sealId' => env('MEMORY_POINT_SEALID', ''),
 ];
