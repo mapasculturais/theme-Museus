@@ -16,8 +16,42 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
          *
          * @see protectec/application/conf/space-types.php
          */
-        $app->hook('API.<<*>>(space).params', function(&$api_params) use ($app) {
-            $api_params['type'] = 'BET(60,69)';
+        $app->hook('ApiQuery(Space).joins', function(&$joins) {
+            $joins.= "
+                LEFT JOIN 
+                        e.__sealRelations sr 
+                WITH
+                    sr.seal in (27)
+            ";
+        });
+
+        $app->hook('ApiQuery(Space).where', function(&$where) use ($app) {
+            $complement = "";
+            if($memory_point_seal_id = $app->config['museus.memoryPoint.sealId']) {
+                $complement.= "OR sr.seal = {$memory_point_seal_id}";
+            }
+
+            $where.= "
+                AND e._type in (60,69) {$complement}
+            ";
+        });
+
+        // Insere filtro na tela de busca de espaço para filtrar pontos de memória
+        $app->hook('template(search.spaces.search-filter-space-field):before', function() use($app) {
+            if($app->config['museus.memoryPoint.sealId']) {
+                $this->part('museus/filter-memory-point');
+            }
+        });
+
+        // Quando abrir a tela de busca atravez do menu ponto de memoria carrega ja filtrado
+        $app->hook('GET(search.spaces)', function() use ($app) {
+            if(isset($this->data['ponto_memoria'])) {
+                $app->hook('search-spaces-initial-pseudo-query', function(&$initial_pseudo_query) use ($app) {
+                    if($seal_id = $app->config['museus.memoryPoint.sealId']) {
+                        $initial_pseudo_query['@seals'] = $seal_id;
+                    }
+                });
+            }
         });
 
         parent::_init();
