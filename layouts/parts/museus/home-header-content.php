@@ -17,7 +17,7 @@ $this->import('
     <div class="home-header-content">
         <a href="<?= $auth ?>" class="home-header-content__button button button--primary button--icon">
             <mc-icon name="add"></mc-icon>
-            <span><?= i::__('Criar Espaço') ?></span>
+            <span><?= i::__('Crie seu Museu aqui') ?></span>
         </a>
     </div>
 <?php else:  ?>
@@ -25,7 +25,7 @@ $this->import('
         <create-space #default="{modal}">
             <button @click="modal.open()" class="home-header-content__button button button--primary button--icon">
                 <mc-icon name="add"></mc-icon>
-                <span><?= i::__('Criar Espaço') ?></span>
+                <span><?= i::__('Crie seu Museu aqui') ?></span>
             </button>
         </create-space>
     </div>

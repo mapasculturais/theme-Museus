@@ -5,16 +5,9 @@
     z-index: 4;
 
     &__button {
-        width: size(350); 
-        height: size(60);
+        width: size(462); 
+        height: size(76);
         max-width: 100%; 
         font-size: size(20);
-    }
-}
-
-.home-header {
-    &__content {
-        align-items: flex-end;
-        flex-wrap: wrap;
     }
 }
