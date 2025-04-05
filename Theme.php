@@ -187,7 +187,7 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
             $this->part('museus/home-header-content');
         });
 
-        $app->hook('template(<<*>>.<<*>>.mc-header-menu):end', function() {
+        $app->hook('template(<<*>>.<<*>>.mc-header-menu-spaces):after', function() {
             $this->part('museus/mc-header-menu-memory-point');
         });
     }
