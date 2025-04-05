@@ -16,12 +16,13 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
          *
          * @see protectec/application/conf/space-types.php
          */
-        $app->hook('ApiQuery(Space).joins', function(&$joins) {
+        $app->hook('ApiQuery(Space).joins', function(&$joins) use($app) {
+            $seal_id = $app->config['museus.memoryPoint.sealId'];
             $joins.= "
                 LEFT JOIN 
                         e.__sealRelations sr 
                 WITH
-                    sr.seal in (27)
+                    sr.seal = {$seal_id}
             ";
         });
 
