@@ -33,7 +33,7 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
             }
 
             $where.= "
-                AND e._type in (60,69) {$complement}
+                AND e._type BETWEEN 60 AND 69 {$complement}
             ";
         });
 
