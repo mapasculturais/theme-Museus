@@ -38,21 +38,24 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
         });
 
         // Insere filtro na tela de busca de espaço para filtrar pontos de memória
-        $app->hook('template(search.spaces.search-filter-space-field):before', function() use($app) {
+        $app->hook('template(search.<<spaces|memory>>.search-filter-space-field):before', function() use($app) {
             if($app->config['museus.memoryPoint.sealId']) {
                 $this->part('museus/filter-memory-point');
             }
         });
 
-        // Quando abrir a tela de busca atravez do menu ponto de memoria carrega ja filtrado
-        $app->hook('GET(search.spaces)', function() use ($app) {
-            if(isset($this->data['ponto_memoria'])) {
-                $app->hook('search-spaces-initial-pseudo-query', function(&$initial_pseudo_query) use ($app) {
-                    if($seal_id = $app->config['museus.memoryPoint.sealId']) {
-                        $initial_pseudo_query['@seals'] = $seal_id;
-                    }
-                });
+        $app->hook('GET(search.memory)', function() use ($app) {
+            $app = App::i();
+
+            $initial_pseudo_query = [];
+
+            $app->applyHookBoundTo($this, 'search-memory-point-initial-pseudo-query', [&$initial_pseudo_query]);
+
+            if($seal_id = $app->config['museus.memoryPoint.sealId']) {
+                $initial_pseudo_query['@seals'] = "$seal_id";
             }
+
+            $this->render('space', ['initial_pseudo_query' => $initial_pseudo_query]);
         });
 
         parent::_init();
