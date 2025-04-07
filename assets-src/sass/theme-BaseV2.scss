@@ -59,3 +59,10 @@ $home-register: #0074C1;
     width: 146.14px;
 }
 
+.controller-search.action-memory {
+    .search__header--content--right {
+        button {
+            display: none;
+        }
+    }
+}
