@@ -33,15 +33,8 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
             }
 
             $where.= "
-                AND e._type BETWEEN 60 AND 69 {$complement}
+                AND (e._type BETWEEN 60 AND 69 {$complement})
             ";
-        });
-
-        // Insere filtro na tela de busca de espaço para filtrar pontos de memória
-        $app->hook('template(search.<<spaces|memory>>.search-filter-space-field):before', function() use($app) {
-            if($app->config['museus.memoryPoint.sealId']) {
-                $this->part('museus/filter-memory-point');
-            }
         });
 
         $app->hook('GET(search.memory)', function() use ($app) {
@@ -57,6 +50,92 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
 
             $this->render('space', ['initial_pseudo_query' => $initial_pseudo_query]);
         });
+
+        // Ajusta pseudo query para identificarmos a tela de busca de pontos de memoria
+        $app->hook('search-spaces-initial-pseudo-query', function(&$initial_pseudo_query){
+            $initial_pseudo_query['@museus'] = 1;
+        });
+
+        // Evita que seja carregado os pontos de memoria na tela de busca de museus
+        $app->hook('ApiQuery(Space).params', function(&$params){
+            if(($params['@museus'] ?? false) && empty($params['type'])) {
+                $params['type'] = "BET(60,69)";
+                unset($params['@museus']);
+            }
+        });
+
+        // Remove tipos de museus com relação a rota que esteja acessando Museus ou ponto de memoria
+        $app->hook('mapas.printJsObject:before', function() use ($app) {
+            /** @var Theme $this */
+            if($this->controller->id == "space" && $this->controller->action == "edit") {
+                $space = $this->controller->requestedEntity;
+                $seal_id = $app->config['museus.memoryPoint.sealId'];
+
+                foreach($space->relatedSeals as $seal) {
+                    if($seal->id == $seal_id) {
+                        
+                        return;
+                    }
+                }
+
+            } else if($this->controller->id == "search" && $this->controller->action == "memory") {
+                return;                
+            }
+
+            $options = $this->jsObject['EntitiesDescription']['space']['type']['options'];
+            $options_order = $this->jsObject['EntitiesDescription']['space']['type']['optionsOrder'];
+
+            $new_options = [];
+            foreach($options as $id => $value) {
+                if($id >= 60 && $id <= 69) {
+                    $new_options[$id] = $value;
+                }
+            }
+
+            $options_order = array_filter($options_order, fn($id) => $id >= 60 && $id <= 69);
+
+            $this->jsObject['EntitiesDescription']['space']['type']['options'] = $new_options;
+            $this->jsObject['EntitiesDescription']['space']['type']['optionsOrder'] = $options_order;
+
+        }, 1000);
+
+        // Ajuste textos entre as paginas de busca de museus e ponto de memoria
+        $app->hook('GET(<<*>>):before', function() use ($app) {
+            $replacements = [
+                // [
+                //     "espaço cultural",
+                //     "ponto de memória",
+                // ],
+                // [
+                //     "espaços culturais",
+                //     "pontos de memória",
+                // ],
+                // [
+                //     "espaços",
+                //     "pontos de memória",
+                // ],
+                // [
+                //     "espaço",
+                //     "ponto de memória",
+                // ],
+            ];
+
+            if($this->id == "space" && $this->action == "edit") {
+                $space = $this->requestedEntity;
+                $seal_id = $app->config['museus.memoryPoint.sealId'];
+                foreach($space->relatedSeals as $seal) {
+                    if($seal->id == $seal_id) {
+                        i::$replacements = $replacements;
+                    }
+                }
+
+            } else if($this->id == "search" && $this->action == "memory") {
+
+                i::$replacements = $replacements;
+            }
+        });
+
+
 
         parent::_init();
 
@@ -884,25 +963,6 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
     function register() {
         parent::register();
         $app = App::i();
-        $app->hook('app.register', function(&$registry) {
-            $group = null;
-            $registry['entity_type_groups']['MapasCulturais\Entities\Space'] = array_filter($registry['entity_type_groups']['MapasCulturais\Entities\Space'], function($item) use (&$group) {
-                if ($item->name === 'Museus') {
-                    $group = $item;
-                    return $item;
-                } else {
-                    return null;
-                }
-            });
-
-            $registry['entity_types']['MapasCulturais\Entities\Space'] = array_filter($registry['entity_types']['MapasCulturais\Entities\Space'], function($item) use ($group) {
-                if ($item->id >= $group->min_id && $item->id <= $group->max_id) {
-                    return $item;
-                } else {
-                    return null;
-                }
-            });
-        });
 
         $metadata = [
             'MapasCulturais\Entities\Event' => [
