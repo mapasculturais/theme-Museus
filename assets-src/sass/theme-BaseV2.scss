@@ -66,3 +66,14 @@ $home-register: #0074C1;
         }
     }
 }
+
+.action-memory {
+    .mc-header-menu--item.memory {
+        .icon {
+            background-color: var(--mc-spaces-500);
+        }
+        .label {
+            color: var(--mc-spaces-500);
+        }
+    }
+}
