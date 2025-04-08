@@ -67,6 +67,10 @@ $home-register: #0074C1;
     }
 }
 
+.mc-header-menu--item.space {
+    display: none;
+}
+
 .action-memory {
     .mc-header-menu--item.memory {
         .icon {
