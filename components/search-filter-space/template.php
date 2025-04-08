@@ -22,6 +22,11 @@ $this->import('
             <label> <?php i::_e('Status do espaço') ?> </label>
             <?php $this->applyTemplateHook('search-filter-space-field', 'before') ?>
             <label> <input v-model="pseudoQuery['acessibilidade']" true-value="Sim" :false-value="undefined" type="checkbox"> <?php i::_e('Possui acessibilidade') ?> </label>
+            
+            <?php if($this->controller->action != "memory"): ?>
+            <label class="verified"> <input v-model="pseudoQuery['@verified']" type="checkbox"> <?php i::_e('Espaços oficiais') ?> </label>
+            <?php endif ?>
+
             <?php $this->applyTemplateHook('search-filter-space-field', 'after') ?>
         </div>  
         <div class="field">
