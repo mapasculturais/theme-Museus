@@ -525,7 +525,7 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
                 'label' => 'Capacidade do teatro/auditório (assentos)',
                 'type' => 'number',
                 'validations' => [
-                    'v::numeric()' => 'a capacidade do teatro/auditório deve ser um número inteiro'
+                    'v::numericVal()' => 'a capacidade do teatro/auditório deve ser um número inteiro'
                 ]
             ],
             'equipe_dev_educativo' => [
