@@ -200,4 +200,5 @@ return [
         'Xexéu' => 'Xexéu',
     ],
     'museus.memoryPoint.sealId' => env('MEMORY_POINT_SEALID', ''),
+    'museus.subsiteId' => env('MUSEUS_SUBSITE_ID', '')
 ];

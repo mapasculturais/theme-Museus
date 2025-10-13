@@ -5,11 +5,116 @@ namespace MapasMuseus;
 use MapasCulturais\App;
 use MapasCulturais\Definitions;
 use MapasCulturais\i;
+use MapasCulturais\Utils;
 
 class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
 
     public function _init() {
         $app = App::i();
+        $self = $this;
+        $requiredSpaceFields = [
+            'acessibilidade_fisica',
+            'mus_resp_formacao',
+            'mus_acess_visual_auditiva',
+            'mus_acessibilidade_visual',
+            'mus_servicos_atendimentoEstrangeiros',
+            'mus_subordinado_museu_matriz',
+            'mus_museu_matriz',
+            'mus_nome_responsavel_instituicao',
+            'mus_cpf_responsavel_instituicao',
+            'mus_email_responsavel_instituicao',
+            'mus_telefone_responsavel_instituicao',
+            'mus_funcao_responsavel_instituicao',
+            'mus_endereco_correspondencia_visitacao',
+            'En_CEP',
+            'En_Nome_Logradouro',
+            'En_Num',
+            'En_Bairro',
+            'En_Municipio',
+            'En_Estado',
+            'emailPublico',
+            'emailPrivado',
+            'telefonePublico',
+            'telefone1',
+            'telefone2',
+            'capacidade',
+            'horario',
+            'mus_status',
+            'mus_metodo_contagem_pub',
+            'mus_ingresso_cobrado',
+            'mus_instalacoes',
+            'mus_instalacoes_capacidadeAuditorio',
+            'mus_arquivo_possui',
+            'mus_arquivo_acessoPublico',
+            'mus_biblioteca_possui',
+            'mus_biblioteca_acessoPublico',
+            'mus_equipe_dev_educativo',
+            'mus_servicos_visitaGuiada',
+            'mus_servicos_visitaGuiada_s',
+            'mus_atividade_pub_especif',
+            'mus_num_total_acervo_prec',
+            'mus_acervo_propriedade',
+            'mus_num_acervo_prest', //
+            'mus_instr_documento_n',
+            'mus_gestao_politicaAquisicao',
+            'mus_gestao_politicaDescarte',
+            'mus_equipe_tecnica',
+            'mus_acervo_material',
+            'mus_acervo_material_emExposicao',
+            'mus_instumentoCriacao_tipo',
+            'esfera',
+            'mus_mais_ent_federal',
+            'mus_esfera_tipo_federal',
+            'mus_priv_esfera_tipo',
+            'mus_contrato_gestao',
+            'mus_contrato_gestao_s',
+            'metodo_contagem_pub_outro', //
+            'mus_num_total_acervo',
+            'mus_area_outros', //
+            'mus_outros_cadastros',
+            'mus_tipo_unidadeConservacao',
+            'mus_tipo_unidadeConservacao_protecaoIntegral',
+            'mus_tipo_unidadeConservacao_usoSustentavel',
+            'mus_possui_certificado',
+            'possui_certificado',
+            'certificado', //
+            'cnpj',
+            'razao_social',
+            'mus_abertura_ano',
+            'mus_instituicaoMantenedora',
+            'mus_contrato_qualificacoes',
+            'mus_contrato_qualificacoes_outra', //
+            'mus_num_pessoas',
+            'mus_func_tercerizado',
+            'mus_func_voluntario',
+            'mus_func_estagiario',
+            'mus_gestao_regimentoInterno',
+            'mus_gestao_planoMuseologico',
+            'mus_gestao_planoMuseologico_outro', //
+            'mus_tipo',
+            'mus_tipo_outro', //
+            'mus_ponto_memoria',
+            'mus_possui_certificado_ibram', //
+            'mus_itinerante',
+            'mus_comunidadeRealizaAtividades',
+            'mus_tipo_tematica',
+            'mus_tipo_tematica_outro', //
+            'mus_exposicao_formato',
+            'mus_exposicao_formato_outros', //
+            'mus_exposicao_museu_cartaz',
+            'mus_realiza_atualizacao_expositivo',
+            'mus_instituicao_pesquisa',
+            'mus_instituicao_informacao_pesquisa',
+            'mus_instituicao_informacao_pesquisa_outros', //
+            'mus_recebe_pesquisadores',
+            'mus_pesquisa_devolutiva',
+            'mus_realiza_captacao_recurso',
+            'mus_fonte_captacao_recurso',
+            'mus_fonte_captacao_recurso_outros', //
+            'mus_foi_contemplado_editais',
+            'mus_foi_contemplado_editais_quais', //
+            'mus_foi_contemplado_editais_secult'
+        ];
 
         /*
          *  Modifica a consulta da API de espaços para só retornar Museus
@@ -98,6 +203,36 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
             $this->jsObject['EntitiesDescription']['space']['type']['optionsOrder'] = $options_order;
 
         }, 1000);
+
+        $app->hook('GET(space.edit):before', function () use($self, $requiredSpaceFields) {
+            /** @var Controllers\Space $this */
+
+            $self->spaceRequiredProperties($requiredSpaceFields);
+        });
+
+        $app->hook('PUT(space.single):before', function () use($self, $requiredSpaceFields) {
+            /** @var Controllers\Space $this */
+            $self->spaceRequiredProperties($requiredSpaceFields);
+        });
+
+        /* ALTERA O TIPO DE REQUISIÇÃO DO SALVAMENTO DE ESPAÇOS PARA PUT */
+        $app->hook('view(space.edit).updateMethod', function(&$update_method) {
+            $update_method = 'PUT';
+        });
+
+        $app->hook('entity(Space).validationErrors', function (&$errors) use($requiredSpaceFields) {
+            /** @var Entities\Space $this */
+
+            if($this->isNew()) {
+               return; 
+            }
+
+            foreach($requiredSpaceFields as $field) {
+                if(!$this->$field && !isset($errors[$field])) {
+                    $errors[$field] = [i::__('campo obrigatório')];
+                }
+            }
+        });
 
         // Ajuste textos entre as paginas de busca de museus e ponto de memoria
         $app->hook('GET(<<*>>):before', function() use ($app) {
@@ -254,12 +389,14 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
             $this->part('museus/tab-edit-visitacao');
             $this->part('museus/tab-edit-acervo');
             $this->part('museus/tab-edit-gestao');
+            $this->part('museus/tab-edit-pesquisa');
         });
         
         $app->hook("template(space.single.tabs):end", function(){
             $this->part('museus/tab-single-visitacao');
             $this->part('museus/tab-single-acervo');
             $this->part('museus/tab-single-gestao');
+            $this->part('museus/tab-single-pesquisa');
         });
 
         $app->hook("template(space.edit.entity-info):end", function(){
@@ -272,6 +409,18 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
 
         $app->hook('template(<<*>>.<<*>>.mc-header-menu-spaces):after', function() {
             $this->part('museus/mc-header-menu-memory-point');
+        });
+
+        $app->hook("template(space.edit.main-mc-card):begin", function(){
+            $this->part('museus/card-edit-subordinacao');
+        });
+
+        $app->hook("template(space.edit.mc-card-content-address):end", function(){
+            $this->part('museus/card-address');
+        });
+
+        $app->hook("template(space.edit.mc-card-content-acessibilidade_fisica):end", function(){
+            $this->part('museus/card-acessibilidade');
         });
     }
 
@@ -319,9 +468,9 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
                 'type' => 'radio',
                 'options' => [
                     '' => 'Não possui',
-                    'Museusbr',
-                    'Cadastro nacional de museus',
-                    'ICOM',
+                    'Cadastro Nacional de Museus - Museusbr',
+                    'Conselho Internacional de Museus - ICOM',
+                    // 'Cadastro nacional de museus',
                     'Outros',
                 ]
             ],
@@ -437,7 +586,28 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
                     'Virtual',
                     'Museu de território/Ecomuseu',
                     'Unidade de conservação da natureza',
-                    'Jardim zoológico, botânico, herbário, oceanário ou planetário'
+                    'Jardim zoológico, botânico, herbário, oceanário ou planetário',
+                    'Outro'
+                ]
+            ],
+            'tipo_outro' => [
+                'label' => 'Qual?',
+                'type' => 'text'
+            ],
+            'ponto_memoria' => [
+                'label' => 'O museu é Ponto de Memória',
+                'type' => 'radio',
+                'options' => [
+                    'Sim',
+                    'Não'
+                ]
+            ],
+            'possui_certificado_ibram' => [
+                'label' => 'Possui Certificação do instituto Brasileiro de Museus - IBRAM',
+                'type' => 'radio',
+                'options' => [
+                    'Sim',
+                    'Não'
                 ]
             ],
 
@@ -453,7 +623,12 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
                     'Meios de comunicação e transporte',
                     'Produção de bens e serviços',
                     'Defesa e segurança pública',
+                    'Outro'
                 ]
+            ],
+            'tipo_tematica_outro' => [
+                'label' => 'Qual?',
+                'type' => 'text'
             ],
                 
             'num_total_acervo' => [
@@ -534,7 +709,7 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
                 'options' => ['Sim','Não']
             ],
             'servicos_visitaGuiada' => [
-                'label' => 'O museu promove visitas guiadas?',
+                'label' => 'O museu promove visitas guiadas/mediadas?',
                 'type' => 'radio',
                 'options' => [ 'sim', 'não']
             ],
@@ -555,7 +730,8 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
                     'Sinalização visual',
                     'Material de divulgação impresso',
                     'Audioguia',
-                    'Guia, monitor,orientador e/ou mediador'
+                    'Guia, monitor,orientador e/ou mediador',
+                    '@NA' => 'Não possui'
                 ]
             ],
             'acess_visual_auditiva' => [
@@ -565,7 +741,7 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
             ],
 
             'acessibilidade_visual' => [
-                'label' => 'O museu oferece instalações e serviços destinados às pessoas com deficiências auditivas e visuais?',
+                'label' => 'Qual/quais?',
                 'type'=>'multiselect',
                 'allowOther' => true,
                 'allowOtherText' => 'Outros',
@@ -604,17 +780,144 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
                 ]
             ],
 
+            // novos campos informações
+            'subordinado_museu_matriz' => [
+                'label' => 'Está subordinado a algum Museu Matriz?',
+                'type' => 'radio',
+                'options' => ['Sim', 'Não']
+            ],
+            'museu_matriz' => [
+                'label' => 'Nome do Museu Matriz',
+                'type' => 'text',
+            ],
+            'nome_responsavel_instituicao' => [
+                'label' => 'Nome do responsável pela instituição',
+                'type' => 'text',
+            ],
+            'cpf_responsavel_instituicao' => [
+                'label' => 'CPF do responsável pela instituição',
+                'type' => 'cpf',
+                'validations' => [
+                    'v::cpf()' => 'O número de CPF informado é inválido.'
+                ],
+                'serialize' => function($value, $entity = null) {
+                    return Utils::formatCnpjCpf($value);
+                },
+                'unserialize' => function($value, $entity) {
+                    if (!$value) {
+                        $value = $entity->cpf_responsavel_instituicao ?: '';
+                    }
+
+                    return Utils::formatCnpjCpf($value);
+                }, 
+            ],
+            'email_responsavel_instituicao' => [
+                'label' => 'E-mail do responsável pela instituição',
+                'validations' => [
+                    'v::email()' => 'O endereço informado não é um email válido.'
+                ],
+                'field_type' => 'email',
+            ],
+            'telefone_responsavel_instituicao' => [
+                'label' => 'Telefone do responsável pela instituição',
+                'type' => 'string',
+                'validations' => [
+                    'v::brPhone()' => 'O número de telefone informado é inválido.'
+                ],
+                'field_type' => 'brPhone'
+            ],
+            'funcao_responsavel_instituicao' => [
+                'label' => 'Função exercida no museu ',
+                'type' => 'textarea',
+            ],
+
+            'endereco_correspondencia_visitacao' => [
+                'label' => 'O endereço de correspondência é o mesmo de visitação?',
+                'type' => 'radio',
+                'options' => ['Sim', 'Não']
+            ],
+
+            'cep_visitacao' => [
+                'label' => 'CEP',
+                'type' => 'cep',
+            ],
+
+            'logradouro_visitacao' => [
+                'label' => 'Logradouro',
+            ],
+
+            'numero_visitacao' => [
+                'label' => 'Número',
+            ],
+
+            'bairro_visitacao' => [
+                'label' => 'Bairro',
+            ],
+
+            'complemento_visitacao' => [
+                'label' => 'Complemento ou ponto de referência',
+            ],
+
+            'estado_visitacao' => [
+                'label' => 'Estado',
+                'type' => 'select',
+                'options' => array(
+                    'AC'=>'Acre',
+                    'AL'=>'Alagoas',
+                    'AP'=>'Amapá',
+                    'AM'=>'Amazonas',
+                    'BA'=>'Bahia',
+                    'CE'=>'Ceará',
+                    'DF'=>'Distrito Federal',
+                    'ES'=>'Espírito Santo',
+                    'GO'=>'Goiás',
+                    'MA'=>'Maranhão',
+                    'MT'=>'Mato Grosso',
+                    'MS'=>'Mato Grosso do Sul',
+                    'MG'=>'Minas Gerais',
+                    'PA'=>'Pará',
+                    'PB'=>'Paraíba',
+                    'PR'=>'Paraná',
+                    'PE'=>'Pernambuco',
+                    'PI'=>'Piauí',
+                    'RJ'=>'Rio de Janeiro',
+                    'RN'=>'Rio Grande do Norte',
+                    'RS'=>'Rio Grande do Sul',
+                    'RO'=>'Rondônia',
+                    'RR'=>'Roraima',
+                    'SC'=>'Santa Catarina',
+                    'SP'=>'São Paulo',
+                    'SE'=>'Sergipe',
+                    'TO'=>'Tocantins',
+                ),
+            ],
+
+            'municipio_visitacao' => [
+                'label' => 'Município',
+                'validations' => [
+                    // 'required' => 'O campo é obrigatório'
+                ],
+            ],
+
             // acervo
             'acervo_propriedade' => [
                 'label' => 'Propriedade do acervo',
-                'type' => 'radio',
+                'type' => 'multiselect',
                 'options' => [
                     'Possui SOMENTE acervo próprio',
-                    'Possui acervo próprio e em comodato',
+                    'Possui acervo próprio e de doações',
                     'Acervo compartilhado entre órgãos/setores da mesma entidade mantenedora',
                     'Possui SOMENTE acervo em comodato/empréstimo',
-                    'NÃO possui acervo',
+                    'NÃO possui acervo'
                 ]
+                // 'type' => 'radio',
+                // 'options' => [
+                //     'Possui SOMENTE acervo próprio',
+                //     'Possui acervo próprio e em comodato',
+                //     'Acervo compartilhado entre órgãos/setores da mesma entidade mantenedora',
+                //     'Possui SOMENTE acervo em comodato/empréstimo',
+                //     'NÃO possui acervo',
+                // ]
             ],
 
             'num_acervo_prest' => [
@@ -623,6 +926,11 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
                  'options' => [
                  'Sim', 'Não',
                 ],
+            ],
+
+            'area_outros' => [
+                'label' => 'Qual?',
+                'type' => 'text'
             ],
 
             'acervo_material' => [
@@ -657,15 +965,19 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
             ],
 
             'metodo_contagem_pub' => [
-                'label' => 'Método de contagem de publico',
+                'label' => 'Método de contagem de público',
                 'type' => 'select',
                 'options' => [
-                    'Livro de assinaturas',
-                    'Ingressos impressos',
-                    'Catraca',
-                    'Agendamento',
-                    'Outros'
+                    'Ingresso',
+                    'Livro de assinatura',
+                    'Listagem de agendamento',
+                    'Outro',
+                    '@NA' => 'Não possui'
                 ]
+            ],
+            'metodo_contagem_pub_outro' => [
+                'label' => 'Qual?',
+                'type' => 'text'
             ],
 
             'ingresso_cobrado' => [
@@ -691,7 +1003,7 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
 
             // GESTÂO
             'gestao_regimentoInterno' => [
-                'label' => 'O museu posui regimento interno?',
+                'label' => 'O museu possui regimento interno?',
                 'type' => 'radio',
                 'options' => ['sim', 'não']
             ],
@@ -700,6 +1012,13 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
                 'label' => 'O museu possui plano museológico?',
                 'type' => 'radio',
                 'options' => ['sim', 'não']
+            ],
+            'gestao_planoMuseologico_outro' => [
+                'label' => 'Tempo de vigência',
+                'type' => 'number',
+                'validations' => [
+                    'v::numericVal()' => 'a capacidade do teatro/auditório deve ser um número inteiro'
+                ]
             ],
 
             'gestao_politicaAquisicao' => [
@@ -891,6 +1210,11 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
                     'Outros'
                 ]
             ],
+            'contrato_gestao_s_outros_outros' => [
+                'label' => 'Quais?',
+                'type' => 'text'
+            ],
+
             'contrato_qualificacoes' => [
                 'label' => 'A contratada possui qualificações?',
                 'type' => 'radio',
@@ -903,6 +1227,11 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
                     'Outra'
                 ]
             ],
+            'contrato_qualificacoes_outra' => [
+                'label' => 'Qual?',
+                'type' => 'text'
+            ],
+
             'num_pessoas' => [
                 'label' => 'Quantas pessoas trabalham no museu (contabilizar terceirizados, estagiários e voluntários)?',
                 'type' => 'integer',
@@ -955,6 +1284,128 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
             ],
             'instr_documento_n' => [
                 'label' => 'Caso o Museu não realize nenhuma ação de documentação de seu acervo, justifique', 
+                'type' => 'text'
+            ],
+
+            // Pesquisa
+            'exposicao_formato' => [
+                'label' => 'O Museu realiza exposições de qual formato?',
+                'type' => 'multiselect',
+                'options' => [
+                    'Curta duração',
+                    'Itinerantes',
+                    'Virtuais',
+                    'Mantém apenas a exposição de longa duração',
+                    'Outros'
+                ]
+            ],
+            'exposicao_formato_outros' => [
+                'label' => 'Quais?',
+                'type' => 'text'
+            ],
+            'exposicao_museu_cartaz' => [
+                'label' => 'Há quanto tempo a exposição do museu está em cartaz?',
+                'type' => 'select',
+                'options' => [
+                    '1 a 3 anos',
+                    '4 a 7 anos',
+                    '8 a 10 anos',
+                    'Mais de 10 anos',
+                    'Não possui exposição de longa duração'
+                ]
+            ],
+            'realiza_atualizacao_expositivo' => [
+                'label' => 'O Museu realiza atualização do seu conteúdo/acervo expositivo',
+                'type' => 'radio',
+                'options' => [
+                    'Sim',
+                    'Não',
+                ]
+            ],
+            'instituicao_pesquisa' => [
+                'label' => 'A instituição desenvolve atividade de pesquisa?',
+                'type' => 'radio',
+                'options' => [
+                    'Sim',
+                    'Não',
+                ]
+            ],
+            'instituicao_informacao_pesquisa' => [
+                'label' => '',
+                'type' => 'select',
+                'options' => [
+                    'Mediações',
+                    'Contribuem para produção de conteúdos para o museu',
+                    'Contribuem produção de artigos científicos',
+                    'Outros'
+                ]
+            ],
+            'instituicao_informacao_pesquisa_outros' => [
+                'label' => 'Qual?',
+                'type' => 'text'
+            ],
+            'recebe_pesquisadores' => [
+                'label' => 'O Museu recebe pesquisadores e/ou instituições para realização de pesquisas?',
+                'type' => 'radio',
+                'options' => [
+                    'Sim',
+                    'Não',
+                ]
+            ],
+            'pesquisa_devolutiva' => [
+                'label' => 'As pesquisas que utilizam a instituição do museu como instrumento, fornecem algum tipo de devolutiva?',
+                'type' => 'radio',
+                'options' => [
+                    'Sim',
+                    'Não',
+                ]
+            ],
+            'realiza_captacao_recurso' => [
+                'label' => 'O museu realiza captação de recursos financeiros?',
+                'type' => 'radio',
+                'options' => [
+                    'Sim',
+                    'Não',
+                ]
+            ],
+            'fonte_captacao_recurso' => [
+                'label' => '',
+                'type' => 'select',
+                'options' => [
+                    'Patrocínio local',
+                    'Lei Rouanet',
+                    'Editais de Fomento Nacional',
+                    'Editais de Fomento Estadual',
+                    'Editais de Fomento Municipal',
+                    'Outros'
+                ]
+            ],
+            'fonte_captacao_recurso_outros' => [
+                'label' => 'Qual?',
+                'type' => 'text'
+            ],
+            'foi_contemplado_editais' => [
+                'label' => 'O museu já foi contemplado em editais publicados pelo município',
+                'type' => 'radio',
+                'options' => [
+                    'Sim',
+                    'Não',
+                ]
+            ],
+            'foi_contemplado_editais_quais' => [
+                'label' => 'Qual/quais?',
+                'type' => 'text'
+            ],
+            'foi_contemplado_editais_secult' => [
+                'label' => 'O museu já foi contemplado em editais publicados pelo Estado ou Secult/PE? ',
+                'type' => 'radio',
+                'options' => [
+                    'Sim',
+                    'Não',
+                ]
+            ],
+            'foi_contemplado_editais_secult_quais' => [
+                'label' => 'Qual/quais?',
                 'type' => 'text'
             ]
         ];
@@ -1022,6 +1473,15 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
                         'Outra',
                     ],
                 ],
+
+                'possui_certificado' => [
+                    'label' => 'O museu possui Títulos, Certificados, prêmios',
+                    'type' => 'radio',
+                    'options' => [
+                        'Sim',
+                        'Não',
+                    ]
+                ],
                 
                 'certificado' => [
                     'label' => 'Títulos e Certificados',
@@ -1036,6 +1496,11 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
                         'UPM'   => 'Certificado de Utilidade Pública Municipal (UPM)'
                     ]
                 ],
+
+                'razao_social' => [
+                    'label' => 'Razão social',
+                    'type' => 'text'
+                ]
             ],
 
             'MapasCulturais\Entities\Agent' => [
@@ -1204,5 +1669,17 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
         ];
 
         return $filters;
+    }
+
+    public function spaceRequiredProperties(array $required_metadata) {
+        $app = App::i();
+
+        $metadata = $app->getRegisteredMetadata('MapasCulturais\Entities\Space');
+
+        foreach($metadata as $meta) {
+            if(in_array($meta->key, $required_metadata)) {
+                $meta->is_required = true;
+            }
+        }
     }
 }
