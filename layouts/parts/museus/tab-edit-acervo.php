@@ -27,22 +27,19 @@ $this->import('
                 <div class="grid-12">
                     <entity-field :entity="entity" classes="col-12" prop="mus_num_total_acervo"></entity-field>
                     <entity-field :entity="entity" classes="col-12" prop="mus_num_total_acervo_prec"></entity-field>
-                    <entity-field :entity="entity" classes="col-12" prop="mus_num_acervo_prest"></entity-field>
                     <entity-field :entity="entity" classes="col-12" prop="mus_acervo_propriedade"></entity-field>
+                    <entity-field v-if="entity.mus_acervo_propriedade && entity.mus_acervo_propriedade.includes('Possui SOMENTE acervo em comodato/empréstimo')" :entity="entity" classes="col-12" prop="mus_num_acervo_prest"></entity-field>
                     <div class="field col-12">
                         <label><?= i::__('Classifique as tipologias de acervo existentes no museu:')?></label>
                         <entity-terms :entity="entity" taxonomy="mus_area" editable></entity-terms>
-                    </div> 
+                    </div>
+                    <entity-field v-if="entity.terms.mus_area.includes('Outros')" :entity="entity" classes="col-12" prop="mus_area_outros"></entity-field>
                     <entity-field :entity="entity" classes="col-12" prop="mus_instr_documento"></entity-field>
                     <entity-field :entity="entity" classes="col-12" prop="mus_instr_documento_n"></entity-field>
                     <entity-field :entity="entity" classes="col-12" prop="mus_gestao_politicaAquisicao"></entity-field>
                     <entity-field :entity="entity" classes="col-12" prop="mus_gestao_politicaDescarte"></entity-field>
-                    <entity-field :entity="entity" classes="col-12" prop="mus_instituicaoMantenedora"></entity-field>
                     <entity-field :entity="entity" classes="col-12" prop="mus_outros_cadastros"></entity-field>
-                    <entity-field :entity="entity" classes="col-12" prop="mus_resp_formacao"></entity-field>
-                    <entity-field :entity="entity" classes="col-12" prop="mus_area_formacao"></entity-field>
                     <entity-field :entity="entity" classes="col-12" prop="mus_equipe_tecnica"></entity-field>
-                    <entity-field :entity="entity" classes="col-12" prop="mus_periodo_museologico"></entity-field>
                     <entity-field :entity="entity" classes="col-12" prop="mus_tipo_unidadeConservacao"></entity-field>
                     <entity-field :entity="entity" classes="col-12" prop="mus_tipo_unidadeConservacao_protecaoIntegral"></entity-field>
                     <entity-field :entity="entity" classes="col-12" prop="mus_tipo_unidadeConservacao_usoSustentavel"></entity-field>

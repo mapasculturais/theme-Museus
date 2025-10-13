@@ -28,12 +28,10 @@ $this->import('
                 <entity-data :entity="entity" prop="mus_ingresso_cobrado" class="col-12"></entity-data>
                 <entity-data v-if="mus_ingresso_cobrado == 'sim'" :entity="entity" prop="mus_ingresso_valor" class="col-12"></entity-data>
                 <entity-data v-if="mus_ingresso_cobrado == 'sim'" :entity="entity" prop="mus_desc_valor_ingresso" class="col-12"></entity-data>
-                <entity-data :entity="entity" prop="mus_obs_horario" class="col-12"></entity-data>
 
                 <div class="divider col-12"></div>
 
                 <mc-title tag="h4" size="medium" class="bold col-12"><?= i::__("Recursos de acessibilidade"); ?></mc-title>
-                <entity-data :entity="entity" prop="mus_arquivo_acessoPublico" class="col-12"></entity-data>
                 <entity-data :entity="entity" prop="mus_acessibilidade_visual" class="col-12"></entity-data>
                 <entity-data :entity="entity" prop="mus_acess_visual_auditiva" class="col-12"></entity-data>
                 <entity-data :entity="entity" prop="mus_servicos_atendimentoEstrangeiros" class="col-12"></entity-data>
@@ -42,7 +40,7 @@ $this->import('
 
                 <mc-title tag="h4" size="medium" class="bold col-12"><?= i::__("Instalações que o museu oferece aos visitantes"); ?></mc-title>
                 <entity-data :entity="entity" prop="mus_instalacoes" class="col-12"></entity-data>
-                <entity-data :entity="entity" prop="mus_instalacoes_capacidadeAuditorio" class="col-12"></entity-data>
+                <entity-data v-if="entity.mus_instalacoes && entity.mus_instalacoes.includes('Teatro/Auditório')" :entity="entity" prop="mus_instalacoes_capacidadeAuditorio" class="col-12"></entity-data>
                 <entity-data :entity="entity" prop="mus_arquivo_possui" class="col-12"></entity-data>
                 <entity-data :entity="entity" prop="mus_arquivo_acessoPublico" class="col-12"></entity-data>
                 <entity-data :entity="entity" prop="mus_biblioteca_possui" class="col-12"></entity-data>

@@ -28,7 +28,9 @@ $this->import('
                 <entity-data :entity="entity" classes="col-12" prop="mus_priv_esfera_tipo"></entity-data>
                 <entity-data :entity="entity" prop="certificado" class="col-12"></entity-data>
                 <entity-data :entity="entity" prop="cnpj" class="col-12"></entity-data>
+                <entity-data :entity="entity" prop="razao_social" class="col-12"></entity-data>
                 <entity-data :entity="entity" prop="mus_abertura_ano" class="col-12"></entity-data>
+                <entity-data :entity="entity" prop="mus_instituicaoMantenedora" class="col-12"></entity-data>
                 <entity-data :entity="entity" prop="mus_instumentoCriacao_tipo" class="col-12"></entity-data>
                 <entity-data :entity="entity" prop="mus_instumentoCriacao_descricao" class="col-12"></entity-data>
                 <entity-data :entity="entity" prop="mus_contrato_gestao" class="col-12"></entity-data>
