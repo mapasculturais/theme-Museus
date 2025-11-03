@@ -16,7 +16,9 @@ $this->import('
 
 <mc-tab label="<?= i::esc_attr__('Visitação') ?>" slug="visit">
     <mc-container>
-        <p class="fullwidth semibold"><?php i::_e("Informe aos visitantes, formas de entrada, acessibilidade e instalações do local e as atividades realizadas.") ?></p>
+        <mc-card class="fullwidth"> 
+            <p class="fullwidth semibold"><?php i::_e("Informe aos visitantes, formas de entrada, acessibilidade e instalações do local e as atividades realizadas.") ?></p>
+        </mc-card>
 
         <mc-card class="fullwidth">
             <template #title>

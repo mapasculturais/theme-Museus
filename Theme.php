@@ -400,6 +400,10 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
             $this->part('museus/tab-single-pesquisa');
         });
 
+        $app->hook("template(space.edit.entity-field-label):after", function(){
+           $this->part('museus/field-descriptions-customizations');
+        });
+
         $app->hook("template(space.edit.entity-info):end", function(){
             $this->part('museus/entity-info-fields');
         });
@@ -476,7 +480,7 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
                 ]
             ],
             'resp_formacao' => [
-                'label' => 'Formação do responsável pela instituição',
+                'label' => 'Formação do responsável',
                 'type' => 'radio',
                 'options' => [
                     'Ensino fundamental',
@@ -792,11 +796,11 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
                 'type' => 'text',
             ],
             'nome_responsavel_instituicao' => [
-                'label' => 'Nome do responsável pela instituição',
+                'label' => 'Nome do responsável',
                 'type' => 'text',
             ],
             'cpf_responsavel_instituicao' => [
-                'label' => 'CPF do responsável pela instituição',
+                'label' => 'CPF do responsável',
                 'type' => 'cpf',
                 'validations' => [
                     'v::cpf()' => 'O número de CPF informado é inválido.'
@@ -813,14 +817,14 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
                 }, 
             ],
             'email_responsavel_instituicao' => [
-                'label' => 'E-mail do responsável pela instituição',
+                'label' => 'E-mail do responsável',
                 'validations' => [
                     'v::email()' => 'O endereço informado não é um email válido.'
                 ],
                 'field_type' => 'email',
             ],
             'telefone_responsavel_instituicao' => [
-                'label' => 'Telefone do responsável pela instituição',
+                'label' => 'Telefone do responsável',
                 'type' => 'string',
                 'validations' => [
                     'v::brPhone()' => 'O número de telefone informado é inválido.'

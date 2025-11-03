@@ -1,0 +1,31 @@
+@use '../../../../BaseV2/assets-src/sass/0.settings/mixins' as *;
+
+/* card edit subordinacao */
+.edit-subordinacao {
+    .margin-top-16 {
+        margin-top: size(16);
+    }
+    .margin-bottom-16 {
+        margin-bottom: size(16);
+    }
+
+    .mc-card__title {
+        margin-bottom: 0.5rem;
+    }
+
+    &__content {
+        &--description {
+            margin-bottom: size(16);
+        }
+
+        &--matriz {
+            margin-top: size(16);
+        }
+
+        &--matriz-fields {
+            margin-top: 6rem;
+        }
+    }
+}
+
+/* card edit acessibilidade */ 
