@@ -416,16 +416,8 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
             $this->part('museus/mc-header-menu-memory-point');
         });
 
-        $app->hook("template(space.edit.main-mc-card):begin", function(){
-            $this->part('museus/card-edit-subordinacao');
-        });
-
         $app->hook("template(space.edit.mc-card-content-address):end", function(){
             $this->part('museus/card-address');
-        });
-
-        $app->hook("template(space.edit.mc-card-content-acessibilidade_fisica):end", function(){
-            $this->part('museus/card-acessibilidade');
         });
     }
 
