@@ -37,7 +37,7 @@ $this->import('
                     <entity-field :entity="entity" classes="col-12" prop="mus_foi_contemplado_editais"></entity-field>
                     <entity-field v-if="entity.mus_foi_contemplado_editais == 'Sim'" :entity="entity" classes="col-12" prop="mus_foi_contemplado_editais_quais"></entity-field>
                     <entity-field :entity="entity" classes="col-12" prop="mus_foi_contemplado_editais_secult"></entity-field>
-                    <entity-field v-if="entity.mus_foi_contemplado_editais_secult_quais == 'Sim'" :entity="entity" classes="col-12" prop="mus_foi_contemplado_editais_secult_quais"></entity-field>
+                    <entity-field v-if="entity.mus_foi_contemplado_editais_secult == 'Sim'" :entity="entity" classes="col-12" prop="mus_foi_contemplado_editais_secult_quais"></entity-field>
                 </div>
             </template>
         </mc-card>
