@@ -54,8 +54,9 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
             'mus_atividade_pub_especif',
             'mus_num_total_acervo_prec',
             'mus_acervo_propriedade',
-            'mus_num_acervo_prest', //
-            'mus_instr_documento_n',
+            // 'mus_num_acervo_prest',
+            'mus_instr_documento',
+            'mus_instr_documento',
             'mus_gestao_politicaAquisicao',
             'mus_gestao_politicaDescarte',
             'mus_equipe_tecnica',
@@ -72,16 +73,16 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
             'mus_num_total_acervo',
             'mus_area_outros', //
             'mus_outros_cadastros',
-            'mus_tipo_unidadeConservacao',
-            'mus_tipo_unidadeConservacao_protecaoIntegral',
-            'mus_tipo_unidadeConservacao_usoSustentavel',
+            // 'mus_tipo_unidadeConservacao',
+            // 'mus_tipo_unidadeConservacao_protecaoIntegral',
+            // 'mus_tipo_unidadeConservacao_usoSustentavel',
             'mus_possui_certificado',
             'possui_certificado',
             'certificado', //
             'cnpj',
             'razao_social',
             'mus_abertura_ano',
-            'mus_instituicaoMantenedora',
+            // 'mus_instituicaoMantenedora',
             'mus_contrato_qualificacoes',
             'mus_contrato_qualificacoes_outra', //
             'mus_num_pessoas',
@@ -641,6 +642,7 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
                 ],
             ],
 
+            /*
             'tipo_unidadeConservacao' => [
                 'label' => 'Tipo/categoria de manejo da Unidade de Conservação',
                 'type' => 'radio',
@@ -678,6 +680,7 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
                     'Reserva Particular do Patrimônio Natural'
                 ]
             ],
+            */
 
             'instalacoes' => [
                 'label' => 'Instalações básicas e serviços oferecidos',
@@ -899,7 +902,7 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
             // acervo
             'acervo_propriedade' => [
                 'label' => 'Propriedade do acervo',
-                'type' => 'multiselect',
+                'type' => 'radio',
                 'options' => [
                     'Possui SOMENTE acervo próprio',
                     'Possui acervo próprio e de doações',
@@ -1014,7 +1017,7 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
                 'label' => 'Tempo de vigência',
                 'type' => 'number',
                 'validations' => [
-                    'v::numericVal()' => 'a capacidade do teatro/auditório deve ser um número inteiro'
+                    'v::numericVal()' => 'o tempo de vigência deve ser um número inteiro'
                 ]
             ],
 
@@ -1207,10 +1210,6 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
                     'Outros'
                 ]
             ],
-            'contrato_gestao_s_outros_outros' => [
-                'label' => 'Quais?',
-                'type' => 'text'
-            ],
 
             'contrato_qualificacoes' => [
                 'label' => 'A contratada possui qualificações?',
@@ -1240,7 +1239,7 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
                 'label' => 'O museu possui funcionários terceirizados?',
                 'type' => 'radio',
                 'options' => [
-                    's' => 'Sim', 
+                    's' => 'Sim',
                     'n' => 'Não'
                 ]
             ],
@@ -1269,16 +1268,23 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
             ],
             'instr_documento' => [
                 'label' => 'Indique os instrumentos de documentação de acervo utilizados pelo Museu',
-                'type' => 'multiselect',
+                'type' => 'checklist',
+
                 'allowOther' => true,
                 'allowOtherText' => 'Outro(s)',
                 'options' => [
                     'Livro de registro/tombo/inventário manuscritos',
                     'Listagem digital (Word, Excel...)',
                     'Ficha de catalogação',
-                    'Software/sistemas de catalogação informatizado'
+                    'Software/sistemas de catalogação informatizado',
+                    'Outro',
                 ]
             ],
+            'instr_documento_outros' => [
+                'label' => 'Qual/quais?',
+                'type' => 'text',
+            ],
+
             'instr_documento_n' => [
                 'label' => 'Caso o Museu não realize nenhuma ação de documentação de seu acervo, justifique', 
                 'type' => 'text'
@@ -1287,7 +1293,7 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
             // Pesquisa
             'exposicao_formato' => [
                 'label' => 'O Museu realiza exposições de qual formato?',
-                'type' => 'multiselect',
+                'type' => 'checklist',
                 'options' => [
                     'Curta duração',
                     'Itinerantes',
@@ -1328,8 +1334,8 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
                 ]
             ],
             'instituicao_informacao_pesquisa' => [
-                'label' => '',
-                'type' => 'select',
+                'label' => 'Qual/quais?',
+                'type' => 'checklist',
                 'options' => [
                     'Mediações',
                     'Contribuem para produção de conteúdos para o museu',
@@ -1366,8 +1372,8 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
                 ]
             ],
             'fonte_captacao_recurso' => [
-                'label' => '',
-                'type' => 'select',
+                'label' => 'Qual/quais?',
+                'type' => 'checklist',
                 'options' => [
                     'Patrocínio local',
                     'Lei Rouanet',

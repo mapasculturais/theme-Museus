@@ -37,6 +37,7 @@ $this->import('
                     </div>
                     <entity-field v-if="entity.terms.mus_area.includes('Outros')" :entity="entity" classes="col-12" prop="mus_area_outros"></entity-field>
                     <entity-field :entity="entity" classes="col-12" prop="mus_instr_documento"></entity-field>
+                    <entity-field v-if="entity.mus_instr_documento?.includes('Outro')" :entity="entity" classes="col-12" prop="mus_instr_documento_outros"></entity-field>
                     <entity-field :entity="entity" classes="col-12" prop="mus_instr_documento_n"></entity-field>
                     <entity-field :entity="entity" classes="col-12" prop="mus_gestao_politicaAquisicao"></entity-field>
                     <entity-field :entity="entity" classes="col-12" prop="mus_gestao_politicaDescarte"></entity-field>

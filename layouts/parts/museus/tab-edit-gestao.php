@@ -28,9 +28,9 @@ $this->import('
                 <div class="grid-12">
                     <entity-field :entity="entity" classes="col-12" prop="esfera"></entity-field>
                     <entity-field v-if="entity.esfera == 'Pública'":entity="entity" classes="col-12" prop="esfera_tipo"></entity-field>
-                    <entity-field :entity="entity" classes="col-12" prop="mus_mais_ent_federal"></entity-field>
-                    <entity-field :entity="entity" classes="col-12" prop="mus_esfera_tipo_federal"></entity-field>
-                    <entity-field :entity="entity" classes="col-12" prop="mus_priv_esfera_tipo"></entity-field>
+                    <entity-field v-if="entity.esfera == 'Pública'" :entity="entity" classes="col-12" prop="mus_mais_ent_federal"></entity-field>
+                    <entity-field v-if="entity.esfera_tipo == 'Federal'" :entity="entity" classes="col-12" prop="mus_esfera_tipo_federal"></entity-field>
+                    <entity-field v-if="entity.esfera == 'Privada'" :entity="entity" classes="col-12" prop="mus_priv_esfera_tipo"></entity-field>
                     <entity-field :entity="entity" classes="col-12" prop="possui_certificado"></entity-field>
                     <entity-field v-if="entity.possui_certificado == 'Sim'" :entity="entity" classes="col-12" prop="certificado"></entity-field>
                     <entity-field :entity="entity" classes="col-12" prop="cnpj"></entity-field>
@@ -40,8 +40,8 @@ $this->import('
                     <entity-field :entity="entity" classes="col-12" prop="mus_instumentoCriacao_tipo"></entity-field>
                     <entity-field :entity="entity" classes="col-12" prop="mus_instumentoCriacao_descricao"></entity-field>
                     <entity-field :entity="entity" classes="col-12" prop="mus_contrato_gestao"></entity-field>
-                    <entity-field :entity="entity" classes="col-12" prop="mus_contrato_gestao_s_outros"></entity-field>
-                    <entity-field :entity="entity" classes="col-12" prop="mus_contrato_gestao_s"></entity-field>
+                    <entity-field v-if="entity.mus_contrato_gestao == 's'" :entity="entity" classes="col-12" prop="mus_contrato_gestao_s"></entity-field>
+                    <entity-field v-if="entity.mus_contrato_gestao_s == 'Outros'" :entity="entity" classes="col-12" prop="mus_contrato_gestao_s_outros"></entity-field>
                     <entity-field v-if="entity.mus_contrato_gestao_s == 'Outros'" :entity="entity" classes="col-12" prop="mus_contrato_gestao_s_outros_outros"></entity-field>
                     <entity-field :entity="entity" classes="col-12" prop="mus_contrato_qualificacoes"></entity-field>
                     <entity-field v-if="entity.mus_contrato_qualificacoes == 'Outra'" :entity="entity" classes="col-12" prop="mus_contrato_qualificacoes_outra"></entity-field>

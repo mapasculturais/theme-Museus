@@ -33,7 +33,7 @@ $this->import('
                     <entity-field :entity="entity" classes="col-12" prop="mus_pesquisa_devolutiva"></entity-field>
                     <entity-field :entity="entity" classes="col-12" prop="mus_realiza_captacao_recurso"></entity-field>
                     <entity-field v-if="entity.mus_realiza_captacao_recurso == 'Sim'" :entity="entity" classes="col-12" prop="mus_fonte_captacao_recurso"></entity-field>
-                    <entity-field v-if="entity.mus_fonte_captacao_recurso == 'Outros'" :entity="entity" classes="col-12" prop="mus_fonte_captacao_recurso_outros"></entity-field>
+                    <entity-field v-if="entity.mus_fonte_captacao_recurso?.includes('Outros')" :entity="entity" classes="col-12" prop="mus_fonte_captacao_recurso_outros"></entity-field>
                     <entity-field :entity="entity" classes="col-12" prop="mus_foi_contemplado_editais"></entity-field>
                     <entity-field v-if="entity.mus_foi_contemplado_editais == 'Sim'" :entity="entity" classes="col-12" prop="mus_foi_contemplado_editais_quais"></entity-field>
                     <entity-field :entity="entity" classes="col-12" prop="mus_foi_contemplado_editais_secult"></entity-field>
