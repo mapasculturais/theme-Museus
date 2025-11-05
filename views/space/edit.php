@@ -102,20 +102,15 @@ $this->breadcrumb = [
                             <label><?php i::_e("Acessibilidade"); ?></label>
                         </template>
                         <template #content>
-                            <entity-field :entity="entity" classes="col-12" prop="acessibilidade"></entity-field>
-                        </template>
-                    </mc-card>
-                    <mc-card v-if="entity.acessibilidade === 'Sim'">
-                        <template #title>
-                            <label><?php i::_e("Acessibilidade física"); ?></label>
-                        </template>
-                        <template #content>
-                            <?php $this->applyTemplateHook('mc-card-content-acessibilidade_fisica','begin') ?>
                             <div class="grid-12">
-                                <entity-field :entity="entity" classes="col-12" type="multiselect" prop="acessibilidade_fisica"></entity-field>
-                                <?php $this->part('museus/card-acessibilidade'); ?>
+                                <entity-field :entity="entity" classes="col-12" prop="acessibilidade"></entity-field>
+                                <template v-if="entity.acessibilidade == 'Sim'">
+                                    <?php $this->applyTemplateHook('mc-card-content-acessibilidade_fisica','begin') ?>
+                                    <entity-field :entity="entity" classes="col-12" type="multiselect" prop="acessibilidade_fisica"></entity-field>
+                                    <?php $this->part('museus/card-acessibilidade'); ?>
+                                    <?php $this->applyTemplateHook('mc-card-content-acessibilidade_fisica','end') ?>
+                                </template>
                             </div>
-                            <?php $this->applyTemplateHook('mc-card-content-acessibilidade_fisica','end') ?>
                         </template>
                     </mc-card>
                     <mc-card>
