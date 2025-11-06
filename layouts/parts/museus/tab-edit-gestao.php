@@ -42,7 +42,6 @@ $this->import('
                     <entity-field :entity="entity" classes="col-12" prop="mus_contrato_gestao"></entity-field>
                     <entity-field v-if="entity.mus_contrato_gestao == 's'" :entity="entity" classes="col-12" prop="mus_contrato_gestao_s"></entity-field>
                     <entity-field v-if="entity.mus_contrato_gestao_s == 'Outros'" :entity="entity" classes="col-12" prop="mus_contrato_gestao_s_outros"></entity-field>
-                    <entity-field v-if="entity.mus_contrato_gestao_s == 'Outros'" :entity="entity" classes="col-12" prop="mus_contrato_gestao_s_outros_outros"></entity-field>
                     <entity-field :entity="entity" classes="col-12" prop="mus_contrato_qualificacoes"></entity-field>
                     <entity-field v-if="entity.mus_contrato_qualificacoes == 'Outra'" :entity="entity" classes="col-12" prop="mus_contrato_qualificacoes_outra"></entity-field>
                     <entity-field :entity="entity" classes="col-12" prop="mus_num_pessoas"></entity-field>
