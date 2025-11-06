@@ -54,7 +54,7 @@ $this->import('
                     <entity-field :entity="entity" classes="col-12" prop="mus_biblioteca_acessoPublico"></entity-field>
                     <entity-field :entity="entity" classes="col-12" prop="mus_equipe_dev_educativo"></entity-field>
                     <entity-field :entity="entity" classes="col-12" prop="mus_servicos_visitaGuiada"></entity-field>
-                    <entity-field :entity="entity" classes="col-12" prop="mus_servicos_visitaGuiada_s"></entity-field>
+                    <entity-field v-if="entity.mus_servicos_visitaGuiada == 'sim'" :entity="entity" classes="col-12" prop="mus_servicos_visitaGuiada_s"></entity-field>
                 </div>
             </template>
         </mc-card>
