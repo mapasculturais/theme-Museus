@@ -104,12 +104,10 @@ $this->breadcrumb = [
                         <template #content>
                             <div class="grid-12">
                                 <entity-field :entity="entity" classes="col-12" prop="acessibilidade"></entity-field>
-                                <template v-if="entity.acessibilidade == 'Sim'">
-                                    <?php $this->applyTemplateHook('mc-card-content-acessibilidade_fisica','begin') ?>
-                                    <entity-field :entity="entity" classes="col-12" type="multiselect" prop="acessibilidade_fisica"></entity-field>
-                                    <?php $this->part('museus/card-acessibilidade'); ?>
-                                    <?php $this->applyTemplateHook('mc-card-content-acessibilidade_fisica','end') ?>
-                                </template>
+                                <?php $this->applyTemplateHook('mc-card-content-acessibilidade_fisica','begin') ?>
+                                <entity-field :entity="entity" classes="col-12" type="multiselect" prop="acessibilidade_fisica"></entity-field>
+                                <?php $this->part('museus/card-acessibilidade'); ?>
+                                <?php $this->applyTemplateHook('mc-card-content-acessibilidade_fisica','end') ?>
                             </div>
                         </template>
                     </mc-card>

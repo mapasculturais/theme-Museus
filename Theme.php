@@ -52,8 +52,6 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
             'mus_atividade_pub_especif',
             'mus_num_total_acervo_prec',
             'mus_acervo_propriedade',
-            // 'mus_num_acervo_prest',
-            'mus_instr_documento',
             'mus_instr_documento',
             'mus_gestao_politicaAquisicao',
             'mus_gestao_politicaDescarte',
@@ -63,9 +61,7 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
             'mus_instumentoCriacao_tipo',
             'esfera',
             'mus_contrato_gestao',
-            'metodo_contagem_pub_outro', //
             'mus_num_total_acervo',
-            'mus_area_outros', //
             'mus_outros_cadastros',
             'possui_certificado',
             'cnpj',
@@ -85,19 +81,13 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
             'mus_comunidadeRealizaAtividades',
             'mus_tipo_tematica',
             'mus_exposicao_formato',
-            'mus_exposicao_formato_outros', //
             'mus_exposicao_museu_cartaz',
             'mus_realiza_atualizacao_expositivo',
             'mus_instituicao_pesquisa',
-            'mus_instituicao_informacao_pesquisa',
-            'mus_instituicao_informacao_pesquisa_outros', //
             'mus_recebe_pesquisadores',
             'mus_pesquisa_devolutiva',
             'mus_realiza_captacao_recurso',
-            'mus_fonte_captacao_recurso',
-            'mus_fonte_captacao_recurso_outros', //
             'mus_foi_contemplado_editais',
-            'mus_foi_contemplado_editais_quais', //
             'mus_foi_contemplado_editais_secult'
         ];
 
@@ -634,7 +624,7 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
                         return __('Campo obrigatório');
                     }
                     return false;
-                },                
+                },
             ],
                 
             'num_total_acervo' => [
@@ -942,15 +932,25 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
 
             'num_acervo_prest' => [
                 'label' => 'O comodato/empréstimo está formalizado por meio de documento legal?',
-                 'type' => 'radio',
-                 'options' => [
-                 'Sim', 'Não',
-                ],
+                    'type' => 'radio',
+                    'options' => [ 'Sim', 'Não' ],
+                    'should_validate' => function ($entity, $value) {
+                        if (!empty($entity->mus_acervo_propriedade) && str_contains($entity->mus_acervo_propriedade, 'Possui SOMENTE acervo em comodato/empréstimo') && empty($value)) {
+                            return __('Campo obrigatório');
+                        }
+                        return false;
+                    },
             ],
 
             'area_outros' => [
                 'label' => 'Qual?',
-                'type' => 'text'
+                'type' => 'text',
+                // 'should_validate' => function ($entity, $value) {
+                //     if (!empty($entity->mus_acervo_propriedade) && str_contains($entity->mus_acervo_propriedade, 'Possui SOMENTE acervo em comodato/empréstimo') && empty($value)) {
+                //         return __('Campo obrigatório');
+                //     }
+                //     return false;
+                // },
             ],
 
             'acervo_material' => [
@@ -997,7 +997,13 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
             ],
             'metodo_contagem_pub_outro' => [
                 'label' => 'Qual?',
-                'type' => 'text'
+                'type' => 'text',
+                'should_validate' => function ($entity, $value) {
+                    if (!empty($entity->mus_metodo_contagem_pub) && $entity->mus_metodo_contagem_pub === 'Outro' && empty($value)) {
+                        return __('Campo obrigatório');
+                    }
+                    return false;
+                },
             ],
 
             'ingresso_cobrado' => [
@@ -1264,7 +1270,7 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
                         return __('Campo obrigatório');
                     }
                     return false;
-                },                
+                },
             ],  
 
             'contrato_qualificacoes' => [
@@ -1351,6 +1357,12 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
             'instr_documento_outros' => [
                 'label' => 'Qual/quais?',
                 'type' => 'text',
+                'should_validate' => function ($entity, $value) {
+                    if (!empty($entity->mus_instr_documento) && in_array('Outro', $entity->mus_instr_documento) && empty($value)) {
+                        return __('Campo obrigatório');
+                    }
+                    return false;
+                },
             ],
 
             'instr_documento_n' => [
@@ -1372,7 +1384,13 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
             ],
             'exposicao_formato_outros' => [
                 'label' => 'Quais?',
-                'type' => 'text'
+                'type' => 'text',
+                'should_validate' => function ($entity, $value) {
+                    if (!empty($entity->mus_exposicao_formato) && $entity->mus_exposicao_formato === 'Outros' && empty($value)) {
+                        return __('Campo obrigatório');
+                    }
+                    return false;
+                },
             ],
             'exposicao_museu_cartaz' => [
                 'label' => 'Há quanto tempo a exposição do museu está em cartaz?',
@@ -1409,11 +1427,23 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
                     'Contribuem para produção de conteúdos para o museu',
                     'Contribuem produção de artigos científicos',
                     'Outros'
-                ]
+                ],
+                'should_validate' => function ($entity, $value) {
+                    if (!empty($entity->mus_instituicao_pesquisa) && $entity->mus_instituicao_pesquisa === 'Sim' && empty($value)) {
+                        return __('Campo obrigatório');
+                    }
+                    return false;
+                },
             ],
             'instituicao_informacao_pesquisa_outros' => [
                 'label' => 'Qual?',
-                'type' => 'text'
+                'type' => 'text',
+                'should_validate' => function ($entity, $value) {
+                    if (!empty($entity->mus_instituicao_informacao_pesquisa) && $entity->mus_instituicao_informacao_pesquisa === 'Outros' && empty($value)) {
+                        return __('Campo obrigatório');
+                    }
+                    return false;
+                },
             ],
             'recebe_pesquisadores' => [
                 'label' => 'O Museu recebe pesquisadores e/ou instituições para realização de pesquisas?',
@@ -1449,11 +1479,23 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
                     'Editais de Fomento Estadual',
                     'Editais de Fomento Municipal',
                     'Outros'
-                ]
+                ],
+                'should_validate' => function ($entity, $value) {
+                    if (!empty($entity->mus_realiza_captacao_recurso) && $entity->mus_realiza_captacao_recurso === 'Sim' && empty($value)) {
+                        return __('Campo obrigatório');
+                    }
+                    return false;
+                },
             ],
             'fonte_captacao_recurso_outros' => [
                 'label' => 'Qual?',
-                'type' => 'text'
+                'type' => 'text',
+                'should_validate' => function ($entity, $value) {
+                    if (!empty($entity->mus_fonte_captacao_recurso) && in_array('Outros', $entity->mus_realiza_captacao_recurso) && empty($value)) {
+                        return __('Campo obrigatório');
+                    }
+                    return false;
+                },
             ],
             'foi_contemplado_editais' => [
                 'label' => 'O museu já foi contemplado em editais publicados pelo município',
@@ -1461,11 +1503,17 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
                 'options' => [
                     'Sim',
                     'Não',
-                ]
+                ],
             ],
             'foi_contemplado_editais_quais' => [
                 'label' => 'Qual/quais?',
-                'type' => 'text'
+                'type' => 'text',
+                'should_validate' => function ($entity, $value) {
+                    if (!empty($entity->mus_foi_contemplado_editais) && $entity->mus_foi_contemplado_editais === 'Sim' && empty($value)) {
+                        return __('Campo obrigatório');
+                    }
+                    return false;
+                },
             ],
             'foi_contemplado_editais_secult' => [
                 'label' => 'O museu já foi contemplado em editais publicados pelo Estado ou Secult/PE? ',
@@ -1477,8 +1525,14 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
             ],
             'foi_contemplado_editais_secult_quais' => [
                 'label' => 'Qual/quais?',
-                'type' => 'text'
-            ]
+                'type' => 'text',
+                'should_validate' => function ($entity, $value) {
+                    if (!empty($entity->mus_foi_contemplado_editais_secult) && $entity->mus_foi_contemplado_editais_secult === 'Sim' && empty($value)) {
+                        return __('Campo obrigatório');
+                    }
+                    return false;
+                },
+            ],
         ];
     }
 
@@ -1577,7 +1631,7 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
                             return __('Campo obrigatório');
                         }
                         return false;
-                    },                    
+                    },
                 ],
 
                 'razao_social' => [
