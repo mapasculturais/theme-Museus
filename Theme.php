@@ -67,7 +67,6 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
             'cnpj',
             'razao_social',
             'mus_abertura_ano',
-            // 'mus_instituicaoMantenedora',
             'mus_contrato_qualificacoes',
             'mus_num_pessoas',
             'mus_func_tercerizado',
@@ -461,8 +460,8 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
             'area_formacao' => [
                 'label' => 'Em caso de superior completo, especifique a área',
                 'type' => 'text',
-                'should_validate' => function($entity, $value) {
-                    if (!empty($entity->mus_resp_formacao) && str_contains($entity->mus_resp_formacao, 'Ensino superior') && empty($value)) {
+                'should_validate' => function($entity) {
+                    if (!empty($entity->mus_resp_formacao) && str_contains($entity->mus_resp_formacao, 'Ensino superior')) {
                         return __('Campo obrigatório');
                     }
                     return false;
@@ -571,8 +570,8 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
             'tipo_outro' => [
                 'label' => 'Qual?',
                 'type' => 'text',
-                'should_validate' => function ($entity, $value) {
-                    if (!empty($entity->mus_tipo) && $entity->mus_tipo === 'Outro' && empty($value)) {
+                'should_validate' => function ($entity) {
+                    if (!empty($entity->mus_tipo) && $entity->mus_tipo === 'Outro') {
                         return __('Campo obrigatório');
                     }
                     return false;
@@ -593,8 +592,8 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
                     'Sim',
                     'Não'
                 ],
-                'should_validate' => function ($entity, $value) {
-                    if (!empty($entity->mus_ponto_memoria) && $entity->mus_ponto_memoria === 'Sim' && empty($value)) {
+                'should_validate' => function ($entity) {
+                    if (!empty($entity->mus_ponto_memoria) && $entity->mus_ponto_memoria === 'Sim') {
                         return __('Campo obrigatório');
                     }
                     return false;
@@ -619,8 +618,8 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
             'tipo_tematica_outro' => [
                 'label' => 'Qual?',
                 'type' => 'text',
-                'should_validate' => function ($entity, $value) {
-                    if (!empty($entity->mus_tipo_tematica) && $entity->mus_tipo_tematica === 'Outro' && empty($value)) {
+                'should_validate' => function ($entity) {
+                    if (!empty($entity->mus_tipo_tematica) && $entity->mus_tipo_tematica === 'Outro') {
                         return __('Campo obrigatório');
                     }
                     return false;
@@ -752,8 +751,8 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
                     'Tradutor de Linguagem Brasileira de Sinais (LIBRAS)',
                     'Texto/Etiquetas em braile com informações sobre os objetos expostos'
                 ],
-                'should_validate' => function ($entity, $value) {
-                    if (!empty($entity->mus_acess_visual_auditiva) && $entity->mus_acess_visual_auditiva == 'Sim' && empty($value)) {
+                'should_validate' => function ($entity) {
+                    if (!empty($entity->mus_acess_visual_auditiva) && $entity->mus_acess_visual_auditiva == 'Sim') {
                         return __('Campo obrigatório');
                     }
                     return false;
@@ -793,8 +792,8 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
             'museu_matriz' => [
                 'label' => 'Nome do Museu Matriz',
                 'type' => 'text',
-                'should_validate' => function($entity, $value) {
-                    if (!empty($entity->mus_subordinado_museu_matriz) && $entity->mus_subordinado_museu_matriz === 'Sim' && empty($value)) {
+                'should_validate' => function($entity) {
+                    if (!empty($entity->mus_subordinado_museu_matriz) && $entity->mus_subordinado_museu_matriz === 'Sim') {
                         return __('Campo obrigatório');
                     }
                     return false;
@@ -934,8 +933,8 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
                 'label' => 'O comodato/empréstimo está formalizado por meio de documento legal?',
                     'type' => 'radio',
                     'options' => [ 'Sim', 'Não' ],
-                    'should_validate' => function ($entity, $value) {
-                        if (!empty($entity->mus_acervo_propriedade) && str_contains($entity->mus_acervo_propriedade, 'Possui SOMENTE acervo em comodato/empréstimo') && empty($value)) {
+                    'should_validate' => function ($entity) {
+                        if (!empty($entity->mus_acervo_propriedade) && str_contains($entity->mus_acervo_propriedade, 'Possui SOMENTE acervo em comodato/empréstimo')) {
                             return __('Campo obrigatório');
                         }
                         return false;
@@ -945,12 +944,12 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
             'area_outros' => [
                 'label' => 'Qual?',
                 'type' => 'text',
-                // 'should_validate' => function ($entity, $value) {
-                //     if (!empty($entity->mus_acervo_propriedade) && str_contains($entity->mus_acervo_propriedade, 'Possui SOMENTE acervo em comodato/empréstimo') && empty($value)) {
-                //         return __('Campo obrigatório');
-                //     }
-                //     return false;
-                // },
+                'should_validate' => function ($entity) {
+                    if (!empty($entity->terms['mus_area']) && in_array('Outros', $entity->terms['mus_area'])) {
+                        return __('Campo obrigatório');
+                    }
+                    return false;
+                },
             ],
 
             'acervo_material' => [
@@ -998,8 +997,8 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
             'metodo_contagem_pub_outro' => [
                 'label' => 'Qual?',
                 'type' => 'text',
-                'should_validate' => function ($entity, $value) {
-                    if (!empty($entity->mus_metodo_contagem_pub) && $entity->mus_metodo_contagem_pub === 'Outro' && empty($value)) {
+                'should_validate' => function ($entity) {
+                    if (!empty($entity->mus_metodo_contagem_pub) && $entity->mus_metodo_contagem_pub === 'Outro') {
                         return __('Campo obrigatório');
                     }
                     return false;
@@ -1045,8 +1044,8 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
                 'validations' => [
                     'v::numericVal()' => 'o tempo de vigência deve ser um número inteiro'
                 ],
-                'should_validate' => function($entity, $value) {
-                    if (!empty($entity->mus_gestao_planoMuseologico) && str_contains($entity->mus_gestao_planoMuseologico, 'sim') && empty($value)) {
+                'should_validate' => function($entity) {
+                    if (!empty($entity->mus_gestao_planoMuseologico) && str_contains($entity->mus_gestao_planoMuseologico, 'sim')) {
                         return __('Campo obrigatório');
                     }
                     return false;
@@ -1175,8 +1174,8 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
             'mais_ent_federal' => [
                 'label' => 'Caso o museu seja formado por dois ou mais entes da Federação, especifique quais:',
                 'type' => 'text',
-                'should_validate' => function ($entity, $value) {
-                    if (!empty($entity->esfera) && $entity->esfera === 'Pública' && empty($value)) {
+                'should_validate' => function ($entity) {
+                    if (!empty($entity->esfera) && $entity->esfera === 'Pública') {
                         return __('Campo obrigatório');
                     }
                     return false;
@@ -1213,8 +1212,8 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
                     'Casa Civil   ',
                     'Gabinete de Segurança Institucional'
                 ],
-                'should_validate' => function ($entity, $value) {
-                    if (!empty($entity->esfera_tipo) && $entity->esfera_tipo === 'Federal' && empty($value)) {
+                'should_validate' => function ($entity) {
+                    if (!empty($entity->esfera_tipo) && $entity->esfera_tipo === 'Federal') {
                         return __('Campo obrigatório');
                     }
                     return false;
@@ -1229,8 +1228,8 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
                    'Organização Religiosa',
                    'Entidade Sindical'
                 ],
-                'should_validate' => function ($entity, $value) {
-                    if (!empty($entity->esfera) && $entity->esfera === 'Privada' && empty($value)) {
+                'should_validate' => function ($entity) {
+                    if (!empty($entity->esfera) && $entity->esfera === 'Privada') {
                         return __('Campo obrigatório');
                     }
                     return false;
@@ -1255,8 +1254,8 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
                     'Sociedade (incluem-se aqui as sociedades de economia mista, empresas públicas e privadas)',
                     'Outros'
                 ],
-                'should_validate' => function ($entity, $value) {
-                    if (!empty($entity->mus_contrato_gestao) && $entity->mus_contrato_gestao === 's' && empty($value)) {
+                'should_validate' => function ($entity) {
+                    if (!empty($entity->mus_contrato_gestao) && $entity->mus_contrato_gestao === 's') {
                         return __('Campo obrigatório');
                     }
                     return false;
@@ -1265,8 +1264,8 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
             'contrato_gestao_s_outros' => [
                 'label' => 'Caso outros, informe',
                 'type' => 'text',
-                'should_validate' => function ($entity, $value) {
-                    if (!empty($entity->mus_contrato_gestao_s) && $entity->mus_contrato_gestao_s === 'Outros' && empty($value)) {
+                'should_validate' => function ($entity) {
+                    if (!empty($entity->mus_contrato_gestao_s) && $entity->mus_contrato_gestao_s === 'Outros') {
                         return __('Campo obrigatório');
                     }
                     return false;
@@ -1288,8 +1287,8 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
             'contrato_qualificacoes_outra' => [
                 'label' => 'Qual?',
                 'type' => 'text',
-                'should_validate' => function ($entity, $value) {
-                    if (!empty($entity->mus_contrato_qualificacoes) && $entity->mus_contrato_qualificacoes === 'Outra' && empty($value)) {
+                'should_validate' => function ($entity) {
+                    if (!empty($entity->mus_contrato_qualificacoes) && $entity->mus_contrato_qualificacoes === 'Outra') {
                         return __('Campo obrigatório');
                     }
                     return false;
@@ -1317,8 +1316,8 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
                 'validations' => [
                     'v::intVal()' => 'O número de funcionários deve ser um número inteiro'
                 ],
-                'should_validate' => function ($entity, $value) {
-                    if (!empty($entity->mus_func_tercerizado) && $entity->mus_func_tercerizado === 's' && empty($value)) {
+                'should_validate' => function ($entity) {
+                    if (!empty($entity->mus_func_tercerizado) && $entity->mus_func_tercerizado === 's') {
                         return __('Campo obrigatório');
                     }
                     return false;
@@ -1357,8 +1356,8 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
             'instr_documento_outros' => [
                 'label' => 'Qual/quais?',
                 'type' => 'text',
-                'should_validate' => function ($entity, $value) {
-                    if (!empty($entity->mus_instr_documento) && in_array('Outro', $entity->mus_instr_documento) && empty($value)) {
+                'should_validate' => function ($entity) {
+                    if (!empty($entity->mus_instr_documento) && in_array('Outro', $entity->mus_instr_documento)) {
                         return __('Campo obrigatório');
                     }
                     return false;
@@ -1385,8 +1384,8 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
             'exposicao_formato_outros' => [
                 'label' => 'Quais?',
                 'type' => 'text',
-                'should_validate' => function ($entity, $value) {
-                    if (!empty($entity->mus_exposicao_formato) && $entity->mus_exposicao_formato === 'Outros' && empty($value)) {
+                'should_validate' => function ($entity) {
+                    if (!empty($entity->mus_exposicao_formato) && $entity->mus_exposicao_formato === 'Outros') {
                         return __('Campo obrigatório');
                     }
                     return false;
@@ -1428,8 +1427,8 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
                     'Contribuem produção de artigos científicos',
                     'Outros'
                 ],
-                'should_validate' => function ($entity, $value) {
-                    if (!empty($entity->mus_instituicao_pesquisa) && $entity->mus_instituicao_pesquisa === 'Sim' && empty($value)) {
+                'should_validate' => function ($entity) {
+                    if (!empty($entity->mus_instituicao_pesquisa) && $entity->mus_instituicao_pesquisa === 'Sim') {
                         return __('Campo obrigatório');
                     }
                     return false;
@@ -1438,8 +1437,8 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
             'instituicao_informacao_pesquisa_outros' => [
                 'label' => 'Qual?',
                 'type' => 'text',
-                'should_validate' => function ($entity, $value) {
-                    if (!empty($entity->mus_instituicao_informacao_pesquisa) && $entity->mus_instituicao_informacao_pesquisa === 'Outros' && empty($value)) {
+                'should_validate' => function ($entity) {
+                    if (!empty($entity->mus_instituicao_informacao_pesquisa) && $entity->mus_instituicao_informacao_pesquisa === 'Outros') {
                         return __('Campo obrigatório');
                     }
                     return false;
@@ -1480,8 +1479,8 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
                     'Editais de Fomento Municipal',
                     'Outros'
                 ],
-                'should_validate' => function ($entity, $value) {
-                    if (!empty($entity->mus_realiza_captacao_recurso) && $entity->mus_realiza_captacao_recurso === 'Sim' && empty($value)) {
+                'should_validate' => function ($entity) {
+                    if (!empty($entity->mus_realiza_captacao_recurso) && $entity->mus_realiza_captacao_recurso === 'Sim') {
                         return __('Campo obrigatório');
                     }
                     return false;
@@ -1490,8 +1489,8 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
             'fonte_captacao_recurso_outros' => [
                 'label' => 'Qual?',
                 'type' => 'text',
-                'should_validate' => function ($entity, $value) {
-                    if (!empty($entity->mus_fonte_captacao_recurso) && in_array('Outros', $entity->mus_realiza_captacao_recurso) && empty($value)) {
+                'should_validate' => function ($entity) {
+                    if (!empty($entity->mus_fonte_captacao_recurso) && in_array('Outros', $entity->mus_realiza_captacao_recurso)) {
                         return __('Campo obrigatório');
                     }
                     return false;
@@ -1508,8 +1507,8 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
             'foi_contemplado_editais_quais' => [
                 'label' => 'Qual/quais?',
                 'type' => 'text',
-                'should_validate' => function ($entity, $value) {
-                    if (!empty($entity->mus_foi_contemplado_editais) && $entity->mus_foi_contemplado_editais === 'Sim' && empty($value)) {
+                'should_validate' => function ($entity) {
+                    if (!empty($entity->mus_foi_contemplado_editais) && $entity->mus_foi_contemplado_editais === 'Sim') {
                         return __('Campo obrigatório');
                     }
                     return false;
@@ -1526,8 +1525,8 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
             'foi_contemplado_editais_secult_quais' => [
                 'label' => 'Qual/quais?',
                 'type' => 'text',
-                'should_validate' => function ($entity, $value) {
-                    if (!empty($entity->mus_foi_contemplado_editais_secult) && $entity->mus_foi_contemplado_editais_secult === 'Sim' && empty($value)) {
+                'should_validate' => function ($entity) {
+                    if (!empty($entity->mus_foi_contemplado_editais_secult) && $entity->mus_foi_contemplado_editais_secult === 'Sim') {
                         return __('Campo obrigatório');
                     }
                     return false;
@@ -1597,8 +1596,8 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
                         'Entidade Sindical',
                         'Outra',
                     ],
-                    'should_validate' => function ($entity, $value) {
-                        if (!empty($entity->esfera) && $entity->esfera === 'Pública' && empty($value)) {
+                    'should_validate' => function ($entity) {
+                        if (!empty($entity->esfera) && $entity->esfera === 'Pública') {
                             return __('Campo obrigatório');
                         }
                         return false;
@@ -1626,8 +1625,8 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
                         'UPE'   => 'Certificado de Utilidade Pública Estadual (UPE)',
                         'UPM'   => 'Certificado de Utilidade Pública Municipal (UPM)'
                     ],
-                    'should_validate' => function ($entity, $value) {
-                        if (!empty($entity->possui_certificado) && $entity->possui_certificado === 'Sim' && empty($value)) {
+                    'should_validate' => function ($entity) {
+                        if (!empty($entity->possui_certificado) && $entity->possui_certificado === 'Sim') {
                             return __('Campo obrigatório');
                         }
                         return false;
