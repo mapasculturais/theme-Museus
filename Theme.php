@@ -197,8 +197,9 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
 
         $app->hook('entity(Space).validationErrors', function (&$errors) use($requiredSpaceFields) {
             /** @var Entities\Space $this */
-
-            if($this->isNew()) {
+            $app = App::i();
+            
+            if($this->isNew() || $app->user->is('admin')) {
                return; 
             }
 
