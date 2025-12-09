@@ -1,15 +1,16 @@
 .home-entities {
     background-color: var(--mc-white);
+    overflow: hidden;
     position: relative;
 
     &__background {
         position: absolute;
-        right: size(-282);
-        top: size(78);
+        right: size(-363);
+        top: 0;
 
         img {
-            height: size(546);
-            width: size(564);
+            height: size(703);
+            width: auto;
         }
 
         @include mobile {
