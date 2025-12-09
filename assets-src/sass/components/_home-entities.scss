@@ -1,0 +1,28 @@
+.home-entities {
+    background-color: var(--mc-white);
+    position: relative;
+
+    &__background {
+        position: absolute;
+        right: size(-282);
+        top: size(78);
+
+        img {
+            height: size(546);
+            width: size(564);
+        }
+
+        @include mobile {
+            display: none;
+        }
+    }
+
+    &__content {
+        position: relative;
+        z-index: 2;
+    }
+
+    .card__right {
+        background-color: #EEE;
+    }
+}

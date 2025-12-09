@@ -14,13 +14,13 @@ $lightness-300: 25%;
 $lightness-700: 25%;
 
 // Brand colors
-$primary-500: #4D00FF;
+$primary-500: #1C66F9;
 $secondary-500: #DF0D23;
 
 // Entities colors
 $opportunities-500: #2BA100;
 $events-500: #4D00FF;
-$agents-500: #FF6400;
+$agents-500: #E41D29;
 $projects-500: #DF0D23;
 $spaces-500: #1C66F9;
 
@@ -43,17 +43,22 @@ $font-headings: 'Sora', sans-serif;
 
 @import '../../../BaseV2/assets-src/sass/theme-BaseV2';
 
+// SETTINGS
+@import 'settings/typography';
+@import 'settings/atoms';
+
 // COMPONENTS
-@import './components/home-feature';
-@import './components/home-header';
-@import './components/home-register';
-@import './components/home-spaces';
-@import './components/main-footer';
-@import './components/main-header';
+@import 'components/home-entities';
+@import 'components/home-feature';
+@import 'components/home-header';
+@import 'components/home-register';
+@import 'components/home-spaces';
+@import 'components/main-footer';
+@import 'components/main-header';
 
 // LAYOUTS
 @import 'layouts/museums.scss';
-@import './layouts/tab-information';
+@import 'layouts/tab-information';
 
 .mc-header-logo {
     width: 146.14px;
