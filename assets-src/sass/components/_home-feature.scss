@@ -1,0 +1,7 @@
+.home-feature {
+    color: var(--mc-white);
+
+    .tabs-component__button--active::after {
+        background-color: currentColor;
+    }
+}

@@ -34,30 +34,26 @@ $helper-500: #0074C1;
 
 // home
 $home-opportunities: #FFA4A3;
-$home-feature: #93DC79;
-$home-register: #0074C1;
+$home-feature: #49B359;
+$home-register: #1C66F9;
+$home-spaces: #F3C510;
 
 $font-body: 'Sora', sans-serif;
 $font-headings: 'Sora', sans-serif;
 
 @import '../../../BaseV2/assets-src/sass/theme-BaseV2';
 
-// PAGES
-@import 'layouts/museums.scss';
-
-// Components
-@import './components/home-spaces';
+// COMPONENTS
+@import './components/home-feature';
 @import './components/home-header';
+@import './components/home-register';
+@import './components/home-spaces';
+@import './components/main-footer';
 @import './components/main-header';
 
-@import './views/tab-information';
-
-.main-footer .theme-logo.onlyImg .theme-logo__logo--img img {
-    max-height: 5rem;
-    @media (min-width: 800px) {
-        margin-bottom: 4rem;
-    }
-}
+// LAYOUTS
+@import 'layouts/museums.scss';
+@import './layouts/tab-information';
 
 .mc-header-logo {
     width: 146.14px;

@@ -1,0 +1,13 @@
+.home-register {
+
+    &__background {
+
+        &--img {
+            display: none;
+        }
+
+        &--mask {
+            mix-blend-mode: normal;
+        }
+    }
+}
