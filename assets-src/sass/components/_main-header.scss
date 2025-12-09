@@ -1,0 +1,57 @@
+.main-header {
+}
+
+.mc-header-menu {
+    column-gap: size(16);
+
+    & > :nth-child(n + 2) {
+        border-inline-start: 3px solid #F3C510;
+        padding-inline-start: size(16);
+    }
+
+    &--item {
+        padding-block: size(4);
+
+        .icon {
+            display: none;
+        }
+
+        .label {
+            margin: 0;
+        }
+    }
+
+    li:has(.space) {
+        display: none;
+    }
+}
+
+.controller-site.action-index {
+
+    .main-header {
+        background-color: transparent;
+        box-shadow: none;
+        position: absolute;
+
+        &__buttons {
+            color: var(--mc-white);
+
+            a {
+                color: inherit;
+            }
+
+            .logIn {
+                background-color: rgba(white, 0.25);
+                backdrop-filter: blur(4px);
+            }
+        }
+    }
+
+    .mc-header-menu--item {
+        color: var(--mc-white);
+
+        .label {
+            color: inherit;
+        }
+    }
+}

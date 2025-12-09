@@ -1,0 +1,51 @@
+.home-header {
+    min-height: 100vh;
+    padding-top: size(120);
+    position: relative;
+    
+    &__content {
+        display: block;
+        margin-inline: auto;
+        max-width: size(1200);
+        position: unset;
+        
+        & > * {
+            max-width: size(600);
+        }
+        
+        &::before {
+            background: #0C2856CC;
+        }
+    }
+
+    &__title {
+        max-width: unset;
+        text-transform: uppercase;
+    }
+
+    &__description {
+        font-weight: 600;
+        line-height: 1.6;
+        
+        @include desktop {
+            text-align: justify;
+            text-align-last: start;
+        }
+    }
+}
+
+.home-header-content {
+    margin-block: size(32);
+    position: relative;
+    z-index: 4;
+
+    &__button {
+        background-color: var(--mc-spaces-500);
+        border: none;
+        font-weight: 700;
+        width: size(462); 
+        height: size(76);
+        max-width: 100%; 
+        font-size: size(20);
+    }
+}
