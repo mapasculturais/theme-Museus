@@ -2,10 +2,11 @@
 
 namespace MapasMuseus;
 
-use MapasCulturais\App;
-use MapasCulturais\Definitions;
 use MapasCulturais\i;
+use MapasCulturais\App;
 use MapasCulturais\Utils;
+use MapasCulturais\Definitions;
+use MapasCulturais\Entities\Space;
 
 class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
 
@@ -393,6 +394,13 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
 
         $app->hook("template(space.edit.mc-card-content-address):end", function(){
             $this->part('museus/card-address');
+        });
+
+        // garante que o espaço seja salvo como rascunho
+        $app->hook('entity(Space).save:before', function() use ($app){
+            if($this->isNew()) {
+                $this->setStatus(Space::STATUS_DRAFT);
+            }
         });
     }
 
