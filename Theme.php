@@ -204,8 +204,32 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
                return; 
             }
 
+            $can_validade = function($field, $entity){
+
+                if($field == 'mus_instalacoes_capacidadeAuditorio') {
+                    if(!$entity->mus_instalacoes || !in_array('Teatro/Auditório', $entity->mus_instalacoes)) {
+                        return false;
+                    }
+                }
+
+                if($field == 'mus_servicos_visitaGuiada_s') {
+                    if(!$entity->mus_servicos_visitaGuiada || $entity->mus_servicos_visitaGuiada != 'sim') {
+                        return false;
+                    }
+                }
+
+                if($field == 'mus_subordinado_museu_matriz') {
+                   
+                    if(!$entity->mus_subordinado_museu_matriz || $entity->mus_subordinado_museu_matriz != 'Sim') {
+                        return false;
+                    }
+                }
+
+                return true;
+            };
+
             foreach($requiredSpaceFields as $field) {
-                if(!$this->$field && !isset($errors[$field])) {
+                if(!$this->$field && !isset($errors[$field]) && $can_validade($field,$this)) {
                     $errors[$field] = [i::__('campo obrigatório')];
                 }
             }
