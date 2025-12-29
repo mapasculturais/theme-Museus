@@ -49,3 +49,13 @@
         font-size: size(20);
     }
 }
+
+.theme-logo {
+    display: flex;
+    justify-content: normal;
+    width: 100%;
+
+    &__logo {
+        margin: 0;
+    }
+}
