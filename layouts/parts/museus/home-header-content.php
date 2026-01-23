@@ -16,7 +16,7 @@ $this->import('
 <?php if ($app->user->is('guest')):  ?>
     <div class="home-header__banner">
         <a href="<?= $auth ?>">
-            <img :src="secondBanner" />
+            <img :src="banner" />
         </a>
     </div>
 <?php else:  ?>
@@ -24,7 +24,7 @@ $this->import('
         <create-space #default="{modal}">
             <div class="home-header__banner">
                 <a href="javascript:void(0)"  @click="modal.open()">
-                    <img :src="secondBanner" />
+                    <img :src="banner" />
                 </a>
             </div>
         </create-space>
