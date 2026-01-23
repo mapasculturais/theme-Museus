@@ -32,12 +32,20 @@
             text-align-last: start;
         }
     }
+
+    &__banner {
+        z-index: 5;
+    }
+
+    &__content {
+        display: flex;
+    }
 }
 
 .home-header-content {
     margin-block: size(32);
     position: relative;
-    z-index: 4;
+    z-index: 6;
 
     &__button {
         background-color: var(--mc-spaces-500);

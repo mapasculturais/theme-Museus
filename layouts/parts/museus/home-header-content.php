@@ -14,19 +14,19 @@ $this->import('
 ?>
 
 <?php if ($app->user->is('guest')):  ?>
-    <div class="home-header-content">
-        <a href="<?= $auth ?>" class="home-header-content__button button button--primary button--icon">
-            <mc-icon name="add"></mc-icon>
-            <span><?= i::__('Crie seu Museu aqui') ?></span>
+    <div class="home-header__banner">
+        <a href="<?= $auth ?>">
+            <img :src="secondBanner" />
         </a>
     </div>
 <?php else:  ?>
     <div class="home-header-content">
         <create-space #default="{modal}">
-            <button @click="modal.open()" class="home-header-content__button button button--primary button--icon">
-                <mc-icon name="add"></mc-icon>
-                <span><?= i::__('Crie seu Museu aqui') ?></span>
-            </button>
+            <div class="home-header__banner">
+                <a href="javascript:void(0)"  @click="modal.open()">
+                    <img :src="secondBanner" />
+                </a>
+            </div>
         </create-space>
     </div>
 <?php endif  ?>

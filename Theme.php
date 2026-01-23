@@ -408,8 +408,9 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
             $this->part('museus/entity-info-fields');
         });
 
-        $app->hook('template(site.index.home-header-content):after', function(){
-            $this->part('museus/home-header-content');
+        $app->hook('view.partial(second-banner).params', function(&$data, &$html) use ($app){
+            $html = 'museus/home-header-content';
+            return;
         });
 
         $app->hook('template(<<*>>.<<*>>.mc-header-menu-spaces):after', function() {
