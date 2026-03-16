@@ -186,8 +186,9 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
             $self->spaceRequiredProperties($requiredSpaceFields);
         });
 
-        $app->hook('PUT(space.single):before', function () use($self, $requiredSpaceFields) {
+        $app->hook('PUT(space.single):before', function () use($self, $requiredSpaceFields, $app) {
             /** @var Controllers\Space $this */
+            $app->request->headers['MAPAS-Force-Save'] = true;
             $self->spaceRequiredProperties($requiredSpaceFields);
         });
 
