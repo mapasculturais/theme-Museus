@@ -1377,7 +1377,12 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
             'instr_documento' => [
                 'label' => 'Indique os instrumentos de documentação de acervo utilizados pelo Museu',
                 'type' => 'checklist',
-
+                'serialize' => function ($value, $entity = null) {
+                   return json_encode($value ?? []);
+                },
+                'unserialize' => function ($value, $entity) {
+                    return $value ? json_decode($value, true) : [];
+                },
                 'allowOther' => true,
                 'allowOtherText' => 'Outro(s)',
                 'options' => [
@@ -1414,7 +1419,13 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
                     'Virtuais',
                     'Mantém apenas a exposição de longa duração',
                     'Outros'
-                ]
+                ],
+                'serialize' => function ($value, $entity = null) {
+                   return $value ? json_encode($value) : [];
+                },
+                'unserialize' => function ($value, $entity) {
+                    return $value ? json_decode($value, true) : [];
+                }
             ],
             'exposicao_formato_outros' => [
                 'label' => 'Quais?',
@@ -1456,6 +1467,12 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
             'instituicao_informacao_pesquisa' => [
                 'label' => 'Qual/quais?',
                 'type' => 'checklist',
+                'serialize' => function ($value, $entity = null) {
+                   return json_encode($value ?? []);
+                },
+                'unserialize' => function ($value, $entity) {
+                    return $value ? json_decode($value, true) : [];
+                },
                 'options' => [
                     'Mediações',
                     'Contribuem para produção de conteúdos para o museu',
@@ -1506,6 +1523,12 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
             'fonte_captacao_recurso' => [
                 'label' => 'Qual/quais?',
                 'type' => 'checklist',
+                'serialize' => function ($value, $entity = null) {
+                   return json_encode($value ?? []);
+                },
+                'unserialize' => function ($value, $entity) {
+                    return $value ? json_decode($value, true) : [];
+                },
                 'options' => [
                     'Patrocínio local',
                     'Lei Rouanet',
