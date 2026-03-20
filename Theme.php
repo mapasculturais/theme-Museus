@@ -473,7 +473,7 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
                 'label' => 'A instituição já possui cadastro?',
                 'type' => 'radio',
                 'options' => [
-                    '' => 'Não possui',
+                    'Não possui' => 'Não possui',
                     'Cadastro Nacional de Museus - Museusbr',
                     'Conselho Internacional de Museus - ICOM',
                     // 'Cadastro nacional de museus',
@@ -532,7 +532,7 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
                 'allowOther' => true,
                 'allowOtherText' => 'Outro',
                 'options' => [
-                    '' => 'Não possui',
+                    'Não possui' => 'Não possui',
                     'Lei',
                     'Decreto-Lei',
                     'Decreto',
@@ -679,7 +679,7 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
                 'label' => 'Tipo/categoria de manejo da Unidade de Conservação',
                 'type' => 'radio',
                 'options' => [
-                    '' => 'Não se aplica',
+                    'Não se aplica' => 'Não se aplica',
                     'Proteção integral',
                     'Uso sustentável'
                 ]
@@ -689,7 +689,7 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
                 'label' => 'Tipo de unidade de proteção integral',
                 'type' => 'radio',
                 'options' => [
-                    '' => 'Não se aplica',
+                    'Não se aplica' => 'Não se aplica',
                     'Estação Ecológica',
                     'Monumento Natural',
                     'Parque',
@@ -702,7 +702,7 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
                 'label' => 'Tipo de unidade de uso sustentável',
                 'type' => 'radio',
                 'options' => [
-                    '' => 'Não se aplica',
+                    'Não se aplica' => 'Não se aplica',
                     'Floresta',
                     'Reserva Extrativista',
                     'Reserva de Desenvolvimento Sustentável',
@@ -812,7 +812,7 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
                 'label' => 'O acervo bibliográfico está aberto para consulta de usuários externos?',
                 'type' => 'radio',
                 'options' => [
-                    '' => 'não se aplica',
+                    'não se aplica' => 'não se aplica',
                     'sim' => 'sim',
                     'não' => 'não',
                 ]
@@ -1000,7 +1000,7 @@ class Theme extends \MapasCulturais\Themes\BaseV2\Theme{
                 'label' => 'O acervo material encontra-se em exposição?',
                 'type' => 'radio',
                 'options' => [
-                    '' => 'não se aplica',
+                    'não se aplica' => 'não se aplica',
                     'sim' => 'sim',
                     'não' => 'não'
                 ]
